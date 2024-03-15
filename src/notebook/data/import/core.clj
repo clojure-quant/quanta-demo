@@ -65,8 +65,9 @@ dt
              :calendar [:us :d]
              :import :eodhd} 
             ; fails because more than a year ago
-            {:start (-> "2019-12-01T00:00:00Z" t/instant t/zoned-date-time)
-             :end (-> "2020-02-01T00:00:00Z" t/instant t/zoned-date-time)})
+            {:start (-> "2023-12-01T00:00:00Z" t/instant t/zoned-date-time)
+             :end (-> "2024-04-01T00:00:00Z" t/instant t/zoned-date-time)})
+
 
 (b/get-bars im
             {:asset "AEE.AU"
