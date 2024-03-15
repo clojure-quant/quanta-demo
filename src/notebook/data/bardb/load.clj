@@ -26,6 +26,6 @@
                  :calendar [:forex :m]}
                 window))
 
-;; 2024-03-15T13:37-04:00[America/New_York] etf 30 MIN DELAYED.
+;; 2024-03-15T14:17-04:00[America/New_York] etf 30 MIN DELAYED.
 ;; 2024-03-15T12:14-04:00[America/New_York]  forex (seems to be UK close)
 ;; 2024-03-15T03:22-04:00[America/New_York]  future (seems to be tokyo close)

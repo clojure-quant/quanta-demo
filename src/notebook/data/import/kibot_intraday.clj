@@ -11,6 +11,7 @@
 
 (def im (modular.system/system :import-manager))
 
+
 im
 
 (def db (nippy/start-bardb-nippy "output/kibot-intraday/"))
@@ -52,7 +53,7 @@ db
 
 (import-assets ["SPY" "QQQ"])
 
-(import-assets  ["USD/JPY" "JY0" ])
+(import-assets  ["JY0"  "USD/JPY" ])
 
 (import-assets ["EU0" "SF0" "BP0"])
 

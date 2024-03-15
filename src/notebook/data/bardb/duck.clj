@@ -3,6 +3,7 @@
    [tick.core :as t]
    [tablecloth.api :as tc]
    [ta.db.bars.protocol :as b]
+   [ta.db.bars.duckdb :as duck]
    [modular.system]))
 
 (def db (modular.system/system :duckdb))
@@ -33,6 +34,8 @@
              :import :kibot}
             window)
 
+(duck/delete-bars db [:us :d] "AEE.AU")
+            
 
 (b/get-bars db {:asset "USD/JPY"
                 :calendar [:us :m]}
