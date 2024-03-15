@@ -28,7 +28,6 @@
                      "notebook.datascience.date"])
 
 (def ns-data ["notebook.data.alphavantage"
-              "notebook.data.warehouse-overview"
               "notebook.data.series"])
 
 (def ns-playground ["notebook.playground.svg"
@@ -52,7 +51,7 @@
 (eval-notebook "demo.playground.dataset-group")
 
 (-> ;(eval-notebook "demo.playground.cljplot")
- (eval-notebook "notebook.data.warehouse-overview")
+ (eval-notebook "demo.playground.dataset-group")
  show!)
 
 (eval-notebooks ns-misc)
