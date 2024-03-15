@@ -41,6 +41,8 @@
   (add-lists-to-db asset-lists-filenames)
   (kibot-http/import-kibot-links "resources/kibot-http/"  "forex")
   (kibot-http/import-kibot-links "resources/kibot-http/"  "futures")
+  (kibot-http/import-kibot-links "resources/kibot-http/"  "etf")
+  (kibot-http/import-kibot-links "resources/kibot-http/"  "stocks")
   :assets-added-to-db)
 
 (comment

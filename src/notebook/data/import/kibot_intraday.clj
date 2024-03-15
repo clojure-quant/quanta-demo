@@ -50,6 +50,10 @@ db
                 "CD0" "JY0" "AD0" "NE0" "PX0" 
                 "RA0" "RY0" "RF0" "RP0" "PJY0"])
 
+(import-assets ["SPY" "QQQ"])
+
+
+(import-assets ["INTC"])
 
 
 
