@@ -171,7 +171,13 @@
              {:type :select
               :path [4 :max-open-close-over-low-high]
               :name "doji-co/lh max"
-              :spec [0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9]}]
+              :spec [0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9]}
+              {:type :select
+              :path [4 :calendar 1]
+              :name "intraday-interval"
+              :spec [:m :h]}
+             
+             ]
    :viz 'ta.viz.ds.highchart/highstock-render-spec
    :viz-options juan.notebook.viz/combined-chart-spec
    :key :signal})

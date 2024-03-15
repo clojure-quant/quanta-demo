@@ -14,12 +14,16 @@
              :end (t/instant "2024-03-20T20:00:00Z")})
 
 
+
 (b/get-bars db
            {:asset "USD/JPY"
             :calendar [:forex :d]
             ;:import :kibot
             }
             window)
+
+; daily:  2024-03-14T20:30:00Z 
+; minute: 2024-03-15T16:14:00Z
 
 (b/get-bars db
             {:asset "UUP"

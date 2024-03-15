@@ -17,7 +17,7 @@
             window)
 
 (b/get-bars db
-            {:asset "USD/JPY"
+            {:asset "EUR/USD"
              :calendar [:forex :m]}
             window)
 

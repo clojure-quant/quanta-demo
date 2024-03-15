@@ -42,7 +42,8 @@ dt
              :calendar [:forex :d]
              :import :kibot}
             {:start (t/instant "2023-09-01T00:00:00Z")
-             :end (t/instant "2023-10-01T00:00:00Z")})
+             :end (t/instant "2024-05-01T00:00:00Z")})
+
 
 
 (b/get-bars im {:asset "EU0" ; future(forex)
@@ -65,13 +66,6 @@ dt
              :calendar [:us :d]
              :import :eodhd} 
             ; fails because more than a year ago
-            {:start (-> "2023-12-01T00:00:00Z" t/instant t/zoned-date-time)
-             :end (-> "2024-04-01T00:00:00Z" t/instant t/zoned-date-time)})
+            {:start (-> "2023-12-01T00:00:00Z" t/instant)
+             :end (-> "2024-04-01T00:00:00Z" t/instant)})
 
-
-(b/get-bars im
-            {:asset "AEE.AU"
-             :calendar [:us :d]
-             :import :eodhd}
-            {:start (-> "2023-05-01T00:00:00Z" t/instant t/zoned-date-time)
-             :end (-> "2024-03-12T00:00:00Z" t/instant t/zoned-date-time)})

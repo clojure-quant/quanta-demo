@@ -34,8 +34,8 @@ window-daily
               :calendar [:forex :d]
               :import :kibot}
         ds (b/get-bars im opts
-             {:start (t/instant "2000-01-01T00:00:00Z")
-              :end (t/instant "2024-05-01T00:00:00Z")})]
+                       {:start (t/instant "2000-01-01T00:00:00Z")
+                        :end (t/instant "2024-05-01T00:00:00Z")})]
     (if (nom/anomaly? ds)
       (do
         (error "could not get asset: " asset)
@@ -47,7 +47,7 @@ window-daily
         {:asset asset :count c}))))
 
 (def window-intraday
-  (cal/trailing-range [:forex :m] 90000 (t/zoned-date-time "2024-03-08T20:00-05:00[America/New_York]")))
+  (cal/trailing-range [:forex :m] 90000 (t/zoned-date-time "2024-03-20T20:00-05:00[America/New_York]")))
 
 window-intraday
 
@@ -58,7 +58,7 @@ window-intraday
               :import :kibot-http}
         ds (with-retries 5 b/get-bars im opts
              {:start (t/instant "2019-12-01T00:00:00Z")
-              :end (t/instant "2020-02-01T00:00:00Z")})]
+              :end (t/instant "2020-05-01T00:00:00Z")})]
     (if (nom/anomaly? ds)
       (do
         (error "could not get asset: " asset)
@@ -86,11 +86,9 @@ asset-pairs
 
 (doall
  (for [pair asset-pairs]
-   (do 
+   (do
      (get-forex-intraday (:fx pair))
-     (get-forex-intraday (str (:future pair) "0"))
-     )
-   ))
+     (get-forex-intraday (str (:future pair) "0")))))
 
 (doall
  (for [pair asset-pairs]
@@ -102,7 +100,7 @@ asset-pairs
 ; - pre-market (8 :00-9:30 a.m. ET),
 ; - regular (9 :30 a.m.-4:00 p.m. ET.) and 
 ; - after market (4 :00-6:30 p.m. ET) sessions. 
-;Trading for SPY (SPDR S&P 500 ETF) and some other 
+; Trading for SPY (SPDR S&P 500 ETF) and some other 
 ; liquid ETFs and stocks usually starts at 4 a.m and 
 ; ends at 8 p.m. ET.
 

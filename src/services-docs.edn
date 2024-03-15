@@ -66,7 +66,7 @@
                           "output/overviewdb")
                   :stop (ta.db.bars.dynamic/stop-bardb-dynamic this)}
 
-  :import-mananger-compressing {:start (ta.import.provider.compress/start-compressing-provider
+  :import-manager-compressing {:start (ta.import.provider.compress/start-compressing-provider
                                  (clip/ref :bardb-dynamic)
                                  {:month :d
                                   :year :d
@@ -74,7 +74,7 @@
 
   :bardb-dynamic-compressing {:start (ta.db.bars.dynamic/start-bardb-dynamic
                                       (clip/ref :duckdb)
-                                      (clip/ref :import-mananger-compressing)
+                                      (clip/ref :import-manager-compressing)
                                       "output/overviewdb-compressing")
                               :stop (ta.db.bars.dynamic/stop-bardb-dynamic this)}
 
@@ -94,7 +94,9 @@
                           {:fx (clip/ref :feed-fx)
                            :bybit (clip/ref :feed-bybit)})}
 
-  :live {:start (ta.algo.env/create-env-javelin (clip/ref :bardb-dynamic))}
+  :live {:start (ta.algo.env/create-env-javelin (clip/ref :bardb-dynamic
+                                                          ;:bardb-dynamic-compressing
+                                                          ))}
 
   :tickerplant {:start (ta.live.tickerplant/start-tickerplant
                         {:algo-env (clip/ref :live)
