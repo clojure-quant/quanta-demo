@@ -39,7 +39,7 @@
           :stop (.close this)}
 
   :duckdb {; todo: change /bars to /bars.ddb (duck-db db has .ddb extension)
-           :start (ta.db.bars.duckdb/start-bardb-duck "../../output/duckdb/bars.ddb")
+           :start (ta.db.bars.duckdb/start-bardb-duck "output/duckdb/bars.ddb")
            :stop (ta.db.bars.duckdb/stop-bardb-duck this)
            :post-start ta.db.bars.duckdb/init-tables}
   
@@ -59,7 +59,7 @@
   :bardb-dynamic {:start (ta.db.bars.dynamic/start-bardb-dynamic
                           (clip/ref :duckdb)
                           (clip/ref :import-manager)
-                          "../../output/overviewdb")
+                          "output/overviewdb")
                   :stop (ta.db.bars.dynamic/stop-bardb-dynamic this)}
 
   :import-mananger-compressing {:start (ta.import.provider.compress/start-compressing-provider
@@ -71,7 +71,7 @@
   :bardb-dynamic-compressing {:start (ta.db.bars.dynamic/start-bardb-dynamic
                                       (clip/ref :duckdb)
                                       (clip/ref :import-mananger-compressing)
-                                      "../../output/overviewdb-compressing")
+                                      "output/overviewdb-compressing")
                               :stop (ta.db.bars.dynamic/stop-bardb-dynamic this)}
 
   :feed-fx {:start    (ta.quote.fix/start-fix-feed-autoconnect :ctrader-tradeviewmarkets-quote)

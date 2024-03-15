@@ -6,7 +6,7 @@
 
 (defn save-file [req]
   (let [tmpfilepath (:path (bean (get-in req [:params "file" :tempfile])))
-        custom-path "../resources/trades-upload.edn"]
+        custom-path "resources/trades-upload.edn"]
     (io/copy (io/file tmpfilepath) (io/file custom-path))
     {:status 200
      :headers  {"Content-Type" "text/html"}

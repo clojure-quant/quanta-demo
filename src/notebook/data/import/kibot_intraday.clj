@@ -11,7 +11,7 @@
 
 im
 
-(def db (nippy/start-bardb-nippy "../../output/kibot-intraday/"))
+(def db (nippy/start-bardb-nippy "output/kibot-intraday/"))
 
 db
 (nippy/filename-asset db {:asset "EUR/USD" 

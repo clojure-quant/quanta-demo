@@ -9,7 +9,7 @@
                 :symbol s
                 :category :crypto}) assets)
         (pr-str)
-        (spit "../resources/symbollist/bybit.edn")))
+        (spit "resources/symbollist/bybit.edn")))
 
 (-> (get-assets-spot)
     (save-list))

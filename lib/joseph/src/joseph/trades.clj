@@ -44,7 +44,7 @@
   (when dt-str (parse-date dt-str)))
 
 (defn load-trades []
-  (->> (slurp "../resources/trades-upload.edn")
+  (->> (slurp "resources/trades-upload.edn")
        (edn/read-string)
        ;(remove live-trade?)
        (map #(update % :entry-date parse-date))

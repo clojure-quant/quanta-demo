@@ -28,7 +28,7 @@
    "test"
    ])
 
-(def asset-list-directory "../resources/symbollist/")
+(def asset-list-directory "resources/symbollist/")
 
 (def asset-lists-filenames
   (map #(str asset-list-directory % ".edn") asset-lists))
@@ -39,7 +39,7 @@
 
 (defn add-assets []
   (add-lists-to-db asset-lists-filenames)
-  (kibot-http/import-kibot-links "forex")
+  ;(kibot-http/import-kibot-links "forex")
   :assets-added-to-db)
 
 (comment

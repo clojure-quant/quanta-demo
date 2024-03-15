@@ -7,7 +7,7 @@
 
 (def e (get-exchanges api-token))
 
-(spit "../resources/eodhd-exchanges.edn" (pr-str e))
+(spit "resources/eodhd-exchanges.edn" (pr-str e))
 
 
 (def t (get-exchange-tickers api-token "AU"))
@@ -30,7 +30,7 @@ t
        (filter-stocks)
        (map convert-one)
        (pr-str)
-       (spit (str "../resources/symbollist/eodhd-" exchange ".edn"))))
+       (spit (str "resources/symbollist/eodhd-" exchange ".edn"))))
 
 (save-list "AU" t)
 

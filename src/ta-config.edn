@@ -19,7 +19,7 @@
                           [#{"*"} :info]] ; default -> info
               :appenders {:default {:type :console-color}
                           :rolling {:type :file-rolling
-                                    :path "../../output/trateg.log"
+                                    :path "output/trateg.log"
                                     :pattern :monthly}
                           
                           }}
@@ -48,7 +48,7 @@
                          "sentiment" juan.sentiment/sentiment-cookies-wrapped
                          }}}
 
- :reval {:rdocument  {:storage-root "../../output/rdocument/"
+ :reval {:rdocument  {:storage-root "output/rdocument/"
                       :url-root "/api/rdocument/file/"}
          :collections {:data [:clj "notebook/data/"]
                        :studies [:clj "notebook/studies/"]
@@ -61,20 +61,20 @@
                        ;:demo-cljs [:cljs "demo/notebook/"]
                        }}
 
- :ta {:warehouse {:series  {:default "../../output/db/default/"
-                            :crypto "../../output/db/crypto/"
-                            :stocks "../../output/db/stocks/"
-                            :fx "../../output/db/fx/"
-                            :futures "../../output/db/futures/"
-                            :random "../../output/db/random/"
-                            :shuffled  "../../output/db/shuffled/"
-                            :seasonal "../../output/db/seasonal/"
-                            :juan "../../output/db/juan/"
+ :ta {:warehouse {:series  {:default "output/db/default/"
+                            :crypto "output/db/crypto/"
+                            :stocks "output/db/stocks/"
+                            :fx "output/db/fx/"
+                            :futures "output/db/futures/"
+                            :random "output/db/random/"
+                            :shuffled  "output/db/shuffled/"
+                            :seasonal "output/db/seasonal/"
+                            :juan "output/db/juan/"
                             }}
       }
 
 
- :demo {:gann-data-file "../resources/gann.edn"}
+ :demo {:gann-data-file "resources/gann.edn"}
 
  :keybindings [{:kb "alt-g k",
                 :handler [:palette/show],
