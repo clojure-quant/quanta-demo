@@ -43,6 +43,10 @@
            :stop (ta.db.bars.duckdb/stop-bardb-duck this)
            :post-start ta.db.bars.duckdb/init-tables}
   
+  :bardb-sources {:start (ta.db.bars.sources/start-bardb-sources
+                          {:duckdb (clip/ref :duckdb)
+                           :nippy (ta.db.bars.nippy/start-bardb-nippy "output/kibot-intraday/")})}
+
   :import-manager {:start (ta.import.core/start-import-manager
                            {:kibot (ta.import.provider.kibot.ds/create-import-kibot
                                      (:kibot (clip/ref :secrets)))

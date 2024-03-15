@@ -8,7 +8,7 @@
         com.taoensso/timbre {:mvn/version "6.2.2"} ; clj/cljs logging
         org.pinkgorilla/reval {:mvn/version "0.5.141"}
         ; ta
-        org.pinkgorilla/ta {:mvn/version "0.3.679"}
+        org.pinkgorilla/ta {:mvn/version "0.3.684"}
         ; apps
         ta/astro {:local/root "./lib/astro" :deps/manifest :deps}
         ta/gann {:local/root "./lib/gann" :deps/manifest :deps}

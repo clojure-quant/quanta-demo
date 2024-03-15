@@ -52,6 +52,9 @@ db
 
 (import-assets ["SPY" "QQQ"])
 
+(import-assets  ["USD/JPY" "JY0" ])
+
+(import-assets ["EU0" "SF0" "BP0"])
 
 (import-assets ["INTC"])
 
