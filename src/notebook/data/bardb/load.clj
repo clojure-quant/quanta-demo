@@ -21,6 +21,11 @@
              :calendar [:forex :m]}
             window)
 
+(b/get-bars db
+            {:asset "USD/JPY"
+             :calendar [:forex :d]}
+            window)
+
 (-> (b/get-bars db
                 {:asset "QQQ"  ; "USD/JPY"
                  :calendar [:forex :m]}

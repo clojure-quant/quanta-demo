@@ -28,12 +28,23 @@
 
 window-daily
 
-(defn get-forex-daily [asset]
+(defn get-forex-day [asset]
   (info "getting intraday forex for: " asset)
-  (with-retries 5 b/get-bars db-dyn {:asset asset
-                                 :calendar [:forex :d]
-                                 :import :kibot}
-    window-daily))
+  (let [opts {:asset asset
+              :calendar [:forex :d]
+              :import :kibot}
+        ds (b/get-bars im opts
+             {:start (t/instant "2000-01-01T00:00:00Z")
+              :end (t/instant "2024-05-01T00:00:00Z")})]
+    (if (nom/anomaly? ds)
+      (do
+        (error "could not get asset: " asset)
+        {:asset asset :count 0})
+      (let [c (tc/row-count ds)]
+        (info "recevied from kibot asset:" asset " count: " c)
+        (duck/delete-bars db-duck [:forex :d] asset)
+        (b/append-bars db-duck opts ds)
+        {:asset asset :count c}))))
 
 (def window-intraday
   (cal/trailing-range [:forex :m] 90000 (t/zoned-date-time "2024-03-08T20:00-05:00[America/New_York]")))
@@ -81,4 +92,20 @@ asset-pairs
      )
    ))
 
+(doall
+ (for [pair asset-pairs]
+   (do
+     (get-forex-day (:fx pair))
+     (get-forex-day (str (:future pair) "0")))))
 
+; Our stocks and ETFs data includes
+; - pre-market (8 :00-9:30 a.m. ET),
+; - regular (9 :30 a.m.-4:00 p.m. ET.) and 
+; - after market (4 :00-6:30 p.m. ET) sessions. 
+;Trading for SPY (SPDR S&P 500 ETF) and some other 
+; liquid ETFs and stocks usually starts at 4 a.m and 
+; ends at 8 p.m. ET.
+
+; Daily data uses the 5PM to 5PM ET interval as a single
+;  trading session. So, for example, Monday trading session 
+; starts at 5PM on Sunday and ends at 5PM on Monday.

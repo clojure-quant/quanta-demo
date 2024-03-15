@@ -11,13 +11,13 @@
 
 
 (def window {:start (t/instant "2022-03-05T00:00:00Z")
-             :end (t/instant "2024-03-06T20:00:00Z")})
+             :end (t/instant "2024-03-20T20:00:00Z")})
 
 
 (b/get-bars db
-           {:asset "EUR/USD"
+           {:asset "USD/JPY"
             :calendar [:forex :d]
-            :import :kibot
+            ;:import :kibot
             }
             window)
 
