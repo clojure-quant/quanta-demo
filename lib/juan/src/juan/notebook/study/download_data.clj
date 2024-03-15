@@ -7,6 +7,7 @@
    ;[ta.import.core :refer [get-bars]]
    [ta.calendar.core :as cal]
    [ta.db.bars.protocol :as b]
+   [ta.import.helper.retries :refer [with-retries]]
    [juan.asset-pairs :refer [asset-pairs]]))
 
 ; intraday data is big, so we preload it.
@@ -23,25 +24,22 @@ window-daily
 
 (defn get-forex-daily [asset]
   (info "getting intraday forex for: " asset)
-  (b/get-bars db {:asset asset
-                  :calendar [:forex :d]
-                  :import :kibot}
-              window-daily))
+  (with-retries 5 b/get-bars db {:asset asset
+                                 :calendar [:forex :d]
+                                 :import :kibot}
+    window-daily))
 
 (def window-intraday
   (cal/trailing-range [:forex :m] 90000 (t/zoned-date-time "2024-03-08T20:00-05:00[America/New_York]")))
-
-
 
 window-intraday
 
 (defn get-forex-intraday [asset]
   (info "getting intraday forex for: " asset)
-  (b/get-bars db {:asset asset
+  (with-retries 5 b/get-bars db {:asset asset
                   :calendar [:forex :m]
                   :import :kibot-http}
-          window-intraday))
-
+              window-intraday))
 
 ;; import one forex
 (db/instrument-details "EUR/USD")
@@ -53,13 +51,12 @@ window-intraday
 
 asset-pairs
 
+(doall
+ (for [pair asset-pairs]
+   (get-forex-daily (:fx pair))))
 
-(doall 
-  (for [pair asset-pairs]
-    (get-forex-daily (:fx pair))))
-
-(doall 
-  (for [pair asset-pairs]
-    (get-forex-intraday (:fx pair))))
+(doall
+ (for [pair asset-pairs]
+   (get-forex-intraday (:fx pair))))
 
 

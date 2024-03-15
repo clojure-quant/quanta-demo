@@ -40,6 +40,7 @@
 (defn add-assets []
   (add-lists-to-db asset-lists-filenames)
   (kibot-http/import-kibot-links "resources/kibot-http/"  "forex")
+  (kibot-http/import-kibot-links "resources/kibot-http/"  "futures")
   :assets-added-to-db)
 
 (comment

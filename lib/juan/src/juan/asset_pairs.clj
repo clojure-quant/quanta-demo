@@ -30,9 +30,19 @@
   (->> (map :fx asset-pairs)
        (into [])))
 
+(def future-fx-assets
+  (->> (map :future asset-pairs)
+       (map #(str % "0"))
+       (into [])))
+
 
 (comment 
   spot-fx-assets
+
+  future-fx-assets
+  ;; => ["EU0" "SF0" "BP0" "SEK0" "NOK0" "CD0" "JY0" "AD0" "NE0" "PX0" "RA0" "RY0" "RF0" "RP0" "PJY0"]
+
+
   
  ; 
   )
