@@ -1,0 +1,14 @@
+{:alphavantage "" ; free api key at: https://www.alphavantage.co/support/#api-key
+ 
+ :kibot {; paid account at www.kibot.com
+         :user "guest" 
+         :password "guest"}
+ :quandl "" 
+ ; oauth2 credentials (for user login and oauth2 authenticated apis)
+ :oauth2
+{:google {:client-id ""
+          :client-secret ""}
+ :github {:client-id        ""
+          :client-secret    ""}
+ }
+ }
