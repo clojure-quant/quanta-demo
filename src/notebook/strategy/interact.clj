@@ -228,7 +228,7 @@
               :spec [0.1 0.5 1.0 1.5 2.0 2.5 3.0 5.0]}]
    :viz 'ta.viz.ds.highchart/highstock-render-spec
    :viz-options {:chart {:box :fl}
-                 :charts [{:close :candlestick
+                 :charts [{:close :line ; :candlestick
                            :sh {:type :line :color "green"}
                            :sl {:type :line :color "red"}
                            :h {:type :line :color "blue"}
