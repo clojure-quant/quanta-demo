@@ -8,7 +8,7 @@
         com.taoensso/timbre {:mvn/version "6.2.2"} ; clj/cljs logging
         org.pinkgorilla/reval {:mvn/version "0.5.141"}
         ; ta
-        org.pinkgorilla/ta {:mvn/version "0.3.691"}
+        org.pinkgorilla/ta {:mvn/version "0.3.692"}
         ;org.pinkgorilla/ta {:local/root "../trateg" :deps/manifest :deps}
         babashka/process {:mvn/version "0.5.21"}
         ; apps
