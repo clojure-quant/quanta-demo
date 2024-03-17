@@ -6,8 +6,7 @@
    ; vega specs here:
    [notebook.strategy.sentiment-spread.vega]
    [notebook.strategy.asset-compare.viz]
-   [juan.notebook.viz]
-   ))
+   [juan.notebook.viz]))
 
 (defn all-cryptos []
   (->> (db/symbols-available :crypto)
@@ -41,11 +40,10 @@
                {:type :bool
                 :path :super-super-fast?
                 :name "SuperSuperFast?"}])
-   :viz 'ta.viz.ds.highchart/highstock-render-spec
-   :viz-options {:chart {:box :fl}
-                 :charts [{:close :candlestick #_:ohlc}
-                          {:volume {:type :column :color "red"}}]}})
-
+   :chart {:viz 'ta.viz.ds.highchart/highstock-render-spec
+           :viz-options {:chart {:box :fl}
+                         :charts [{:close :candlestick #_:ohlc}
+                                  {:volume {:type :column :color "red"}}]}}})
 
 (def sma-crypto
   {:id :sma-crypto
@@ -74,13 +72,14 @@
               :path :sma-length-lt
               :name "sma-lt"
               :spec [100 200 500 1000]}]
-   :viz 'ta.viz.ds.highchart/highstock-render-spec
-   :viz-options {:chart {:box :fl}
-                 :charts [{:close :candlestick ; :ohlc ; :line 
-                           :sma-lt :line
-                           :sma-st :line}
-                          {:volume :column}]}})
-
+   :chart {:viz 'ta.viz.ds.highchart/highstock-render-spec
+           :viz-options {:chart {:box :fl}
+                         :charts [{:close :candlestick ; :ohlc ; :line 
+                                   :sma-lt :line
+                                   :sma-st :line}
+                                  {:volume :column}]}}
+   :metrics {:viz 'ta.viz.ds.metrics/metrics-render-spec
+             :viz-options {}}})
 
 (def sentiment-spread
   {:id :sentiment-spread
@@ -103,9 +102,8 @@
               :path :market
               :name "Market"
               :spec ["SPY" "QQQ" "IWM"]}]
-   :viz 'ta.viz.ds.vega/vega-render-spec
-   :viz-options notebook.strategy.sentiment-spread.vega/vega-spec})
-
+   :chart {:viz 'ta.viz.ds.vega/vega-render-spec
+           :viz-options notebook.strategy.sentiment-spread.vega/vega-spec}})
 
 (def juan-fx
   {:id :juan-fx
@@ -172,16 +170,14 @@
               :path [4 :max-open-close-over-low-high]
               :name "doji-co/lh max"
               :spec [0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9]}
-              {:type :select
+             {:type :select
               :path [4 :calendar 1]
               :name "intraday-interval"
-              :spec [:m :h]}
-             
-             ]
-   :viz 'ta.viz.ds.highchart/highstock-render-spec
-   :viz-options juan.notebook.viz/combined-chart-spec
-   :key :signal})
+              :spec [:m :h]}]
 
+   :chart {:viz 'ta.viz.ds.highchart/highstock-render-spec
+           :viz-options juan.notebook.viz/combined-chart-spec
+           :key :signal}})
 
 (def asset-compare
   {:id :asset-compare
@@ -191,8 +187,8 @@
           :assets ["GLD" "UUP" "SPY" "QQQ" "IWM" "EEM" "EFA" "IYR" "USO" "TLT"]
           :import :kibot
           :trailing-n 1000}
-   :viz 'ta.viz.ds.vega/vega-render-spec
-   :viz-options notebook.strategy.asset-compare.viz/vega-spec})
+   :chart {:viz 'ta.viz.ds.vega/vega-render-spec
+           :viz-options notebook.strategy.asset-compare.viz/vega-spec}})
 
 (def reversal-and-breakout
   {:id :reversal-and-breakout
@@ -226,16 +222,15 @@
               :path :threshold
               :name "Threshold"
               :spec [0.1 0.5 1.0 1.5 2.0 2.5 3.0 5.0]}]
-   :viz 'ta.viz.ds.highchart/highstock-render-spec
-   :viz-options {:chart {:box :fl}
-                 :charts [{:close :line ; :candlestick
-                           :sh {:type :line :color "green"}
-                           :sl {:type :line :color "red"}
-                           :h {:type :line :color "blue"}
-                           :l {:type :line :color "yellow"}}
-                          ;{:volume :column}
-                          ]}})
-
+   :chart {:viz 'ta.viz.ds.highchart/highstock-render-spec
+           :viz-options {:chart {:box :fl}
+                         :charts [{:close :line ; :candlestick
+                                   :sh {:type :line :color "green"}
+                                   :sl {:type :line :color "red"}
+                                   :h {:type :line :color "blue"}
+                                   :l {:type :line :color "yellow"}}
+                                     ;{:volume :column}
+                                  ]}}})
 (def astro-chart
   {:id :astro-chart
    :algo {:type :time
@@ -245,7 +240,7 @@
               :path :asset
               :name "Asset"
               :spec ["BTCUSDT" "ETHUSDT"]}]
-   :viz 'astro.hiccup/astro-hiccup})
+   :chart {:viz 'astro.hiccup/astro-hiccup}})
 
 (def eodhd-eod
   {:id :eodhd-eod
@@ -272,12 +267,12 @@
               :path :sma-length-lt
               :name "sma-lt"
               :spec [100 200 500 1000]}]
-   :viz 'ta.viz.ds.highchart/highstock-render-spec
-   :viz-options {:chart {:box :fl}
-                 :charts [{:close :candlestick ; :ohlc ; :line 
-                           :sma-lt :line
-                           :sma-st :line}
-                          {:volume :column}]}})
+   :chart {:viz 'ta.viz.ds.highchart/highstock-render-spec
+           :viz-options {:chart {:box :fl}
+                         :charts [{:close :candlestick ; :ohlc ; :line 
+                                   :sma-lt :line
+                                   :sma-st :line}
+                                  {:volume :column}]}}})
 
 (def gann
   {:id :gann
@@ -305,23 +300,22 @@
               :path :sma-length-lt
               :name "sma-lt"
               :spec [100 200 500 1000]}]
-   :viz 'ta.viz.ds.highchart/highstock-render-spec
-   :viz-options {:chart {:box :fl}
-                 :charts  [{:sr-up-0 "line"
-                            :sr-up-1 "line"
-                            :sr-up-2 "line"
-                            :sr-down-0 {:type "line" :color "red"}
-                            :sr-down-1 {:type "line" :color "red"}
-                            :sr-down-2 {:type "line" :color "red"}}
-                           {:cross-up-close "column"
-                            :cross-down-close "column"}
-                           {:qp "column"
-                  ;:qt "column"
-                            }
-                ;{:index "column"}
-               ; {:qt-jump-close "column"}
-                           ]}})
-
+   :chart {:viz 'ta.viz.ds.highchart/highstock-render-spec
+           :viz-options {:chart {:box :fl}
+                         :charts  [{:sr-up-0 "line"
+                                    :sr-up-1 "line"
+                                    :sr-up-2 "line"
+                                    :sr-down-0 {:type "line" :color "red"}
+                                    :sr-down-1 {:type "line" :color "red"}
+                                    :sr-down-2 {:type "line" :color "red"}}
+                                   {:cross-up-close "column"
+                                    :cross-down-close "column"}
+                                   {:qp "column"
+                             ;:qt "column"
+                                    }
+                           ;{:index "column"}
+                          ; {:qt-jump-close "column"}
+                                   ]}}})
 (defn add-templates []
   (doall
    (map template/add [watch-crypto
@@ -334,10 +328,8 @@
                       eodhd-eod
                       gann])))
 
-
 (comment
   (add-templates)
 
  ; 
   )
-
