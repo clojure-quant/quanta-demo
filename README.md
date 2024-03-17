@@ -1,1 +1,1 @@
-# trateg-demo
+# quanta-demo
