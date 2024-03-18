@@ -104,8 +104,6 @@
     (-> {:close [10.0 10.6 10.7]
          :date [(days-ago 1) (days-ago 2) (days-ago 3)]}
         tc/dataset))
-  (require '[ta.algo.manager :refer [col-info]])
-  (col-info ds)
 
   (ta4j/ds->ta4j-close ds)
 

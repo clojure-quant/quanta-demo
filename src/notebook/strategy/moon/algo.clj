@@ -14,7 +14,7 @@
   (if phase
     (case phase
       :i1 :flat
-      :full :buy
+      :full :long
       :hold)
     :hold))
 
@@ -23,7 +23,7 @@
 
 
 (defn buy-signal->text [signal]
-  (if (= signal :buy)
+  (if (= signal :long)
     1.0
     nil))
 

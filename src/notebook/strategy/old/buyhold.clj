@@ -6,7 +6,7 @@
    [ta.trade.print :refer [print-overview-stats print-roundtrip-stats
                               print-roundtrips print-roundtrips-pl-desc]]
    [ta.trade.metrics.roundtrip-stats :refer [roundtrip-metrics]]
-   [ta.algo.buy-hold :refer [buy-hold-signal]]
+   [ta.indicator.signal :refer [buy-hold-signal]]
    [ta.viz.table :refer [print-table]]))
 
 (def s "BTCUSD")

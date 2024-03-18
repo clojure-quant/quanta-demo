@@ -11,7 +11,7 @@
     :flat  ; flat on month-end
     (if mb?
       (if (> close sma-v)
-        :buy  ; long when above ma
+        :long  ; long when above ma
         :flat) ; flat when below ma
       :hold ;  hold when not month-begin or month-end
       )))
@@ -30,7 +30,7 @@
                          :sma-r sma-r
                          :m-b m-b
                          ;:signal1 (dtype/emap buy-above :object close sma-v)
-                         :signal (dtype/emap long-during-month-when-above-ma :object m-b m-e close sma-v)}))))
+                         :signal (dtype/emap long-during-month-when-above-ma :keyword m-b m-e close sma-v)}))))
 
 (def col-study [:date :close :sma-v  :signal
                    ; :signal2

@@ -7,7 +7,7 @@
    [tech.v3.datatype :as dtype]
    [ta.calendar.link :refer [link-bars2]]
    [ta.algo.ds :refer [all-positions-agree-ds]]
-   [ta.trade.signal2 :refer [signal-keyword->signal-double]]
+   [ta.trade.signal :refer [signal-keyword->signal-double]]
    [juan.algo.spike :refer [spike-signal]]
    [juan.algo.pivot-price-nearby :refer [nearby-pivots]]))
 

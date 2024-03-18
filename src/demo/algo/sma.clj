@@ -21,8 +21,8 @@
 (defn calc-sma-signal [sma-st sma-lt]
   (if (and sma-st sma-lt)
     (cond
-      (> sma-st sma-lt) :buy
-      (< sma-st sma-lt) :sell
+      (> sma-st sma-lt) :long
+      (< sma-st sma-lt) :short
       :else :hold)
     :hold))
 
