@@ -49,3 +49,9 @@ shortSignal1 = crossunder(close, hma_top_band1 and (bar_index - lastSignalBar > 
    :lower (fun/-  hullma (fun/* band-height a-low))
 
 
+
+(def config {1 {:wma-n 250 :m 20 :l-up 1.5 :l-down 3.0}
+             2 {:wma-n 125 :m 10 :l-up 2.0 :l-down 2.0}
+             3 {:wma-n 50 :m 5 :l-up 2.5 :l-down 1.5}
+             :wt {:n1 10 :n2 40}})
+
