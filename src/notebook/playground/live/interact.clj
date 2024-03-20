@@ -66,6 +66,6 @@ subscription-id
 (-> @sub/visualizations-a (get subscription-id))
 
 
-; (require '[notebook.strategy.sentiment-spread.vega :refer [calc-viz-vega]])
+; (require '[algodemo.sentiment-spread.vega :refer [calc-viz-vega]])
 ; (calc-viz-vega (-> @sub/results-a :sentiment-spread))
 

@@ -1,0 +1,7 @@
+{:name "algodemo"
+ :quanta/template [algodemo.template/watch-crypto
+                   algodemo.template/sma-crypto
+                   algodemo.template/sentiment-spread
+                   algodemo.template/asset-compare
+                   algodemo.template/reversal-and-breakout
+                   algodemo.template/eodhd-eod]}
