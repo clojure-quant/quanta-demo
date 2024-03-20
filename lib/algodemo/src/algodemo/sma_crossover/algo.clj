@@ -12,8 +12,9 @@
     :hold))
 
 (defn sma-crossover-algo [_env {:keys [sma-length-st sma-length-lt] :as opts} bar-ds]
-  (let [sma-st (sma {:n sma-length-st} bar-ds)
-        sma-lt (sma {:n sma-length-lt} bar-ds)
+  (let [price (:close bar-ds)
+        sma-st (sma {:n sma-length-st} price)
+        sma-lt (sma {:n sma-length-lt} price)
         signal (into [] (map calc-sma-signal sma-st sma-lt))]
     (tc/add-columns bar-ds {:sma-st sma-st
                             :sma-lt sma-lt
