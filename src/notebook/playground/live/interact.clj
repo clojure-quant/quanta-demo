@@ -49,9 +49,15 @@
 
 subscription-id
 
+(def subscription-id "YEoVgy")
+
 ; check state (developer debugging)
 
 (-> @sub/subscriptions-a keys)
+;; => ("YEoVgy")
+
+;; => ("x7u1cu")
+
 ;; => ()
 
 (-> @sub/results-a keys)

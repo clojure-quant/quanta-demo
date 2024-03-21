@@ -103,7 +103,7 @@
                          :quote-manager (clip/ref :quote-manager)})}
 
   ;; LIVE STRATEGIES
-  :crypto-raw {:start (notebook.strategy.live.crypto/create-crypto
+  #_:crypto-raw #_{:start (notebook.strategy.live.crypto/create-crypto
                        (clip/ref :live)
                        ; ref to :tickerplant is needed to start tickerplant FIRST.
                        (clip/ref :tickerplant) (clip/ref :timbre))}

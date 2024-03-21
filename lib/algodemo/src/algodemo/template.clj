@@ -71,10 +71,23 @@
               :spec [100 200 500 1000]}]
    :chart {:viz 'ta.viz.ds.highchart/highstock-render-spec
            :viz-options {:chart {:box :fl}
-                         :charts [{:close :candlestick ; :ohlc ; :line 
+                         :charts [{:ohlc :candlestick ; :ohlc ; :line 
+                                   :close :line
                                    :sma-lt :line
-                                   :sma-st :line}
+                                   :sma-st :line
+                                   :signal :flags}
                                   {:volume :column}]}}
+   :table {:viz 'ta.viz.ds.rtable/rtable-render-spec
+           :viz-options {:class "table-head-fixed padding-sm table-red table-striped table-hover"
+                         :style {:width "50vw"
+                                 :height "40vh"
+                                 :border "3px solid green"}
+                         :columns [{:path :date}
+                                   {:path :close}
+                                   {:path :sma-st}
+                                   {:path :sma-lt}
+                                   {:path :position}
+                                   {:path :signal}]}}
    :metrics {:viz 'ta.viz.ds.metrics/metrics-render-spec
              :viz-options {}}})
 
