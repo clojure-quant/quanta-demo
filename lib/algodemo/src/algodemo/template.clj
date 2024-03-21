@@ -129,7 +129,7 @@
 (def reversal-and-breakout
   {:id :reversal-and-breakout
    :algo {:type :trailing-bar
-          :calendar [:crypto :m]
+          :calendar [:crypto :d]
           :asset "BTCUSDT"
           :trailing-n 1000
           :import :bybit
@@ -161,12 +161,28 @@
    :chart {:viz 'ta.viz.ds.highchart/highstock-render-spec
            :viz-options {:chart {:box :fl}
                          :charts [{:close :line ; :candlestick
-                                   :sh {:type :line :color "green"}
-                                   :sl {:type :line :color "red"}
-                                   :h {:type :line :color "blue"}
-                                   :l {:type :line :color "yellow"}}
-                                     ;{:volume :column}
-                                  ]}}})
+                                   ;:sh {:type :line :color "green"}
+                                   ;:sl {:type :line :color "red"}
+                                   ;:h {:type :line :color "blue"}
+                                   ;:l {:type :line :color "yellow"}
+
+                                   ; TODO: does not work with webgl
+                                   ;:bullish-breakout? {:type :flags
+                                   ;                    ;:color "blue"
+                                   ;                    :color "rgba(100,0,50,1)"
+                                   ;                    :fillColor "rgba(100,200,50,1)" ;"green"
+                                   ;                    :dataLabels {:backgroundColor "rgba(100,200,50,1)"
+                                   ;                                 :borderColor "green"}
+                                   ;                    }
+
+                                   :hstore {:type :line :color "green"}
+                                   :lstore {:type :line :color "red"}
+                                   }
+                                  {:volume :column}]}}
+   :metrics {:viz 'ta.viz.ds.metrics/metrics-render-spec
+             :viz-options {}}})
+
+
 
 (def eodhd-eod
   {:id :eodhd-eod
