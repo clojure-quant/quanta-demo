@@ -1,7 +1,7 @@
 {:name "algodemo"
- :quanta/template [algodemo.template/watch-crypto
-                   algodemo.template/sma-crypto
-                   algodemo.template/sentiment-spread
-                   algodemo.template/asset-compare
-                   algodemo.template/reversal-and-breakout
-                   algodemo.template/eodhd-eod]}
+ :quanta/template [algodemo.sma-crossover.template/sma-crypto
+                   algodemo.sentiment-spread.template/sentiment-spread
+                   algodemo.asset-compare.template/asset-compare
+                   algodemo.reversal-and-breakout.template/reversal-and-breakout
+                   algodemo.nil.template/watch-crypto
+                   algodemo.sma-crossover.template/eodhd-eod]}

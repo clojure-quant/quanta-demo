@@ -49,11 +49,13 @@
 
 subscription-id
 
-(def subscription-id "YEoVgy")
+(def subscription-id "79zRE_")
 
 ; check state (developer debugging)
 
 (-> @sub/subscriptions-a keys)
+;; => ("79zRE_")
+
 ;; => ("YEoVgy")
 
 ;; => ("x7u1cu")
