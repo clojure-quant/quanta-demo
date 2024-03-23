@@ -33,7 +33,7 @@
       (replace-missing :down)
       (:out)))
 
-(defn over-time [n vec]
+(defn allow-one-signal-every-n-bars [n vec]
   (let [ds (tc/dataset {:in vec})]
     (:out (r/rolling ds
                      {:window-type :fixed
@@ -45,39 +45,30 @@
                                          true
                                          false))}}))))
 
-(defn bullish-cross [below-w above-w level-w]
-  "calc level cross inside a bar. eg: open - close, low - close"
-  (dfn/and
-    (dfn/< below-w level-w)
-    (dfn/> above-w level-w)))
-
-(defn bearish-cross [above-w below-w level-w]
-  "calc level cross inside a bar. eg: open - close, low - close"
-  (dfn/and
-    (dfn/> above-w level-w)
-    (dfn/< below-w level-w)))
-
-(defn bullish-cross-over-time [n {:keys [below above level] :as cols}]
-  "bullish cross of a level by col1 and col2 values"
-  (->> (bullish-cross below above level)
-       (over-time n)))
-
-(defn bearish-cross-over-time [n {:keys [below above level] :as cols}]
-  "bearish cross of a level by col1 and col2 values"
-  (->> (bearish-cross below above level)
-       (over-time n)))
-
-(defn no-prior-signal-over-time? [ds trailing-n of]
-  (r/rolling ds
+(defn no-prior-signal-every-n-bars [n vec]
+  (let [ds (tc/dataset {:in vec})]
+    (:out (r/rolling ds
              {:window-type :fixed
-              :window-size trailing-n
+              :window-size n
               :relative-window-position :left}
-             {:prior-signals? {:column-name [of]
-                               :reducer (fn [bool-w]
-                                          ; aggregate window results and skip the current bool
-                                          (if (some true? (drop-last bool-w))
-                                            false
-                                            true))}}))
+             {:out {:column-name [:in]
+                    :reducer (fn [bool-w]
+                               ; aggregate window results and skip the current bool
+                               (if (some true? (drop-last bool-w))
+                                 false
+                                 true))}}))))
+
+(defn bullish-at-level [below above level]
+  "calc for every bar if the bullish condition is true: above > level > below"
+  (dfn/and
+    (dfn/< below level)
+    (dfn/> above level)))
+
+(defn bearish-at-level [above below level]
+  "calc for every bar if the bearish condition is true: above > level > below"
+  (dfn/and
+    (dfn/> above level)
+    (dfn/< below level)))
 
 (defn- calc-rb-signal [bullish-breakout? bearish-breakout? lcross-over? hcross-under?]
   (cond
@@ -104,38 +95,31 @@
 
         ;; TODO: create cross len param for breakout and rejection...
         ;; cross inside window
-        breakout (bullish-cross-over-time 5 {:below open :above close :level storeh})
-        breakdown (bearish-cross-over-time 5 {:below open :above close :level storel})
+        breakout  (->> (bullish-at-level open close storeh)
+                       (allow-one-signal-every-n-bars 5))
+
+        breakdown (->> (bearish-at-level open close storel)
+                       (allow-one-signal-every-n-bars 5))
 
         strong-breakout (dfn/and breakout strongvol)
         strong-breakdown (dfn/and breakdown strongvol)
 
         ; breakout signal
-        no-prior-bullish-breakout-signals? (no-prior-signal-over-time? (tc/dataset {:signal strong-breakout})
-                                                                       2 :signal)
-        no-prior-bearish-breakout-signals? (no-prior-signal-over-time? (tc/dataset {:signal strong-breakdown})
-                                                                       2 :signal)
+        no-prior-bullish-breakout-signals? (no-prior-signal-every-n-bars 4 strong-breakout)
+        no-prior-bearish-breakout-signals? (no-prior-signal-every-n-bars 4 strong-breakdown)
 
-        bullish-breakout? (dfn/and strong-breakout
-                                   (:prior-signals? no-prior-bullish-breakout-signals?))
-
-        bearish-breakout? (dfn/and strong-breakdown
-                                   (:prior-signals? no-prior-bearish-breakout-signals?))
+        bullish-breakout? (dfn/and strong-breakout no-prior-bullish-breakout-signals?)
+        bearish-breakout? (dfn/and strong-breakdown no-prior-bearish-breakout-signals?)
 
         ; rejection signal
-        storel-cross (bullish-cross low close storel)
-        storeh-cross (bearish-cross high close storeh)
+        storel-cross (bullish-at-level low close storel)
+        storeh-cross (bearish-at-level high close storeh)
 
-        no-prior-bullish-rejections? (no-prior-signal-over-time? (tc/dataset {:signal storel-cross})
-                                                                 2 :signal)
+        no-prior-bullish-rejections? (no-prior-signal-every-n-bars 4 storel-cross)
+        no-prior-bearish-rejections? (no-prior-signal-every-n-bars 4 storeh-cross)
 
-        no-prior-bearish-rejections? (no-prior-signal-over-time? (tc/dataset {:signal storeh-cross})
-                                                                 2 :signal)
-
-        bullish-rejection? (dfn/and storel-cross
-                                    (:prior-signals? no-prior-bullish-rejections?))
-        bearish-rejection? (dfn/and storel-cross
-                                    (:prior-signals? no-prior-bearish-rejections?))
+        bullish-rejection? (dfn/and storel-cross no-prior-bullish-rejections?)
+        bearish-rejection? (dfn/and storel-cross no-prior-bearish-rejections?)
 
         ; signal
         lcross-over? (cross-up low storel)
@@ -144,8 +128,7 @@
         signal (into [] (map calc-rb-signal bullish-breakout?
                              bearish-breakout?
                              lcross-over?
-                             hcross-under?))
-        ]
+                             hcross-under?))]
     (tc/add-columns bar-ds {
                             :sh sh
                             :sl sl
@@ -160,15 +143,15 @@
                             :strongvol strongvol
                             :strong-breakout strong-breakout
                             :strong-breakdown strong-breakdown
-                            :no-prior-bullish-breakout-signals? (:prior-signals? no-prior-bullish-breakout-signals?)
-                            :no-prior-bearish-breakout-signals? (:prior-signals? no-prior-bearish-breakout-signals?)
+                            :no-prior-bullish-breakout-signals? no-prior-bullish-breakout-signals?
+                            :no-prior-bearish-breakout-signals? no-prior-bearish-breakout-signals?
                             :bullish-breakout? bullish-breakout?
                             :bearish-breakout? bearish-breakout?
                             :storel-cross storel-cross
                             :storeh-cross storeh-cross
-                            :no-prior-bullish-rejections? (:prior-signals? no-prior-bullish-rejections?)
+                            :no-prior-bullish-rejections? no-prior-bullish-rejections?
                             :bullish-rejection? bullish-rejection?
-                            :no-prior-bearish-rejections? (:prior-signals? no-prior-bearish-rejections?)
+                            :no-prior-bearish-rejections? no-prior-bearish-rejections?
                             :bearish-rejection? bearish-rejection?
                             :lcross-over? lcross-over?
                             :hcross-under? hcross-under?
