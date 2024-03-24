@@ -3,7 +3,8 @@
     [tablecloth.api :as tc]
     [ta.indicator :refer [sma wma]]
     [ta.indicator.signal :refer [cross-up cross-down]]
-    [tech.v3.dataset :as ds :refer [row-map replace-missing]]
+    [ta.indicator.rolling :refer [trailing-max trailing-min]]
+    [tech.v3.dataset :as ds :refer [replace-missing]]
     [tech.v3.dataset.rolling :as r]
     [tech.v3.datatype.rolling :as rolling]
     [tech.v3.datatype.functional :as dfn]
@@ -12,22 +13,8 @@
 
 ;; ALGO: https://www.tradingview.com/script/fpWwOup4-Reversal-and-Breakout-Signals-AlgoAlpha/
 
-(defn max-ds [ds len of]
-  (r/rolling ds
-             {:window-type :fixed
-              :window-size len
-              :relative-window-position :left}
-             {:max (r/max of)}))
-
-(defn min-ds [ds len of]
-  (r/rolling ds
-             {:window-type :fixed
-              :window-size len
-              :relative-window-position :left}
-             {:min (r/min of)}))
-
-(defn store-ds [ds of]
-  "creates a column which takes the value of an other column or keeps the previous taken value.
+(defn store-prev [vec]
+  "takes the prev value of the given column or of the new created one.
 
   because only values of existing columns can be accessed and no state is available during
   processing, two steps are needed to get the previous value.
@@ -35,65 +22,53 @@
   first: the column is created only with values where the value changes.
          rows where the old value is needed, we kept empty.
   second: replacing the missing values by using :down strategy (taking previous not missing value)"
-  (-> ds
-      (r/rolling
+  (-> (r/rolling
+        (tc/dataset {:in vec})
         {:window-type :fixed
          :window-size 2
          :relative-window-position :left}
-        {:store {:column-name [of]
+        {:out {:column-name [:in]
                  :reducer (fn [[prev cur]]
                             (if (= cur prev) prev))}})
-      (replace-missing :down)))
+      (replace-missing :down)
+      (:out)))
 
-(defn bullish-cross [below-w above-w level-w]
-  "calc level cross inside a bar. eq: open - close, low - close"
+(defn allow-one-signal-every-n-bars [n vec]
+  (let [ds (tc/dataset {:in vec})]
+    (:out (r/rolling ds
+                     {:window-type :fixed
+                      :window-size n
+                      :relative-window-position :left}
+                     {:out {:column-name [:in]
+                            :reducer (fn [window]
+                                       (if (some true? window)
+                                         true
+                                         false))}}))))
+
+(defn no-prior-signal-every-n-bars [n vec]
+  (let [ds (tc/dataset {:in vec})]
+    (:out (r/rolling ds
+             {:window-type :fixed
+              :window-size n
+              :relative-window-position :left}
+             {:out {:column-name [:in]
+                    :reducer (fn [bool-w]
+                               ; aggregate window results and skip the current bool
+                               (if (some true? (drop-last bool-w))
+                                 false
+                                 true))}}))))
+
+(defn bullish-at-level [below above level]
+  "calc for every bar if the bullish condition is true: above > level > below"
   (dfn/and
-    (dfn/< below-w level-w)
-    (dfn/> above-w level-w)))
+    (dfn/< below level)
+    (dfn/> above level)))
 
-(defn bearish-cross [above-w below-w level-w]
-  "calc level cross inside a bar. eq: open - close, low - close"
+(defn bearish-at-level [above below level]
+  "calc for every bar if the bearish condition is true: above > level > below"
   (dfn/and
-    (dfn/> above-w level-w)
-    (dfn/< below-w level-w)))
-
-(defn bullish-cross-over-time-ds [ds len below-of above-of level-of]
-  "bullish cross of a level by col1 and col2 values"
-  (r/rolling ds
-             {:window-type :fixed
-              :window-size len
-              :relative-window-position :left}
-             {:breakout {:column-name [below-of above-of level-of]
-                         :reducer (fn [below-w above-w level-w]
-                                    ; aggregate window results
-                                    (if (some true? (bullish-cross below-w above-w level-w))
-                                      true
-                                      false))}}))
-
-(defn bearish-cross-over-time-ds [ds len above-of below-of level-of]
-  "bearish cross of a level by col1 and col2 values"
-  (r/rolling ds
-             {:window-type :fixed
-              :window-size len
-              :relative-window-position :left}
-             {:breakdown {:column-name [above-of below-of level-of]
-                          :reducer (fn [above-w below-w level-w]
-                                     ; aggregate window results
-                                     (if (some true? (bearish-cross above-w below-w level-w))
-                                       true
-                                       false))}}))
-
-(defn no-prior-signal-over-time? [ds trailing-n of]
-  (r/rolling ds
-             {:window-type :fixed
-              :window-size trailing-n
-              :relative-window-position :left}
-             {:prior-signals? {:column-name [of]
-                               :reducer (fn [bool-w]
-                                          ; aggregate window results and skip the current bool
-                                          (if (some true? (drop-last bool-w))
-                                            false
-                                            true))}}))
+    (dfn/> above level)
+    (dfn/< below level)))
 
 (defn- calc-rb-signal [bullish-breakout? bearish-breakout? lcross-over? hcross-under?]
   (cond
@@ -104,86 +79,79 @@
     :else :hold))
 
 (defn rb-algo [_env {:keys [len vlen threshold] :as opts} bar-ds]
-  (let [
-        sh (ds/add-column bar-ds (wma len (:high bar-ds)))
-        sl (ds/add-column bar-ds (wma len (:low bar-ds)))
-        h (max-ds sh len :wma)
-        l (min-ds sl len :wma)
+  (let [{:keys [open high low close volume]} bar-ds
+        sh (wma len high)
+        sl (wma len low)
+        h (trailing-max len sh)
+        l (trailing-min len sl)
 
-        storeh (store-ds h :max)
-        storel (store-ds l :min)
+        storeh (store-prev h)
+        storel (store-prev l)
 
-        ; volume cur
-        sma-vol (sma {:n vlen} (:volume bar-ds))
-        sma-r (dfn// (:volume bar-ds) sma-vol)
+        ;; volume cur
+        sma-vol (sma {:n vlen} volume)
+        sma-r (dfn// volume sma-vol)
         strongvol (dfn/> sma-r threshold)
 
-        ; TODO: create cross len param for breakout and rejection...
-        ; cross inside window
-        breakout (bullish-cross-over-time-ds storeh 5 :open :close :store)
-        breakdown (bearish-cross-over-time-ds storel 5 :open :close :store)
+        ;; TODO: create cross len param for breakout and rejection...
+        ;; cross inside window
+        breakout  (->> (bullish-at-level open close storeh)
+                       (allow-one-signal-every-n-bars 5))
 
-        strong-breakout (dfn/and (:breakout breakout) strongvol)
-        strong-breakdown (dfn/and (:breakdown breakdown) strongvol)
+        breakdown (->> (bearish-at-level open close storel)
+                       (allow-one-signal-every-n-bars 5))
+
+        strong-breakout (dfn/and breakout strongvol)
+        strong-breakdown (dfn/and breakdown strongvol)
 
         ; breakout signal
-        no-prior-bullish-breakout-signals? (no-prior-signal-over-time? (tc/dataset {:signal strong-breakout})
-                                                                       2 :signal)
-        no-prior-bearish-breakout-signals? (no-prior-signal-over-time? (tc/dataset {:signal strong-breakdown})
-                                                                       2 :signal)
+        no-prior-bullish-breakout-signals? (no-prior-signal-every-n-bars 4 strong-breakout)
+        no-prior-bearish-breakout-signals? (no-prior-signal-every-n-bars 4 strong-breakdown)
 
-        bullish-breakout? (dfn/and strong-breakout
-                                   (:prior-signals? no-prior-bullish-breakout-signals?))
-
-        bearish-breakout? (dfn/and strong-breakdown
-                                   (:prior-signals? no-prior-bearish-breakout-signals?))
+        bullish-breakout? (dfn/and strong-breakout no-prior-bullish-breakout-signals?)
+        bearish-breakout? (dfn/and strong-breakdown no-prior-bearish-breakout-signals?)
 
         ; rejection signal
-        storel-cross (bullish-cross (:low bar-ds) (:close bar-ds) (:store storel))
-        storeh-cross (bearish-cross (:high bar-ds) (:close bar-ds) (:store storeh))
+        storel-cross (bullish-at-level low close storel)
+        storeh-cross (bearish-at-level high close storeh)
 
-        no-prior-bullish-rejections? (no-prior-signal-over-time? (tc/dataset {:signal storel-cross})
-                                                                 2 :signal)
+        no-prior-bullish-rejections? (no-prior-signal-every-n-bars 4 storel-cross)
+        no-prior-bearish-rejections? (no-prior-signal-every-n-bars 4 storeh-cross)
 
-        no-prior-bearish-rejections? (no-prior-signal-over-time? (tc/dataset {:signal storeh-cross})
-                                                                 2 :signal)
-
-        bullish-rejection? (dfn/and storel-cross
-                                    (:prior-signals? no-prior-bullish-rejections?))
-        bearish-rejection? (dfn/and storel-cross
-                                    (:prior-signals? no-prior-bearish-rejections?))
+        bullish-rejection? (dfn/and storel-cross no-prior-bullish-rejections?)
+        bearish-rejection? (dfn/and storel-cross no-prior-bearish-rejections?)
 
         ; signal
-        lcross-over? (cross-up (:low bar-ds) (:store storel))
-        hcross-under? (cross-down (:high bar-ds) (:store storeh))
+        lcross-over? (cross-up low storel)
+        hcross-under? (cross-down high storeh)
 
         signal (into [] (map calc-rb-signal bullish-breakout?
                              bearish-breakout?
                              lcross-over?
                              hcross-under?))]
     (tc/add-columns bar-ds {
-                            :sh (:wma sh)
-                            :sl (:wma sl)
-                            :h (:max h)
-                            :l (:min l)
-                            :hstore (:store storeh)
-                            :lstore (:store storel)
-                            :breakout (:breakout breakout)
-                            :breakdown (:breakdown breakdown)
+                            :sh sh
+                            :sl sl
+                            :h h
+                            :l l
+                            :hstore storeh
+                            :lstore storel
+                            :breakout breakout
+                            :breakdown breakdown
                             :sma-vol sma-vol
                             :sma-r sma-r
                             :strongvol strongvol
                             :strong-breakout strong-breakout
                             :strong-breakdown strong-breakdown
-                            :no-prior-bullish-breakout-signals? (:prior-signals? no-prior-bullish-breakout-signals?)
-                            :no-prior-bearish-breakout-signals? (:prior-signals? no-prior-bearish-breakout-signals?)
+                            :no-prior-bullish-breakout-signals? no-prior-bullish-breakout-signals?
+                            :no-prior-bearish-breakout-signals? no-prior-bearish-breakout-signals?
                             :bullish-breakout? bullish-breakout?
                             :bearish-breakout? bearish-breakout?
                             :storel-cross storel-cross
                             :storeh-cross storeh-cross
-                            :no-prior-bullish-rejections? (:prior-signals? no-prior-bullish-rejections?)
+                            :no-prior-bullish-rejections? no-prior-bullish-rejections?
                             :bullish-rejection? bullish-rejection?
-                            :no-prior-bearish-rejections? (:prior-signals? no-prior-bearish-rejections?)
+                            :no-prior-bearish-rejections? no-prior-bearish-rejections?
                             :bearish-rejection? bearish-rejection?
                             :lcross-over? lcross-over?
                             :hcross-under? hcross-under?
@@ -220,8 +188,15 @@
   (:close ds)
   (wma 5 :close ds)
 
-  (let [sh (wma 5 :high ds)]
-    (max-ds sh 5 :wma))
+  (store-prev (:close ds))
+
+  (let [sh (wma 5 (:high ds))
+        ds (tc/dataset {:wma sh})]
+    (max-ds ds 5 :wma))
+
+  (let [sh (wma 5 (:high ds))
+        ds (tc/dataset {:max (trailing-max 5 sh)})]
+    ds)
 
   (let [sl (wma 5 :low ds)]
     (min-ds sl 5 :wma))
