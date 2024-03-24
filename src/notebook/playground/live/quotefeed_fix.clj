@@ -1,10 +1,9 @@
 (ns notebook.playground.live.quotefeed-fix
   (:require
-    [taoensso.timbre :as timbre :refer [info warn error]]
-    [manifold.stream :as s]
-    [ta.quote.fix :refer [create-quotefeed-fix]]
-    [ta.quote.core :refer [connect disconnect subscribe quote-stream publish!]]))
-
+   [taoensso.timbre :as timbre :refer [info warn error]]
+   [manifold.stream :as s]
+   [ta.quote.fix :refer [create-quotefeed-fix]]
+   [ta.quote.core :refer [connect disconnect subscribe quote-stream publish!]]))
 
 ;; 1. create quote-feed
 
@@ -15,7 +14,7 @@ feed
 (quote-stream feed)
 
 ;; 2. create consumer , and send a test quote to consumer.
-  
+
 (defn print-quote [quote]
   (info "quote received: " quote))
 
@@ -26,11 +25,9 @@ feed
 ;; 3. subscribe to quotes
 (subscribe feed "EUR/USD")
 (subscribe feed "USD/JPY")
-(subscribe feed "USD/SEK")  
-  
-;; 4. look to console to see printed messages.  
+(subscribe feed "USD/SEK")
 
+;; 4. look to console to see printed messages.  
 
 ;; 5. shutdown.
 (disconnect feed)
-  

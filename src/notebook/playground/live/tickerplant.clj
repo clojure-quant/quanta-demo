@@ -58,13 +58,10 @@ t
            ; and no bars will be generated.
            :algo 'notebook.playground.live.tickerplant/nil-algo}])
 
-
 (algo/add-algo algo-env algo-spec)
 
 (current-bars t [:forex :m])
 (current-bars t [:crypto :m])
-
-
 
 ;; => ({:asset "BTCUSD", :epoch 1}
 ;;     {:asset "ETHUSDT",

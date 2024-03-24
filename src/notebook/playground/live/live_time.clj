@@ -16,7 +16,6 @@
    (info "time event: " msg))
  (ct/get-time-stream s))
 
-
 (ct/remove-calendar s [:eu :m])
 
 (ct/show-calendars s)

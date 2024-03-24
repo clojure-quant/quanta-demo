@@ -10,8 +10,6 @@
    [ta.db.bars.dynamic.import :as importer]
    [ta.db.bars.dynamic.overview-db :as overview]))
 
-
-
 ;; test if fetching further days back works
 
 (overview/available-range

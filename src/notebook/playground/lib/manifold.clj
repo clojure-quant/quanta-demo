@@ -1,17 +1,16 @@
 (ns notebook.playground.lib.manifold
   (:require
-    [manifold.stream :as s]))
+   [manifold.stream :as s]))
 
-
-(def stream 
+(def stream
   (->> [1 2 3]
-  s/->source))
-             
+       s/->source))
+
 stream
 
 (s/take! stream)
 
-(def result 
+(def result
   (s/map inc stream))
 
 result

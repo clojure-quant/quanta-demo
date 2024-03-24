@@ -14,7 +14,6 @@
                 (reduce + (map square (map - a (repeat (mean a)))))
                 (- (count a) 1)))))
 
-
 (comment
   (mean [1 2 3 4 5])
   (standarddev [1 2 3 4 5])

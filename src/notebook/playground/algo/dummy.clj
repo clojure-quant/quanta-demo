@@ -33,7 +33,6 @@ algo
 @algo
 ;; => "the spec is: {:type :time, :calendar [:us :d], :data 42, :algo notebook.playground.algo.dummy/secret} (calculated: :evening)"
 
-
 ;; 3. backtest with complex syntax
 
 (def window (cal/trailing-range [:us :d] 1))
@@ -55,24 +54,22 @@ e
 ;; 5. backtest with formulas.
 
 (defn combine [env spec & args]
-{ :args args})
-  
-(defn sum [env spec & args]
-  (apply + args)) 
+  {:args args})
 
-(def combined-spec 
+(defn sum [env spec & args]
+  (apply + args))
+
+(def combined-spec
   [:a {:calendar [:us :d] :algo 'notebook.playground.algo.dummy/secret :type :time}
    :b {:type :time :calendar [:us :d] :data 42 :algo 'notebook.playground.algo.dummy/secret}
    :c {:value 4444}
    :d {:formula [:a :b] :algo 'notebook.playground.algo.dummy/combine :type :time}
    :e {:value 2222}
-   :f {:formula [:c :e] :algo 'notebook.playground.algo.dummy/sum :type :time}
-   ])
+   :f {:formula [:c :e] :algo 'notebook.playground.algo.dummy/sum :type :time}])
 
 (require '[ta.algo.spec :refer [spec->ops]])
 (spec->ops e spec)
 (spec->ops e combined-spec)
-
 
 (def combined-result
   (backtest-algo :duckdb combined-spec))

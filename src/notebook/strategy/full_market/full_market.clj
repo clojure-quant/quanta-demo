@@ -15,8 +15,7 @@
       (nippy/save-ds (ds-name-day category interval day))))
 
 (defn load-ds-day [category interval day]
- (nippy/load-ds (ds-name-day category interval day)))
-
+  (nippy/load-ds (ds-name-day category interval day)))
 
 ; task
 
@@ -29,13 +28,11 @@
 
 (defn download-missing-files [category interval]
   (let [missing-files (kibot-raw/files-missing-locally category interval)]
-    (doall (map #(download-and-extract category interval %) missing-files))
-    ))
+    (doall (map #(download-and-extract category interval %) missing-files))))
 
 ;; Backload 6 months: process by date ascending. Reason: split data changes prior values.
 ;; Add daily bar to storage. Try duckdb.
 ;; Eliminate symbols with splits (entire history).
-
 
 ;; 6 months of daily files
 ;; each day is 1MB - 26MB
@@ -45,9 +42,9 @@
 
 (defn store-ds-all [category interval]
   (let [days (kibot-ds/existing-rar-days category interval)]
-    (doall (map #(store-ds-day category interval %) days))))  
+    (doall (map #(store-ds-day category interval %) days))))
 
-(comment 
+(comment
   (kibot-raw/local-dir :stock :daily :ds)
   (kibot-raw/local-dir :stock :daily-unadjusted :ds)
   (ds-name-day :stock :daily-unadjusted "20230918")
@@ -55,7 +52,7 @@
   (store-ds-day :stock :daily "20230918")
   ; 20230918.nippy.gz has 6 MB
   ; stock/20230918.exe has 5.1 MB.
-  
+
   (store-ds-all :stock :daily)
 
    ;; task
@@ -64,9 +61,7 @@
 
   ; etf rar problems
   ; 20230626.exe
-  
 
-  
 ;  
   )
 

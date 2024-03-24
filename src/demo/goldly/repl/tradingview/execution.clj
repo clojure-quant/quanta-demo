@@ -2,7 +2,6 @@
   (:require
    [reval.cljs-eval :refer [eval-code!]]))
 
-
 (eval-code!
  (-> (tv/chart-active)
      (.setText "asdf")))

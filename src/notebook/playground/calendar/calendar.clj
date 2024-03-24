@@ -1,9 +1,7 @@
 (ns notebook.playground.calendar
   (:require
    [ta.calendar.core :refer [calendar-seq]]
-   [clojure.pprint :refer [print-table]]
-   ))
-
+   [clojure.pprint :refer [print-table]]))
 
 (def c (calendar-seq :crypto :d))
 

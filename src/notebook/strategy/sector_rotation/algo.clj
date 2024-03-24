@@ -17,7 +17,7 @@
       )))
 
 (defn trade-sma-monthly
-  [env {:keys [sma-length] 
+  [env {:keys [sma-length]
         :or {sma-length 30}} bar-ds]
   (let [{:keys [date close]} bar-ds
         sma-v (sma sma-length close)

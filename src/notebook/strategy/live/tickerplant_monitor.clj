@@ -14,13 +14,12 @@
            (map #(assoc % :exchange exchange :interval interval))))))
 
 (defn get-tickerplant-status [_env _opts dt]
-  (try 
-  (let [forex (get-bars-calendar [:forex :m])
-        crypto (get-bars-calendar [:crypto :m])]
-    (when (and forex crypto)
-          (tc/dataset (concat forex crypto))
-          ))
-    (catch Exception ex 
+  (try
+    (let [forex (get-bars-calendar [:forex :m])
+          crypto (get-bars-calendar [:crypto :m])]
+      (when (and forex crypto)
+        (tc/dataset (concat forex crypto))))
+    (catch Exception ex
       (error "excepting in get-tickerplant-status")
       nil)))
 
@@ -44,16 +43,14 @@
              {:path :ticks}]
    :algo ['notebook.strategy.live.tickerplant-monitor/get-tickerplant-status
           'ta.viz.publish/publish-ds->table]})
- 
-(defn create-tickerplant-monitor [env & args]
-   (algo/add-algo env algo-spec))
-    
 
+(defn create-tickerplant-monitor [env & args]
+  (algo/add-algo env algo-spec))
 
 (comment
   t
-(get-tickerplant-status nil nil nil)
-  
+  (get-tickerplant-status nil nil nil)
+
   (require '[modular.system])
   (def env (modular.system/system :live))
 

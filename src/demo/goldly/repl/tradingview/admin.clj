@@ -24,7 +24,6 @@
 
 ;(set! (.-bongo js/globalThis) i-clj)
 
-
 (eval-code!
  (deref tv/state))
 
@@ -75,7 +74,6 @@
       ;(set! (.-foo js/globalThis) foo)
      (js/eval "new foo().a")))
 
-
 (eval-code!
  (set-symbol "TLT" "1D"))
 
@@ -84,14 +82,12 @@
 
 ;"BB:BTCUSD"
 
-
 ;widget.selectedLineTool () ; returns "cursor"
 ;widget.activeChart () .getAllShapes () .forEach (({name}) => console.log (name));
 ;widget.activeChart().setPriceToBarRatio(0.7567, { disableUndo: true });
 ;widget.activeChart () .getPanes () [1] .moveTo (0);
 ;widget.activeChart () .getTimeScaleLogicalRange ()
 
-
 ; not working - tradingview widget does not have layout features
 (eval-code!
-   (ta.tradingview.goldly.interact2/set-layout "2h"))
+ (ta.tradingview.goldly.interact2/set-layout "2h"))

@@ -16,11 +16,9 @@ start-dt
     (->> c
          (print-table))))
 
-
 (print-n [[:crypto :h]
           [:crypto :m]]
          3)
-
 
 (print-n [[:eu :d]
           [:us :d]]
@@ -28,6 +26,5 @@ start-dt
 
 (print-n [[:test-short :d]
           [:test-short :h]
-          [:test-short :m30]
-          ]
+          [:test-short :m30]]
          30)

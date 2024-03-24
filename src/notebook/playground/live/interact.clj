@@ -1,12 +1,12 @@
 (ns notebook.playground.live.interact
-  (:require 
+  (:require
    [ta.interact.template :refer [get-options]]
    [ta.interact.subscription :as sub]))
 
-(-> :watch-crypto get-options )
+(-> :watch-crypto get-options)
 
-(-> :juan-fx 
-    get-options 
+(-> :juan-fx
+    get-options
     ;:current
     )
 ;; => {:options
@@ -41,10 +41,9 @@
 ;;      [2 :step] 1.0E-4,
 ;;      [4 :max-open-close-over-low-high] 0.3}}
 
-
 ; subscribe
-(def subscription-id 
-  (sub/subscribe-live 
+(def subscription-id
+  (sub/subscribe-live
    :crypto-watch {:asset "ETHUSDT"}))
 
 subscription-id
@@ -65,14 +64,12 @@ subscription-id
 (-> @sub/results-a keys)
 (-> @sub/visualizations-a keys)
 
-
 ;; watch results..
 (def subscription-id "FOkpkS")
 
 (-> @sub/subscriptions-a (get subscription-id))
 (-> @sub/results-a (get subscription-id))
 (-> @sub/visualizations-a (get subscription-id))
-
 
 ; (require '[algodemo.sentiment-spread.vega :refer [calc-viz-vega]])
 ; (calc-viz-vega (-> @sub/results-a :sentiment-spread))

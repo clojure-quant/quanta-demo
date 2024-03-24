@@ -1,8 +1,7 @@
 (ns demo.notebook
   (:require
    [reval.document.notebook :refer [eval-notebook load-notebook]]
-   [goldly.scratchpad :refer [show! show-as]]
-   ))
+   [goldly.scratchpad :refer [show! show-as]]))
 
 (defn eval-notebooks [ns-list]
   (map eval-notebook ns-list))

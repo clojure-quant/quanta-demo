@@ -25,8 +25,7 @@
    "equity-style"
    ; stocks
    "eodhd-AU"
-   "test"
-   ])
+   "test"])
 
 (def asset-list-directory "resources/symbollist/")
 
@@ -49,6 +48,5 @@
   asset-lists-filenames
   (add-assets)
 
-
- ; 
+; 
   )

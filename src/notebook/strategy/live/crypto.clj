@@ -39,7 +39,6 @@
     (p/publish-ds->table nil table-spec ds-bars)
     (p/publish-ds->highstock nil chart-spec ds-bars)))
 
-
 (def algo-spec
   {:type :trailing-bar
    :trailing-n 3000
@@ -55,10 +54,8 @@
         result-a-seq (doall (map #(algo/add-algo env %) specs))]
     result-a-seq))
 
-
 (defn calc-viz-highchart [bar-ds]
   (highstock-render-spec chart-spec bar-ds))
-
 
 (comment
   (require '[ta.interact.subscription :refer [results-a]])
@@ -67,8 +64,7 @@
 
   (calc-viz-highchart @results-a)
 
-
- ;
+;
   )
 
 

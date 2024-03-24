@@ -2,7 +2,6 @@
   (:require
    [javelin.core-clj :refer [cell cell=]]))
 
-
 (defn start []
   (let [a (cell 0)              ;; input cell with initial value of 0.
         b (cell= (inc a))       ;; formula cell of a+1.
@@ -13,7 +12,6 @@
     ;; a was incremented, and its new value propagated (consistently)
     ;; through b and c.  c's new value, 126, is printed to the console.
     :done))
-
 
 (start)
 

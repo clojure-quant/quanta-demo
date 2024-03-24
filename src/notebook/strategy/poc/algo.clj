@@ -46,13 +46,13 @@
         change (diff (:close ds-bars))
         up? (dtype/emap up? :bool change)
         bin (b/bin-full bin-n (:close ds-bars))]
-   {:bin bin
-    :ds-bin (tc/dataset
-             {:change change
-              :bin (b/bin-result bin)
-              :up? up?
-              :volume-up (dtype/emap up-volume :double volume up?)
-              :volume-down (dtype/emap down-volume :double volume up?)})}))
+    {:bin bin
+     :ds-bin (tc/dataset
+              {:change change
+               :bin (b/bin-result bin)
+               :up? up?
+               :volume-up (dtype/emap up-volume :double volume up?)
+               :volume-down (dtype/emap down-volume :double volume up?)})}))
 
 (defn price-with-most-time [{:keys [ds-bin bin]}]
   (let [bin-highest-count (-> ds-bin
@@ -63,8 +63,6 @@
                               tc/first
                               :bin)]
     (b/bin-middle bin bin-highest-count)))
-
-
 
 (defn price-with-highest-volume [{:keys [ds-bin _bin]}]
   (-> ds-bin
@@ -84,7 +82,7 @@
       tc/first
       :close))
 
-(defn poc-prices 
+(defn poc-prices
   "returns a map with differently calculated poc prices.
    input: ds-bars (bars of the higher frequency)
           bin-nr (number of bins for time-poc calculation)"
@@ -126,16 +124,13 @@
                                (> (:time poc) close)
                                time-spread-big?))}))
 
-
 (defn indicator-poc [env {:keys [lower-timeframe bin-n] :as spec} ds-bars]
   (let [ds-bars-ltf (get-bars-lower-timeframe env spec lower-timeframe)]
     (poc-prices ds-bars-ltf bin-n)))
-
-
 
 (def default-options
   {:vpoc-tpoc {:input-source :close
                :tpoc-threshold 50 ; [1 100] With 50% threshold, a highlight will occur when >= 50% of total time was traded at point of control.
                :vpoc-threshold 50 ; [1 100]
                :delta-rule :standard-vpoc ; [:vpoc+delta :vpoc-each-side] Standard VPOC = volume point of control. VPOC with delta indication = volume point of control with direction indicated as color (buy/sell). VPOCs separately for each side = volume point of control for each side separately with direction indicated as color.")
-  }})
+               }})

@@ -12,7 +12,7 @@
              :end (t/instant "2024-03-20T20:00:00Z")})
 
 (b/get-bars db
-            {:asset "JY0" 
+            {:asset "JY0"
              :calendar [:forex :m]}
             window)
 

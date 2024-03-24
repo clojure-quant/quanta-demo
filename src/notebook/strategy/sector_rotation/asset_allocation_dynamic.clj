@@ -20,9 +20,7 @@
    ;[ta.trade.signal :refer [buy-above]]
    [ta.trade.roundtrip-backtest :refer [run-backtest run-backtest-parameter-range]]
    [ta.trade.metrics.roundtrip-stats :refer [roundtrip-metrics backtests->performance-metrics]]
-   [ta.trade.print]
-   ))
-
+   [ta.trade.print]))
 
 (defn calc-rts-symbol [options]
   (-> (run-backtest trade-sma-monthly options)

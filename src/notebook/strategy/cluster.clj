@@ -61,7 +61,6 @@ bar-ds-list
 ; we should see only 1000 here, but we removed 2 bars, so we have 998 everywhere.
 (map tc/row-count bar-ds-list)
 
-
 (def corrs
   (->> bar-ds-list
        (map #(-> % :return standardize))
@@ -111,7 +110,6 @@ corrs
           (:clustering clustering)))
 
 symbol->cluster
-
 
 (defn edges [threshold]
   (let [n (count full-symbols)]

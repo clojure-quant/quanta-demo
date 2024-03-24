@@ -16,8 +16,7 @@ dt
                 :calendar [:crypto :d]
                 :import :bybit}
             {:start  (t/instant "2020-01-01T00:00:00Z")
-             :end (t/instant "2024-01-01T00:00:00Z")
-             })
+             :end (t/instant "2024-01-01T00:00:00Z")})
 
 ;; ALPHAVANTAGE
 (b/get-bars im {:asset "FMCDX" ; mutual fund
@@ -33,18 +32,16 @@ dt
 (-> (b/get-bars im {:asset "NG0" ; future
                     :calendar [:us :d]
                     :import :kibot}
-                 {:start  (t/instant "2020-01-01T00:00:00Z")
+                {:start  (t/instant "2020-01-01T00:00:00Z")
                  :end (t/instant "2024-01-01T00:00:00Z")})
     date-type)
 
-(b/get-bars im 
+(b/get-bars im
             {:asset "EUR/USD" ; forex
              :calendar [:forex :d]
              :import :kibot}
             {:start (t/instant "2023-09-01T00:00:00Z")
              :end (t/instant "2024-05-01T00:00:00Z")})
-
-
 
 (b/get-bars im {:asset "EU0" ; future(forex)
                 :calendar [:us :d]
@@ -53,7 +50,7 @@ dt
              :end (t/instant "2023-10-01T00:00:00Z")})
 
 (b/get-bars im
-            {:asset "MSFT" 
+            {:asset "MSFT"
              :calendar [:us :d]
              :import :kibot}
             {:start (t/instant "2019-12-01T00:00:00Z")
@@ -64,7 +61,7 @@ dt
 (b/get-bars im
             {:asset "AEE.AU"
              :calendar [:us :d]
-             :import :eodhd} 
+             :import :eodhd}
             ; fails because more than a year ago
             {:start (-> "2023-12-01T00:00:00Z" t/instant)
              :end (-> "2024-04-01T00:00:00Z" t/instant)})

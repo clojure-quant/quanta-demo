@@ -1,33 +1,33 @@
 (ns notebook.playground.bardb.performance-test
   (:require
-    [taoensso.timbre :refer [trace debug info warn error]]
-    [clojure.string :as str]
-    [tick.core :as t]
-    [tmducken.duckdb :as duckdb]
-    [tech.v3.dataset :as ds]
-    [clojure.java.io :as java-io]
-    [ta.db.bars.protocol :refer [bardb barsource]]
-    [ta.db.bars.protocol :as b]
-    [ta.db.bars.duckdb :refer [start-bardb-duck stop-bardb-duck]]
-    [ta.calendar.calendars :refer [calendars]]
-    [ta.calendar.core :as cal]
-    [ta.algo.env :as algo-env-impl]
-    [ta.algo.env.protocol :as algo-env]
+   [taoensso.timbre :refer [trace debug info warn error]]
+   [clojure.string :as str]
+   [tick.core :as t]
+   [tmducken.duckdb :as duckdb]
+   [tech.v3.dataset :as ds]
+   [clojure.java.io :as java-io]
+   [ta.db.bars.protocol :refer [bardb barsource]]
+   [ta.db.bars.protocol :as b]
+   [ta.db.bars.duckdb :refer [start-bardb-duck stop-bardb-duck]]
+   [ta.calendar.calendars :refer [calendars]]
+   [ta.calendar.core :as cal]
+   [ta.algo.env :as algo-env-impl]
+   [ta.algo.env.protocol :as algo-env]
     ;[ta.algo.backtest :refer [run-backtest]]
-    [ta.engine.protocol :as eng]
-    [ta.calendar.combined :refer [combined-event-seq]]))
+   [ta.engine.protocol :as eng]
+   [ta.calendar.combined :refer [combined-event-seq]]))
 
 (defn- duckdb-start [db-filename]
-    (duckdb/initialize! {:duckdb-home "../../app/demo/binaries"})
-    (let [db (duckdb/open-db db-filename)
-          conn (duckdb/connect db)]
-        {:db db
-         :conn conn}))
+  (duckdb/initialize! {:duckdb-home "../../app/demo/binaries"})
+  (let [db (duckdb/open-db db-filename)
+        conn (duckdb/connect db)]
+    {:db db
+     :conn conn}))
 
 ;; RANDOM CANDLE
 
 (defn vec->sql-str [arr]
-    (str "[" (str/join ", " (map #(str "'" % "'") arr)) "]"))
+  (str "[" (str/join ", " (map #(str "'" % "'") arr)) "]"))
 
 (defn gen-asset-names
   ([n]
@@ -39,14 +39,14 @@
   (duckdb/run-query! conn
                      (format "CREATE TABLE %s PARTITION OF %s
                                 FOR VALUES FROM ('%s') TO ('%s');",
-                             (str table-name"_"from)
+                             (str table-name "_" from)
                              table-name
                              from
                              to)))
 
 (defn create-ohcl-table [conn table-name]
-    (duckdb/run-query! conn
-       (format "CREATE TABLE %s (
+  (duckdb/run-query! conn
+                     (format "CREATE TABLE %s (
                   date TIMESTAMP,
                   open DOUBLE,
                   high DOUBLE,
@@ -58,8 +58,8 @@
                   asset VARCHAR);", table-name)))
 
 (defn insert-random-candles [conn table-name from to assets]
-    (duckdb/run-query! conn (format
-        "INSERT INTO %s (date, open, high, low, close, volume, ticks, epoch, asset)
+  (duckdb/run-query! conn (format
+                           "INSERT INTO %s (date, open, high, low, close, volume, ticks, epoch, asset)
          SELECT date,
            round(random() * 1000) AS open,
            round(random() * 1000) AS high,
@@ -77,10 +77,10 @@
   (-> (duckdb/sql->dataset conn (format "select count(*) from %s", table-name)) (first) (second) (first)))
 
 (defn measure-insert [conn table-name from to assets]
-    (println "ingesting..." from "-" to ", " (first assets) "-" (last assets))
-    (time (insert-random-candles conn table-name from to assets))
-    (println "total rows: " (get-total-count conn table-name))
-    (println "-------------------------------------------------------------------------------"))
+  (println "ingesting..." from "-" to ", " (first assets) "-" (last assets))
+  (time (insert-random-candles conn table-name from to assets))
+  (println "total rows: " (get-total-count conn table-name))
+  (println "-------------------------------------------------------------------------------"))
 
 (defn get-range-start-dt [to-year n]
   (let [from-year (- to-year (dec n))]
@@ -92,7 +92,7 @@
 
 (defn create-new-db [path {:keys [years assets]} [calendar-kw interval-kw] & [db-state]]
   (let [table-name (str (name calendar-kw) "_" (name interval-kw))
-        path (str path"/duckdb-partitioning_"table-name"_"assets"a_"years"y.db")
+        path (str path "/duckdb-partitioning_" table-name "_" assets "a_" years "y.db")
         {:keys [db conn new?] :as state} (if db-state
                                            db-state
                                            (start-bardb-duck path))
@@ -112,45 +112,43 @@
 
 (defn create-hive-partition-by-year [conn table-name path]
   (duckdb/run-query! conn
-    (str "COPY (select *, EXTRACT(YEAR FROM date) AS year
+                     (str "COPY (select *, EXTRACT(YEAR FROM date) AS year
                 from " table-name ")
-          TO '"path"' (FORMAT PARQUET, PARTITION_BY (year));")))
+          TO '" path "' (FORMAT PARQUET, PARTITION_BY (year));")))
 
 (defn create-hive-partition-by-asset [conn table-name path]
   (duckdb/run-query! conn
-    (str "COPY " table-name "
-          TO '"path"' (FORMAT PARQUET, PARTITION_BY (asset));")))
+                     (str "COPY " table-name "
+          TO '" path "' (FORMAT PARQUET, PARTITION_BY (asset));")))
 
 (defn trailing-window-test [db start end]
   ;(loop [cur (cal/current-close :crypto :m end)]
   ;  (if (t/>= cur start)
-      (let [table-name "crypto_m"
-            asset "ASSET_1"
+  (let [table-name "crypto_m"
+        asset "ASSET_1"
             ;dstart (str (t/date cur)
             ;            " "
             ;            (t/time cur)":00")
             ;dend dstart
-            dstart (str (t/date start)
-                        " "
-                        (t/time start)":00")
-            dend (str (t/date end)
-                      " "
-                      (t/time end)":00")
-            query (str "select * from " table-name
-                       " where asset = '" asset "'"
+        dstart (str (t/date start)
+                    " "
+                    (t/time start) ":00")
+        dend (str (t/date end)
+                  " "
+                  (t/time end) ":00")
+        query (str "select * from " table-name
+                   " where asset = '" asset "'"
                        ;" and date = '" dstart "'"
                        ;" and date >= '" dstart "'"
                        ;" and date <= '" dend "'"
-                       " order by date")
-            res (duckdb/sql->dataset (:conn db) query)]
-        (println res)
+                   " order by date")
+        res (duckdb/sql->dataset (:conn db) query)]
+    (println res)
         ;(b/get-bars db {:asset "ASSET_1" :calendar [:crypto :m]} {:start (t/instant "2023-01-01T00:00:00Z")
         ;                                                          :end (t/instant "2023-01-01T00:10:00Z")})
         ;(recur (cal/prior-close :crypto :m cur))
-        ))
+    ))
 ;))
-
-
 
 (defn secret [env spec time]
   (str "the spec is: " spec " (calculated: " time ")"))
@@ -186,8 +184,7 @@
   "run a single bar-strategy with data powered by bar-db-kw
    as of date dt. returns the result of the strategy."
   [bar-db algo-spec dt]
-  (let [
-        ;bar-db  (modular.system/system bar-db-kw)
+  (let [;bar-db  (modular.system/system bar-db-kw)
         env (algo-env-impl/create-env-javelin bar-db)
         strategy (algo-env/add-algo env algo-spec)
         engine (algo-env/get-engine env)
@@ -209,9 +206,9 @@
   (println "===========================================================")
   (println "years: " years "assets: " assets)
   (println "===========================================================")
-  (let [db-name (str "duckdb-partitioning_crypto_m_"assets"a_"years"y.db")
+  (let [db-name (str "duckdb-partitioning_crypto_m_" assets "a_" years "y.db")
         base-dir "/tmp"
-        path (str base-dir"/"db-name)
+        path (str base-dir "/" db-name)
         exists? (exists-db? path)
         db (start-bardb-duck path)
         trailing-n (* 500000 years)]
@@ -228,14 +225,12 @@
     ;(time (trailing-window-test db
     ;                            (t/in (t/date-time "1924-01-01T00:00:00") "America/New_York")
     ;                            (t/in (t/date-time "2023-12-29T23:59:00") "America/New_York")))
-    (stop-bardb-duck db)
-    ))
+    (stop-bardb-duck db)))
 
 (defn run-performance-test [_]
   (single-test {:years 1 :assets 1})
   (single-test {:years 10 :assets 1})
-  (single-test {:years 100 :assets 1})
-  )
+  (single-test {:years 100 :assets 1}))
 
 (comment
   (def base-path "~/Desktop/tmp")
@@ -259,7 +254,7 @@
   (def db-name "duckdb-partitioning_crypto_m_1a_100y.db")
   (def db-path "~/Desktop/tmp")
   (def hive-path "~/Desktop/tmp/hive")
-  (def db (start-bardb-duck (str db-path"/"db-name)))
+  (def db (start-bardb-duck (str db-path "/" db-name)))
 
   ; partitioning
   ;(create-partition-table (:conn db) "crypto_m" "2023-01-01T00:00:00" "2023-12-31T23:59:00")

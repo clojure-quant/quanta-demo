@@ -5,14 +5,11 @@
 
 (eval-code!
  (ta.tradingview.goldly.interact2/get-range
-   @ta.tradingview.goldly.interact/tv-widget-atom
-  ))
+  @ta.tradingview.goldly.interact/tv-widget-atom))
 ;; {:from 1644796800, :to 1697155200}
 
 (eval-code!
  (ta.tradingview.goldly.interact/track-range))
-
-
 
 (defn epoch [yyyy-mm-dd]
   (-> yyyy-mm-dd parse-date ->epoch-second))
@@ -40,11 +37,10 @@
  (let [p (ta.tradingview.goldly.interact2/set-range
           @ta.tradingview.goldly.interact/tv-widget-atom
           {:from 1672531200
-           :to 1703980800 }
+           :to 1703980800}
           ;{:percentRightMargin 5}
-          {}
-          )]
-   (.then p (fn [] 
+          {})]
+   (.then p (fn []
               (println "new visible range applied!")
               ;widget.activeChart () .refreshMarks ();              
               ))))
@@ -61,12 +57,10 @@
               (println "new visible range applied!")
               ;widget.activeChart () .refreshMarks ();              
               ))))
-
-
 (eval-code!  ; 2019-04-01 (as midpoint in the chart)
-  (ta.tradingview.goldly.interact2/goto-date!
-    @ta.tradingview.goldly.interact/tv-widget-atom
-    1554076800))
+ (ta.tradingview.goldly.interact2/goto-date!
+  @ta.tradingview.goldly.interact/tv-widget-atom
+  1554076800))
 ;set-visible-range  {:from 1545868800, :to 1562284800} {:percentRightMargin 5}
 
 (epoch-second->datetime 1554076800)

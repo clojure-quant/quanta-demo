@@ -10,17 +10,17 @@
   "Moving Average" [30 "close"]))
 
 (eval-code!
- (ta.tradingview.goldly.interact/add-study 
+ (ta.tradingview.goldly.interact/add-study
   "MACD" [14 30 "close" 9]))
 
 (eval-code!
- (ta.tradingview.goldly.interact/add-study 
+ (ta.tradingview.goldly.interact/add-study
   "Compare" ["open" "AAPL"]))
 ;Compare has 2 inputs: [dataSource, symbol]. 
 ;Supported dataSource values: ["close", "high", "low", "open"].
 
 (eval-code!
- (ta.tradingview.goldly.interact/add-study 
+ (ta.tradingview.goldly.interact/add-study
   "CLJMAIN" ["close"]))
 
 (eval-code!
@@ -31,7 +31,6 @@
 
 (eval-code!
  (ta.tradingview.goldly.interact/study-list))
-
 
 (eval-code!
  (ta.tradingview.goldly.interact/remove-all-studies))

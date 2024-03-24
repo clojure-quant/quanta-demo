@@ -8,9 +8,6 @@
    [ta.db.bars.duckdb :as duck]
    [ta.db.bars.dynamic :as dynamic]))
 
-
-
-
 ;; Test if duckdb get/append works
 
 (def db-duck (duck/start-bardb-duck "/tmp/demo12.ddb"))
@@ -25,7 +22,6 @@ db-duck
 ds
 
 (duck/order-columns (duck/empty-ds [:us :d]))
-
 
 (b/append-bars db-duck {:asset "QQQ"
                         :calendar [:us :d]
@@ -46,7 +42,6 @@ ds
              :end (-> "2001-03-01T20:00:00Z" t/instant)})
 window
 
-
 ; get all data available
 (b/get-bars db-duck
             {:asset "MSFT"
@@ -60,7 +55,6 @@ window
              :calendar [:us :d]
              :import :kibot}
             window)
-
 
 ;; Test if DYAMIC get/append works
 
@@ -81,7 +75,6 @@ window
                            :import :kibot} ds)
 
 (-> (duck/empty-ds [:us :d]) (tc/info))
-
 
 ; since we dont have this asset in our db, it will fetch via kibot
 ; and save to duckdb.

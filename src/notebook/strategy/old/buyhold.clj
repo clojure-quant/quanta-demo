@@ -4,7 +4,7 @@
    [ta.warehouse :as wh]
    [ta.trade.roundtrip-backtest :refer [run-backtest]]
    [ta.trade.print :refer [print-overview-stats print-roundtrip-stats
-                              print-roundtrips print-roundtrips-pl-desc]]
+                           print-roundtrips print-roundtrips-pl-desc]]
    [ta.trade.metrics.roundtrip-stats :refer [roundtrip-metrics]]
    [ta.indicator.signal :refer [buy-hold-signal]]
    [ta.viz.table :refer [print-table]]))

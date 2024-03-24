@@ -2,8 +2,6 @@
   (:require
    [ta.db.asset.db :as db]))
 
-
-
 (defn get-category [s]
   (-> s db/instrument-details :category))
 
@@ -15,7 +13,6 @@
                    :mutualfund :alphavantage
                    :kibot)]
     provider))
-
 
 (comment
   (db/instrument-details "MSFT")

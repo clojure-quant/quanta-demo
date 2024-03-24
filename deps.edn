@@ -7,8 +7,7 @@
         com.taoensso/timbre {:mvn/version "6.2.2"} ; clj/cljs logging
         org.pinkgorilla/reval {:mvn/version "0.5.141"}
         ; ta
-        org.pinkgorilla/ta {:mvn/version "0.3.719"} 
-        ;org.pinkgorilla/ta {:local/root "../trateg" :deps/manifest :deps}
+        org.pinkgorilla/ta {:mvn/version "0.3.731"} 
         ;org.pinkgorilla/ta {:local/root "../quanta" :deps/manifest :deps}
         babashka/process {:mvn/version "0.5.21"}
         ;com.clojure-goes-fast/clj-memory-meter {:mvn/version "0.1.0"}
@@ -51,8 +50,8 @@
   :public-algos
   {:extra-deps {ta/algodemo {:local/root "./lib/algodemo" :deps/manifest :deps}}}
   
-  :my-algos-direct
-  {:extra-deps {;io.github.clojure-quant/algo-juan {:git/sha "3fdb0b94b27b9d52ca0a9057fc77784b023219a6"}
+  #_:my-algos-direct
+  #_{:extra-deps {;io.github.clojure-quant/algo-juan {:git/sha "3fdb0b94b27b9d52ca0a9057fc77784b023219a6"}
                 io.github.clojure-quant/algo-alex {:git/sha "17178469c187b4d085d6120bc865e58dfcbc1309"}
                 io.github.clojure-quant/algo-gann {:git/sha "af82abcd216b8179ff03ae61668bd5a1ebe11295"}
                 io.github.clojure-quant/algo-astro {:git/sha "0006c6a812a67977358838fd01aced21cb6b62c6"}

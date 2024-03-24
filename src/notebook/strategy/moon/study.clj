@@ -45,12 +45,11 @@ moon-ds
         ds-study (tc/select-rows ds-study (range 1 (tc/row-count ds-study)))]
     ds-study))
 
-
 (defn distribution [ds-moon]
   (let [ds-grouped (-> ds-moon
                        (tc/group-by [:moon-phase])
                        (tc/aggregate {:count (fn [ds]
-                                              (->> ds tc/row-count))
+                                               (->> ds tc/row-count))
                                       :mean (fn [ds]
                                               (->> ds
                                                    :logret
@@ -67,7 +66,6 @@ moon-ds
 (def result-ds
   (backtest-algo :bardb-dynamic algo-spec))
 
-
 (distribution result-ds)
 ;;    | :moon-phase | :count |       :mean |
 ;;    |-------------|-------:|------------:|
@@ -80,9 +78,8 @@ moon-ds
 ;;    |         :d2 |    122 |  0.00024143 |
 ;;    |         :d3 |    122 |  0.00098021 |
 
-
 ;; distribution for nasdaq
-(def result-qqq-ds 
+(def result-qqq-ds
   (backtest-algo :bardb-dynamic (assoc algo-spec :asset "QQQ")))
 (distribution result-qqq-ds)
 ;;    | :moon-phase | :count |       :mean |
@@ -96,9 +93,8 @@ moon-ds
 ;;    |         :d2 |    122 | -0.00002570 |
 ;;    |         :d3 |    122 |  0.00135081 |
 
-
 ;; distribution for gold
-(def result-gld-ds 
+(def result-gld-ds
   (backtest-algo :bardb-dynamic (assoc algo-spec :asset "GLD")))
 (distribution result-gld-ds)
 ;;    | :moon-phase | :count |       :mean |
@@ -111,7 +107,6 @@ moon-ds
 ;;    |         :d1 |    116 |  0.00020369 |
 ;;    |         :d2 |    122 | -0.00016964 |
 ;;    |         :d3 |    122 | -0.00005881 |
-
 
 result-gld-ds
 
@@ -128,7 +123,6 @@ result-gld-ds
 ;;    | :avg-win-log | :avg-bars-win | :win-nr-prct |        :pf |   :avg-log | :pl-log-cum | :avg-loss-log | :trades | :avg-bars-loss |       :p |
 ;;    |-------------:|--------------:|-------------:|-----------:|-----------:|------------:|--------------:|--------:|---------------:|----------|
 ;;    |   0.01097137 |   12.82608696 |  24.21052632 | 1.04275617 | 0.00010891 |  0.01034677 |   -0.00336104 |      95 |     9.29166667 | _unnamed |
-
 
 ;; TODO: make it work starting from here; really just simple nav metrics.
 

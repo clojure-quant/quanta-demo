@@ -23,13 +23,13 @@
     [:p.text-blue.text-xl "warehouse"]
     [link-href "/warehouse" "warehouse"]
     [link-href "/series" "series"]]
-    
+
    ; trateg demos
    [:div.bg-blue-300.m-5
-     [:h1.text-xl.text-red-600 "joseph"]
-     [link-href "/joseph" "tradingview"]
-     [link-dispatch [:bidi/goto 'joseph.page.nav/page-joseph-nav]  "nav"]
-     [link-dispatch [:bidi/goto 'joseph.page.live2/page-live-trading]  "live"]]
+    [:h1.text-xl.text-red-600 "joseph"]
+    [link-href "/joseph" "tradingview"]
+    [link-dispatch [:bidi/goto 'joseph.page.nav/page-joseph-nav]  "nav"]
+    [link-dispatch [:bidi/goto 'joseph.page.live2/page-live-trading]  "live"]]
 
    [:div.bg-blue-300.m-5
     [:h1.text-xl.text-red-600 "gann tools"]
@@ -37,10 +37,10 @@
 
    ; test
    [:div.bg-blue-300.m-5
-     [:p.text-blue.text-xl "test"]
-     [link-dispatch [:bidi/goto 'demo.goldly.page.test.test/test-page] "test-page"]
-     [link-dispatch [:bidi/goto 'demo.goldly.page.test.layout/page-layout-1] "layout-1"]
-     [link-dispatch [:bidi/goto 'demo.goldly.page.test.layout/page-layout-2] "layout-2"]]
+    [:p.text-blue.text-xl "test"]
+    [link-dispatch [:bidi/goto 'demo.goldly.page.test.test/test-page] "test-page"]
+    [link-dispatch [:bidi/goto 'demo.goldly.page.test.layout/page-layout-1] "layout-1"]
+    [link-dispatch [:bidi/goto 'demo.goldly.page.test.layout/page-layout-2] "layout-2"]]
    ; goldly developer tools
    [:div.bg-blue-300.m-5
     [:p.text-blue.text-xl "goldly developer tools"]

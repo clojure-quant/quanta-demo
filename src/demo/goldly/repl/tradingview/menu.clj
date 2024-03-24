@@ -2,16 +2,12 @@
   (:require
    [reval.cljs-eval :refer [eval-code!]]))
 
-
-
-
 (eval-code!
  (ta.tradingview.goldly.interact2/add-header-button
   @ta.tradingview.goldly.interact/tv-widget-atom
   "re-gann" "my tooltip"
   (fn []
     (js/alert "re-gann button clicked "))))
-
 
 (eval-code!
  (ta.tradingview.goldly.interact2/add-context-menu

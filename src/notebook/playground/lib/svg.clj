@@ -128,30 +128,29 @@ basic-group
   (-> (gann-box c gw gh)
       (tf/translate [(* no-t gw) (* no-p gh)])))
 
-
- (into ^:R [:svg  {:width (* 2 gw)
-               :height (* 2 gh)}
-        #_(-> (el/rect gw gh)
-              (tf/translate [(/ gw 2) (/ gh 2)])
-              (tf/style {:stroke
-                         (str "orange")
-                         :stroke-width "2px"
+(into ^:R [:svg  {:width (* 2 gw)
+                  :height (* 2 gh)}
+           #_(-> (el/rect gw gh)
+                 (tf/translate [(/ gw 2) (/ gh 2)])
+                 (tf/style {:stroke
+                            (str "orange")
+                            :stroke-width "2px"
                   ;:fill "none"
-                         }))]
-       (concat
+                            }))]
+      (concat
         ;(gann-box gw gh)
        ; (gann "red" (/ gw 2) (/ gh 2) 0 0)
        ; (gann "red" (/ gw 2) (/ gh 2) 0 1)
        ; (gann "red" (/ gw 2) (/ gh 2) 1 0)
        ; (gann "red" (/ gw 2) (/ gh 2) 1 1)
 
-        (gann "blue" (* gw 2) (* gh 2) 0 0)
+       (gann "blue" (* gw 2) (* gh 2) 0 0)
 
         ;(gann "green" gw gh 0 0)
         ;(gann "green" gw gh 1 0)
         ;(gann "green" gw gh 1 1)
         ;(gann "green" gw gh 0 1)
-        ))
+       ))
 
 (-> (gann-box "blue" gw gh)
     (tf/translate [gw 0]))
@@ -175,21 +174,21 @@ basic-group
                :height gh}]))
 
 ^:R
- [:svg  {:width gw
-         :height gh}
-  (-> (el/rect 20 20) (tf/translate [100 0]))
-  (-> (el/rect 20 20)
-      (tf/translate [200 150])
-      (tf/style {:stroke
-                 (str "green")
-                 :stroke-width "2px"
-                 :fill "none"}))
-  #_(-> (el/line [0 0]
-                 [100 300])
-        (tf/style {:stroke
-                   (str "green")
-                   :stroke-width "2px"
-                   :fill "none"}))]
+[:svg  {:width gw
+        :height gh}
+ (-> (el/rect 20 20) (tf/translate [100 0]))
+ (-> (el/rect 20 20)
+     (tf/translate [200 150])
+     (tf/style {:stroke
+                (str "green")
+                :stroke-width "2px"
+                :fill "none"}))
+ #_(-> (el/line [0 0]
+                [100 300])
+       (tf/style {:stroke
+                  (str "green")
+                  :stroke-width "2px"
+                  :fill "none"}))]
 
 (defn draw-box [])
 

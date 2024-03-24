@@ -1,9 +1,7 @@
 (ns notebook.playground.engine.direct
   (:require
    [ta.engine.javelin :refer [create-engine-javelin]]
-   [ta.engine.protocol :as p]
-  ))
-
+   [ta.engine.protocol :as p]))
 
 (def e (create-engine-javelin))
 
@@ -13,7 +11,7 @@
 (def t (p/calendar-cell e identity [:us :d]))
 @t
 
-(p/set-calendar! e {:calendar [:us :d] :time :sometime-later} )
+(p/set-calendar! e {:calendar [:us :d] :time :sometime-later})
 @t
 
 (defn fun [c] (* c 1000))

@@ -2,7 +2,6 @@
   (:require
    [reval.cljs-eval :refer [eval-code!]]))
 
-
 (eval-code!
  (+ 5 5))
 
@@ -19,11 +18,11 @@
 (eval-code!
  (ta.tradingview.goldly.interact2/add-shape
   @ta.tradingview.goldly.interact/tv-widget-atom
-   [{:time 1652054400}]
-     {:shape "vertical_line"
-      :disableSave true ; prevents saving the shape on the chart
-      :disableUndo true ; prevents adding of the action to the undo stack
-      }))
+  [{:time 1652054400}]
+  {:shape "vertical_line"
+   :disableSave true ; prevents saving the shape on the chart
+   :disableUndo true ; prevents adding of the action to the undo stack
+   }))
 
 (eval-code!
  (ta.tradingview.goldly.interact2/add-shape
@@ -33,11 +32,7 @@
    ;:disableSave true ; prevents saving the shape on the chart
    ;:disableUndo true ; prevents adding of the action to the undo stack
    :text "AASDFASDFSDF"
-   :overrides {:showLabel true}
-   
-   }))
-
-
+   :overrides {:showLabel true}}))
 
 (eval-code!
  (ta.tradingview.goldly.interact2/add-shape
@@ -61,27 +56,23 @@
   @ta.tradingview.goldly.interact/tv-widget-atom
   [{:time 1644364800
                   ;:price 135.0
-                 }]
-               {;:shape "arrow_up" ; arrow_down arrow_left arrow_right price_label arrow_marker flag
-                :shape "text"
+    }]
+  {;:shape "arrow_up" ; arrow_down arrow_left arrow_right price_label arrow_marker flag
+   :shape "text"
                  ;:text "🚀"
                 ; :text "🌕" ;U+1F315 :full_moon:
-                :text "🌑" ; New Moon	U+1F311
+   :text "🌑" ; New Moon	U+1F311
                  ;:location=location.belowbar
-                :color "#32CD32"
-                :frozen true
-                :title "MR BIG"
+   :color "#32CD32"
+   :frozen true
+   :title "MR BIG"
                  ;:fillBackground false
-                :backgroundColor "rgba( 102, 123, 139, 1)"
+   :backgroundColor "rgba( 102, 123, 139, 1)"
                  ;textcolor=color.new(color.white, 0)
-                :offset 1000
+   :offset 1000
                  ;:size size.auto
-                :channel "close" ; if price not set => open, high, low, close. 
-                }))
-
-
-
-
+   :channel "close" ; if price not set => open, high, low, close. 
+   }))
 (eval-code!
  (tv/add-shape
   [{:time 1625764800.0 :price 250.0}

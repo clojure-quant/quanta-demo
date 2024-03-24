@@ -1,17 +1,9 @@
-(ns notebook.studies.task
+(ns notebook.strategy.bollinger-old.optimizer
   (:require
    [taoensso.timbre :refer [info]]
    [tablecloth.api :as tc]
-   [webly.log]
    [ta.backtest.backtester :as backtest]
    [demo.study.bollinger :as bs]))
-
-(webly.log/timbre-config!
- {:timbre-loglevel
-  [[#{"pinkgorilla.nrepl.client.connection"} :info]
-   [#{"org.eclipse.jetty.*"} :info]
-   [#{"webly.*"} :info]
-   [#{"*"} :info]]})
 
 (def default-options {:w :crypto
                       :frequency "D"
@@ -22,7 +14,7 @@
                       :mult-down 2.0
                       :forward-size 20})
 
-(defn task-bollinger-study [& _]
+(defn task-bollinger-study []
   (info "running bollinger strategy with options: " default-options)
   (let [r (backtest/run-study bs/bollinger-study
                               default-options)]
@@ -35,7 +27,7 @@
     (backtest/save-study :crypto (:ds-study r) "ETHUSD" "D" "bollinger-upcross")
     (info "study calculation finished.")))
 
-(defn task-bollinger-optimizer [& _]
+(defn task-bollinger-optimizer []
   (info "running bollinger strategy optimizer")
   (->
    (for [length (range 10 200 10)

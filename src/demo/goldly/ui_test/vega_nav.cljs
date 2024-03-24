@@ -5,9 +5,7 @@
    [tick.goldly]
    [tick.core :as t]
    [demo.goldly.view.vega-nav :refer [vega-nav-plot]]
-   [ta.viz.nav-vega :refer [portfolio-nav]]
-   ))
-
+   [ta.viz.nav-vega :refer [portfolio-nav]]))
 
 (def vega-nav-plot-test-data
   [{:nav 100.0 :index 1}
@@ -27,7 +25,7 @@
       (t/date-time)
       (t/inst)))
 
- {:open# 18,
+{:open# 18,
  :long$ 751131.0,
  :short$ 116290.0,
  :net$ 634841.0,

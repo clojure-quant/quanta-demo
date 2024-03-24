@@ -5,6 +5,5 @@
    [tech.v3.datatype.functional]
    ;[ta.date]
    [ta.warehouse]
-   [ta.series.indicator]
-   ))
+   [ta.series.indicator]))
 

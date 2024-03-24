@@ -2,13 +2,11 @@
   (:require
    [ta.import.provider.eodhd.raw :refer [get-exchanges get-exchange-tickers]]))
 
-
 (def api-token "65f0ad82c56400.56029279")
 
 (def e (get-exchanges api-token))
 
 (spit "resources/eodhd-exchanges.edn" (pr-str e))
-
 
 (def t (get-exchange-tickers api-token "AU"))
 
@@ -22,8 +20,7 @@ t
    :isin Isin})
 
 (defn filter-stocks [l]
-  (filter #(= (:Type %) "Common Stock") l)
-  )
+  (filter #(= (:Type %) "Common Stock") l))
 
 (defn save-list [exchange assets]
   (->> assets

@@ -11,7 +11,6 @@
 
 (def im (modular.system/system :import-manager))
 
-
 im
 
 (def db (nippy/start-bardb-nippy "output/kibot-intraday/"))
@@ -28,10 +27,10 @@ db
              {:start (t/instant "2019-12-01T00:00:00Z")
               :end (t/instant "2020-02-01T00:00:00Z")})]
     (if (nom/anomaly? ds)
-      (do 
+      (do
         (error "could not get asset: " asset)
         {:asset asset :count 0})
-      (let [c (tc/row-count ds)] 
+      (let [c (tc/row-count ds)]
         (info "recevied from kibot asset:" asset " count: " c)
         (b/append-bars db opts ds)
         {:asset asset :count c}))))
@@ -47,13 +46,13 @@ db
                 "NZD/USD" "USD/MXN" "USD/ZAR" "EUR/JPY"
                 "EUR/CHF" "EUR/GBP" "GBP/JPY"])
 
-(import-assets ["EU0" "SF0" "BP0" "SEK0" "NOK0" 
-                "CD0" "JY0" "AD0" "NE0" "PX0" 
+(import-assets ["EU0" "SF0" "BP0" "SEK0" "NOK0"
+                "CD0" "JY0" "AD0" "NE0" "PX0"
                 "RA0" "RY0" "RF0" "RP0" "PJY0"])
 
 (import-assets ["SPY" "QQQ"])
 
-(import-assets  ["JY0"  "USD/JPY" ])
+(import-assets  ["JY0"  "USD/JPY"])
 
 (import-assets ["EU0" "SF0" "BP0"])
 

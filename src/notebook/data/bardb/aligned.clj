@@ -12,14 +12,10 @@
 
 (defn get-aligned [env {:keys [calendar trailing-n] :as opts} time]
   (let [cal-seq (cal/trailing-window calendar trailing-n time)
-        bars (get-bars-aligned-filled env opts cal-seq)
-        ]
+        bars (get-bars-aligned-filled env opts cal-seq)]
     {:time time
      :cal-seq cal-seq
      :bars bars}))
-
-
-
 
 (def window (-> (cal/trailing-range [:us :d] 1)
                    ;(window-as-date-time)
@@ -32,17 +28,13 @@ window
            :import :kibot
            :trailing-n 100})
 
-
 (def env (create-env :bardb-dynamic))
 (def strategy (dsl/add-time-strategy env spec get-aligned))
 (run-backtest env window)
 @strategy
 
-
 (t/inst)
-
 
 (-> (t/inst)
     (t/date)
-    (t/at (t/time "00:04:00"))
-    )
+    (t/at (t/time "00:04:00")))

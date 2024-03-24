@@ -2,9 +2,7 @@
   (:require
    [tablecloth.api :as tc]
    [tech.v3.datatype :as dtype]
-   [tech.v3.datatype.functional :as dfn]
-   ))
-
+   [tech.v3.datatype.functional :as dfn]))
 
 (defn take-max [ds max-pos sort-by where]
   (let [c (tc/row-count ds)
@@ -29,18 +27,14 @@
     (map #(take-max % max-pos sort-by where) x)
     (apply tc/concat x)))
 
-
-(comment 
+(comment
   ; make sure we take the highest :sma-r
   (-> (tc/dataset {:year-month [202001 202001 202001 202001 202001 202001 202001]
                    :sma-r [3 4 6 2 3 4 5]})
       (max-positions 2 [:sma-r] :middle)
         ;(max-positions 2 [:sma-r] :bottom)
         ;(max-positions 2 [:sma-r] :top)
-    )  
-  
-  
-  
- ; 
+      )
+; 
   )
 

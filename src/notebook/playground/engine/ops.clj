@@ -4,11 +4,9 @@
    [ta.engine.ops :refer [add-ops]]
    [ta.engine.protocol :as p]))
 
-
 (def e (create-engine-javelin))
 
 (defn time-as-map [t] {:time t})
-
 
 (def ops-1
   [[0 {:calendar [:us :d] :time-fn time-as-map}]])
@@ -28,8 +26,7 @@ c
    [2 {:formula [0 1] :formula-fn concat}]
    [3 {:value 27}]
    [4 {:formula [3] :formula-fn inc}]
-   [5 {:formula [3 4] :formula-fn +}]
-   ])
+   [5 {:formula [3 4] :formula-fn +}]])
 
 (def cells (add-ops e ops-multiple))
 

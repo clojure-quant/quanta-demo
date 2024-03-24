@@ -37,8 +37,6 @@
     (catch Exception ex
       (error "exception in adding quote monitor: " ex))))
 
-
-
 (comment
 
   (get-quote-snapshot nil nil nil)

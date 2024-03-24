@@ -8,12 +8,11 @@
 ;; add two instruments with algo-dummy
 ;; this will trigger subscription of the assets
 
-
 ;(def bar-category [:forex :m])
 ;(def bar-category [:crypto :m])
 (def bar-category [:crypto :m])
 
-(def raw-dummy-strategies 
+(def raw-dummy-strategies
   [{:algo algo-dummy
     :algo-opts {:bar-category bar-category
                 :asset "EUR/USD"
@@ -23,9 +22,7 @@
     :algo-opts {:bar-category bar-category
                 :asset "USD/JPY"
                 :v 41
-                :label :dummy
-                }}])
-
+                :label :dummy}}])
 
 (comment
   (require '[modular.system])
@@ -36,7 +33,7 @@
 
  ; 
   )
-   
+
 
 
 

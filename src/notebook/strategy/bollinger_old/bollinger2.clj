@@ -7,8 +7,7 @@
    [ta.helper.window :refer [drop-beginning calc-trailing-true-counter]]
    [ta.algo.manager :refer [add-algo]]
    [ta.tradingview.chart.color :refer [color]]
-   [ta.tradingview.chart.plot :refer [plot-type]]
-   ))
+   [ta.tradingview.chart.plot :refer [plot-type]]))
 
 (defn add-bollinger-indicator
   "adds bollinger indicator to dataset
@@ -78,25 +77,21 @@
   :comment "just the data"
   :algo add-bollinger-with-signal
   :charts [{;:trade "flags"
-            :bb-lower {:type "line" 
-                       :linewidth 2 
-                       :color (color :blue-900)
-                       }
-            :bb-upper {:type "line" 
+            :bb-lower {:type "line"
+                       :linewidth 2
+                       :color (color :blue-900)}
+            :bb-upper {:type "line"
                        :linewidth 4
-                       :color (color :red)
-                       }}
-           {:volume {:type "line" 
+                       :color (color :red)}}
+           {:volume {:type "line"
                      :color (color :gold)
-                     :plottype (plot-type :columns)
-                     }}] ;
+                     :plottype (plot-type :columns)}}] ;
   :options {:symbol "SPY"
             :frequency "D"
             :sma-length 30
             :stddev-length 30
             :mult-up 1.0
             :mult-down 1.0}})
-
 
 (comment
   (require '[ta.helper.date-ds  :refer [days-ago]])

@@ -2,12 +2,11 @@
   (:require
    [modular.system]
    [ta.live.quote-manager :as qm]
-   [clojure.pprint :refer [print-table]]
-   ))
+   [clojure.pprint :refer [print-table]]))
 
 ;; create quote-manager from feeds
 
-(def feed-fx (modular.system/system :feed-fx ))
+(def feed-fx (modular.system/system :feed-fx))
 (def feed-bybit (modular.system/system :feed-bybit))
 (def feeds {:fx feed-fx :crypto feed-bybit})
 (def q (qm/create-quote-manager feeds))
@@ -41,8 +40,6 @@
 ;;     {:asset "ETHUSDT", :price 3418.86, :size 0.05512, :feed :bybit}
 ;;     {:asset "EUR/GBP", :price 0.85629, :size 100.0, :feed :fx})
 
-
 (-> (qm/quote-snapshot q)
-    print-table
- )
+    print-table)
 
