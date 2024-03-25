@@ -51,11 +51,7 @@
            ;:key :minute
            }
    ;:table {:viz 'ta.viz.ds.rtable/rtable-render-spec
-   ;        :viz-options {:class "table-head-fixed padding-sm table-red table-striped table-hover"
-   ;                      :style {:width "50vw"
-   ;                              :height "40vh"
-   ;                              :border "3px solid green"}
-   ;                      :columns [{:path :date}
+   ;        :viz-options {:columns [{:path :date}
    ;                                {:path :close}
    ;                                {:path :signal}]}}
    ;:metrics {:viz 'ta.viz.ds.metrics/metrics-render-spec
