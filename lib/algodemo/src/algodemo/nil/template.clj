@@ -39,6 +39,6 @@
                 :name "SuperSuperFast?"}])
    :chart {:viz 'ta.viz.ds.highchart/highstock-render-spec
            :viz-options {:chart {:box :fl}
-                         :charts [{:close :candlestick #_:ohlc}
+                         :charts [{:bar :candlestick #_:ohlc}
                                   {:volume {:type :column :color "red"}}]}}})
 

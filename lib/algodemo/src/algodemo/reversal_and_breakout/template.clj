@@ -34,7 +34,7 @@
               :spec [0.1 0.5 1.0 1.5 2.0 2.5 3.0 5.0]}]
    :chart {:viz 'ta.viz.ds.highchart/highstock-render-spec
            :viz-options {:chart {:box :fl}
-                         :charts [{:close :line ; :candlestick
+                         :charts [{:bar :candlestick
                                    :signal {:type :flags}
                                    :hstore {:type :line :color "green"}
                                    :lstore {:type :line :color "red"}}

@@ -43,7 +43,7 @@
              ]
    :chart {:viz 'ta.viz.ds.highchart/highstock-render-spec
            :viz-options {:chart {:box :fl}
-                         :charts [{:close :line ; :candlestick
+                         :charts [{:close :line
                                    :ma {:type :line}
                                    ;:ma-day {:type :line}
                                    }

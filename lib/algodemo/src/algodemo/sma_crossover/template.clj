@@ -30,7 +30,7 @@
               :spec [100 200 500 1000]}]
    :chart {:viz 'ta.viz.ds.highchart/highstock-render-spec
            :viz-options {:chart {:box :fl}
-                         :charts [{:ohlc :candlestick ; :ohlc ; :line 
+                         :charts [{:bar :candlestick ; :ohlc ; :line 
                                    :close :line
                                    :sma-lt :line
                                    :sma-st :line
@@ -89,7 +89,7 @@
               :spec [100 200 500 1000]}]
    :chart {:viz 'ta.viz.ds.highchart/highstock-render-spec
            :viz-options {:chart {:box :fl}
-                         :charts [{:close :candlestick ; :ohlc ; :line 
+                         :charts [{:bar :candlestick ; :ohlc ; :line 
                                    :sma-lt :line
                                    :sma-st :line}
                                   #_{:volume :column}]}}})
