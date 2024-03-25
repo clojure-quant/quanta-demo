@@ -36,8 +36,8 @@
            :viz-options {:chart {:box :fl}
                          :charts [{:bar :candlestick
                                    :signal {:type :flags}
-                                   :hstore {:type :line :color "green"}
-                                   :lstore {:type :line :color "red"}}
+                                   :hstore {:type :line :color "blue-2"}
+                                   :lstore {:type :line :color "blue-9"}}
                                   {:volume :column}]}}
    :table {:viz 'ta.viz.ds.rtable/rtable-render-spec
            :viz-options {:columns [{:path :date}
