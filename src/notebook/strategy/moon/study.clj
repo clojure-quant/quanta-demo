@@ -40,7 +40,7 @@ moon-ds
                        (tc/add-column ds-study :logret (fun/- (:logret ds-study) avg-move)))
                    ds-study)
         ds-study (tc/add-columns ds-study
-                                 {:win (dtype/emap win? :bool (:logret ds-study))
+                                 {:win (dtype/emap win? :boolean (:logret ds-study))
                                   :move (fun/abs (:logret ds-study))})
         ds-study (tc/select-rows ds-study (range 1 (tc/row-count ds-study)))]
     ds-study))
