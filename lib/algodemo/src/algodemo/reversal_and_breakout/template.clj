@@ -42,6 +42,8 @@
    :table {:viz 'ta.viz.ds.rtable/rtable-render-spec
            :viz-options {:columns [{:path :date}
                                    {:path :close}
+                                   {:path :hstore}
+                                   {:path :lstore}
                                    {:path :signal}]}}
    :metrics {:viz 'ta.viz.ds.metrics/metrics-render-spec
              :viz-options {}}})
