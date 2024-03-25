@@ -44,7 +44,7 @@
 (defn calc-poc-cols [ds-bars bin-n]
   (let [volume (:volume ds-bars)
         change (diff (:close ds-bars))
-        up? (dtype/emap up? :bool change)
+        up? (dtype/emap up? :boolean change)
         bin (b/bin-full bin-n (:close ds-bars))]
     {:bin bin
      :ds-bin (tc/dataset

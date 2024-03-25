@@ -35,20 +35,7 @@
    :chart {:viz 'ta.viz.ds.highchart/highstock-render-spec
            :viz-options {:chart {:box :fl}
                          :charts [{:close :line ; :candlestick
-                                   ;:sh {:type :line :color "green"}
-                                   ;:sl {:type :line :color "red"}
-                                   ;:h {:type :line :color "blue"}
-                                   ;:l {:type :line :color "yellow"}
-
-                                   ; TODO: does not work with webgl
-                                   ;:bullish-breakout? {:type :flags
-                                   ;                    ;:color "blue"
-                                   ;                    :color "rgba(100,0,50,1)"
-                                   ;                    :fillColor "rgba(100,200,50,1)" ;"green"
-                                   ;                    :dataLabels {:backgroundColor "rgba(100,200,50,1)"
-                                   ;                                 :borderColor "green"}
-                                   ;                    }
-                                   :signal {:type :flags}   
+                                   :signal {:type :flags}
                                    :hstore {:type :line :color "green"}
                                    :lstore {:type :line :color "red"}}
                                   {:volume :column}]}}

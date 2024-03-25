@@ -4,4 +4,5 @@
                    algodemo.asset-compare.template/asset-compare
                    algodemo.reversal-and-breakout.template/reversal-and-breakout
                    algodemo.nil.template/watch-crypto
-                   algodemo.sma-crossover.template/eodhd-eod]}
+                   algodemo.sma-crossover.template/eodhd-eod
+                   algodemo.multi-ma.template/multi-ma]}
