@@ -7,7 +7,7 @@
         com.taoensso/timbre {:mvn/version "6.2.2"} ; clj/cljs logging
         org.pinkgorilla/reval {:mvn/version "0.5.141"}
         ; ta
-        org.pinkgorilla/ta {:mvn/version "0.3.731"} 
+        org.pinkgorilla/ta {:mvn/version "0.3.741"} 
         ;org.pinkgorilla/ta {:local/root "../quanta" :deps/manifest :deps}
         babashka/process {:mvn/version "0.5.21"}
         ;com.clojure-goes-fast/clj-memory-meter {:mvn/version "0.1.0"}
@@ -34,7 +34,7 @@
         }
 
   :docs ; RUN SERVICES (keep running)
-  {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.658"} ; 0.4.657
+  {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.660"} ; "0.4.658"
                 org.pinkgorilla/modular {:mvn/version "0.0.40"}
                 com.fzakaria/slf4j-timbre {:mvn/version "0.4.0"}}
    :extra-paths ["target/webly" ; to include the sci-bindings info

@@ -53,6 +53,8 @@ subscription-id
 ; check state (developer debugging)
 
 (-> @sub/subscriptions-a keys)
+;; => ("c3ZNXs")
+
 ;; => ("79zRE_")
 
 ;; => ("YEoVgy")
@@ -65,7 +67,7 @@ subscription-id
 (-> @sub/visualizations-a keys)
 
 ;; watch results..
-(def subscription-id "FOkpkS")
+(def subscription-id "c3ZNXs")
 
 (-> @sub/subscriptions-a (get subscription-id))
 (-> @sub/results-a (get subscription-id))

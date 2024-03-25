@@ -45,7 +45,7 @@
                                                       ;:short "circle"
                                                       :short "url(/r/arrow-down.svg)"
                                                        }}}
-                                  {:volume :column}]}}
+                                  #_{:volume :column}]}}
    :table {:viz 'ta.viz.ds.rtable/rtable-render-spec
            :viz-options {:class "table-head-fixed padding-sm table-red table-striped table-hover"
                          :style {:width "50vw"
@@ -92,4 +92,4 @@
                          :charts [{:close :candlestick ; :ohlc ; :line 
                                    :sma-lt :line
                                    :sma-st :line}
-                                  {:volume :column}]}}})
+                                  #_{:volume :column}]}}})

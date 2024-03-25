@@ -38,9 +38,13 @@
    ; test
    [:div.bg-blue-300.m-5
     [:p.text-blue.text-xl "test"]
-    [link-dispatch [:bidi/goto 'demo.goldly.page.test.test/test-page] "test-page"]
+    [link-dispatch [:bidi/goto 'demo.goldly.page.test.test/test-page] "symbol-picker"]
     [link-dispatch [:bidi/goto 'demo.goldly.page.test.layout/page-layout-1] "layout-1"]
-    [link-dispatch [:bidi/goto 'demo.goldly.page.test.layout/page-layout-2] "layout-2"]]
+    [link-dispatch [:bidi/goto 'demo.goldly.page.test.layout/page-layout-2] "layout-2"]
+    [link-dispatch [:bidi/goto 'demo.goldly.page.test.highchart/highchart-page] "highchart"]
+    [link-dispatch [:bidi/goto 'demo.goldly.page.test.highchart/highstock-page] "highstock"]
+    [link-dispatch [:bidi/goto 'demo.goldly.page.test.color/color-page] "color"]
+    ]
    ; goldly developer tools
    [:div.bg-blue-300.m-5
     [:p.text-blue.text-xl "goldly developer tools"]

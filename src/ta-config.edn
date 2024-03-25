@@ -43,6 +43,9 @@
                          "test/" {"test" demo.goldly.page.test.test/test-page
                                   "layout1" demo.goldly.page.test.layout/page-layout-1
                                   "layout2" demo.goldly.page.test.layout/page-layout-2
+                                  "highchart" demo.goldly.page.test.highchart/highchart-page
+                                  "highstock" demo.goldly.page.test.highchart/highstock-page
+                                  "color" demo.goldly.page.test.color/color-page
                                   }}
                    :api {"arrow" :dataset/arrow
                          "sentiment" juan.sentiment/sentiment-cookies-wrapped
