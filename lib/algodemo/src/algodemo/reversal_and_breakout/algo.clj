@@ -33,7 +33,7 @@
       (replace-missing :down)
       (:out)))
 
-(defn allow-one-signal-every-n-bars [n vec]
+(defn one-signal-every-n-bars [n vec]
   (let [ds (tc/dataset {:in vec})]
     (:out (r/rolling ds
                      {:window-type :fixed
@@ -70,12 +70,13 @@
     (dfn/> above level)
     (dfn/< below level)))
 
-(defn- calc-rb-signal [bullish-breakout? bearish-breakout? lcross-over? hcross-under?]
+(defn- calc-rb-signal [bullish-breakout? bearish-breakout?
+                       bullish-rejection-signal? bearish-rejection-signal?]
   (cond
-    (and bearish-breakout? lcross-over?) :hold
-    (and bullish-breakout? hcross-under?) :hold
     bullish-breakout? :long
+    bullish-rejection-signal? :long
     bearish-breakout? :short
+    bearish-rejection-signal? :short
     :else :hold))
 
 (defn rb-algo [_env {:keys [len vlen threshold] :as opts} bar-ds]
@@ -96,10 +97,10 @@
         ;; TODO: create cross len param for breakout and rejection...
         ;; cross inside window
         breakout  (->> (bullish-at-level open close storeh)
-                       (allow-one-signal-every-n-bars 5))
+                       (one-signal-every-n-bars 5))
 
         breakdown (->> (bearish-at-level open close storel)
-                       (allow-one-signal-every-n-bars 5))
+                       (one-signal-every-n-bars 5))
 
         strong-breakout (dfn/and breakout strongvol)
         strong-breakdown (dfn/and breakdown strongvol)
@@ -115,8 +116,8 @@
         storel-cross (bullish-at-level low close storel)
         storeh-cross (bearish-at-level high close storeh)
 
-        no-prior-bullish-rejections? (no-prior-signal-every-n-bars 4 storel-cross)
-        no-prior-bearish-rejections? (no-prior-signal-every-n-bars 4 storeh-cross)
+        no-prior-bullish-rejections? (no-prior-signal-every-n-bars 5 storel-cross)
+        no-prior-bearish-rejections? (no-prior-signal-every-n-bars 5 storeh-cross)
 
         bullish-rejection? (dfn/and storel-cross no-prior-bullish-rejections?)
         bearish-rejection? (dfn/and storel-cross no-prior-bearish-rejections?)
@@ -125,38 +126,52 @@
         lcross-over? (cross-up low storel)
         hcross-under? (cross-down high storeh)
 
-        signal (into [] (map calc-rb-signal bullish-breakout?
+        reset-state? (dfn/or
+                      (dfn/and lcross-over? bearish-breakout?)
+                      (dfn/and hcross-under? bullish-breakout?))
+
+        bullish-rejection-signal? (dfn/and bullish-rejection?
+                                          (dfn/or reset-state? bullish-breakout?))
+        bearish-rejection-signal? (dfn/and bearish-rejection?
+                                          (dfn/or reset-state? bearish-breakout?))
+
+
+        signal (into [] (map calc-rb-signal
+                             bullish-breakout?
                              bearish-breakout?
-                             lcross-over?
-                             hcross-under?))]
-    (tc/add-columns bar-ds {
-                            :sh sh
-                            :sl sl
-                            :h h
-                            :l l
-                            :hstore storeh
-                            :lstore storel
-                            :breakout breakout
-                            :breakdown breakdown
-                            :sma-vol sma-vol
-                            :sma-r sma-r
-                            :strongvol strongvol
-                            :strong-breakout strong-breakout
-                            :strong-breakdown strong-breakdown
-                            :no-prior-bullish-breakout-signals? no-prior-bullish-breakout-signals?
-                            :no-prior-bearish-breakout-signals? no-prior-bearish-breakout-signals?
-                            :bullish-breakout? bullish-breakout?
-                            :bearish-breakout? bearish-breakout?
-                            :storel-cross storel-cross
-                            :storeh-cross storeh-cross
-                            :no-prior-bullish-rejections? no-prior-bullish-rejections?
-                            :bullish-rejection? bullish-rejection?
-                            :no-prior-bearish-rejections? no-prior-bearish-rejections?
-                            :bearish-rejection? bearish-rejection?
-                            :lcross-over? lcross-over?
-                            :hcross-under? hcross-under?
-                            :signal signal
-                            })
+                             bullish-rejection-signal?
+                             bearish-rejection-signal?))]
+    (-> (tc/add-columns bar-ds {
+                                :sh sh
+                                :sl sl
+                                :h h
+                                :l l
+                                :hstore storeh
+                                :lstore storel
+                                :breakout breakout
+                                :breakdown breakdown
+                                :sma-vol sma-vol
+                                :sma-r sma-r
+                                :strongvol strongvol
+                                :strong-breakout strong-breakout
+                                :strong-breakdown strong-breakdown
+                                :no-prior-bullish-breakout-signals? no-prior-bullish-breakout-signals?
+                                :no-prior-bearish-breakout-signals? no-prior-bearish-breakout-signals?
+                                :bullish-breakout? bullish-breakout?
+                                :bearish-breakout? bearish-breakout?
+                                :storel-cross storel-cross
+                                :storeh-cross storeh-cross
+                                :no-prior-bullish-rejections? no-prior-bullish-rejections?
+                                :no-prior-bearish-rejections? no-prior-bearish-rejections?
+                                :bullish-rejection? bullish-rejection?
+                                :bearish-rejection? bearish-rejection?
+                                :lcross-over? lcross-over?
+                                :hcross-under? hcross-under?
+                                :reset-state? reset-state?
+                                :bullish-rejection-signal? bullish-rejection-signal?
+                                :bearish-rejection-signal? bearish-rejection-signal?
+                                :signal signal
+                                }))
     ))
 
 

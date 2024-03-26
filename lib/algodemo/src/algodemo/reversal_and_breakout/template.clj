@@ -44,6 +44,14 @@
                                    {:path :close}
                                    {:path :hstore}
                                    {:path :lstore}
+                                   ;{:path :bull-rej-close}
+                                   ;{:path :bear-rej-close}
+                                   {:path :bullish-breakout?}
+                                   {:path :bearish-breakout?}
+                                   {:path :bullish-rejection-signal?}
+                                   {:path :bearish-rejection-signal?}
+                                   ;{:path :bull-breakout-close}
+                                   ;{:path :bear-breakout-close}
                                    {:path :signal}]}}
    :metrics {:viz 'ta.viz.ds.metrics/metrics-render-spec
              :viz-options {}}})
