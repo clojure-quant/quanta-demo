@@ -1,7 +1,10 @@
 (ns notebook.playground.live.viz-debug
   (:require
+   [tablecloth.api :as tc]
+   [tech.v3.dataset.print :refer [print-range]]
    [ta.interact.template :refer [get-options]]
-   [ta.interact.subscription :as sub]))
+   [ta.interact.subscription :as sub]
+   [ta.interact.debug :refer [dump-dataset]]))
 
 (defn get-sub []
   (let [active (-> @sub/subscriptions-a keys)
@@ -17,9 +20,19 @@
 (defn get-result []
   (let [id (get-sub)]
     (when id
-      (-> @sub/results-a (get id)))))
+      (-> @sub/results-a (get id) deref))))
 
 (get-result)
+
+(defn dump-ds [ds]
+  (dump-dataset "/tmp/test.txt" ds))
+
+(-> (get-result)
+    (tc/select-columns [:date :close :high :b2-upper
+                        :b2h-crossed?  :b2h-cross-high
+                        :carried-high  :carried-crossed?])
+    (print-range :all)
+    (dump-ds))
 
 (defn get-viz []
   (let [id (get-sub)]
