@@ -6,8 +6,8 @@
         techascent/tech.viz {:mvn/version "6.00-beta-16-2"}
         com.taoensso/timbre {:mvn/version "6.2.2"} ; clj/cljs logging
         org.pinkgorilla/reval {:mvn/version "0.5.141"}
-        ; ta
-        org.pinkgorilla/ta {:mvn/version "0.3.772"} 
+        ; quanta
+        org.pinkgorilla/ta {:mvn/version "0.3.776"} 
         ;org.pinkgorilla/ta {:local/root "../quanta" :deps/manifest :deps}
         babashka/process {:mvn/version "0.5.21"}
         ;com.clojure-goes-fast/clj-memory-meter {:mvn/version "0.1.0"}
@@ -69,16 +69,7 @@
   {:exec-fn juan.fix/start-harvesting}
 
   :duckdb-performance-test
-  {:exec-fn notebook.playground.bardb.performance-test/run-performance-test}
-
-  :extension-test
-  {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.661"}
-                org.pinkgorilla/modular {:mvn/version "0.0.40"}
-                com.fzakaria/slf4j-timbre {:mvn/version "0.4.0"}
-                io.github.pink-gorilla/extension {:git/url "https://github.com/pink-gorilla/extension.git"
-                                                  :sha "8363595f71473cefe7596164db32c8dfb24ae262"}}
-   :exec-fn demo.extension/test-discovery}
-
+  {:exec-fn quanta.notebook.bardb-performance-test/run-performance-test}
 
 ;  
   }}

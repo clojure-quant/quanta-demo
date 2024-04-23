@@ -71,7 +71,7 @@ FLORIAN TODO:
 
 - goldly: if nrepl .nrepl-port (in main folder)
 
-- https://github.com/johnmn3/injest   BETTER THREADING MACROS
+
 
 
 

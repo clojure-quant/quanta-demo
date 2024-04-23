@@ -7,7 +7,7 @@
   :timbre {:start (modular.log/timbre-config!
                    (:timbre/clj (deref (clip/ref :config))))}
 
-  :asset-db {:start (notebook.data.asset.db/add-assets)}
+  :asset-db {:start (quanta.notebook.asset-add/add-assets)}
 
 ; goldly service returns {:ns-clj :webly           ; this are used to start clj-require and webly
   ;                         :ws-watch :cljs-watch}   ; this is used when stopping goldly
@@ -114,13 +114,13 @@
   ;                     (clip/ref :timbre)
   ;                       ; ref to :tickerplant is needed to start tickerplant FIRST.
   ;                     )}
-  :tickerplant-monitor {:start (notebook.strategy.live.tickerplant-monitor/create-tickerplant-monitor
+  :tickerplant-monitor {:start (quanta.notebook.study.live.tickerplant-monitor/create-tickerplant-monitor
                                 (clip/ref :live)
                                 (clip/ref :tickerplant)
                                 (clip/ref :timbre)
                       ; ref to :tickerplant is needed to start tickerplant FIRST.
                                 )}
-  :quote-monitor {:start (notebook.strategy.live.quote-monitor/create-quote-monitor
+  :quote-monitor {:start (quanta.notebook.study.live.quote-monitor/create-quote-monitor
                           (clip/ref :live)
                           (clip/ref :tickerplant)
                           (clip/ref :timbre))}

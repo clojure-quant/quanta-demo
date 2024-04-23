@@ -51,15 +51,13 @@
                          "sentiment" juan.sentiment/sentiment-cookies-wrapped
                          }}}
 
- :reval {:rdocument  {:storage-root "output/rdocument/"
+ :reval {:rdocument  {:storage-root "target/webly/public/rdocument/"
                       :url-root "/api/rdocument/file/"}
-         :collections {:data [:clj "notebook/data/"]
-                       :studies [:clj "notebook/studies/"]
-                       :datascience [:clj "notebook/datascience/"]
-                       :playground [:clj "notebook/playground/"]
-                       :ui-test [:cljs "demo/goldly/ui_test/"]
-                       :ta-viz-cljs [:cljs "ta/viz/notebook/"]
-                       :ta-viz-clj  [:clj "ta/viz/notebook/"]
+         :collections {:study [:clj "quanta/notebook/study/"]
+                       :quanta [:clj "quanta/notebook/"]
+                       :quanta-ui [:cljs "quanta/notebook/viz/"]
+                       :ui [:cljs "demo/goldly/ui_test/"]
+                       :dev [:clj "quanta/notebook/dev/"] 
                        ;:demo [:clj "demo/notebook/"]
                        ;:demo-cljs [:cljs "demo/notebook/"]
                        }}

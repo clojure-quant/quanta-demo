@@ -1,8 +1,9 @@
 # quanta-demo
 
 
-This will run quanta-studio; the ui can be accessed on http://localhost:8080/.
+## run demo 
 
+This will run quanta-studio; the ui can be accessed on http://localhost:8080/.
 
 *start with public algos enabled*
 
@@ -14,7 +15,6 @@ clj -X:docs:public-algos:my-algos
 ```
 clj -X:docs:public-algos:my-algos
 ```
-
 
 
 ## VAULT
