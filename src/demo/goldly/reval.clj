@@ -7,16 +7,18 @@
 
 (defn text-render-fipp
   [o comment]
+   ^{:R true}
   [:span.text-green-500
    comment
-   [:p/text
+   ['demo.goldly.text/text
     (pprint-str o)]])
 
 (defn text-render
   [o comment]
+  ^{:R true}
   [:span.text-blue-500
    comment
-   [:p/text
+   ['demo.goldly.text/text
     (pr-str o)]])
 
 ;; clojure
@@ -57,3 +59,9 @@
   hiccup-convertable
   (to-hiccup [self]
     (text-render self "techml dataset ")))
+
+
+(defn add-techml-render-ui []
+  ; this function is called just for the side-effects above.
+  (println "adding techml render ui ..")
+  )

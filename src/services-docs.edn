@@ -35,6 +35,8 @@
                   :handler cider.nrepl/cider-nrepl-handler)
           :stop (.close this)}
 
+  :techml-render-ui {:start (demo.goldly.reval/add-techml-render-ui)}
+
   :studio {:start (ta.interact.studio/start-studio)}
 
   :duckdb {; todo: change /bars to /bars.ddb (duck-db db has .ddb extension)
