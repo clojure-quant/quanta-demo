@@ -19,7 +19,7 @@
                           [#{"*"} :info]] ; default -> info
               :appenders {:default {:type :console-color}
                           :rolling {:type :file-rolling
-                                    :path "output/trateg.log"
+                                    :path "output/quanta.log"
                                     :pattern :monthly}
                           
                           }}
