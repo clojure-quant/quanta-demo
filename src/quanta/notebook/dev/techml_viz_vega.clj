@@ -16,26 +16,10 @@
                       {:title "Stock Price (2007-2010)"
                        :label-key "symbol"
                        :background "white"})
+    ;(vega/vega->svg-file ds "timeseries.svg")
+    (with-meta {:render-fn 'ui.vega/vega})))
 
-  ;(vega/vega->svg-file ds "timeseries.svg")
-    ))
-;; generate plot-image, and show it in browser
 
-^{:render-as :p/vega}
-
-(-> (stock-plot)
-    (with-meta {:render-fn 'ui.vega/vega}))
-
-(comment
-
-  ;(save (stock-plot) "vega-spec" :edn) ; save in :edn format creates a HUMAN READABLE edn file!
-
-; show url (printed to console)
-; the link can be opened in the browser (it will save it to disk immediately)
- ; (url "vega-spec.edn")
-
-;  
-  )
-
+(stock-plot)
 
 
