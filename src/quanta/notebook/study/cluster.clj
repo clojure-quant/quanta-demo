@@ -15,6 +15,7 @@
    [ta.db.bars.aligned :refer [get-bars-aligned-filled]]
    [ta.db.asset.db :as asset-db]
    [ta.indicator.returns :refer [diff]]
+   [ta.indicator.fastmath :as ifm]
    [ui.cytoscape :refer [cytoscape]]))
 
 ; fidelity-select are mutualfunds, which are not supported by kibot. 
@@ -80,6 +81,15 @@ corrs
 ;;     [0.2635 0.3315 0.3844 0.3225 0.5681 0.5533 0.3952 0.4380 0.5316 0.6312  1.000 0.3252 0.4654]
 ;;     [0.3240 0.6325 0.4421 0.5830 0.5216 0.4563 0.7078 0.5560 0.5575 0.5027 0.3252  1.000 0.4666]
 ;;     [0.6301 0.5464 0.7917 0.5596 0.8022 0.8039 0.6738 0.7178 0.8808 0.7673 0.4654 0.4666  1.000]]
+
+
+(->> (ifm/correlations-dataset 
+      (map #(-> % :return standardize) bar-ds-list)
+      (vec assets))
+     (ifm/vegalite-correlation))
+
+
+
 
 (def clustering
   (-> bar-ds-list
