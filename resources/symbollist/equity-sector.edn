@@ -6,7 +6,7 @@
  {:region :us :sector :financial :name "iShares US Financials" :symbol "IYF"  :category :etf :also ["VFH" "XLF" "KBE"]}
  {:region :us :sector :financial-services :name "iShares US Financial Svcs" :category :etf :symbol "IYG"}
  {:region :us :sector :real-estate :name "iShares US Real Estate" :symbol "IYR" :category :etf :also ["ICF" "VNQ" "RWR"]}
- {:region :us :sector :telecom :name "iShares US Telecommunications" :symbol "IYZ " :category :etf  :also ["PXN" "IXP" "TTH" "VOX"]}
+ {:region :us :sector :telecom :name "iShares US Telecommunications" :symbol "IYZ" :category :etf  :also ["PXN" "IXP" "TTH" "VOX"]}
  {:region :us :sector :industrial :name "iShares US Industrials" :symbol "IYJ" :category :etf :also ["VIS" "XLI"]}
  {:region :us :sector :materials :name "iShares US Basic Materials" :symbol "IYM" :category :etf  :also ["VAW" "XLB"]}
  {:region :us :sector :energy  :name "iShares US Energy" :symbol "IYE" :category :etf :also ["VDE" "XLE"]}

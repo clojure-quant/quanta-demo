@@ -1,4 +1,4 @@
-(ns notebook.strategy.cluster
+(ns quanta.notebook.study.cluster
   (:require
    [tech.v3.dataset.print :as print]
    [tech.v3.datatype.functional :as fun]
@@ -14,21 +14,21 @@
    [ta.db.asset.symbollist :refer [load-list]]
    [ta.db.bars.aligned :refer [get-bars-aligned-filled]]
    [ta.db.asset.db :as asset-db]
-   [ta.indicator.returns :refer [diff]]))
+   [ta.indicator.returns :refer [diff]]
+   [ui.cytoscape :refer [cytoscape]]))
 
 ; fidelity-select are mutualfunds, which are not supported by kibot. 
 ;(def assets (load-list "fidelity-select"))
-(def assets (load-list "resources/symbollist/equity-sector/.edn"))
+(def assets (load-list "resources/symbollist/equity-sector.edn"))
 
-assets
 (count assets)
 ;; => 13
+
+assets
 
 (def db (modular.system/system :bardb-dynamic))
 
 (def window (cal/trailing-window [:us :d] 1000))
-
-window
 
 (defn load-ds [asset]
   (get-bars-aligned-filled db {:calendar [:us :d]
@@ -36,7 +36,6 @@ window
                                :asset asset} window))
 
 (load-ds "MSFT")
-(load-ds "FSAGX")
 
 (defn add-calcs [bars-ds]
   (tc/add-columns bars-ds {:return (diff (:close bars-ds))}))
@@ -54,8 +53,6 @@ window
 
 (def bar-ds-list
   (map (comp remove-first-2-rows add-calcs load-ds) assets))
-
-bar-ds-list
 
 ; since we have requested the 1000 most recent bars,
 ; we should see only 1000 here, but we removed 2 bars, so we have 998 everywhere.
@@ -112,7 +109,7 @@ corrs
 symbol->cluster
 
 (defn edges [threshold]
-  (let [n (count full-symbols)]
+  (let [n (count assets)]
     (-> (for [j     (range n)
               i     (range j)
               :let  [r (corrs i j)]
@@ -123,19 +120,13 @@ symbol->cluster
            :j    j
            :sign (fun/signum r)}))))
 
-(-> edges
+(-> 0.6
+    edges
     tc/dataset
     (print/print-range :all))
 
 (let [threshold 0.6
-      stylesheet    [{:selector "node"
-                      :style    {:width  20
-                                 :height 10
-                                 :shape  "rectangle"}}
-                     {:selector "edge"
-                      :style    {:width 5
-                                 :line-color "purple"}}]
-      nodes (->> full-symbols
+      nodes (->> assets
                  (map-indexed (fn [i symbol]
                                 {:data {:id i
                                         :label (name symbol)}})))
@@ -146,14 +137,21 @@ symbol->cluster
                                 :source i
                                 :target j}})))
       elements (concat nodes edges)]
-  ^:R
-  [:p/cytoscape   {;:box :lg
-                   :stylesheet stylesheet
-                   :elements   elements
-                   :layout     {:name "cose"}
-                   :style      {:border "9px solid #39b"
-                                :width  "800px"
-                                :height "800px"}}])
+  (cytoscape
+   {:stylesheet [{:selector "node"
+                  :style    {:width  20
+                             :height 10
+                             :shape  "rectangle"}}
+                 {:selector "edge"
+                  :style    {:width 5
+                             :line-color "purple"}}]
+    :elements   elements
+    :layout     {:name "cose"}
+    :style      {:border "9px solid #39b"
+                 :width  "600px"
+                 :height "600px"}}))
+
+;; 
 
 (-> (->> 0.6
          edges
@@ -165,9 +163,12 @@ symbol->cluster
           (fn [i comp-indexes]
             (tc/dataset
              {:component      (str "comp" i)
-              :symbol (map full-symbols comp-indexes)})))
-         (apply tc/concat))
+              :symbol (map (vec assets) comp-indexes)})))
+         (apply tc/concat)
+         )
     (tc/add-columns
-     {:name    #(->> % :symbol (mapv symbol->name))
+     {:name    #(->> % :symbol (mapv asset-db/instrument-name))
       :cluster #(->> % :symbol (mapv symbol->cluster))})
     (print/print-range :all))
+
+
