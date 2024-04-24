@@ -1,4 +1,4 @@
-(ns quanta.notebook.dev.techml.plot-tml
+(ns quanta.notebook.dev.techml-viz-vega
   (:require
    [tech.v3.dataset :as tds]
    [tech.v3.datatype.datetime.operations :as dtype-dt-ops]
@@ -24,7 +24,7 @@
 ^{:render-as :p/vega}
 
 (-> (stock-plot)
-    (with-meta {:render-as :p/vega}))
+    (with-meta {:render-fn 'ui.vega/vega}))
 
 (comment
 
