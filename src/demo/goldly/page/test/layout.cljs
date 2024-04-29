@@ -1,6 +1,6 @@
 (ns demo.goldly.page.test.layout
   (:require
-   [site :refer [ipsum]]
+   [ui.site.ipsum :refer [ipsum]]
    [ta.viz.lib.layout :as layout]))
 
 (defn page-layout-1 [_route]

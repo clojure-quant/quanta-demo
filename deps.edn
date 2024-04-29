@@ -1,13 +1,12 @@
 {:paths ["src"
-         ;"classes"
-         ]
+         "resources"]
  :deps {org.clojure/clojure  {:mvn/version "1.11.1"}
         aysylu/loom {:mvn/version "1.0.2"}
         techascent/tech.viz {:mvn/version "6.00-beta-16-2"}
         com.taoensso/timbre {:mvn/version "6.2.2"} ; clj/cljs logging
-        org.pinkgorilla/reval {:mvn/version "0.5.141"}
+        org.pinkgorilla/reval {:mvn/version "0.6.159"}
         ; quanta
-        org.pinkgorilla/ta {:mvn/version "0.3.788"} 
+        org.pinkgorilla/ta {:mvn/version "0.3.789"}
         ;org.pinkgorilla/ta {:local/root "../quanta" :deps/manifest :deps}
         babashka/process {:mvn/version "0.5.21"}
         ;com.clojure-goes-fast/clj-memory-meter {:mvn/version "0.1.0"}
@@ -20,50 +19,63 @@
            :main-opts ["-m" "cljfmt.main"
                        "--indents" "cljfmt.edn"]}
 
-  ; example: clojure -X:run :task ':bybit-import' :symbol-list "currency-spot"
+  ; example: clojure -X:task :task ':bybit-import' :symbol-list "currency-spot"
   ; see README.md for available tasks
 
-  :run {:extra-deps {org.pinkgorilla/modular {:mvn/version "0.0.40"}
-                     com.fzakaria/slf4j-timbre {:mvn/version "0.4.0"}}
-        :extra-paths ["cli"]
-        :exec-fn modular.system/start!
-        :exec-args {:config "ta-config.edn"
-                    :services "services-task.edn"
-                    :run demo.env.task/run}
-        :jvm-opts ["-Xmx4G"] ;; or more
-        }
+  :task {:extra-deps {org.pinkgorilla/modular {:mvn/version "0.2.56"}
+                      com.fzakaria/slf4j-timbre {:mvn/version "0.4.0"}}
+         :extra-paths ["cli"]
+         :exec-fn modular.system/start!
+         :exec-args {:config "ta-config.edn"
+                     :services "services-task.edn"
+                     :run demo.env.task/run}
+         :jvm-opts ["-Xmx4G"] ;; or more
+         }
 
-  :docs ; RUN SERVICES (keep running)
-  {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.661"} ; "0.4.660"
-                org.pinkgorilla/modular {:mvn/version "0.0.40"}
-                com.fzakaria/slf4j-timbre {:mvn/version "0.4.0"}}
-   :extra-paths ["target/webly" ; to include the sci-bindings info
-                 "node_modules"
-                 "resources"]
-   :exec-fn modular.system/start!
-   :exec-args {:profile "jetty"
-               :services "services-docs.edn" ; see demo/src/services-docs.edn
-               :config  ["webly/config.edn" "goldly/config.edn"
-                         ;"goldly/docs-config.edn"
-                         "ta-config.edn"]}}
-  
+  :webly {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.7.24"}
+                       org.pinkgorilla/modular {:mvn/version "0.2.56"}
+                       com.fzakaria/slf4j-timbre {:mvn/version "0.4.0"}}
+          :extra-paths [;"src" "resources"
+                        "target/webly" ; to include the sci-bindings info
+                        "node_modules"]
+          :exec-fn webly.app.app/webly-build
+          :exec-args {:config ["ta-config.edn"]
+                      :profile "npm-install"}}
+
+  :npm-install {:exec-args {:profile "npm-install"}}
+  :compile {:exec-args {:profile "compile2"}}
+  :release {:exec-args {:profile "release"}}
+  :release-adv {:exec-args {:profile "release-adv"}}
+  :static {:exec-args {:profile "static"}}
+  :ci {:exec-args {:profile "ci"}}
+  :run {:exec-fn modular.system/start!
+        :exec-args {:profile "jetty"
+                    :services "services-web.edn"}}
+
+  :static-sci {:exec-fn goldly.build/static-build-copy-sci-code}
+
+  :nbeval {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.7.24"}}
+           :exec-fn modular.system/start!
+           :exec-args {:run reval.task/eval-all-collections
+                       :config  ["ta-config.edn"]
+                       :services "services-task.edn"}}
+
   :public-algos
   {:extra-deps {io.github.clojure-quant/algo-demo {:local/root "../algo-demo" :deps/manifest :deps}}}
-  
+
   #_:my-algos-direct
   #_{:extra-deps {;io.github.clojure-quant/algo-juan {:git/sha "3fdb0b94b27b9d52ca0a9057fc77784b023219a6"}
-                io.github.clojure-quant/algo-alex {:git/sha "17178469c187b4d085d6120bc865e58dfcbc1309"}
-                io.github.clojure-quant/algo-gann {:git/sha "af82abcd216b8179ff03ae61668bd5a1ebe11295"}
-                io.github.clojure-quant/algo-astro {:git/sha "0006c6a812a67977358838fd01aced21cb6b62c6"}
-                io.github.clojure-quant/algo-joseph {:git/sha "0cf2e362520756d5c55071846e6c5f3c8a57229c"}}}
+                  io.github.clojure-quant/algo-alex {:git/sha "17178469c187b4d085d6120bc865e58dfcbc1309"}
+                  io.github.clojure-quant/algo-gann {:git/sha "af82abcd216b8179ff03ae61668bd5a1ebe11295"}
+                  io.github.clojure-quant/algo-astro {:git/sha "0006c6a812a67977358838fd01aced21cb6b62c6"}
+                  io.github.clojure-quant/algo-joseph {:git/sha "0cf2e362520756d5c55071846e6c5f3c8a57229c"}}}
 
   :my-algos
   {:extra-deps {io.github.clojure-quant/algo-juan {:local/root "../algo-juan" :deps/manifest :deps}
                 io.github.clojure-quant/algo-alex {:local/root "../algo-alex" :deps/manifest :deps}
                 io.github.clojure-quant/algo-gann {:local/root "../algo-gann" :deps/manifest :deps}
                 io.github.clojure-quant/algo-astro {:local/root "../algo-astro" :deps/manifest :deps}
-                io.github.clojure-quant/algo-joseph {:local/root "../algo-joseph" :deps/manifest :deps}
-                }}
+                io.github.clojure-quant/algo-joseph {:local/root "../algo-joseph" :deps/manifest :deps}}}
 
   :quote-harvester
   {:exec-fn juan.fix/start-harvesting}

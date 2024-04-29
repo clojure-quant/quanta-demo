@@ -47,11 +47,16 @@
     ]
    ; goldly developer tools
    [:div.bg-blue-300.m-5
-    [:p.text-blue.text-xl "goldly developer tools"]
-    [link-dispatch [:bidi/goto 'reval.goldly.page.notebook-viewer/viewer-page :query-params {}] "notebook viewer"]
-    [link-dispatch [:bidi/goto 'scratchpad.page.scratchpad/scratchpad] "scratchpad"]
-    [link-dispatch [:bidi/goto 'goldly.devtools.page.runtime/runtime-page] "environment"]
-    [link-dispatch [:bidi/goto 'goldly.devtools.page.help/devtools-page] "devtools help"]]
+    [:p.text-blue.text-xl "developer tools"]
+    [link-dispatch [:bidi/goto 'reval.page.viewer/viewer-page :query-params {}] "notebook viewer"]
+    [link-dispatch [:bidi/goto 'reval.page.repl/repl-page :query-params {}] "repl"]
+    ;[link-dispatch [:bidi/goto 'scratchpad.page.scratchpad/scratchpad] "scratchpad"]
+    ;[link-dispatch [:bidi/goto 'goldly.devtools.page.runtime/runtime-page] "environment"]
+    ;[link-dispatch [:bidi/goto 'goldly.devtools.page.help/devtools-page] "devtools help"] 
+    ]
+
+   
+   
 
 ;
    ])

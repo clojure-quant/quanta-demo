@@ -8,18 +8,25 @@ This will run quanta-studio; the ui can be accessed on http://localhost:8080/.
 *start with public algos enabled*
 
 ```
-clj -X:docs:public-algos:my-algos
+clj -X:webly:run:public-algos
 ```
 
 *start with private algos enabled as well*
 ```
-clj -X:docs:public-algos:my-algos
+clj -X:webly:run:public-algos:my-algos
+```
+
+## Notebook Viewer
+
+To eval all notebooks, run:
+```
+clj -X:nbeval
 ```
 
 
 ## VAULT
 
-Datafeeds require api credentials. In `app/vault` there is `trateg/creds.edn`.
+Datafeeds require api credentials. In `app/vault` there is `goldly/trateg.edn`.
 Modify this file to use your credentials. Then set the environment variable *MYVAULT*
 so that it points to *app/vault* , example:
 `export MYVAULT=/home/awb99/repo/trateg/myvault/app/vault`
