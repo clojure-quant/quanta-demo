@@ -48,7 +48,7 @@
                          "ta-config.edn"]}}
   
   :public-algos
-  {:extra-deps {ta/algodemo {:local/root "./lib/algodemo" :deps/manifest :deps}}}
+  {:extra-deps {io.github.clojure-quant/algo-demo {:local/root "../algo-demo" :deps/manifest :deps}}}
   
   #_:my-algos-direct
   #_{:extra-deps {;io.github.clojure-quant/algo-juan {:git/sha "3fdb0b94b27b9d52ca0a9057fc77784b023219a6"}
