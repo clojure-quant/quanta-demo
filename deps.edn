@@ -7,7 +7,7 @@
         com.taoensso/timbre {:mvn/version "6.2.2"} ; clj/cljs logging
         org.pinkgorilla/reval {:mvn/version "0.5.141"}
         ; quanta
-        org.pinkgorilla/ta {:mvn/version "0.3.783"} 
+        org.pinkgorilla/ta {:mvn/version "0.3.788"} 
         ;org.pinkgorilla/ta {:local/root "../quanta" :deps/manifest :deps}
         babashka/process {:mvn/version "0.5.21"}
         ;com.clojure-goes-fast/clj-memory-meter {:mvn/version "0.1.0"}
@@ -62,7 +62,7 @@
                 io.github.clojure-quant/algo-alex {:local/root "../algo-alex" :deps/manifest :deps}
                 io.github.clojure-quant/algo-gann {:local/root "../algo-gann" :deps/manifest :deps}
                 io.github.clojure-quant/algo-astro {:local/root "../algo-astro" :deps/manifest :deps}
-                ;io.github.clojure-quant/algo-joseph {:local/root "../algo-joseph" :deps/manifest :deps}
+                io.github.clojure-quant/algo-joseph {:local/root "../algo-joseph" :deps/manifest :deps}
                 }}
 
   :quote-harvester
