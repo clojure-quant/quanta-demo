@@ -1,0 +1,135 @@
+ {:modular (modular.system/modular-env)  ; {:profile "jetty"  :config ["demo.edn" "secrets.edn"]}
+ :components
+ {:config {:start (modular.config/load-config! (:config #ref [:modular]))}
+  :secrets {:start (clojure.edn/read-string
+                    (slurp #envf ["%s/goldly/trateg.edn" "MYVAULT"]))}
+
+  :exts {:start (extension/discover)}
+
+  :timbre {:start (modular.log/timbre-config!
+                   (:timbre/clj (deref (clip/ref :config))))}
+
+  :webly {:start (webly.app.app/start-webly
+                  (deref (clip/ref :config))
+                  (:profile #ref [:modular]))
+          :stop (webly.app.app/stop-webly this)}
+
+  :clj-service {:start (goldly.service/start-clj-services
+                        (clip/ref :exts))}
+
+  :reval {:start (reval.config/set-config!
+                  (:reval (deref (clip/ref :config))))}
+
+  :nrepl {:start (nrepl.server/start-server
+                  :bind "0.0.0.0"
+                  :port 9100
+                  :middleware cider.nrepl.middleware/cider-middleware
+                  :handler cider.nrepl/cider-nrepl-handler)
+          :stop (.close this)}
+
+  ;; QUANTA:
+
+  :asset-db {:start (quanta.notebook.asset-add/add-assets)}
+
+  :techml-render-ui {:start (demo.goldly.reval/add-techml-render-ui)}
+
+  :studio {:start (ta.interact.studio/start-studio)}
+
+  :duckdb {; todo: change /bars to /bars.ddb (duck-db db has .ddb extension)
+           :start (ta.db.bars.duckdb/start-bardb-duck "output/duckdb/bars.ddb")
+           :stop (ta.db.bars.duckdb/stop-bardb-duck this)
+           :post-start ta.db.bars.duckdb/init-tables}
+
+  :bardb-sources {:start (ta.db.bars.sources/start-bardb-sources
+                          {:duckdb (clip/ref :duckdb)
+                           :nippy (ta.db.bars.nippy/start-bardb-nippy "output/kibot-intraday/")})}
+
+  :import-manager {:start (ta.import.core/start-import-manager
+                           {:kibot (ta.import.provider.kibot.ds/create-import-kibot
+                                    (:kibot (clip/ref :secrets)))
+                            :kibot-http (ta.import.provider.kibot-http.ds/create-import-kibot-http
+                                         (:kibot (clip/ref :secrets)))
+                            ;:quandl {:start (ta.import.provider.quandl.raw/set-key!
+           ;                 (:quandl (clip/ref :secrets)))}
+                            :eodhd (ta.import.provider.eodhd.ds/create-import-eodhd
+                                    (:eodhd (clip/ref :secrets)))
+                            :alphavantage (ta.import.provider.alphavantage.ds/create-import-alphavantage
+                                           (:alphavantage (clip/ref :secrets)))
+                            :bybit (ta.import.provider.bybit.ds/create-import-bybit)})}
+
+  :bardb-dynamic {:start (ta.db.bars.dynamic/start-bardb-dynamic
+                          (clip/ref :duckdb)
+                          (clip/ref :import-manager)
+                          "output/overviewdb")
+                  :stop (ta.db.bars.dynamic/stop-bardb-dynamic this)}
+
+  :import-manager-compressing {:start (ta.import.provider.compress/start-compressing-provider
+                                       (clip/ref :bardb-dynamic)
+                                       {:month :d
+                                        :year :d
+                                        :h :m})}
+
+  :bardb-dynamic-compressing {:start (ta.db.bars.dynamic/start-bardb-dynamic
+                                      (clip/ref :duckdb)
+                                      (clip/ref :import-manager-compressing)
+                                      "output/overviewdb-compressing")
+                              :stop (ta.db.bars.dynamic/stop-bardb-dynamic this)}
+
+  #_:feed-fx #_{:start    (ta.quote.fix/start-fix-feed-autoconnect :ctrader-tradeviewmarkets-quote)
+                   ; not connected feed: 
+                   ;(ta.quote.fix/create-quotefeed-fix :ctrader-tradeviewmarkets-quote)
+            }
+
+  #_:feed-bybit #_{:start  (ta.quote.bybit/start-quotefeed-bybit-autoconnect :something)
+                   ; not connected feed: 
+                   ;(ta.quote.fix/create-quotefeed-fix :ctrader-tradeviewmarkets-quote)
+               }
+
+  #_:quote-manager #_{; having the quote-manager public allows us to interact with it.
+                  ; so we can subscribe to a quote ad-hoc and use it.
+                  :start (ta.live.quote-manager/create-quote-manager
+                          {:fx (clip/ref :feed-fx)
+                           :bybit (clip/ref :feed-bybit)})}
+
+  :live {:start (ta.algo.env/create-env-javelin (clip/ref :bardb-dynamic
+                                                          ;:bardb-dynamic-compressing
+                                                          ))}
+
+  #_:tickerplant #_{:start (ta.live.tickerplant/start-tickerplant
+                        {:algo-env (clip/ref :live)
+                         :quote-manager (clip/ref :quote-manager)})}
+
+  ;; LIVE STRATEGIES
+  #_:crypto-raw #_{:start (notebook.strategy.live.crypto/create-crypto
+                           (clip/ref :live)
+                       ; ref to :tickerplant is needed to start tickerplant FIRST.
+                           (clip/ref :tickerplant) (clip/ref :timbre))}
+
+  ;:juan-live {:start (juan.notebook.live.multiple/create-juan
+  ;                     (clip/ref :live)
+  ;                     (clip/ref :tickerplant)
+  ;                     (clip/ref :timbre)
+  ;                       ; ref to :tickerplant is needed to start tickerplant FIRST.
+  ;                     )}
+  #_:tickerplant-monitor #_{:start (quanta.notebook.study.live.tickerplant-monitor/create-tickerplant-monitor
+                                (clip/ref :live)
+                                (clip/ref :tickerplant)
+                                (clip/ref :timbre)
+                      ; ref to :tickerplant is needed to start tickerplant FIRST.
+                                )}
+  #_:quote-monitor #_{:start (quanta.notebook.study.live.quote-monitor/create-quote-monitor
+                          (clip/ref :live)
+                          (clip/ref :tickerplant)
+                          (clip/ref :timbre))}
+
+  ;:sma-strategy-forex {:start (ta.env.dsl.barstrategy/add-bar-strategies (clip/ref :live)
+  ;                             (var-get notebook.algo-config.simple-sma-crossover/algos-fx))}
+
+  ;:sma-strategy-crypto {:start (ta.env.dsl.barstrategy/add-bar-strategies  (clip/ref :live)
+  ;                               (var-get notebook.algo-config.simple-sma-rossover/algos-crypto))}
+
+  ;:multicalendar-sma-strategy-forex {:start (ta.env.dsl.multi-calendar/add (clip/ref :live)
+  ;                                           (var-get notebook.algo-config.multicalendar-sma/multi-calendar-algo-demo))}
+
+;
+  }}

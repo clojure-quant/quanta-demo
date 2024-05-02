@@ -16,6 +16,11 @@ clj -X:webly:run:public-algos
 clj -X:webly:run:public-algos:my-algos
 ```
 
+*start without realtime feeds*
+```
+clj -X:webly:run-bare:public-algos:my-algos
+```
+
 ## Notebook Viewer
 
 To eval all notebooks, run:
