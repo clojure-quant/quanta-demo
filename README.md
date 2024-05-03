@@ -1,7 +1,7 @@
 # quanta-demo
 
 Notebook viewer with examples how to use ui render functions 
-is on [quanta-demo Github Pages](https://pink-gorilla.github.io/quanta-demo/)
+is on [quanta-demo Github Pages](https://clojure-quant.github.io/quanta-demo/)
 
 ## run demo 
 
