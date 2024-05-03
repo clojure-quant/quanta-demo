@@ -1,0 +1,2506 @@
+; saved on 2024-05-03 12:52:12
+{:content [{:out "",
+            :id :af75a588-2d02-4783-b69a-9bcd6761f4b2,
+            :code "(ns quanta.notebook.study.ma-compare\n  (:require\n   [fastmath.signal :as s]\n   [ta.indicator :as indicator]\n   [ta.indicator.fastmath :refer [lowpass]]\n   [tablecloth.api :as tc]\n   [ta.viz.ds.vega :refer [vega-render-spec ds-stacked]]\n   ))",
+            :ns "quanta.notebook.study.ma-compare",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.p-2.clj-nil [:p "nil"]]}
+           {:out "",
+            :id :af931b8c-65d5-4853-ab6b-f1a3326b5b16,
+            :code "(def size 300)",
+            :ns "quanta.notebook.study.ma-compare",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.ma-compare/size"]}
+           {:out "",
+            :id :493ec1dc-53f2-4c9d-86d8-6f0e5b93089a,
+            :code "(def signal-period 200)",
+            :ns "quanta.notebook.study.ma-compare",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.ma-compare/signal-period"]}
+           {:out "",
+            :id :7e92b731-027b-4eb0-920f-85ae8160ac46,
+            :code "(def wave-rect (s/oscillator :square (/ 1.0 signal-period) 1.0 0.4))",
+            :ns "quanta.notebook.study.ma-compare",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.ma-compare/wave-rect"]}
+           {:out "",
+            :id :95f9c87f-ce07-4871-8def-685b4f6f4f3d,
+            :code "(def signal\n  (->> (map wave-rect (range size))\n       (map inc)\n       (map inc)))",
+            :ns "quanta.notebook.study.ma-compare",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.ma-compare/signal"]}
+           {:out "",
+            :id :0c0ac2fc-a441-4caf-95f6-751a61cd382a,
+            :code "(def ds \n  (tc/dataset {:index (range size)\n               :close signal\n               :sma (indicator/sma {:n 10} signal)\n               :ema (indicator/ema 10 signal)\n               :lowpass (lowpass {:rate 8000.0 :cutoff 2000.0} signal)\n               }))",
+            :ns "quanta.notebook.study.ma-compare",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.ma-compare/ds"]}
+           {:out "",
+            :id :a7bcbcd8-5256-4e0f-ab5c-6dddb8361187,
+            :code "ds",
+            :ns "quanta.notebook.study.ma-compare",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [300 5]:\n\n| :index | :close | :sma |       :ema |   :lowpass |\n|-------:|-------:|-----:|-----------:|-----------:|\n|      0 |    3.0 |  3.0 | 3.00000000 | 1.83304641 |\n|      1 |    3.0 |  3.0 | 3.00000000 | 2.54607311 |\n|      2 |    3.0 |  3.0 | 3.00000000 | 2.82342946 |\n|      3 |    3.0 |  3.0 | 3.00000000 | 2.93131679 |\n|      4 |    3.0 |  3.0 | 3.00000000 | 2.97328329 |\n|      5 |    3.0 |  3.0 | 3.00000000 | 2.98960761 |\n|      6 |    3.0 |  3.0 | 3.00000000 | 2.99595752 |\n|      7 |    3.0 |  3.0 | 3.00000000 | 2.99842754 |\n|      8 |    3.0 |  3.0 | 3.00000000 | 2.99938834 |\n|      9 |    3.0 |  3.0 | 3.00000000 | 2.99976207 |\n|    ... |    ... |  ... |        ... |        ... |\n|    289 |    1.0 |  1.0 | 1.00000159 | 1.00000000 |\n|    290 |    1.0 |  1.0 | 1.00000130 | 1.00000000 |\n|    291 |    1.0 |  1.0 | 1.00000106 | 1.00000000 |\n|    292 |    1.0 |  1.0 | 1.00000087 | 1.00000000 |\n|    293 |    1.0 |  1.0 | 1.00000071 | 1.00000000 |\n|    294 |    1.0 |  1.0 | 1.00000058 | 1.00000000 |\n|    295 |    1.0 |  1.0 | 1.00000048 | 1.00000000 |\n|    296 |    1.0 |  1.0 | 1.00000039 | 1.00000000 |\n|    297 |    1.0 |  1.0 | 1.00000032 | 1.00000000 |\n|    298 |    1.0 |  1.0 | 1.00000026 | 1.00000000 |\n|    299 |    1.0 |  1.0 | 1.00000021 | 1.00000000 |\n"]]}
+           {:out "",
+            :id :2bce69e0-36a8-4828-ade7-f046bc0cff88,
+            :code "(ds-stacked ds :index [:close :sma :ema :lowpass])",
+            :ns "quanta.notebook.study.ma-compare",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [1200 3]:\n\n|  :x |  :y |    :name |\n|----:|----:|----------|\n|   0 | 3.0 |   :close |\n|   1 | 3.0 |   :close |\n|   2 | 3.0 |   :close |\n|   3 | 3.0 |   :close |\n|   4 | 3.0 |   :close |\n|   5 | 3.0 |   :close |\n|   6 | 3.0 |   :close |\n|   7 | 3.0 |   :close |\n|   8 | 3.0 |   :close |\n|   9 | 3.0 |   :close |\n| ... | ... |      ... |\n| 289 | 1.0 | :lowpass |\n| 290 | 1.0 | :lowpass |\n| 291 | 1.0 | :lowpass |\n| 292 | 1.0 | :lowpass |\n| 293 | 1.0 | :lowpass |\n| 294 | 1.0 | :lowpass |\n| 295 | 1.0 | :lowpass |\n| 296 | 1.0 | :lowpass |\n| 297 | 1.0 | :lowpass |\n| 298 | 1.0 | :lowpass |\n| 299 | 1.0 | :lowpass |\n"]]}
+           {:out "",
+            :id :35deb34b-086a-410c-b29f-b32594281093,
+            :code "(def vega-spec \n  {:box :sm\n   :height \"200\" ;\"100%\"\n   :width \"700\"\n   :description \"moving average comparison\"\n   :mark \"line\"\n   :encoding  {:x {:field :x :type \"ordinal\"}\n               :y {:field :y :type \"quantitative\"}\n               :color {:field :name, :type \"nominal\"}\n               }})",
+            :ns "quanta.notebook.study.ma-compare",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.ma-compare/vega-spec"]}
+           {:out "",
+            :id :1b4f3d8a-7f97-4377-8ccd-ef45e1649c18,
+            :code "(vega-render-spec {:cols [:x :y :name]\n                   :spec vega-spec}\n                  (ds-stacked ds :index [:close :sma :ema :lowpass]))",
+            :ns "quanta.notebook.study.ma-compare",
+            :render-fn ta.viz.renderfn/render-spec,
+            :data ^{:render-fn ta.viz.renderfn/render-spec}
+                  {:render-fn ta.viz.renderfn.vega/vega-lite,
+                   :data {:values [^{}
+                                   {:x 0,
+                                    :y 3.0,
+                                    :name :close}
+^{}
+{:x 1, :y 3.0, :name :close}
+^{}
+{:x 2, :y 3.0, :name :close}
+^{}
+{:x 3, :y 3.0, :name :close}
+^{}
+{:x 4, :y 3.0, :name :close}
+^{}
+{:x 5, :y 3.0, :name :close}
+^{}
+{:x 6, :y 3.0, :name :close}
+^{}
+{:x 7, :y 3.0, :name :close}
+^{}
+{:x 8, :y 3.0, :name :close}
+^{}
+{:x 9, :y 3.0, :name :close}
+^{}
+{:x 10, :y 3.0, :name :close}
+^{}
+{:x 11, :y 3.0, :name :close}
+^{}
+{:x 12, :y 3.0, :name :close}
+^{}
+{:x 13, :y 3.0, :name :close}
+^{}
+{:x 14, :y 3.0, :name :close}
+^{}
+{:x 15, :y 3.0, :name :close}
+^{}
+{:x 16, :y 3.0, :name :close}
+^{}
+{:x 17, :y 3.0, :name :close}
+^{}
+{:x 18, :y 3.0, :name :close}
+^{}
+{:x 19, :y 3.0, :name :close}
+^{}
+{:x 20, :y 1.0, :name :close}
+^{}
+{:x 21, :y 1.0, :name :close}
+^{}
+{:x 22, :y 1.0, :name :close}
+^{}
+{:x 23, :y 1.0, :name :close}
+^{}
+{:x 24, :y 1.0, :name :close}
+^{}
+{:x 25, :y 1.0, :name :close}
+^{}
+{:x 26, :y 1.0, :name :close}
+^{}
+{:x 27, :y 1.0, :name :close}
+^{}
+{:x 28, :y 1.0, :name :close}
+^{}
+{:x 29, :y 1.0, :name :close}
+^{}
+{:x 30, :y 1.0, :name :close}
+^{}
+{:x 31, :y 1.0, :name :close}
+^{}
+{:x 32, :y 1.0, :name :close}
+^{}
+{:x 33, :y 1.0, :name :close}
+^{}
+{:x 34, :y 1.0, :name :close}
+^{}
+{:x 35, :y 1.0, :name :close}
+^{}
+{:x 36, :y 1.0, :name :close}
+^{}
+{:x 37, :y 1.0, :name :close}
+^{}
+{:x 38, :y 1.0, :name :close}
+^{}
+{:x 39, :y 1.0, :name :close}
+^{}
+{:x 40, :y 1.0, :name :close}
+^{}
+{:x 41, :y 1.0, :name :close}
+^{}
+{:x 42, :y 1.0, :name :close}
+^{}
+{:x 43, :y 1.0, :name :close}
+^{}
+{:x 44, :y 1.0, :name :close}
+^{}
+{:x 45, :y 1.0, :name :close}
+^{}
+{:x 46, :y 1.0, :name :close}
+^{}
+{:x 47, :y 1.0, :name :close}
+^{}
+{:x 48, :y 1.0, :name :close}
+^{}
+{:x 49, :y 1.0, :name :close}
+^{}
+{:x 50, :y 1.0, :name :close}
+^{}
+{:x 51, :y 1.0, :name :close}
+^{}
+{:x 52, :y 1.0, :name :close}
+^{}
+{:x 53, :y 1.0, :name :close}
+^{}
+{:x 54, :y 1.0, :name :close}
+^{}
+{:x 55, :y 1.0, :name :close}
+^{}
+{:x 56, :y 1.0, :name :close}
+^{}
+{:x 57, :y 1.0, :name :close}
+^{}
+{:x 58, :y 1.0, :name :close}
+^{}
+{:x 59, :y 1.0, :name :close}
+^{}
+{:x 60, :y 1.0, :name :close}
+^{}
+{:x 61, :y 1.0, :name :close}
+^{}
+{:x 62, :y 1.0, :name :close}
+^{}
+{:x 63, :y 1.0, :name :close}
+^{}
+{:x 64, :y 1.0, :name :close}
+^{}
+{:x 65, :y 1.0, :name :close}
+^{}
+{:x 66, :y 1.0, :name :close}
+^{}
+{:x 67, :y 1.0, :name :close}
+^{}
+{:x 68, :y 1.0, :name :close}
+^{}
+{:x 69, :y 1.0, :name :close}
+^{}
+{:x 70, :y 1.0, :name :close}
+^{}
+{:x 71, :y 1.0, :name :close}
+^{}
+{:x 72, :y 1.0, :name :close}
+^{}
+{:x 73, :y 1.0, :name :close}
+^{}
+{:x 74, :y 1.0, :name :close}
+^{}
+{:x 75, :y 1.0, :name :close}
+^{}
+{:x 76, :y 1.0, :name :close}
+^{}
+{:x 77, :y 1.0, :name :close}
+^{}
+{:x 78, :y 1.0, :name :close}
+^{}
+{:x 79, :y 1.0, :name :close}
+^{}
+{:x 80, :y 1.0, :name :close}
+^{}
+{:x 81, :y 1.0, :name :close}
+^{}
+{:x 82, :y 1.0, :name :close}
+^{}
+{:x 83, :y 1.0, :name :close}
+^{}
+{:x 84, :y 1.0, :name :close}
+^{}
+{:x 85, :y 1.0, :name :close}
+^{}
+{:x 86, :y 1.0, :name :close}
+^{}
+{:x 87, :y 1.0, :name :close}
+^{}
+{:x 88, :y 1.0, :name :close}
+^{}
+{:x 89, :y 1.0, :name :close}
+^{}
+{:x 90, :y 1.0, :name :close}
+^{}
+{:x 91, :y 1.0, :name :close}
+^{}
+{:x 92, :y 1.0, :name :close}
+^{}
+{:x 93, :y 1.0, :name :close}
+^{}
+{:x 94, :y 1.0, :name :close}
+^{}
+{:x 95, :y 1.0, :name :close}
+^{}
+{:x 96, :y 1.0, :name :close}
+^{}
+{:x 97, :y 1.0, :name :close}
+^{}
+{:x 98, :y 1.0, :name :close}
+^{}
+{:x 99, :y 1.0, :name :close}
+^{}
+{:x 100, :y 1.0, :name :close}
+^{}
+{:x 101, :y 1.0, :name :close}
+^{}
+{:x 102, :y 1.0, :name :close}
+^{}
+{:x 103, :y 1.0, :name :close}
+^{}
+{:x 104, :y 1.0, :name :close}
+^{}
+{:x 105, :y 1.0, :name :close}
+^{}
+{:x 106, :y 1.0, :name :close}
+^{}
+{:x 107, :y 1.0, :name :close}
+^{}
+{:x 108, :y 1.0, :name :close}
+^{}
+{:x 109, :y 1.0, :name :close}
+^{}
+{:x 110, :y 1.0, :name :close}
+^{}
+{:x 111, :y 1.0, :name :close}
+^{}
+{:x 112, :y 1.0, :name :close}
+^{}
+{:x 113, :y 1.0, :name :close}
+^{}
+{:x 114, :y 1.0, :name :close}
+^{}
+{:x 115, :y 1.0, :name :close}
+^{}
+{:x 116, :y 1.0, :name :close}
+^{}
+{:x 117, :y 1.0, :name :close}
+^{}
+{:x 118, :y 1.0, :name :close}
+^{}
+{:x 119, :y 1.0, :name :close}
+^{}
+{:x 120, :y 3.0, :name :close}
+^{}
+{:x 121, :y 3.0, :name :close}
+^{}
+{:x 122, :y 3.0, :name :close}
+^{}
+{:x 123, :y 3.0, :name :close}
+^{}
+{:x 124, :y 3.0, :name :close}
+^{}
+{:x 125, :y 3.0, :name :close}
+^{}
+{:x 126, :y 3.0, :name :close}
+^{}
+{:x 127, :y 3.0, :name :close}
+^{}
+{:x 128, :y 3.0, :name :close}
+^{}
+{:x 129, :y 3.0, :name :close}
+^{}
+{:x 130, :y 3.0, :name :close}
+^{}
+{:x 131, :y 3.0, :name :close}
+^{}
+{:x 132, :y 3.0, :name :close}
+^{}
+{:x 133, :y 3.0, :name :close}
+^{}
+{:x 134, :y 3.0, :name :close}
+^{}
+{:x 135, :y 3.0, :name :close}
+^{}
+{:x 136, :y 3.0, :name :close}
+^{}
+{:x 137, :y 3.0, :name :close}
+^{}
+{:x 138, :y 3.0, :name :close}
+^{}
+{:x 139, :y 3.0, :name :close}
+^{}
+{:x 140, :y 3.0, :name :close}
+^{}
+{:x 141, :y 3.0, :name :close}
+^{}
+{:x 142, :y 3.0, :name :close}
+^{}
+{:x 143, :y 3.0, :name :close}
+^{}
+{:x 144, :y 3.0, :name :close}
+^{}
+{:x 145, :y 3.0, :name :close}
+^{}
+{:x 146, :y 3.0, :name :close}
+^{}
+{:x 147, :y 3.0, :name :close}
+^{}
+{:x 148, :y 3.0, :name :close}
+^{}
+{:x 149, :y 3.0, :name :close}
+^{}
+{:x 150, :y 3.0, :name :close}
+^{}
+{:x 151, :y 3.0, :name :close}
+^{}
+{:x 152, :y 3.0, :name :close}
+^{}
+{:x 153, :y 3.0, :name :close}
+^{}
+{:x 154, :y 3.0, :name :close}
+^{}
+{:x 155, :y 3.0, :name :close}
+^{}
+{:x 156, :y 3.0, :name :close}
+^{}
+{:x 157, :y 3.0, :name :close}
+^{}
+{:x 158, :y 3.0, :name :close}
+^{}
+{:x 159, :y 3.0, :name :close}
+^{}
+{:x 160, :y 3.0, :name :close}
+^{}
+{:x 161, :y 3.0, :name :close}
+^{}
+{:x 162, :y 3.0, :name :close}
+^{}
+{:x 163, :y 3.0, :name :close}
+^{}
+{:x 164, :y 3.0, :name :close}
+^{}
+{:x 165, :y 3.0, :name :close}
+^{}
+{:x 166, :y 3.0, :name :close}
+^{}
+{:x 167, :y 3.0, :name :close}
+^{}
+{:x 168, :y 3.0, :name :close}
+^{}
+{:x 169, :y 3.0, :name :close}
+^{}
+{:x 170, :y 3.0, :name :close}
+^{}
+{:x 171, :y 3.0, :name :close}
+^{}
+{:x 172, :y 3.0, :name :close}
+^{}
+{:x 173, :y 3.0, :name :close}
+^{}
+{:x 174, :y 3.0, :name :close}
+^{}
+{:x 175, :y 3.0, :name :close}
+^{}
+{:x 176, :y 3.0, :name :close}
+^{}
+{:x 177, :y 3.0, :name :close}
+^{}
+{:x 178, :y 3.0, :name :close}
+^{}
+{:x 179, :y 3.0, :name :close}
+^{}
+{:x 180, :y 3.0, :name :close}
+^{}
+{:x 181, :y 3.0, :name :close}
+^{}
+{:x 182, :y 3.0, :name :close}
+^{}
+{:x 183, :y 3.0, :name :close}
+^{}
+{:x 184, :y 3.0, :name :close}
+^{}
+{:x 185, :y 3.0, :name :close}
+^{}
+{:x 186, :y 3.0, :name :close}
+^{}
+{:x 187, :y 3.0, :name :close}
+^{}
+{:x 188, :y 3.0, :name :close}
+^{}
+{:x 189, :y 3.0, :name :close}
+^{}
+{:x 190, :y 3.0, :name :close}
+^{}
+{:x 191, :y 3.0, :name :close}
+^{}
+{:x 192, :y 3.0, :name :close}
+^{}
+{:x 193, :y 3.0, :name :close}
+^{}
+{:x 194, :y 3.0, :name :close}
+^{}
+{:x 195, :y 3.0, :name :close}
+^{}
+{:x 196, :y 3.0, :name :close}
+^{}
+{:x 197, :y 3.0, :name :close}
+^{}
+{:x 198, :y 3.0, :name :close}
+^{}
+{:x 199, :y 3.0, :name :close}
+^{}
+{:x 200, :y 3.0, :name :close}
+^{}
+{:x 201, :y 3.0, :name :close}
+^{}
+{:x 202, :y 3.0, :name :close}
+^{}
+{:x 203, :y 3.0, :name :close}
+^{}
+{:x 204, :y 3.0, :name :close}
+^{}
+{:x 205, :y 3.0, :name :close}
+^{}
+{:x 206, :y 3.0, :name :close}
+^{}
+{:x 207, :y 3.0, :name :close}
+^{}
+{:x 208, :y 3.0, :name :close}
+^{}
+{:x 209, :y 3.0, :name :close}
+^{}
+{:x 210, :y 3.0, :name :close}
+^{}
+{:x 211, :y 3.0, :name :close}
+^{}
+{:x 212, :y 3.0, :name :close}
+^{}
+{:x 213, :y 3.0, :name :close}
+^{}
+{:x 214, :y 3.0, :name :close}
+^{}
+{:x 215, :y 3.0, :name :close}
+^{}
+{:x 216, :y 3.0, :name :close}
+^{}
+{:x 217, :y 3.0, :name :close}
+^{}
+{:x 218, :y 3.0, :name :close}
+^{}
+{:x 219, :y 3.0, :name :close}
+^{}
+{:x 220, :y 1.0, :name :close}
+^{}
+{:x 221, :y 1.0, :name :close}
+^{}
+{:x 222, :y 1.0, :name :close}
+^{}
+{:x 223, :y 1.0, :name :close}
+^{}
+{:x 224, :y 1.0, :name :close}
+^{}
+{:x 225, :y 1.0, :name :close}
+^{}
+{:x 226, :y 1.0, :name :close}
+^{}
+{:x 227, :y 1.0, :name :close}
+^{}
+{:x 228, :y 1.0, :name :close}
+^{}
+{:x 229, :y 1.0, :name :close}
+^{}
+{:x 230, :y 1.0, :name :close}
+^{}
+{:x 231, :y 1.0, :name :close}
+^{}
+{:x 232, :y 1.0, :name :close}
+^{}
+{:x 233, :y 1.0, :name :close}
+^{}
+{:x 234, :y 1.0, :name :close}
+^{}
+{:x 235, :y 1.0, :name :close}
+^{}
+{:x 236, :y 1.0, :name :close}
+^{}
+{:x 237, :y 1.0, :name :close}
+^{}
+{:x 238, :y 1.0, :name :close}
+^{}
+{:x 239, :y 1.0, :name :close}
+^{}
+{:x 240, :y 1.0, :name :close}
+^{}
+{:x 241, :y 1.0, :name :close}
+^{}
+{:x 242, :y 1.0, :name :close}
+^{}
+{:x 243, :y 1.0, :name :close}
+^{}
+{:x 244, :y 1.0, :name :close}
+^{}
+{:x 245, :y 1.0, :name :close}
+^{}
+{:x 246, :y 1.0, :name :close}
+^{}
+{:x 247, :y 1.0, :name :close}
+^{}
+{:x 248, :y 1.0, :name :close}
+^{}
+{:x 249, :y 1.0, :name :close}
+^{}
+{:x 250, :y 1.0, :name :close}
+^{}
+{:x 251, :y 1.0, :name :close}
+^{}
+{:x 252, :y 1.0, :name :close}
+^{}
+{:x 253, :y 1.0, :name :close}
+^{}
+{:x 254, :y 1.0, :name :close}
+^{}
+{:x 255, :y 1.0, :name :close}
+^{}
+{:x 256, :y 1.0, :name :close}
+^{}
+{:x 257, :y 1.0, :name :close}
+^{}
+{:x 258, :y 1.0, :name :close}
+^{}
+{:x 259, :y 1.0, :name :close}
+^{}
+{:x 260, :y 1.0, :name :close}
+^{}
+{:x 261, :y 1.0, :name :close}
+^{}
+{:x 262, :y 1.0, :name :close}
+^{}
+{:x 263, :y 1.0, :name :close}
+^{}
+{:x 264, :y 1.0, :name :close}
+^{}
+{:x 265, :y 1.0, :name :close}
+^{}
+{:x 266, :y 1.0, :name :close}
+^{}
+{:x 267, :y 1.0, :name :close}
+^{}
+{:x 268, :y 1.0, :name :close}
+^{}
+{:x 269, :y 1.0, :name :close}
+^{}
+{:x 270, :y 1.0, :name :close}
+^{}
+{:x 271, :y 1.0, :name :close}
+^{}
+{:x 272, :y 1.0, :name :close}
+^{}
+{:x 273, :y 1.0, :name :close}
+^{}
+{:x 274, :y 1.0, :name :close}
+^{}
+{:x 275, :y 1.0, :name :close}
+^{}
+{:x 276, :y 1.0, :name :close}
+^{}
+{:x 277, :y 1.0, :name :close}
+^{}
+{:x 278, :y 1.0, :name :close}
+^{}
+{:x 279, :y 1.0, :name :close}
+^{}
+{:x 280, :y 1.0, :name :close}
+^{}
+{:x 281, :y 1.0, :name :close}
+^{}
+{:x 282, :y 1.0, :name :close}
+^{}
+{:x 283, :y 1.0, :name :close}
+^{}
+{:x 284, :y 1.0, :name :close}
+^{}
+{:x 285, :y 1.0, :name :close}
+^{}
+{:x 286, :y 1.0, :name :close}
+^{}
+{:x 287, :y 1.0, :name :close}
+^{}
+{:x 288, :y 1.0, :name :close}
+^{}
+{:x 289, :y 1.0, :name :close}
+^{}
+{:x 290, :y 1.0, :name :close}
+^{}
+{:x 291, :y 1.0, :name :close}
+^{}
+{:x 292, :y 1.0, :name :close}
+^{}
+{:x 293, :y 1.0, :name :close}
+^{}
+{:x 294, :y 1.0, :name :close}
+^{}
+{:x 295, :y 1.0, :name :close}
+^{}
+{:x 296, :y 1.0, :name :close}
+^{}
+{:x 297, :y 1.0, :name :close}
+^{}
+{:x 298, :y 1.0, :name :close}
+^{}
+{:x 299, :y 1.0, :name :close}
+^{}
+{:x 0, :y 3.0, :name :sma}
+^{}
+{:x 1, :y 3.0, :name :sma}
+^{}
+{:x 2, :y 3.0, :name :sma}
+^{}
+{:x 3, :y 3.0, :name :sma}
+^{}
+{:x 4, :y 3.0, :name :sma}
+^{}
+{:x 5, :y 3.0, :name :sma}
+^{}
+{:x 6, :y 3.0, :name :sma}
+^{}
+{:x 7, :y 3.0, :name :sma}
+^{}
+{:x 8, :y 3.0, :name :sma}
+^{}
+{:x 9, :y 3.0, :name :sma}
+^{}
+{:x 10, :y 3.0, :name :sma}
+^{}
+{:x 11, :y 3.0, :name :sma}
+^{}
+{:x 12, :y 3.0, :name :sma}
+^{}
+{:x 13, :y 3.0, :name :sma}
+^{}
+{:x 14, :y 3.0, :name :sma}
+^{}
+{:x 15, :y 3.0, :name :sma}
+^{}
+{:x 16, :y 3.0, :name :sma}
+^{}
+{:x 17, :y 3.0, :name :sma}
+^{}
+{:x 18, :y 3.0, :name :sma}
+^{}
+{:x 19, :y 3.0, :name :sma}
+^{}
+{:x 20, :y 2.8, :name :sma}
+^{}
+{:x 21, :y 2.6, :name :sma}
+^{}
+{:x 22, :y 2.4, :name :sma}
+^{}
+{:x 23, :y 2.2, :name :sma}
+^{}
+{:x 24, :y 2.0, :name :sma}
+^{}
+{:x 25, :y 1.8, :name :sma}
+^{}
+{:x 26, :y 1.6, :name :sma}
+^{}
+{:x 27, :y 1.4, :name :sma}
+^{}
+{:x 28, :y 1.2, :name :sma}
+^{}
+{:x 29, :y 1.0, :name :sma}
+^{}
+{:x 30, :y 1.0, :name :sma}
+^{}
+{:x 31, :y 1.0, :name :sma}
+^{}
+{:x 32, :y 1.0, :name :sma}
+^{}
+{:x 33, :y 1.0, :name :sma}
+^{}
+{:x 34, :y 1.0, :name :sma}
+^{}
+{:x 35, :y 1.0, :name :sma}
+^{}
+{:x 36, :y 1.0, :name :sma}
+^{}
+{:x 37, :y 1.0, :name :sma}
+^{}
+{:x 38, :y 1.0, :name :sma}
+^{}
+{:x 39, :y 1.0, :name :sma}
+^{}
+{:x 40, :y 1.0, :name :sma}
+^{}
+{:x 41, :y 1.0, :name :sma}
+^{}
+{:x 42, :y 1.0, :name :sma}
+^{}
+{:x 43, :y 1.0, :name :sma}
+^{}
+{:x 44, :y 1.0, :name :sma}
+^{}
+{:x 45, :y 1.0, :name :sma}
+^{}
+{:x 46, :y 1.0, :name :sma}
+^{}
+{:x 47, :y 1.0, :name :sma}
+^{}
+{:x 48, :y 1.0, :name :sma}
+^{}
+{:x 49, :y 1.0, :name :sma}
+^{}
+{:x 50, :y 1.0, :name :sma}
+^{}
+{:x 51, :y 1.0, :name :sma}
+^{}
+{:x 52, :y 1.0, :name :sma}
+^{}
+{:x 53, :y 1.0, :name :sma}
+^{}
+{:x 54, :y 1.0, :name :sma}
+^{}
+{:x 55, :y 1.0, :name :sma}
+^{}
+{:x 56, :y 1.0, :name :sma}
+^{}
+{:x 57, :y 1.0, :name :sma}
+^{}
+{:x 58, :y 1.0, :name :sma}
+^{}
+{:x 59, :y 1.0, :name :sma}
+^{}
+{:x 60, :y 1.0, :name :sma}
+^{}
+{:x 61, :y 1.0, :name :sma}
+^{}
+{:x 62, :y 1.0, :name :sma}
+^{}
+{:x 63, :y 1.0, :name :sma}
+^{}
+{:x 64, :y 1.0, :name :sma}
+^{}
+{:x 65, :y 1.0, :name :sma}
+^{}
+{:x 66, :y 1.0, :name :sma}
+^{}
+{:x 67, :y 1.0, :name :sma}
+^{}
+{:x 68, :y 1.0, :name :sma}
+^{}
+{:x 69, :y 1.0, :name :sma}
+^{}
+{:x 70, :y 1.0, :name :sma}
+^{}
+{:x 71, :y 1.0, :name :sma}
+^{}
+{:x 72, :y 1.0, :name :sma}
+^{}
+{:x 73, :y 1.0, :name :sma}
+^{}
+{:x 74, :y 1.0, :name :sma}
+^{}
+{:x 75, :y 1.0, :name :sma}
+^{}
+{:x 76, :y 1.0, :name :sma}
+^{}
+{:x 77, :y 1.0, :name :sma}
+^{}
+{:x 78, :y 1.0, :name :sma}
+^{}
+{:x 79, :y 1.0, :name :sma}
+^{}
+{:x 80, :y 1.0, :name :sma}
+^{}
+{:x 81, :y 1.0, :name :sma}
+^{}
+{:x 82, :y 1.0, :name :sma}
+^{}
+{:x 83, :y 1.0, :name :sma}
+^{}
+{:x 84, :y 1.0, :name :sma}
+^{}
+{:x 85, :y 1.0, :name :sma}
+^{}
+{:x 86, :y 1.0, :name :sma}
+^{}
+{:x 87, :y 1.0, :name :sma}
+^{}
+{:x 88, :y 1.0, :name :sma}
+^{}
+{:x 89, :y 1.0, :name :sma}
+^{}
+{:x 90, :y 1.0, :name :sma}
+^{}
+{:x 91, :y 1.0, :name :sma}
+^{}
+{:x 92, :y 1.0, :name :sma}
+^{}
+{:x 93, :y 1.0, :name :sma}
+^{}
+{:x 94, :y 1.0, :name :sma}
+^{}
+{:x 95, :y 1.0, :name :sma}
+^{}
+{:x 96, :y 1.0, :name :sma}
+^{}
+{:x 97, :y 1.0, :name :sma}
+^{}
+{:x 98, :y 1.0, :name :sma}
+^{}
+{:x 99, :y 1.0, :name :sma}
+^{}
+{:x 100, :y 1.0, :name :sma}
+^{}
+{:x 101, :y 1.0, :name :sma}
+^{}
+{:x 102, :y 1.0, :name :sma}
+^{}
+{:x 103, :y 1.0, :name :sma}
+^{}
+{:x 104, :y 1.0, :name :sma}
+^{}
+{:x 105, :y 1.0, :name :sma}
+^{}
+{:x 106, :y 1.0, :name :sma}
+^{}
+{:x 107, :y 1.0, :name :sma}
+^{}
+{:x 108, :y 1.0, :name :sma}
+^{}
+{:x 109, :y 1.0, :name :sma}
+^{}
+{:x 110, :y 1.0, :name :sma}
+^{}
+{:x 111, :y 1.0, :name :sma}
+^{}
+{:x 112, :y 1.0, :name :sma}
+^{}
+{:x 113, :y 1.0, :name :sma}
+^{}
+{:x 114, :y 1.0, :name :sma}
+^{}
+{:x 115, :y 1.0, :name :sma}
+^{}
+{:x 116, :y 1.0, :name :sma}
+^{}
+{:x 117, :y 1.0, :name :sma}
+^{}
+{:x 118, :y 1.0, :name :sma}
+^{}
+{:x 119, :y 1.0, :name :sma}
+^{}
+{:x 120, :y 1.2, :name :sma}
+^{}
+{:x 121, :y 1.4, :name :sma}
+^{}
+{:x 122, :y 1.6, :name :sma}
+^{}
+{:x 123, :y 1.8, :name :sma}
+^{}
+{:x 124, :y 2.0, :name :sma}
+^{}
+{:x 125, :y 2.2, :name :sma}
+^{}
+{:x 126, :y 2.4, :name :sma}
+^{}
+{:x 127, :y 2.6, :name :sma}
+^{}
+{:x 128, :y 2.8, :name :sma}
+^{}
+{:x 129, :y 3.0, :name :sma}
+^{}
+{:x 130, :y 3.0, :name :sma}
+^{}
+{:x 131, :y 3.0, :name :sma}
+^{}
+{:x 132, :y 3.0, :name :sma}
+^{}
+{:x 133, :y 3.0, :name :sma}
+^{}
+{:x 134, :y 3.0, :name :sma}
+^{}
+{:x 135, :y 3.0, :name :sma}
+^{}
+{:x 136, :y 3.0, :name :sma}
+^{}
+{:x 137, :y 3.0, :name :sma}
+^{}
+{:x 138, :y 3.0, :name :sma}
+^{}
+{:x 139, :y 3.0, :name :sma}
+^{}
+{:x 140, :y 3.0, :name :sma}
+^{}
+{:x 141, :y 3.0, :name :sma}
+^{}
+{:x 142, :y 3.0, :name :sma}
+^{}
+{:x 143, :y 3.0, :name :sma}
+^{}
+{:x 144, :y 3.0, :name :sma}
+^{}
+{:x 145, :y 3.0, :name :sma}
+^{}
+{:x 146, :y 3.0, :name :sma}
+^{}
+{:x 147, :y 3.0, :name :sma}
+^{}
+{:x 148, :y 3.0, :name :sma}
+^{}
+{:x 149, :y 3.0, :name :sma}
+^{}
+{:x 150, :y 3.0, :name :sma}
+^{}
+{:x 151, :y 3.0, :name :sma}
+^{}
+{:x 152, :y 3.0, :name :sma}
+^{}
+{:x 153, :y 3.0, :name :sma}
+^{}
+{:x 154, :y 3.0, :name :sma}
+^{}
+{:x 155, :y 3.0, :name :sma}
+^{}
+{:x 156, :y 3.0, :name :sma}
+^{}
+{:x 157, :y 3.0, :name :sma}
+^{}
+{:x 158, :y 3.0, :name :sma}
+^{}
+{:x 159, :y 3.0, :name :sma}
+^{}
+{:x 160, :y 3.0, :name :sma}
+^{}
+{:x 161, :y 3.0, :name :sma}
+^{}
+{:x 162, :y 3.0, :name :sma}
+^{}
+{:x 163, :y 3.0, :name :sma}
+^{}
+{:x 164, :y 3.0, :name :sma}
+^{}
+{:x 165, :y 3.0, :name :sma}
+^{}
+{:x 166, :y 3.0, :name :sma}
+^{}
+{:x 167, :y 3.0, :name :sma}
+^{}
+{:x 168, :y 3.0, :name :sma}
+^{}
+{:x 169, :y 3.0, :name :sma}
+^{}
+{:x 170, :y 3.0, :name :sma}
+^{}
+{:x 171, :y 3.0, :name :sma}
+^{}
+{:x 172, :y 3.0, :name :sma}
+^{}
+{:x 173, :y 3.0, :name :sma}
+^{}
+{:x 174, :y 3.0, :name :sma}
+^{}
+{:x 175, :y 3.0, :name :sma}
+^{}
+{:x 176, :y 3.0, :name :sma}
+^{}
+{:x 177, :y 3.0, :name :sma}
+^{}
+{:x 178, :y 3.0, :name :sma}
+^{}
+{:x 179, :y 3.0, :name :sma}
+^{}
+{:x 180, :y 3.0, :name :sma}
+^{}
+{:x 181, :y 3.0, :name :sma}
+^{}
+{:x 182, :y 3.0, :name :sma}
+^{}
+{:x 183, :y 3.0, :name :sma}
+^{}
+{:x 184, :y 3.0, :name :sma}
+^{}
+{:x 185, :y 3.0, :name :sma}
+^{}
+{:x 186, :y 3.0, :name :sma}
+^{}
+{:x 187, :y 3.0, :name :sma}
+^{}
+{:x 188, :y 3.0, :name :sma}
+^{}
+{:x 189, :y 3.0, :name :sma}
+^{}
+{:x 190, :y 3.0, :name :sma}
+^{}
+{:x 191, :y 3.0, :name :sma}
+^{}
+{:x 192, :y 3.0, :name :sma}
+^{}
+{:x 193, :y 3.0, :name :sma}
+^{}
+{:x 194, :y 3.0, :name :sma}
+^{}
+{:x 195, :y 3.0, :name :sma}
+^{}
+{:x 196, :y 3.0, :name :sma}
+^{}
+{:x 197, :y 3.0, :name :sma}
+^{}
+{:x 198, :y 3.0, :name :sma}
+^{}
+{:x 199, :y 3.0, :name :sma}
+^{}
+{:x 200, :y 3.0, :name :sma}
+^{}
+{:x 201, :y 3.0, :name :sma}
+^{}
+{:x 202, :y 3.0, :name :sma}
+^{}
+{:x 203, :y 3.0, :name :sma}
+^{}
+{:x 204, :y 3.0, :name :sma}
+^{}
+{:x 205, :y 3.0, :name :sma}
+^{}
+{:x 206, :y 3.0, :name :sma}
+^{}
+{:x 207, :y 3.0, :name :sma}
+^{}
+{:x 208, :y 3.0, :name :sma}
+^{}
+{:x 209, :y 3.0, :name :sma}
+^{}
+{:x 210, :y 3.0, :name :sma}
+^{}
+{:x 211, :y 3.0, :name :sma}
+^{}
+{:x 212, :y 3.0, :name :sma}
+^{}
+{:x 213, :y 3.0, :name :sma}
+^{}
+{:x 214, :y 3.0, :name :sma}
+^{}
+{:x 215, :y 3.0, :name :sma}
+^{}
+{:x 216, :y 3.0, :name :sma}
+^{}
+{:x 217, :y 3.0, :name :sma}
+^{}
+{:x 218, :y 3.0, :name :sma}
+^{}
+{:x 219, :y 3.0, :name :sma}
+^{}
+{:x 220, :y 2.8, :name :sma}
+^{}
+{:x 221, :y 2.6, :name :sma}
+^{}
+{:x 222, :y 2.4, :name :sma}
+^{}
+{:x 223, :y 2.2, :name :sma}
+^{}
+{:x 224, :y 2.0, :name :sma}
+^{}
+{:x 225, :y 1.8, :name :sma}
+^{}
+{:x 226, :y 1.6, :name :sma}
+^{}
+{:x 227, :y 1.4, :name :sma}
+^{}
+{:x 228, :y 1.2, :name :sma}
+^{}
+{:x 229, :y 1.0, :name :sma}
+^{}
+{:x 230, :y 1.0, :name :sma}
+^{}
+{:x 231, :y 1.0, :name :sma}
+^{}
+{:x 232, :y 1.0, :name :sma}
+^{}
+{:x 233, :y 1.0, :name :sma}
+^{}
+{:x 234, :y 1.0, :name :sma}
+^{}
+{:x 235, :y 1.0, :name :sma}
+^{}
+{:x 236, :y 1.0, :name :sma}
+^{}
+{:x 237, :y 1.0, :name :sma}
+^{}
+{:x 238, :y 1.0, :name :sma}
+^{}
+{:x 239, :y 1.0, :name :sma}
+^{}
+{:x 240, :y 1.0, :name :sma}
+^{}
+{:x 241, :y 1.0, :name :sma}
+^{}
+{:x 242, :y 1.0, :name :sma}
+^{}
+{:x 243, :y 1.0, :name :sma}
+^{}
+{:x 244, :y 1.0, :name :sma}
+^{}
+{:x 245, :y 1.0, :name :sma}
+^{}
+{:x 246, :y 1.0, :name :sma}
+^{}
+{:x 247, :y 1.0, :name :sma}
+^{}
+{:x 248, :y 1.0, :name :sma}
+^{}
+{:x 249, :y 1.0, :name :sma}
+^{}
+{:x 250, :y 1.0, :name :sma}
+^{}
+{:x 251, :y 1.0, :name :sma}
+^{}
+{:x 252, :y 1.0, :name :sma}
+^{}
+{:x 253, :y 1.0, :name :sma}
+^{}
+{:x 254, :y 1.0, :name :sma}
+^{}
+{:x 255, :y 1.0, :name :sma}
+^{}
+{:x 256, :y 1.0, :name :sma}
+^{}
+{:x 257, :y 1.0, :name :sma}
+^{}
+{:x 258, :y 1.0, :name :sma}
+^{}
+{:x 259, :y 1.0, :name :sma}
+^{}
+{:x 260, :y 1.0, :name :sma}
+^{}
+{:x 261, :y 1.0, :name :sma}
+^{}
+{:x 262, :y 1.0, :name :sma}
+^{}
+{:x 263, :y 1.0, :name :sma}
+^{}
+{:x 264, :y 1.0, :name :sma}
+^{}
+{:x 265, :y 1.0, :name :sma}
+^{}
+{:x 266, :y 1.0, :name :sma}
+^{}
+{:x 267, :y 1.0, :name :sma}
+^{}
+{:x 268, :y 1.0, :name :sma}
+^{}
+{:x 269, :y 1.0, :name :sma}
+^{}
+{:x 270, :y 1.0, :name :sma}
+^{}
+{:x 271, :y 1.0, :name :sma}
+^{}
+{:x 272, :y 1.0, :name :sma}
+^{}
+{:x 273, :y 1.0, :name :sma}
+^{}
+{:x 274, :y 1.0, :name :sma}
+^{}
+{:x 275, :y 1.0, :name :sma}
+^{}
+{:x 276, :y 1.0, :name :sma}
+^{}
+{:x 277, :y 1.0, :name :sma}
+^{}
+{:x 278, :y 1.0, :name :sma}
+^{}
+{:x 279, :y 1.0, :name :sma}
+^{}
+{:x 280, :y 1.0, :name :sma}
+^{}
+{:x 281, :y 1.0, :name :sma}
+^{}
+{:x 282, :y 1.0, :name :sma}
+^{}
+{:x 283, :y 1.0, :name :sma}
+^{}
+{:x 284, :y 1.0, :name :sma}
+^{}
+{:x 285, :y 1.0, :name :sma}
+^{}
+{:x 286, :y 1.0, :name :sma}
+^{}
+{:x 287, :y 1.0, :name :sma}
+^{}
+{:x 288, :y 1.0, :name :sma}
+^{}
+{:x 289, :y 1.0, :name :sma}
+^{}
+{:x 290, :y 1.0, :name :sma}
+^{}
+{:x 291, :y 1.0, :name :sma}
+^{}
+{:x 292, :y 1.0, :name :sma}
+^{}
+{:x 293, :y 1.0, :name :sma}
+^{}
+{:x 294, :y 1.0, :name :sma}
+^{}
+{:x 295, :y 1.0, :name :sma}
+^{}
+{:x 296, :y 1.0, :name :sma}
+^{}
+{:x 297, :y 1.0, :name :sma}
+^{}
+{:x 298, :y 1.0, :name :sma}
+^{}
+{:x 299, :y 1.0, :name :sma}
+^{}
+{:x 0, :y 3.0, :name :ema}
+^{}
+{:x 1, :y 3.0, :name :ema}
+^{}
+{:x 2, :y 3.0, :name :ema}
+^{}
+{:x 3, :y 3.0, :name :ema}
+^{}
+{:x 4, :y 3.0, :name :ema}
+^{}
+{:x 5, :y 3.0, :name :ema}
+^{}
+{:x 6, :y 3.0, :name :ema}
+^{}
+{:x 7, :y 3.0, :name :ema}
+^{}
+{:x 8, :y 3.0, :name :ema}
+^{}
+{:x 9, :y 3.0, :name :ema}
+^{}
+{:x 10, :y 3.0, :name :ema}
+^{}
+{:x 11, :y 3.0, :name :ema}
+^{}
+{:x 12, :y 3.0, :name :ema}
+^{}
+{:x 13, :y 3.0, :name :ema}
+^{}
+{:x 14, :y 3.0, :name :ema}
+^{}
+{:x 15, :y 3.0, :name :ema}
+^{}
+{:x 16, :y 3.0, :name :ema}
+^{}
+{:x 17, :y 3.0, :name :ema}
+^{}
+{:x 18, :y 3.0, :name :ema}
+^{}
+{:x 19, :y 3.0, :name :ema}
+^{}
+{:x 20, :y 2.6363636363636362, :name :ema}
+^{}
+{:x 21, :y 2.3388429752066116, :name :ema}
+^{}
+{:x 22, :y 2.0954169797145004, :name :ema}
+^{}
+{:x 23, :y 1.8962502561300458, :name :ema}
+^{}
+{:x 24, :y 1.733295664106401, :name :ema}
+^{}
+{:x 25, :y 1.599969179723419, :name :ema}
+^{}
+{:x 26, :y 1.490883874319161, :name :ema}
+^{}
+{:x 27, :y 1.4016322608065863, :name :ema}
+^{}
+{:x 28, :y 1.328608213387207, :name :ema}
+^{}
+{:x 29, :y 1.268861265498624, :name :ema}
+^{}
+{:x 30, :y 1.2199773990443288, :name :ema}
+^{}
+{:x 31, :y 1.1799815083089962, :name :ema}
+^{}
+{:x 32, :y 1.1472575977073605, :name :ema}
+^{}
+{:x 33, :y 1.1204834890332949, :name :ema}
+^{}
+{:x 34, :y 1.0985774001181503, :name :ema}
+^{}
+{:x 35, :y 1.080654236460305, :name :ema}
+^{}
+{:x 36, :y 1.0659898298311585, :name :ema}
+^{}
+{:x 37, :y 1.0539916789527661, :name :ema}
+^{}
+{:x 38, :y 1.044175010052263, :name :ema}
+^{}
+{:x 39, :y 1.0361431900427607, :name :ema}
+^{}
+{:x 40, :y 1.029571700944077, :name :ema}
+^{}
+{:x 41, :y 1.024195028045154, :name :ema}
+^{}
+{:x 42, :y 1.019795932036944, :name :ema}
+^{}
+{:x 43, :y 1.0161966716665907, :name :ema}
+^{}
+{:x 44, :y 1.0132518222726652, :name :ema}
+^{}
+{:x 45, :y 1.0108424000412715, :name :ema}
+^{}
+{:x 46, :y 1.008871054579222, :name :ema}
+^{}
+{:x 47, :y 1.007258135564818, :name :ema}
+^{}
+{:x 48, :y 1.0059384745530329, :name :ema}
+^{}
+{:x 49, :y 1.004858751907027, :name :ema}
+^{}
+{:x 50, :y 1.0039753424693856, :name :ema}
+^{}
+{:x 51, :y 1.0032525529294973, :name :ema}
+^{}
+{:x 52, :y 1.0026611796695888, :name :ema}
+^{}
+{:x 53, :y 1.0021773288205726, :name :ema}
+^{}
+{:x 54, :y 1.0017814508531957, :name :ema}
+^{}
+{:x 55, :y 1.0014575506980692, :name :ema}
+^{}
+{:x 56, :y 1.0011925414802385, :name :ema}
+^{}
+{:x 57, :y 1.0009757157565589, :name :ema}
+^{}
+{:x 58, :y 1.00079831289173, :name :ema}
+^{}
+{:x 59, :y 1.0006531650932335, :name :ema}
+^{}
+{:x 60, :y 1.0005344078035547, :name :ema}
+^{}
+{:x 61, :y 1.000437242748363, :name :ema}
+^{}
+{:x 62, :y 1.0003577440668425, :name :ema}
+^{}
+{:x 63, :y 1.000292699691053, :name :ema}
+^{}
+{:x 64, :y 1.000239481565407, :name :ema}
+^{}
+{:x 65, :y 1.0001959394626057, :name :ema}
+^{}
+{:x 66, :y 1.0001603141057682, :name :ema}
+^{}
+{:x 67, :y 1.0001311660865377, :name :ema}
+^{}
+{:x 68, :y 1.0001073177071673, :name :ema}
+^{}
+{:x 69, :y 1.0000878053967732, :name :ema}
+^{}
+{:x 70, :y 1.000071840779178, :name :ema}
+^{}
+{:x 71, :y 1.0000587788193274, :name :ema}
+^{}
+{:x 72, :y 1.0000480917612677, :name :ema}
+^{}
+{:x 73, :y 1.0000393478046736, :name :ema}
+^{}
+{:x 74, :y 1.0000321936583694, :name :ema}
+^{}
+{:x 75, :y 1.0000263402659386, :name :ema}
+^{}
+{:x 76, :y 1.000021551126677, :name :ema}
+^{}
+{:x 77, :y 1.0000176327400085, :name :ema}
+^{}
+{:x 78, :y 1.0000144267872797, :name :ema}
+^{}
+{:x 79, :y 1.000011803735047, :name :ema}
+^{}
+{:x 80, :y 1.0000096576014021, :name :ema}
+^{}
+{:x 81, :y 1.0000079016738745, :name :ema}
+^{}
+{:x 82, :y 1.0000064650058973, :name :ema}
+^{}
+{:x 83, :y 1.0000052895502796, :name :ema}
+^{}
+{:x 84, :y 1.000004327813865, :name :ema}
+^{}
+{:x 85, :y 1.0000035409386168, :name :ema}
+^{}
+{:x 86, :y 1.0000028971315955, :name :ema}
+^{}
+{:x 87, :y 1.0000023703803964, :name :ema}
+^{}
+{:x 88, :y 1.0000019394021424, :name :ema}
+^{}
+{:x 89, :y 1.000001586783571, :name :ema}
+^{}
+{:x 90, :y 1.000001298277467, :name :ema}
+^{}
+{:x 91, :y 1.0000010622270186, :name :ema}
+^{}
+{:x 92, :y 1.0000008690948334, :name :ema}
+^{}
+{:x 93, :y 1.000000711077591, :name :ema}
+^{}
+{:x 94, :y 1.0000005817907562, :name :ema}
+^{}
+{:x 95, :y 1.0000004760106187, :name :ema}
+^{}
+{:x 96, :y 1.0000003894632334, :name :ema}
+^{}
+{:x 97, :y 1.0000003186517366, :name :ema}
+^{}
+{:x 98, :y 1.000000260715057, :name :ema}
+^{}
+{:x 99, :y 1.0000002133123194, :name :ema}
+^{}
+{:x 100, :y 1.0000001745282614, :name :ema}
+^{}
+{:x 101, :y 1.0000001427958503, :name :ema}
+^{}
+{:x 102, :y 1.0000001168329684, :name :ema}
+^{}
+{:x 103, :y 1.0000000955906105, :name :ema}
+^{}
+{:x 104, :y 1.0000000782104996, :name :ema}
+^{}
+{:x 105, :y 1.0000000639904087, :name :ema}
+^{}
+{:x 106, :y 1.000000052355789, :name :ema}
+^{}
+{:x 107, :y 1.0000000428365547, :name :ema}
+^{}
+{:x 108, :y 1.0000000350480902, :name :ema}
+^{}
+{:x 109, :y 1.0000000286757103, :name :ema}
+^{}
+{:x 110, :y 1.0000000234619448, :name :ema}
+^{}
+{:x 111, :y 1.0000000191961367, :name :ema}
+^{}
+{:x 112, :y 1.0000000157059301, :name :ema}
+^{}
+{:x 113, :y 1.0000000128503064, :name :ema}
+^{}
+{:x 114, :y 1.000000010513887, :name :ema}
+^{}
+{:x 115, :y 1.0000000086022713, :name :ema}
+^{}
+{:x 116, :y 1.000000007038222, :name :ema}
+^{}
+{:x 117, :y 1.0000000057585452, :name :ema}
+^{}
+{:x 118, :y 1.000000004711537, :name :ema}
+^{}
+{:x 119, :y 1.000000003854894, :name :ema}
+^{}
+{:x 120, :y 1.363636366790368, :name :ema}
+^{}
+{:x 121, :y 1.6611570273739373, :name :ema}
+^{}
+{:x 122, :y 1.9045830223968578, :name :ema}
+^{}
+{:x 123, :y 2.103749745597429, :name :ema}
+^{}
+{:x 124, :y 2.2667043373069875, :name :ema}
+^{}
+{:x 125, :y 2.4000308214329897, :name :ema}
+^{}
+{:x 126, :y 2.5091161266269917, :name :ema}
+^{}
+{:x 127, :y 2.5983677399675384, :name :ema}
+^{}
+{:x 128, :y 2.6713917872461677, :name :ema}
+^{}
+{:x 129, :y 2.731138735019592, :name :ema}
+^{}
+{:x 130, :y 2.7800226013796663, :name :ema}
+^{}
+{:x 131, :y 2.8200184920379088, :name :ema}
+^{}
+{:x 132, :y 2.852742402576471, :name :ema}
+^{}
+{:x 133, :y 2.879516511198931, :name :ema}
+^{}
+{:x 134, :y 2.9014226000718524, :name :ema}
+^{}
+{:x 135, :y 2.919345763695152, :name :ema}
+^{}
+{:x 136, :y 2.9340101702960335, :name :ema}
+^{}
+{:x 137, :y 2.9460083211513, :name :ema}
+^{}
+{:x 138, :y 2.955824990032882, :name :ema}
+^{}
+{:x 139, :y 2.9638568100269036, :name :ema}
+^{}
+{:x 140, :y 2.970428299112921, :name :ema}
+^{}
+{:x 141, :y 2.9758049720014808, :name :ema}
+^{}
+{:x 142, :y 2.9802040680012114, :name :ema}
+^{}
+{:x 143, :y 2.9838033283646275, :name :ema}
+^{}
+{:x 144, :y 2.986748177752877, :name :ema}
+^{}
+{:x 145, :y 2.9891575999796265, :name :ema}
+^{}
+{:x 146, :y 2.991128945437876, :name :ema}
+^{}
+{:x 147, :y 2.9927418644491715, :name :ema}
+^{}
+{:x 148, :y 2.994061525458413, :name :ema}
+^{}
+{:x 149, :y 2.995141248102338, :name :ema}
+^{}
+{:x 150, :y 2.9960246575382765, :name :ema}
+^{}
+{:x 151, :y 2.9967474470767717, :name :ema}
+^{}
+{:x 152, :y 2.9973388203355404, :name :ema}
+^{}
+{:x 153, :y 2.997822671183624, :name :ema}
+^{}
+{:x 154, :y 2.9982185491502378, :name :ema}
+^{}
+{:x 155, :y 2.99854244930474, :name :ema}
+^{}
+{:x 156, :y 2.99880745852206, :name :ema}
+^{}
+{:x 157, :y 2.999024284245322, :name :ema}
+^{}
+{:x 158, :y 2.999201687109809, :name :ema}
+^{}
+{:x 159, :y 2.9993468349080254, :name :ema}
+^{}
+{:x 160, :y 2.9994655921974753, :name :ema}
+^{}
+{:x 161, :y 2.99956275725248, :name :ema}
+^{}
+{:x 162, :y 2.999642255933847, :name :ema}
+^{}
+{:x 163, :y 2.9997073003095114, :name :ema}
+^{}
+{:x 164, :y 2.9997605184350546, :name :ema}
+^{}
+{:x 165, :y 2.999804060537772, :name :ema}
+^{}
+{:x 166, :y 2.9998396858945404, :name :ema}
+^{}
+{:x 167, :y 2.9998688339137147, :name :ema}
+^{}
+{:x 168, :y 2.9998926822930394, :name :ema}
+^{}
+{:x 169, :y 2.9999121946033958, :name :ema}
+^{}
+{:x 170, :y 2.99992815922096, :name :ema}
+^{}
+{:x 171, :y 2.9999412211807854, :name :ema}
+^{}
+{:x 172, :y 2.9999519082388244, :name :ema}
+^{}
+{:x 173, :y 2.999960652195402, :name :ema}
+^{}
+{:x 174, :y 2.9999678063416924, :name :ema}
+^{}
+{:x 175, :y 2.999973659734112, :name :ema}
+^{}
+{:x 176, :y 2.9999784488733643, :name :ema}
+^{}
+{:x 177, :y 2.999982367260025, :name :ema}
+^{}
+{:x 178, :y 2.999985573212748, :name :ema}
+^{}
+{:x 179, :y 2.9999881962649755, :name :ema}
+^{}
+{:x 180, :y 2.9999903423986165, :name :ema}
+^{}
+{:x 181, :y 2.9999920983261408, :name :ema}
+^{}
+{:x 182, :y 2.999993534994115, :name :ema}
+^{}
+{:x 183, :y 2.9999947104497307, :name :ema}
+^{}
+{:x 184, :y 2.9999956721861434, :name :ema}
+^{}
+{:x 185, :y 2.99999645906139, :name :ema}
+^{}
+{:x 186, :y 2.9999971028684103, :name :ema}
+^{}
+{:x 187, :y 2.9999976296196085, :name :ema}
+^{}
+{:x 188, :y 2.9999980605978616, :name :ema}
+^{}
+{:x 189, :y 2.9999984132164323, :name :ema}
+^{}
+{:x 190, :y 2.9999987017225354, :name :ema}
+^{}
+{:x 191, :y 2.9999989377729834, :name :ema}
+^{}
+{:x 192, :y 2.9999991309051683, :name :ema}
+^{}
+{:x 193, :y 2.9999992889224103, :name :ema}
+^{}
+{:x 194, :y 2.999999418209245, :name :ema}
+^{}
+{:x 195, :y 2.999999523989382, :name :ema}
+^{}
+{:x 196, :y 2.9999996105367672, :name :ema}
+^{}
+{:x 197, :y 2.999999681348264, :name :ema}
+^{}
+{:x 198, :y 2.9999997392849433, :name :ema}
+^{}
+{:x 199, :y 2.999999786687681, :name :ema}
+^{}
+{:x 200, :y 2.9999998254717393, :name :ema}
+^{}
+{:x 201, :y 2.99999985720415, :name :ema}
+^{}
+{:x 202, :y 2.999999883167032, :name :ema}
+^{}
+{:x 203, :y 2.9999999044093895, :name :ema}
+^{}
+{:x 204, :y 2.9999999217895006, :name :ema}
+^{}
+{:x 205, :y 2.9999999360095915, :name :ema}
+^{}
+{:x 206, :y 2.9999999476442114, :name :ema}
+^{}
+{:x 207, :y 2.9999999571634457, :name :ema}
+^{}
+{:x 208, :y 2.9999999649519102, :name :ema}
+^{}
+{:x 209, :y 2.99999997132429, :name :ema}
+^{}
+{:x 210, :y 2.9999999765380556, :name :ema}
+^{}
+{:x 211, :y 2.9999999808038638, :name :ema}
+^{}
+{:x 212, :y 2.9999999842940706, :name :ema}
+^{}
+{:x 213, :y 2.9999999871496943, :name :ema}
+^{}
+{:x 214, :y 2.9999999894861133, :name :ema}
+^{}
+{:x 215, :y 2.999999991397729, :name :ema}
+^{}
+{:x 216, :y 2.9999999929617784, :name :ema}
+^{}
+{:x 217, :y 2.9999999942414552, :name :ema}
+^{}
+{:x 218, :y 2.9999999952884635, :name :ema}
+^{}
+{:x 219, :y 2.9999999961451067, :name :ema}
+^{}
+{:x 220, :y 2.6363636332096325, :name :ema}
+^{}
+{:x 221, :y 2.338842972626063, :name :ema}
+^{}
+{:x 222, :y 2.095416977603142, :name :ema}
+^{}
+{:x 223, :y 1.8962502544025708, :name :ema}
+^{}
+{:x 224, :y 1.7332956626930125, :name :ema}
+^{}
+{:x 225, :y 1.5999691785670103, :name :ema}
+^{}
+{:x 226, :y 1.4908838733730083, :name :ema}
+^{}
+{:x 227, :y 1.4016322600324613, :name :ema}
+^{}
+{:x 228, :y 1.328608212753832, :name :ema}
+^{}
+{:x 229, :y 1.2688612649804079, :name :ema}
+^{}
+{:x 230, :y 1.2199773986203337, :name :ema}
+^{}
+{:x 231, :y 1.1799815079620912, :name :ema}
+^{}
+{:x 232, :y 1.1472575974235293, :name :ema}
+^{}
+{:x 233, :y 1.1204834888010695, :name :ema}
+^{}
+{:x 234, :y 1.0985773999281478, :name :ema}
+^{}
+{:x 235, :y 1.0806542363048481, :name :ema}
+^{}
+{:x 236, :y 1.0659898297039667, :name :ema}
+^{}
+{:x 237, :y 1.0539916788487, :name :ema}
+^{}
+{:x 238, :y 1.0441750099671183, :name :ema}
+^{}
+{:x 239, :y 1.0361431899730968, :name :ema}
+^{}
+{:x 240, :y 1.0295717008870793, :name :ema}
+^{}
+{:x 241, :y 1.0241950279985195, :name :ema}
+^{}
+{:x 242, :y 1.0197959319987886, :name :ema}
+^{}
+{:x 243, :y 1.0161966716353725, :name :ema}
+^{}
+{:x 244, :y 1.013251822247123, :name :ema}
+^{}
+{:x 245, :y 1.0108424000203733, :name :ema}
+^{}
+{:x 246, :y 1.0088710545621236, :name :ema}
+^{}
+{:x 247, :y 1.0072581355508283, :name :ema}
+^{}
+{:x 248, :y 1.005938474541587, :name :ema}
+^{}
+{:x 249, :y 1.004858751897662, :name :ema}
+^{}
+{:x 250, :y 1.0039753424617235, :name :ema}
+^{}
+{:x 251, :y 1.0032525529232283, :name :ema}
+^{}
+{:x 252, :y 1.0026611796644596, :name :ema}
+^{}
+{:x 253, :y 1.002177328816376, :name :ema}
+^{}
+{:x 254, :y 1.0017814508497622, :name :ema}
+^{}
+{:x 255, :y 1.00145755069526, :name :ema}
+^{}
+{:x 256, :y 1.0011925414779401, :name :ema}
+^{}
+{:x 257, :y 1.0009757157546784, :name :ema}
+^{}
+{:x 258, :y 1.0007983128901914, :name :ema}
+^{}
+{:x 259, :y 1.0006531650919748, :name :ema}
+^{}
+{:x 260, :y 1.000534407802525, :name :ema}
+^{}
+{:x 261, :y 1.0004372427475203, :name :ema}
+^{}
+{:x 262, :y 1.000357744066153, :name :ema}
+^{}
+{:x 263, :y 1.0002926996904888, :name :ema}
+^{}
+{:x 264, :y 1.0002394815649454, :name :ema}
+^{}
+{:x 265, :y 1.000195939462228, :name :ema}
+^{}
+{:x 266, :y 1.0001603141054591, :name :ema}
+^{}
+{:x 267, :y 1.0001311660862848, :name :ema}
+^{}
+{:x 268, :y 1.0001073177069604, :name :ema}
+^{}
+{:x 269, :y 1.000087805396604, :name :ema}
+^{}
+{:x 270, :y 1.0000718407790397, :name :ema}
+^{}
+{:x 271, :y 1.0000587788192143, :name :ema}
+^{}
+{:x 272, :y 1.0000480917611754, :name :ema}
+^{}
+{:x 273, :y 1.0000393478045981, :name :ema}
+^{}
+{:x 274, :y 1.0000321936583076, :name :ema}
+^{}
+{:x 275, :y 1.000026340265888, :name :ema}
+^{}
+{:x 276, :y 1.0000215511266357, :name :ema}
+^{}
+{:x 277, :y 1.0000176327399746, :name :ema}
+^{}
+{:x 278, :y 1.000014426787252, :name :ema}
+^{}
+{:x 279, :y 1.0000118037350243, :name :ema}
+^{}
+{:x 280, :y 1.0000096576013835, :name :ema}
+^{}
+{:x 281, :y 1.0000079016738592, :name :ema}
+^{}
+{:x 282, :y 1.0000064650058849, :name :ema}
+^{}
+{:x 283, :y 1.0000052895502693, :name :ema}
+^{}
+{:x 284, :y 1.0000043278138568, :name :ema}
+^{}
+{:x 285, :y 1.00000354093861, :name :ema}
+^{}
+{:x 286, :y 1.0000028971315902, :name :ema}
+^{}
+{:x 287, :y 1.000002370380392, :name :ema}
+^{}
+{:x 288, :y 1.0000019394021389, :name :ema}
+^{}
+{:x 289, :y 1.000001586783568, :name :ema}
+^{}
+{:x 290, :y 1.0000012982774649, :name :ema}
+^{}
+{:x 291, :y 1.0000010622270168, :name :ema}
+^{}
+{:x 292, :y 1.0000008690948319, :name :ema}
+^{}
+{:x 293, :y 1.0000007110775897, :name :ema}
+^{}
+{:x 294, :y 1.0000005817907551, :name :ema}
+^{}
+{:x 295, :y 1.0000004760106178, :name :ema}
+^{}
+{:x 296, :y 1.0000003894632328, :name :ema}
+^{}
+{:x 297, :y 1.0000003186517359, :name :ema}
+^{}
+{:x 298, :y 1.0000002607150567, :name :ema}
+^{}
+{:x 299, :y 1.0000002133123191, :name :ema}
+^{}
+{:x 0, :y 1.8330464110549718, :name :lowpass}
+^{}
+{:x 1, :y 2.5460731070827727, :name :lowpass}
+^{}
+{:x 2, :y 2.8234294610638586, :name :lowpass}
+^{}
+{:x 3, :y 2.9313167919621708, :name :lowpass}
+^{}
+{:x 4, :y 2.9732832946266656, :name :lowpass}
+^{}
+{:x 5, :y 2.9896076149266, :name :lowpass}
+^{}
+{:x 6, :y 2.995957522980299, :name :lowpass}
+^{}
+{:x 7, :y 2.9984275389778774, :name :lowpass}
+^{}
+{:x 8, :y 2.999388336988919, :name :lowpass}
+^{}
+{:x 9, :y 2.9997620725513316, :name :lowpass}
+^{}
+{:x 10, :y 2.999907449903289, :name :lowpass}
+^{}
+{:x 11, :y 2.9999639994441623, :name :lowpass}
+^{}
+{:x 12, :y 2.9999859963407203, :name :lowpass}
+^{}
+{:x 13, :y 2.999994552793182, :name :lowpass}
+^{}
+{:x 14, :y 2.9999978811208177, :name :lowpass}
+^{}
+{:x 15, :y 2.999999175788778, :name :lowpass}
+^{}
+{:x 16, :y 2.999999679394586, :name :lowpass}
+^{}
+{:x 17, :y 2.9999998752894537, :name :lowpass}
+^{}
+{:x 18, :y 2.999999951489527, :name :lowpass}
+^{}
+{:x 19, :y 2.9999999811301765, :name :lowpass}
+^{}
+{:x 20, :y 1.777969051956616, :name :lowpass}
+^{}
+{:x 21, :y 1.3026179257563113, :name :lowpass}
+^{}
+{:x 22, :y 1.117713691513476, :name :lowpass}
+^{}
+{:x 23, :y 1.0457888049265396, :name :lowpass}
+^{}
+{:x 24, :y 1.0178111367475098, :name :lowpass}
+^{}
+{:x 25, :y 1.0069282566502324, :name :lowpass}
+^{}
+{:x 26, :y 1.0026949846543736, :name :lowpass}
+^{}
+{:x 27, :y 1.001048307338191, :name :lowpass}
+^{}
+{:x 28, :y 1.0004077753368732, :name :lowpass}
+^{}
+{:x 29, :y 1.0001586182976157, :name :lowpass}
+^{}
+{:x 30, :y 1.0000617000638916, :name :lowpass}
+^{}
+{:x 31, :y 1.000024000370332, :name :lowpass}
+^{}
+{:x 32, :y 1.000009335772765, :name :lowpass}
+^{}
+{:x 33, :y 1.000003631471178, :name :lowpass}
+^{}
+{:x 34, :y 1.000001412586108, :name :lowpass}
+^{}
+{:x 35, :y 1.0000005494741429, :name :lowpass}
+^{}
+{:x 36, :y 1.000000213736941, :name :lowpass}
+^{}
+{:x 37, :y 1.0000000831403635, :name :lowpass}
+^{}
+{:x 38, :y 1.0000000323403153, :name :lowpass}
+^{}
+{:x 39, :y 1.0000000125798825, :name :lowpass}
+^{}
+{:x 40, :y 1.0000000048933797, :name :lowpass}
+^{}
+{:x 41, :y 1.000000001903449, :name :lowpass}
+^{}
+{:x 42, :y 1.0000000007404122, :name :lowpass}
+^{}
+{:x 43, :y 1.0000000002880087, :name :lowpass}
+^{}
+{:x 44, :y 1.0000000001120308, :name :lowpass}
+^{}
+{:x 45, :y 1.0000000000435783, :name :lowpass}
+^{}
+{:x 46, :y 1.0000000000169513, :name :lowpass}
+^{}
+{:x 47, :y 1.0000000000065938, :name :lowpass}
+^{}
+{:x 48, :y 1.000000000002565, :name :lowpass}
+^{}
+{:x 49, :y 1.0000000000009979, :name :lowpass}
+^{}
+{:x 50, :y 1.0000000000003881, :name :lowpass}
+^{}
+{:x 51, :y 1.000000000000151, :name :lowpass}
+^{}
+{:x 52, :y 1.0000000000000586, :name :lowpass}
+^{}
+{:x 53, :y 1.0000000000000226, :name :lowpass}
+^{}
+{:x 54, :y 1.0000000000000089, :name :lowpass}
+^{}
+{:x 55, :y 1.0000000000000036, :name :lowpass}
+^{}
+{:x 56, :y 1.0000000000000013, :name :lowpass}
+^{}
+{:x 57, :y 1.0000000000000004, :name :lowpass}
+^{}
+{:x 58, :y 1.0000000000000002, :name :lowpass}
+^{}
+{:x 59, :y 1.0, :name :lowpass}
+^{}
+{:x 60, :y 1.0, :name :lowpass}
+^{}
+{:x 61, :y 1.0, :name :lowpass}
+^{}
+{:x 62, :y 1.0, :name :lowpass}
+^{}
+{:x 63, :y 1.0, :name :lowpass}
+^{}
+{:x 64, :y 1.0, :name :lowpass}
+^{}
+{:x 65, :y 1.0, :name :lowpass}
+^{}
+{:x 66, :y 1.0, :name :lowpass}
+^{}
+{:x 67, :y 1.0, :name :lowpass}
+^{}
+{:x 68, :y 1.0, :name :lowpass}
+^{}
+{:x 69, :y 1.0, :name :lowpass}
+^{}
+{:x 70, :y 1.0, :name :lowpass}
+^{}
+{:x 71, :y 1.0, :name :lowpass}
+^{}
+{:x 72, :y 1.0, :name :lowpass}
+^{}
+{:x 73, :y 1.0, :name :lowpass}
+^{}
+{:x 74, :y 1.0, :name :lowpass}
+^{}
+{:x 75, :y 1.0, :name :lowpass}
+^{}
+{:x 76, :y 1.0, :name :lowpass}
+^{}
+{:x 77, :y 1.0, :name :lowpass}
+^{}
+{:x 78, :y 1.0, :name :lowpass}
+^{}
+{:x 79, :y 1.0, :name :lowpass}
+^{}
+{:x 80, :y 1.0, :name :lowpass}
+^{}
+{:x 81, :y 1.0, :name :lowpass}
+^{}
+{:x 82, :y 1.0, :name :lowpass}
+^{}
+{:x 83, :y 1.0, :name :lowpass}
+^{}
+{:x 84, :y 1.0, :name :lowpass}
+^{}
+{:x 85, :y 1.0, :name :lowpass}
+^{}
+{:x 86, :y 1.0, :name :lowpass}
+^{}
+{:x 87, :y 1.0, :name :lowpass}
+^{}
+{:x 88, :y 1.0, :name :lowpass}
+^{}
+{:x 89, :y 1.0, :name :lowpass}
+^{}
+{:x 90, :y 1.0, :name :lowpass}
+^{}
+{:x 91, :y 1.0, :name :lowpass}
+^{}
+{:x 92, :y 1.0, :name :lowpass}
+^{}
+{:x 93, :y 1.0, :name :lowpass}
+^{}
+{:x 94, :y 1.0, :name :lowpass}
+^{}
+{:x 95, :y 1.0, :name :lowpass}
+^{}
+{:x 96, :y 1.0, :name :lowpass}
+^{}
+{:x 97, :y 1.0, :name :lowpass}
+^{}
+{:x 98, :y 1.0, :name :lowpass}
+^{}
+{:x 99, :y 1.0, :name :lowpass}
+^{}
+{:x 100, :y 1.0, :name :lowpass}
+^{}
+{:x 101, :y 1.0, :name :lowpass}
+^{}
+{:x 102, :y 1.0, :name :lowpass}
+^{}
+{:x 103, :y 1.0, :name :lowpass}
+^{}
+{:x 104, :y 1.0, :name :lowpass}
+^{}
+{:x 105, :y 1.0, :name :lowpass}
+^{}
+{:x 106, :y 1.0, :name :lowpass}
+^{}
+{:x 107, :y 1.0, :name :lowpass}
+^{}
+{:x 108, :y 1.0, :name :lowpass}
+^{}
+{:x 109, :y 1.0, :name :lowpass}
+^{}
+{:x 110, :y 1.0, :name :lowpass}
+^{}
+{:x 111, :y 1.0, :name :lowpass}
+^{}
+{:x 112, :y 1.0, :name :lowpass}
+^{}
+{:x 113, :y 1.0, :name :lowpass}
+^{}
+{:x 114, :y 1.0, :name :lowpass}
+^{}
+{:x 115, :y 1.0, :name :lowpass}
+^{}
+{:x 116, :y 1.0, :name :lowpass}
+^{}
+{:x 117, :y 1.0, :name :lowpass}
+^{}
+{:x 118, :y 1.0, :name :lowpass}
+^{}
+{:x 119, :y 1.0, :name :lowpass}
+^{}
+{:x 120, :y 2.2220309407033145, :name :lowpass}
+^{}
+{:x 121, :y 2.697382071388515, :name :lowpass}
+^{}
+{:x 122, :y 2.8822863073759057, :name :lowpass}
+^{}
+{:x 123, :y 2.954211194641447, :name :lowpass}
+^{}
+{:x 124, :y 2.9821888630844438, :name :lowpass}
+^{}
+{:x 125, :y 2.9930717432844, :name :lowpass}
+^{}
+{:x 126, :y 2.997305015320199, :name :lowpass}
+^{}
+{:x 127, :y 2.998951692651918, :name :lowpass}
+^{}
+{:x 128, :y 2.9995922246592794, :name :lowpass}
+^{}
+{:x 129, :y 2.9998413817008878, :name :lowpass}
+^{}
+{:x 130, :y 2.9999382999355264, :name :lowpass}
+^{}
+{:x 131, :y 2.9999759996294415, :name :lowpass}
+^{}
+{:x 132, :y 2.999990664227147, :name :lowpass}
+^{}
+{:x 133, :y 2.999996368528788, :name :lowpass}
+^{}
+{:x 134, :y 2.9999985874138786, :name :lowpass}
+^{}
+{:x 135, :y 2.999999450525852, :name :lowpass}
+^{}
+{:x 136, :y 2.999999786263057, :name :lowpass}
+^{}
+{:x 137, :y 2.999999916859636, :name :lowpass}
+^{}
+{:x 138, :y 2.9999999676596847, :name :lowpass}
+^{}
+{:x 139, :y 2.999999987420118, :name :lowpass}
+^{}
+{:x 140, :y 2.9999999951066205, :name :lowpass}
+^{}
+{:x 141, :y 2.999999998096551, :name :lowpass}
+^{}
+{:x 142, :y 2.999999999259588, :name :lowpass}
+^{}
+{:x 143, :y 2.9999999997119913, :name :lowpass}
+^{}
+{:x 144, :y 2.999999999887969, :name :lowpass}
+^{}
+{:x 145, :y 2.9999999999564215, :name :lowpass}
+^{}
+{:x 146, :y 2.9999999999830487, :name :lowpass}
+^{}
+{:x 147, :y 2.999999999993406, :name :lowpass}
+^{}
+{:x 148, :y 2.999999999997435, :name :lowpass}
+^{}
+{:x 149, :y 2.999999999999002, :name :lowpass}
+^{}
+{:x 150, :y 2.999999999999612, :name :lowpass}
+^{}
+{:x 151, :y 2.999999999999849, :name :lowpass}
+^{}
+{:x 152, :y 2.9999999999999414, :name :lowpass}
+^{}
+{:x 153, :y 2.999999999999977, :name :lowpass}
+^{}
+{:x 154, :y 2.999999999999991, :name :lowpass}
+^{}
+{:x 155, :y 2.9999999999999964, :name :lowpass}
+^{}
+{:x 156, :y 2.9999999999999987, :name :lowpass}
+^{}
+{:x 157, :y 2.9999999999999996, :name :lowpass}
+^{}
+{:x 158, :y 3.0, :name :lowpass}
+^{}
+{:x 159, :y 3.0, :name :lowpass}
+^{}
+{:x 160, :y 3.0, :name :lowpass}
+^{}
+{:x 161, :y 3.0, :name :lowpass}
+^{}
+{:x 162, :y 3.0, :name :lowpass}
+^{}
+{:x 163, :y 3.0, :name :lowpass}
+^{}
+{:x 164, :y 3.0, :name :lowpass}
+^{}
+{:x 165, :y 3.0, :name :lowpass}
+^{}
+{:x 166, :y 3.0, :name :lowpass}
+^{}
+{:x 167, :y 3.0, :name :lowpass}
+^{}
+{:x 168, :y 3.0, :name :lowpass}
+^{}
+{:x 169, :y 3.0, :name :lowpass}
+^{}
+{:x 170, :y 3.0, :name :lowpass}
+^{}
+{:x 171, :y 3.0, :name :lowpass}
+^{}
+{:x 172, :y 3.0, :name :lowpass}
+^{}
+{:x 173, :y 3.0, :name :lowpass}
+^{}
+{:x 174, :y 3.0, :name :lowpass}
+^{}
+{:x 175, :y 3.0, :name :lowpass}
+^{}
+{:x 176, :y 3.0, :name :lowpass}
+^{}
+{:x 177, :y 3.0, :name :lowpass}
+^{}
+{:x 178, :y 3.0, :name :lowpass}
+^{}
+{:x 179, :y 3.0, :name :lowpass}
+^{}
+{:x 180, :y 3.0, :name :lowpass}
+^{}
+{:x 181, :y 3.0, :name :lowpass}
+^{}
+{:x 182, :y 3.0, :name :lowpass}
+^{}
+{:x 183, :y 3.0, :name :lowpass}
+^{}
+{:x 184, :y 3.0, :name :lowpass}
+^{}
+{:x 185, :y 3.0, :name :lowpass}
+^{}
+{:x 186, :y 3.0, :name :lowpass}
+^{}
+{:x 187, :y 3.0, :name :lowpass}
+^{}
+{:x 188, :y 3.0, :name :lowpass}
+^{}
+{:x 189, :y 3.0, :name :lowpass}
+^{}
+{:x 190, :y 3.0, :name :lowpass}
+^{}
+{:x 191, :y 3.0, :name :lowpass}
+^{}
+{:x 192, :y 3.0, :name :lowpass}
+^{}
+{:x 193, :y 3.0, :name :lowpass}
+^{}
+{:x 194, :y 3.0, :name :lowpass}
+^{}
+{:x 195, :y 3.0, :name :lowpass}
+^{}
+{:x 196, :y 3.0, :name :lowpass}
+^{}
+{:x 197, :y 3.0, :name :lowpass}
+^{}
+{:x 198, :y 3.0, :name :lowpass}
+^{}
+{:x 199, :y 3.0, :name :lowpass}
+^{}
+{:x 200, :y 3.0, :name :lowpass}
+^{}
+{:x 201, :y 3.0, :name :lowpass}
+^{}
+{:x 202, :y 3.0, :name :lowpass}
+^{}
+{:x 203, :y 3.0, :name :lowpass}
+^{}
+{:x 204, :y 3.0, :name :lowpass}
+^{}
+{:x 205, :y 3.0, :name :lowpass}
+^{}
+{:x 206, :y 3.0, :name :lowpass}
+^{}
+{:x 207, :y 3.0, :name :lowpass}
+^{}
+{:x 208, :y 3.0, :name :lowpass}
+^{}
+{:x 209, :y 3.0, :name :lowpass}
+^{}
+{:x 210, :y 3.0, :name :lowpass}
+^{}
+{:x 211, :y 3.0, :name :lowpass}
+^{}
+{:x 212, :y 3.0, :name :lowpass}
+^{}
+{:x 213, :y 3.0, :name :lowpass}
+^{}
+{:x 214, :y 3.0, :name :lowpass}
+^{}
+{:x 215, :y 3.0, :name :lowpass}
+^{}
+{:x 216, :y 3.0, :name :lowpass}
+^{}
+{:x 217, :y 3.0, :name :lowpass}
+^{}
+{:x 218, :y 3.0, :name :lowpass}
+^{}
+{:x 219, :y 3.0, :name :lowpass}
+^{}
+{:x 220, :y 1.7779690592966855, :name :lowpass}
+^{}
+{:x 221, :y 1.302617928611485, :name :lowpass}
+^{}
+{:x 222, :y 1.1177136926240943, :name :lowpass}
+^{}
+{:x 223, :y 1.045788805358553, :name :lowpass}
+^{}
+{:x 224, :y 1.0178111369155562, :name :lowpass}
+^{}
+{:x 225, :y 1.0069282567156, :name :lowpass}
+^{}
+{:x 226, :y 1.0026949846798006, :name :lowpass}
+^{}
+{:x 227, :y 1.0010483073480816, :name :lowpass}
+^{}
+{:x 228, :y 1.0004077753407206, :name :lowpass}
+^{}
+{:x 229, :y 1.0001586182991122, :name :lowpass}
+^{}
+{:x 230, :y 1.0000617000644738, :name :lowpass}
+^{}
+{:x 231, :y 1.0000240003705585, :name :lowpass}
+^{}
+{:x 232, :y 1.000009335772853, :name :lowpass}
+^{}
+{:x 233, :y 1.0000036314712122, :name :lowpass}
+^{}
+{:x 234, :y 1.0000014125861214, :name :lowpass}
+^{}
+{:x 235, :y 1.000000549474148, :name :lowpass}
+^{}
+{:x 236, :y 1.000000213736943, :name :lowpass}
+^{}
+{:x 237, :y 1.0000000831403644, :name :lowpass}
+^{}
+{:x 238, :y 1.0000000323403155, :name :lowpass}
+^{}
+{:x 239, :y 1.0000000125798825, :name :lowpass}
+^{}
+{:x 240, :y 1.0000000048933797, :name :lowpass}
+^{}
+{:x 241, :y 1.000000001903449, :name :lowpass}
+^{}
+{:x 242, :y 1.0000000007404122, :name :lowpass}
+^{}
+{:x 243, :y 1.0000000002880087, :name :lowpass}
+^{}
+{:x 244, :y 1.0000000001120308, :name :lowpass}
+^{}
+{:x 245, :y 1.0000000000435783, :name :lowpass}
+^{}
+{:x 246, :y 1.0000000000169513, :name :lowpass}
+^{}
+{:x 247, :y 1.0000000000065938, :name :lowpass}
+^{}
+{:x 248, :y 1.000000000002565, :name :lowpass}
+^{}
+{:x 249, :y 1.0000000000009979, :name :lowpass}
+^{}
+{:x 250, :y 1.0000000000003881, :name :lowpass}
+^{}
+{:x 251, :y 1.000000000000151, :name :lowpass}
+^{}
+{:x 252, :y 1.0000000000000586, :name :lowpass}
+^{}
+{:x 253, :y 1.0000000000000226, :name :lowpass}
+^{}
+{:x 254, :y 1.0000000000000089, :name :lowpass}
+^{}
+{:x 255, :y 1.0000000000000036, :name :lowpass}
+^{}
+{:x 256, :y 1.0000000000000013, :name :lowpass}
+^{}
+{:x 257, :y 1.0000000000000004, :name :lowpass}
+^{}
+{:x 258, :y 1.0000000000000002, :name :lowpass}
+^{}
+{:x 259, :y 1.0, :name :lowpass}
+^{}
+{:x 260, :y 1.0, :name :lowpass}
+^{}
+{:x 261, :y 1.0, :name :lowpass}
+^{}
+{:x 262, :y 1.0, :name :lowpass}
+^{}
+{:x 263, :y 1.0, :name :lowpass}
+^{}
+{:x 264, :y 1.0, :name :lowpass}
+^{}
+{:x 265, :y 1.0, :name :lowpass}
+^{}
+{:x 266, :y 1.0, :name :lowpass}
+^{}
+{:x 267, :y 1.0, :name :lowpass}
+^{}
+{:x 268, :y 1.0, :name :lowpass}
+^{}
+{:x 269, :y 1.0, :name :lowpass}
+^{}
+{:x 270, :y 1.0, :name :lowpass}
+^{}
+{:x 271, :y 1.0, :name :lowpass}
+^{}
+{:x 272, :y 1.0, :name :lowpass}
+^{}
+{:x 273, :y 1.0, :name :lowpass}
+^{}
+{:x 274, :y 1.0, :name :lowpass}
+^{}
+{:x 275, :y 1.0, :name :lowpass}
+^{}
+{:x 276, :y 1.0, :name :lowpass}
+^{}
+{:x 277, :y 1.0, :name :lowpass}
+^{}
+{:x 278, :y 1.0, :name :lowpass}
+^{}
+{:x 279, :y 1.0, :name :lowpass}
+^{}
+{:x 280, :y 1.0, :name :lowpass}
+^{}
+{:x 281, :y 1.0, :name :lowpass}
+^{}
+{:x 282, :y 1.0, :name :lowpass}
+^{}
+{:x 283, :y 1.0, :name :lowpass}
+^{}
+{:x 284, :y 1.0, :name :lowpass}
+^{}
+{:x 285, :y 1.0, :name :lowpass}
+^{}
+{:x 286, :y 1.0, :name :lowpass}
+^{}
+{:x 287, :y 1.0, :name :lowpass}
+^{}
+{:x 288, :y 1.0, :name :lowpass}
+^{}
+{:x 289, :y 1.0, :name :lowpass}
+^{}
+{:x 290, :y 1.0, :name :lowpass}
+^{}
+{:x 291, :y 1.0, :name :lowpass}
+^{}
+{:x 292, :y 1.0, :name :lowpass}
+^{}
+{:x 293, :y 1.0, :name :lowpass}
+^{}
+{:x 294, :y 1.0, :name :lowpass}
+^{}
+{:x 295, :y 1.0, :name :lowpass}
+^{}
+{:x 296, :y 1.0, :name :lowpass}
+^{}
+{:x 297, :y 1.0, :name :lowpass}
+^{}
+{:x 298, :y 1.0, :name :lowpass}
+^{}
+{:x 299, :y 1.0, :name :lowpass}]},
+                   :spec {:box :sm,
+                          :height "200",
+                          :width "700",
+                          :description "moving average comparison",
+                          :mark "line",
+                          :encoding {:x {:field :x,
+                                         :type "ordinal"},
+                                     :y {:field :y,
+                                         :type "quantitative"},
+                                     :color {:field :name,
+                                             :type "nominal"}}}}}],
+ :meta {:id :63410b81-3e9c-4129-a46b-1e342e4bd397,
+        :eval-time "2024-05-03 12:52:12",
+        :ns "quanta.notebook.study.ma-compare",
+        :java "19.0.2",
+        :clojure "1.11.1"}}

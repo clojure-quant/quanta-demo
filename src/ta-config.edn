@@ -28,9 +28,9 @@
                       :url-root "/api/rdocument/file/"}
          :collections {:study [:clj "quanta/notebook/study/"]
                        :quanta-docs [:clj "quanta/notebook/docs/"]
-                       :quanta-ui [:cljs "quanta/notebook/viz/"]
-                       :ui [:cljs "demo/goldly/ui_test/"]
-                       :dev [:clj "quanta/notebook/dev/"] 
+                       ;:quanta-ui [:cljs "quanta/notebook/viz/"]
+                       ;:ui [:cljs "demo/goldly/ui_test/"]
+                       ;:dev [:clj "quanta/notebook/dev/"] 
                        ;:demo [:clj "demo/notebook/"]
                        ;:demo-cljs [:cljs "demo/notebook/"]
                        ;; many notebookx are in quanta/notebook 
@@ -38,19 +38,6 @@
                        ;; reason for this is because some notebooks are resetting the db,
                        ;; and some of the notebooks take a long time to eval.
                        }}
-
- #_:ta #_{:warehouse {:series  {:default "output/db/default/"
-                            :crypto "output/db/crypto/"
-                            :stocks "output/db/stocks/"
-                            :fx "output/db/fx/"
-                            :futures "output/db/futures/"
-                            :random "output/db/random/"
-                            :shuffled  "output/db/shuffled/"
-                            :seasonal "output/db/seasonal/"
-                            :juan "output/db/juan/"
-                            }}
-      }
-
 
  :demo {:gann-data-file "resources/gann.edn"}
 

@@ -1,0 +1,4 @@
+(function(){
+'use strict';var wnb;$APP.Bka=function(a){a=$APP.ng(a);$APP.E.F(a,$APP.rT);$APP.E.F(a,$APP.qT);$APP.E.F(a,$APP.DI);var b=$APP.gJ.G(new $APP.I(null,1,5,$APP.J,[$APP.lOa],null));return function(){return new $APP.I(null,3,5,$APP.J,[$APP.dJ,new $APP.I(null,2,5,$APP.J,[$APP.x8a,"config"],null),new $APP.I(null,2,5,$APP.J,[$APP.Lka,$APP.r(b)],null)],null)}};
+$APP.wka=function(a){a=$APP.ng(a);$APP.E.F(a,$APP.rT);$APP.E.F(a,$APP.qT);$APP.E.F(a,$APP.DI);return new $APP.I(null,2,5,$APP.J,[wnb,new $APP.h(null,4,[$APP.BT,"/r/bundlesizereport.html",$APP.wW,"bundle size",$APP.BS,"100%",$APP.kJ,"100%"],null)],null)};wnb=new $APP.G(null,"iframe","iframe",884422026);$APP.jr("webly-devtools");$APP.or();
+}).call(this);

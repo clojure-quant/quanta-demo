@@ -3,17 +3,14 @@
 .cpcache
 .webly
 .clj-kondo
-/target
 /.nrepl-port
 .nrepl-port
 node_modules
 .shadow-cljs
-target
 karma.conf.js
 package-lock.json
 package.json
 shadow-cljs.edn
-goldly_bindings_generated.cljs
 app/demo/certs
 /output/
 output
@@ -24,3 +21,5 @@ output
 .~*
 binaries
 classes
+/target/webly
+target/webly

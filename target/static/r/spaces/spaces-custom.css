@@ -1,0 +1,28 @@
+
+
+ 
+.spaces-fullpage-layout {
+    position: absolute !important;
+}
+
+.spaces-fixedsize-layout {
+    position: relative !important;
+}
+
+
+
+.spaces-resize-handle {
+    /*background-color: red !important;*/
+    opacity: 0.3;
+    /*border: 3px dotted black;*/
+    /*background-image: radial-gradient(#ff8a00, #e52e71);*/
+    background-image: radial-gradient(#212121 20%, #3d4144 20%);
+    background-position: 0 0;
+}
+
+
+.spaces-resize-handle:hover {
+    background-color: blue !important;
+    opacity: 0.7;
+    background-image: radial-gradient(#103ae3, #0e136b);
+}

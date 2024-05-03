@@ -1,0 +1,268 @@
+; saved on 2024-05-03 12:52:23
+{:content [{:out "",
+            :id :e5e09d49-f022-4b9b-8fed-74441dd92275,
+            :code "(ns quanta.notebook.docs.trade-stats\n  (:require\n   [tablecloth.api :as tc]\n   [ta.trade.roundtrip.metrics :as m]))",
+            :ns "quanta.notebook.docs.trade-stats",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.p-2.clj-nil [:p "nil"]]}
+           {:out "",
+            :id :de8af00c-fe62-43d2-a5b2-422f20965af6,
+            :code "(def ds\n  (tc/dataset\n   {:side [:long :short :long :short]\n    :ret-log [-0.30103000  0.17609126  -0.12493874 0.09691001]\n    :win? [true false true false]\n    :bars [1 1 1 1]}))",
+            :ns "quanta.notebook.docs.trade-stats",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.docs.trade-stats/ds"]}
+           {:out "",
+            :id :b90a93b6-2b40-403e-8d51-d007292f1f6e,
+            :code "(m/calc-roundtrip-stats ds [:win?])",
+            :ns "quanta.notebook.docs.trade-stats",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [2 6]:\n\n| :win? | :bars | :trades | :pl-log-cum | :pl-log-mean | :pl-log-max-dd |\n|-------|------:|--------:|------------:|-------------:|---------------:|\n|  true |   2.0 |       2 | -0.42596874 |  -0.21298437 |     0.42596874 |\n| false |   2.0 |       2 |  0.27300127 |   0.13650064 |     0.00000000 |\n"]]}
+           {:out "",
+            :id :339ad833-7eec-4b68-bc2c-04214f094482,
+            :code "(m/win-loss-stats ds)",
+            :ns "quanta.notebook.docs.trade-stats",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [2 6]:\n\n| :win? | :bars | :trades | :pl-log-cum | :pl-log-mean | :pl-log-max-dd |\n|-------|------:|--------:|------------:|-------------:|---------------:|\n|  true |   2.0 |       2 | -0.42596874 |  -0.21298437 |     0.42596874 |\n| false |   2.0 |       2 |  0.27300127 |   0.13650064 |     0.00000000 |\n"]]}
+           {:out "",
+            :id :6efaf2d9-9138-4423-a06d-41c8af0d6861,
+            :code "(m/side-stats ds)",
+            :ns "quanta.notebook.docs.trade-stats",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [2 6]:\n\n|  :side | :bars | :trades | :pl-log-cum | :pl-log-mean | :pl-log-max-dd |\n|--------|------:|--------:|------------:|-------------:|---------------:|\n|  :long |   2.0 |       2 | -0.42596874 |  -0.21298437 |     0.42596874 |\n| :short |   2.0 |       2 |  0.27300127 |   0.13650064 |     0.00000000 |\n"]]}
+           {:out "",
+            :id :e4596f50-3395-4f9d-a63c-b2d2b6112684,
+            :code "(def side-s (m/side-stats ds))",
+            :ns "quanta.notebook.docs.trade-stats",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.docs.trade-stats/side-s"]}
+           {:out "",
+            :id :c937a73e-2f4b-433e-b249-b63c3f6df36e,
+            :code "side-s",
+            :ns "quanta.notebook.docs.trade-stats",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [2 6]:\n\n|  :side | :bars | :trades | :pl-log-cum | :pl-log-mean | :pl-log-max-dd |\n|--------|------:|--------:|------------:|-------------:|---------------:|\n|  :long |   2.0 |       2 | -0.42596874 |  -0.21298437 |     0.42596874 |\n| :short |   2.0 |       2 |  0.27300127 |   0.13650064 |     0.00000000 |\n"]]}
+           {:out "",
+            :id :1e0c397f-a910-486a-abcc-9797ee26c29a,
+            :code "(m/get-group-of side-s :side :long)",
+            :ns "quanta.notebook.docs.trade-stats",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:class "clj-map"}
+                   [:span.font-bold.teal-700.mr-1 "{"]
+                   [:span.items
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":side"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":long"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":bars"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "darkgreen"}}
+                     "2.0"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":trades"]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "2"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":pl-log-cum"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "darkgreen"}}
+                     "-0.42596874"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":pl-log-mean"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "darkgreen"}}
+                     "-0.21298437"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":pl-log-max-dd"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "darkgreen"}}
+                     "0.42596874"]]
+                   [:span.font-bold.teal-700.ml-1 "}"]]}
+           {:out "",
+            :id :28e2eb53-0768-432d-a721-8448e7b2b4c8,
+            :code "(m/get-group-of side-s :side :short)",
+            :ns "quanta.notebook.docs.trade-stats",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:class "clj-map"}
+                   [:span.font-bold.teal-700.mr-1 "{"]
+                   [:span.items
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":side"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":short"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":bars"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "darkgreen"}}
+                     "2.0"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":trades"]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "2"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":pl-log-cum"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "darkgreen"}}
+                     "0.27300127"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":pl-log-mean"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "darkgreen"}}
+                     "0.136500635"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":pl-log-max-dd"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "darkgreen"}}
+                     "0.0"]]
+                   [:span.font-bold.teal-700.ml-1 "}"]]}
+           {:out "",
+            :id :f2f7e6d2-0f7a-4374-ae19-32ebd7a93120,
+            :code "(m/get-group-of side-s :side :parrot)",
+            :ns "quanta.notebook.docs.trade-stats",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.p-2.clj-nil [:p "nil"]]}
+           {:out "",
+            :id :145bb4c7-e757-4b10-844f-ba7df87137aa,
+            :code "(m/calc-roundtrip-metrics ds)",
+            :ns "quanta.notebook.docs.trade-stats",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:class "clj-map"}
+                   [:span.font-bold.teal-700.mr-1 "{"]
+                   [:span.items
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":avg-win-log"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "darkgreen"}}
+                     "-0.21298437"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":avg-bars-win"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "darkgreen"}}
+                     "1.0"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":win-nr-prct"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "darkgreen"}}
+                     "50.0"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":pf"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "darkgreen"}}
+                     "1.5603177963238046"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":avg-log"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "darkgreen"}}
+                     "-0.0382418675"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":pl-log-cum"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "darkgreen"}}
+                     "-0.15296747"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":avg-loss-log"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "darkgreen"}}
+                     "0.136500635"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":trades"]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "4"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":avg-bars-loss"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "darkgreen"}}
+                     "1.0"]]
+                   [:span.font-bold.teal-700.ml-1 "}"]]}],
+ :meta {:id :ec41a000-fc21-469a-99e6-3a0006089dbb,
+        :eval-time "2024-05-03 12:52:23",
+        :ns "quanta.notebook.docs.trade-stats",
+        :java "19.0.2",
+        :clojure "1.11.1"}}

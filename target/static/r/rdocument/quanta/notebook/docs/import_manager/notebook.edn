@@ -1,0 +1,977 @@
+; saved on 2024-05-03 12:52:22
+{:content [{:out "",
+            :id :122dda3a-c203-4307-b5d6-bedf6d5103d4,
+            :code "(ns quanta.notebook.docs.import-manager\n  (:require\n   [tick.core :as t]\n   [ta.db.bars.protocol :as b]\n   [modular.system]))",
+            :ns "quanta.notebook.docs.import-manager",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.p-2.clj-nil [:p "nil"]]}
+           {:out "",
+            :id :ece93f78-12f7-43ed-b336-b68d10722a18,
+            :code "(def im (modular.system/system :import-manager))",
+            :ns "quanta.notebook.docs.import-manager",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.docs.import-manager/im"]}
+           {:out "",
+            :id :3f8de20c-b7c0-453e-a4ba-6179535847ce,
+            :code "im",
+            :ns "quanta.notebook.docs.import-manager",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:class "clj-record"}
+                   [:span.font-bold.teal-700.mr-1 "{"]
+                   [:span.items
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":feeds"]
+                    [:span " "]
+                    [:span
+                     {:class "clj-map"}
+                     [:span.font-bold.teal-700.mr-1 "{"]
+                     [:span.items
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":kibot"]
+                      [:span " "]
+                      [:span
+                       {:class "clj-record"}
+                       [:span.font-bold.teal-700.mr-1 "{"]
+                       [:span.items
+                        [:span
+                         {:style {:color "rgb(30, 30, 82)"}}
+                         ":api-key"]
+                        [:span " "]
+                        [:span
+                         {:class "clj-map"}
+                         [:span.font-bold.teal-700.mr-1 "{"]
+                         [:span.items
+                          [:span
+                           {:style {:color "rgb(30, 30, 82)"}}
+                           ":user"]
+                          [:span " "]
+                          [:span
+                           {:style {:color "grey"}}
+                           "\"hoertlehner@gmail.com\""]
+                          [:span " "]
+                          [:span
+                           {:style {:color "rgb(30, 30, 82)"}}
+                           ":password"]
+                          [:span " "]
+                          [:span
+                           {:style {:color "grey"}}
+                           "\"282m2fhgh\""]]
+                         [:span.font-bold.teal-700.ml-1 "}"]]]
+                       [:span.font-bold.teal-700.ml-1 "}"]]
+                      [:span " "]
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":kibot-http"]
+                      [:span " "]
+                      [:span
+                       {:class "clj-record"}
+                       [:span.font-bold.teal-700.mr-1 "{"]
+                       [:span.items
+                        [:span
+                         {:style {:color "rgb(30, 30, 82)"}}
+                         ":api-key"]
+                        [:span " "]
+                        [:span
+                         {:class "clj-map"}
+                         [:span.font-bold.teal-700.mr-1 "{"]
+                         [:span.items
+                          [:span
+                           {:style {:color "rgb(30, 30, 82)"}}
+                           ":user"]
+                          [:span " "]
+                          [:span
+                           {:style {:color "grey"}}
+                           "\"hoertlehner@gmail.com\""]
+                          [:span " "]
+                          [:span
+                           {:style {:color "rgb(30, 30, 82)"}}
+                           ":password"]
+                          [:span " "]
+                          [:span
+                           {:style {:color "grey"}}
+                           "\"282m2fhgh\""]]
+                         [:span.font-bold.teal-700.ml-1 "}"]]]
+                       [:span.font-bold.teal-700.ml-1 "}"]]
+                      [:span " "]
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":eodhd"]
+                      [:span " "]
+                      [:span
+                       {:class "clj-record"}
+                       [:span.font-bold.teal-700.mr-1 "{"]
+                       [:span.items
+                        [:span
+                         {:style {:color "rgb(30, 30, 82)"}}
+                         ":api-token"]
+                        [:span " "]
+                        [:span
+                         {:style {:color "grey"}}
+                         "\"65f0ad82c56400.56029279\""]]
+                       [:span.font-bold.teal-700.ml-1 "}"]]
+                      [:span " "]
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":alphavantage"]
+                      [:span " "]
+                      [:span
+                       {:class "clj-record"}
+                       [:span.font-bold.teal-700.mr-1 "{"]
+                       [:span.items
+                        [:span
+                         {:style {:color "rgb(30, 30, 82)"}}
+                         ":api-key"]
+                        [:span " "]
+                        [:span
+                         {:style {:color "grey"}}
+                         "\"LDRAIZZIOQGVU465\""]]
+                       [:span.font-bold.teal-700.ml-1 "}"]]
+                      [:span " "]
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":bybit"]
+                      [:span " "]
+                      [:span
+                       {:class "clj-record"}
+                       [:span.font-bold.teal-700.mr-1 "{"]
+                       [:span.items]
+                       [:span.font-bold.teal-700.ml-1 "}"]]]
+                     [:span.font-bold.teal-700.ml-1 "}"]]]
+                   [:span.font-bold.teal-700.ml-1 "}"]]}
+           {:out "",
+            :id :2ff6fb3f-f119-4b14-9b20-523a5b50ac0c,
+            :code "(def dt (t/instant \"2024-05-01T00:00:00Z\"))",
+            :ns "quanta.notebook.docs.import-manager",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.docs.import-manager/dt"]}
+           {:out "",
+            :id :b8e7c9f2-7ea6-4b2c-ac4b-6eef54ef5a9b,
+            :code "dt",
+            :ns "quanta.notebook.docs.import-manager",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class java.time.Instant"]
+                   [:span
+                    "#time/instant \"2024-05-01T00:00:00Z\""]]}
+           {:out "",
+            :id :27951fe0-d20f-4e62-8595-96a0fc3efca2,
+            :code "(b/get-bars im {:asset \"ETHUSDT\" ; crypto\n                :calendar [:crypto :d]\n                :import :bybit}\n            {:start  (t/instant \"2020-01-01T00:00:00Z\")\n             :end (t/instant \"2024-01-01T00:00:00Z\")})",
+            :ns "quanta.notebook.docs.import-manager",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [911 9]:\n\n|                :date |   :open |   :high |    :low |  :close |      :volume |  :asset | :epoch | :ticks |\n|----------------------|--------:|--------:|--------:|--------:|-------------:|---------|-------:|-------:|\n| 2021-07-04T23:59:59Z | 2326.15 | 2593.09 | 2162.34 | 2196.64 |     42.09480 | ETHUSDT |      0 |      0 |\n| 2021-07-05T23:59:59Z | 2196.64 | 2347.88 | 2195.15 | 2322.98 |     49.78600 | ETHUSDT |      0 |      0 |\n| 2021-07-06T23:59:59Z | 2322.98 | 2405.75 | 2294.78 | 2315.49 |     66.48960 | ETHUSDT |      0 |      0 |\n| 2021-07-07T23:59:59Z | 2315.49 | 2322.58 | 2087.82 | 2117.13 |    179.17460 | ETHUSDT |      0 |      0 |\n| 2021-07-08T23:59:59Z | 2117.13 | 2187.14 | 2049.65 | 2146.11 |     78.55110 | ETHUSDT |      0 |      0 |\n| 2021-07-09T23:59:59Z | 2146.11 | 2191.66 | 2077.32 | 2110.95 |     16.86480 | ETHUSDT |      0 |      0 |\n| 2021-07-10T23:59:59Z | 2110.95 | 2172.54 | 2081.68 | 2139.54 |     72.65800 | ETHUSDT |      0 |      0 |\n| 2021-07-11T23:59:59Z | 2139.54 | 2168.35 | 2009.27 | 2034.54 |    144.32550 | ETHUSDT |      0 |      0 |\n| 2021-07-12T23:59:59Z | 2034.54 | 2043.40 | 1918.89 | 1940.81 |    104.61160 | ETHUSDT |      0 |      0 |\n| 2021-07-13T23:59:59Z | 1940.81 | 2018.00 | 1867.51 | 1994.93 |    122.52200 | ETHUSDT |      0 |      0 |\n|                  ... |     ... |     ... |     ... |     ... |          ... |     ... |    ... |    ... |\n| 2023-12-21T23:59:59Z | 2239.40 | 2342.97 | 2230.27 | 2324.81 | 220586.62422 | ETHUSDT |      0 |      0 |\n| 2023-12-22T23:59:59Z | 2324.81 | 2331.56 | 2264.84 | 2308.25 |  70871.68309 | ETHUSDT |      0 |      0 |\n| 2023-12-23T23:59:59Z | 2308.25 | 2326.19 | 2242.52 | 2264.01 |  70083.13360 | ETHUSDT |      0 |      0 |\n| 2023-12-24T23:59:59Z | 2264.01 | 2304.58 | 2253.21 | 2271.10 |  57577.03316 | ETHUSDT |      0 |      0 |\n| 2023-12-25T23:59:59Z | 2271.10 | 2274.70 | 2178.84 | 2230.69 | 119316.34057 | ETHUSDT |      0 |      0 |\n| 2023-12-26T23:59:59Z | 2230.69 | 2392.56 | 2211.86 | 2378.18 | 192607.82945 | ETHUSDT |      0 |      0 |\n| 2023-12-27T23:59:59Z | 2378.18 | 2445.81 | 2334.86 | 2344.21 | 209687.34254 | ETHUSDT |      0 |      0 |\n| 2023-12-28T23:59:59Z | 2344.21 | 2385.20 | 2255.48 | 2299.19 | 164995.97010 | ETHUSDT |      0 |      0 |\n| 2023-12-29T23:59:59Z | 2299.19 | 2322.85 | 2267.78 | 2291.57 |  76737.23008 | ETHUSDT |      0 |      0 |\n| 2023-12-30T23:59:59Z | 2291.57 | 2322.00 | 2258.00 | 2282.00 |  92216.96999 | ETHUSDT |      0 |      0 |\n| 2023-12-31T23:59:59Z | 2282.00 | 2351.80 | 2265.29 | 2351.60 |  72164.87871 | ETHUSDT |      0 |      0 |\n"]]}
+           {:err {:class "java.lang.ClassCastException",
+                  :message "class java.time.Instant cannot be cast to class java.time.chrono.ChronoLocalDateTime (java.time.Instant and java.time.chrono.ChronoLocalDateTime are in module java.base of loader 'bootstrap')",
+                  :stacktrace [{:name "cljc.java_time.local_date_time$is_before/invokeStatic",
+                                :file "local_date_time.clj",
+                                :line 31,
+                                :class "cljc.java_time.local_date_time$is_before",
+                                :method "invokeStatic"}
+                               {:name "cljc.java_time.local_date_time$is_before/invoke",
+                                :file "local_date_time.clj",
+                                :line 31,
+                                :class "cljc.java_time.local_date_time$is_before",
+                                :method "invoke"}
+                               {:name "tick.core$eval12881$fn__12888/invoke",
+                                :file "core.cljc",
+                                :line 1198,
+                                :class "tick.core$eval12881$fn__12888",
+                                :method "invoke"}
+                               {:name "tick.protocols$eval10047$fn__10100$G__10038__10107/invoke",
+                                :file "protocols.cljc",
+                                :line 64,
+                                :class "tick.protocols$eval10047$fn__10100$G__10038__10107",
+                                :method "invoke"}
+                               {:name "tick.core$_GT__EQ_/invokeStatic",
+                                :file "core.cljc",
+                                :line 1394,
+                                :class "tick.core$_GT__EQ_",
+                                :method "invokeStatic"}
+                               {:name "tick.core$_GT__EQ_/invoke",
+                                :file "core.cljc",
+                                :line 1392,
+                                :class "tick.core$_GT__EQ_",
+                                :method "invoke"}
+                               {:name "ta.import.provider.alphavantage.ds$filter_rows_after_date$fn__59809/invoke",
+                                :file "ds.clj",
+                                :line 42,
+                                :class "ta.import.provider.alphavantage.ds$filter_rows_after_date$fn__59809",
+                                :method "invoke"}
+                               {:name "clojure.core$comp$fn__5876/invoke",
+                                :file "core.clj",
+                                :line 2586,
+                                :class "clojure.core$comp$fn__5876",
+                                :method "invoke"}
+                               {:name "tech.v3.datatype.unary_pred$ifn$reify__24829/unaryObject",
+                                :file "unary_pred.clj",
+                                :line 43,
+                                :class "tech.v3.datatype.unary_pred$ifn$reify__24829",
+                                :method "unaryObject"}
+                               {:name "tech.v3.datatype.unary_pred$reader$reify__24847/readObject",
+                                :file "unary_pred.clj",
+                                :line 118,
+                                :class "tech.v3.datatype.unary_pred$reader$reify__24847",
+                                :method "readObject"}
+                               {:name "tech.v3.datatype.unary_pred$bool_reader$reify__24899/test",
+                                :file "unary_pred.clj",
+                                :line 335,
+                                :class "tech.v3.datatype.unary_pred$bool_reader$reify__24899",
+                                :method "test"}
+                               {:name "ham_fisted.Transformables$FilterIterable$1/invokePrim",
+                                :file "Transformables.java",
+                                :line 665,
+                                :class "ham_fisted.Transformables$FilterIterable$1",
+                                :method "invokePrim"}
+                               {:name "ham_fisted.Ranges$LongRange/reduce",
+                                :file "Ranges.java",
+                                :line 103,
+                                :class "ham_fisted.Ranges$LongRange",
+                                :method "reduce"}
+                               {:name "ham_fisted.Reductions/serialReduction",
+                                :file "Reductions.java",
+                                :line 95,
+                                :class "ham_fisted.Reductions",
+                                :method "serialReduction"}
+                               {:name "ham_fisted.Ranges$LongRange$1/invokePrim",
+                                :file "Ranges.java",
+                                :line 115,
+                                :class "ham_fisted.Ranges$LongRange$1",
+                                :method "invokePrim"}
+                               {:name "ham_fisted.IFnDef$LLO/invoke",
+                                :file "IFnDef.java",
+                                :line 400,
+                                :class "ham_fisted.IFnDef$LLO",
+                                :method "invoke"}
+                               {:name "ham_fisted.impl$pgroups/invokeStatic",
+                                :file "impl.clj",
+                                :line 140,
+                                :class "ham_fisted.impl$pgroups",
+                                :method "invokeStatic"}
+                               {:name "ham_fisted.impl$pgroups/invoke",
+                                :file "impl.clj",
+                                :line 124,
+                                :class "ham_fisted.impl$pgroups",
+                                :method "invoke"}
+                               {:name "ham_fisted.ForkJoinPatterns/parallelIndexGroups",
+                                :file "ForkJoinPatterns.java",
+                                :line 21,
+                                :class "ham_fisted.ForkJoinPatterns",
+                                :method "parallelIndexGroups"}
+                               {:name "ham_fisted.Reductions/parallelIndexGroupReduce",
+                                :file "Reductions.java",
+                                :line 115,
+                                :class "ham_fisted.Reductions",
+                                :method "parallelIndexGroupReduce"}
+                               {:name "ham_fisted.Ranges$LongRange/parallelReduction",
+                                :file "Ranges.java",
+                                :line 113,
+                                :class "ham_fisted.Ranges$LongRange",
+                                :method "parallelReduction"}
+                               {:name "ham_fisted.impl$eval18682$fn__18683/invoke",
+                                :file "impl.clj",
+                                :line 422,
+                                :class "ham_fisted.impl$eval18682$fn__18683",
+                                :method "invoke"}
+                               {:name "ham_fisted.protocols$eval17196$fn__17197$G__17187__17210/invoke",
+                                :file "protocols.clj",
+                                :line 38,
+                                :class "ham_fisted.protocols$eval17196$fn__17197$G__17187__17210",
+                                :method "invoke"}
+                               {:name "ham_fisted.Reductions/parallelReduction",
+                                :file "Reductions.java",
+                                :line 209,
+                                :class "ham_fisted.Reductions",
+                                :method "parallelReduction"}
+                               {:name "ham_fisted.Transformables$FilterIterable/parallelReduction",
+                                :file "Transformables.java",
+                                :line 722,
+                                :class "ham_fisted.Transformables$FilterIterable",
+                                :method "parallelReduction"}
+                               {:name "ham_fisted.impl$eval18682$fn__18683/invoke",
+                                :file "impl.clj",
+                                :line 422,
+                                :class "ham_fisted.impl$eval18682$fn__18683",
+                                :method "invoke"}
+                               {:name "ham_fisted.protocols$eval17196$fn__17197$G__17187__17210/invoke",
+                                :file "protocols.clj",
+                                :line 38,
+                                :class "ham_fisted.protocols$eval17196$fn__17197$G__17187__17210",
+                                :method "invoke"}
+                               {:name "ham_fisted.Reductions/parallelReduction",
+                                :file "Reductions.java",
+                                :line 209,
+                                :class "ham_fisted.Reductions",
+                                :method "parallelReduction"}
+                               {:name "ham_fisted.reduce$preduce/invokeStatic",
+                                :file "reduce.clj",
+                                :line 108,
+                                :class "ham_fisted.reduce$preduce",
+                                :method "invokeStatic"}
+                               {:name "ham_fisted.reduce$preduce/invoke",
+                                :file "reduce.clj",
+                                :line 68,
+                                :class "ham_fisted.reduce$preduce",
+                                :method "invoke"}
+                               {:name "ham_fisted.reduce$preduce_reducer/invokeStatic",
+                                :file "reduce.clj",
+                                :line 130,
+                                :class "ham_fisted.reduce$preduce_reducer",
+                                :method "invokeStatic"}
+                               {:name "ham_fisted.reduce$preduce_reducer/invoke",
+                                :file "reduce.clj",
+                                :line 112,
+                                :class "ham_fisted.reduce$preduce_reducer",
+                                :method "invoke"}
+                               {:name "tech.v3.datatype.unary_pred$bool_reader__GT_indexes/invokeStatic",
+                                :file "unary_pred.clj",
+                                :line 336,
+                                :class "tech.v3.datatype.unary_pred$bool_reader__GT_indexes",
+                                :method "invokeStatic"}
+                               {:name "tech.v3.datatype.unary_pred$bool_reader__GT_indexes/invoke",
+                                :file "unary_pred.clj",
+                                :line 326,
+                                :class "tech.v3.datatype.unary_pred$bool_reader__GT_indexes",
+                                :method "invoke"}
+                               {:name "tech.v3.datatype.argops$argfilter/invokeStatic",
+                                :file "argops.clj",
+                                :line 516,
+                                :class "tech.v3.datatype.argops$argfilter",
+                                :method "invokeStatic"}
+                               {:name "tech.v3.datatype.argops$argfilter/invoke",
+                                :file "argops.clj",
+                                :line 488,
+                                :class "tech.v3.datatype.argops$argfilter",
+                                :method "invoke"}
+                               {:name "tech.v3.datatype.argops$argfilter/invokeStatic",
+                                :file "argops.clj",
+                                :line 522,
+                                :class "tech.v3.datatype.argops$argfilter",
+                                :method "invokeStatic"}
+                               {:name "tech.v3.datatype.argops$argfilter/invoke",
+                                :file "argops.clj",
+                                :line 488,
+                                :class "tech.v3.datatype.argops$argfilter",
+                                :method "invoke"}
+                               {:name "tablecloth.api.rows$find_indexes_from_fn/invokeStatic",
+                                :file "rows.clj",
+                                :line 26,
+                                :class "tablecloth.api.rows$find_indexes_from_fn",
+                                :method "invokeStatic"}
+                               {:name "tablecloth.api.rows$find_indexes_from_fn/invoke",
+                                :file "rows.clj",
+                                :line 20,
+                                :class "tablecloth.api.rows$find_indexes_from_fn",
+                                :method "invoke"}
+                               {:name "tablecloth.api.rows$find_indexes/invokeStatic",
+                                :file "rows.clj",
+                                :line 34,
+                                :class "tablecloth.api.rows$find_indexes",
+                                :method "invokeStatic"}
+                               {:name "tablecloth.api.rows$find_indexes/invoke",
+                                :file "rows.clj",
+                                :line 28,
+                                :class "tablecloth.api.rows$find_indexes",
+                                :method "invoke"}
+                               {:name "tablecloth.api.rows$select_or_drop_rows/invokeStatic",
+                                :file "rows.clj",
+                                :line 49,
+                                :class "tablecloth.api.rows$select_or_drop_rows",
+                                :method "invokeStatic"}
+                               {:name "tablecloth.api.rows$select_or_drop_rows/invoke",
+                                :file "rows.clj",
+                                :line 36,
+                                :class "tablecloth.api.rows$select_or_drop_rows",
+                                :method "invoke"}
+                               {:name "tablecloth.api.rows$select_or_drop_rows/invokeStatic",
+                                :file "rows.clj",
+                                :line 39,
+                                :class "tablecloth.api.rows$select_or_drop_rows",
+                                :method "invokeStatic"}
+                               {:name "tablecloth.api.rows$select_or_drop_rows/invoke",
+                                :file "rows.clj",
+                                :line 36,
+                                :class "tablecloth.api.rows$select_or_drop_rows",
+                                :method "invoke"}
+                               {:name "clojure.core$partial$fn__5908/invoke",
+                                :file "core.clj",
+                                :line 2642,
+                                :class "clojure.core$partial$fn__5908",
+                                :method "invoke"}
+                               {:name "tablecloth.api$select_rows/invokeStatic",
+                                :file "api.clj",
+                                :line 907,
+                                :class "tablecloth.api$select_rows",
+                                :method "invokeStatic"}
+                               {:name "tablecloth.api$select_rows/invoke",
+                                :file "api.clj",
+                                :line 897,
+                                :class "tablecloth.api$select_rows",
+                                :method "invoke"}
+                               {:name "ta.import.provider.alphavantage.ds$filter_rows_after_date/invokeStatic",
+                                :file "ds.clj",
+                                :line 41,
+                                :class "ta.import.provider.alphavantage.ds$filter_rows_after_date",
+                                :method "invokeStatic"}
+                               {:name "ta.import.provider.alphavantage.ds$filter_rows_after_date/invoke",
+                                :file "ds.clj",
+                                :line 38,
+                                :class "ta.import.provider.alphavantage.ds$filter_rows_after_date",
+                                :method "invoke"}
+                               {:name "ta.import.provider.alphavantage.ds$get_bars/invokeStatic",
+                                :file "ds.clj",
+                                :line 55,
+                                :class "ta.import.provider.alphavantage.ds$get_bars",
+                                :method "invokeStatic"}
+                               {:name "ta.import.provider.alphavantage.ds$get_bars/invoke",
+                                :file "ds.clj",
+                                :line 45,
+                                :class "ta.import.provider.alphavantage.ds$get_bars",
+                                :method "invoke"}
+                               {:name "ta.import.provider.alphavantage.ds.import-alphavantage/get_bars",
+                                :file "ds.clj",
+                                :line 60,
+                                :class "ta.import.provider.alphavantage.ds.import-alphavantage",
+                                :method "get_bars"}
+                               {:name "ta.import.core$get_bars_impl/invokeStatic",
+                                :file "core.clj",
+                                :line 23,
+                                :class "ta.import.core$get_bars_impl",
+                                :method "invokeStatic"}
+                               {:name "ta.import.core$get_bars_impl/invoke",
+                                :file "core.clj",
+                                :line 18,
+                                :class "ta.import.core$get_bars_impl",
+                                :method "invoke"}
+                               {:name "ta.import.core.import-manager/get_bars",
+                                :file "core.clj",
+                                :line 32,
+                                :class "ta.import.core.import-manager",
+                                :method "get_bars"}
+                               {:name "quanta.notebook.docs.import_manager$eval111936/invokeStatic",
+                                :file nil,
+                                :line 1,
+                                :class "quanta.notebook.docs.import_manager$eval111936",
+                                :method "invokeStatic"}
+                               {:name "quanta.notebook.docs.import_manager$eval111936/invoke",
+                                :file nil,
+                                :line -1,
+                                :class "quanta.notebook.docs.import_manager$eval111936",
+                                :method "invoke"}
+                               {:name "clojure.lang.Compiler/eval",
+                                :file "Compiler.java",
+                                :line 7194,
+                                :class "clojure.lang.Compiler",
+                                :method "eval"}
+                               {:name "clojure.lang.Compiler/load",
+                                :file "Compiler.java",
+                                :line 7653,
+                                :class "clojure.lang.Compiler",
+                                :method "load"}
+                               {:name "clojure.lang.Compiler/load",
+                                :file "Compiler.java",
+                                :line 7600,
+                                :class "clojure.lang.Compiler",
+                                :method "load"}
+                               {:name "clojure.core$load_reader/invokeStatic",
+                                :file "core.clj",
+                                :line 4088,
+                                :class "clojure.core$load_reader",
+                                :method "invokeStatic"}
+                               {:name "clojure.core$load_string/invokeStatic",
+                                :file "core.clj",
+                                :line 4090,
+                                :class "clojure.core$load_string",
+                                :method "invokeStatic"}
+                               {:name "clojure.core$load_string/invoke",
+                                :file "core.clj",
+                                :line 4090,
+                                :class "clojure.core$load_string",
+                                :method "invoke"}
+                               {:name "reval.kernel.clj_eval$clj_eval_raw/invokeStatic",
+                                :file "clj_eval.clj",
+                                :line 40,
+                                :class "reval.kernel.clj_eval$clj_eval_raw",
+                                :method "invokeStatic"}
+                               {:name "reval.kernel.clj_eval$clj_eval_raw/invoke",
+                                :file "clj_eval.clj",
+                                :line 38,
+                                :class "reval.kernel.clj_eval$clj_eval_raw",
+                                :method "invoke"}
+                               {:name "reval.kernel.clj_eval$clj_eval/invokeStatic",
+                                :file "clj_eval.clj",
+                                :line 57,
+                                :class "reval.kernel.clj_eval$clj_eval",
+                                :method "invokeStatic"}
+                               {:name "reval.kernel.clj_eval$clj_eval/invoke",
+                                :file "clj_eval.clj",
+                                :line 44,
+                                :class "reval.kernel.clj_eval$clj_eval",
+                                :method "invoke"}
+                               {:name "reval.document.notebook$eval_nb_segments$nb_eval_segment__93961/invoke",
+                                :file "notebook.clj",
+                                :line 101,
+                                :class "reval.document.notebook$eval_nb_segments$nb_eval_segment__93961",
+                                :method "invoke"}
+                               {:name "clojure.core$map$fn__5935/invoke",
+                                :file "core.clj",
+                                :line 2770,
+                                :class "clojure.core$map$fn__5935",
+                                :method "invoke"}
+                               {:name "clojure.lang.LazySeq/sval",
+                                :file "LazySeq.java",
+                                :line 42,
+                                :class "clojure.lang.LazySeq",
+                                :method "sval"}
+                               {:name "clojure.lang.LazySeq/seq",
+                                :file "LazySeq.java",
+                                :line 51,
+                                :class "clojure.lang.LazySeq",
+                                :method "seq"}
+                               {:name "clojure.lang.RT/seq",
+                                :file "RT.java",
+                                :line 535,
+                                :class "clojure.lang.RT",
+                                :method "seq"}
+                               {:name "clojure.core$seq__5467/invokeStatic",
+                                :file "core.clj",
+                                :line 139,
+                                :class "clojure.core$seq__5467",
+                                :method "invokeStatic"}
+                               {:name "clojure.core$map$fn__5935/invoke",
+                                :file "core.clj",
+                                :line 2763,
+                                :class "clojure.core$map$fn__5935",
+                                :method "invoke"}
+                               {:name "clojure.lang.LazySeq/sval",
+                                :file "LazySeq.java",
+                                :line 42,
+                                :class "clojure.lang.LazySeq",
+                                :method "sval"}
+                               {:name "clojure.lang.LazySeq/seq",
+                                :file "LazySeq.java",
+                                :line 51,
+                                :class "clojure.lang.LazySeq",
+                                :method "seq"}
+                               {:name "clojure.lang.RT/seq",
+                                :file "RT.java",
+                                :line 535,
+                                :class "clojure.lang.RT",
+                                :method "seq"}
+                               {:name "clojure.core$seq__5467/invokeStatic",
+                                :file "core.clj",
+                                :line 139,
+                                :class "clojure.core$seq__5467",
+                                :method "invokeStatic"}
+                               {:name "clojure.core.protocols$seq_reduce/invokeStatic",
+                                :file "protocols.clj",
+                                :line 24,
+                                :class "clojure.core.protocols$seq_reduce",
+                                :method "invokeStatic"}
+                               {:name "clojure.core.protocols$fn__8236/invokeStatic",
+                                :file "protocols.clj",
+                                :line 75,
+                                :class "clojure.core.protocols$fn__8236",
+                                :method "invokeStatic"}
+                               {:name "clojure.core.protocols$fn__8236/invoke",
+                                :file "protocols.clj",
+                                :line 75,
+                                :class "clojure.core.protocols$fn__8236",
+                                :method "invoke"}
+                               {:name "clojure.core.protocols$fn__8178$G__8173__8191/invoke",
+                                :file "protocols.clj",
+                                :line 13,
+                                :class "clojure.core.protocols$fn__8178$G__8173__8191",
+                                :method "invoke"}
+                               {:name "clojure.core$reduce/invokeStatic",
+                                :file "core.clj",
+                                :line 6886,
+                                :class "clojure.core$reduce",
+                                :method "invokeStatic"}
+                               {:name "clojure.core$into/invokeStatic",
+                                :file "core.clj",
+                                :line 6958,
+                                :class "clojure.core$into",
+                                :method "invokeStatic"}
+                               {:name "clojure.core$into/invoke",
+                                :file "core.clj",
+                                :line 6950,
+                                :class "clojure.core$into",
+                                :method "invoke"}
+                               {:name "reval.document.notebook$eval_notebook/invokeStatic",
+                                :file "notebook.clj",
+                                :line 116,
+                                :class "reval.document.notebook$eval_notebook",
+                                :method "invokeStatic"}
+                               {:name "reval.document.notebook$eval_notebook/invoke",
+                                :file "notebook.clj",
+                                :line 106,
+                                :class "reval.document.notebook$eval_notebook",
+                                :method "invoke"}
+                               {:name "reval.document.notebook$eval_notebook/invokeStatic",
+                                :file "notebook.clj",
+                                :line 108,
+                                :class "reval.document.notebook$eval_notebook",
+                                :method "invokeStatic"}
+                               {:name "reval.document.notebook$eval_notebook/invoke",
+                                :file "notebook.clj",
+                                :line 106,
+                                :class "reval.document.notebook$eval_notebook",
+                                :method "invoke"}
+                               {:name "reval.document.collection$eval_collection$fn__94003/invoke",
+                                :file "collection.clj",
+                                :line 57,
+                                :class "reval.document.collection$eval_collection$fn__94003",
+                                :method "invoke"}
+                               {:name "clojure.core$map$fn__5935/invoke",
+                                :file "core.clj",
+                                :line 2770,
+                                :class "clojure.core$map$fn__5935",
+                                :method "invoke"}
+                               {:name "clojure.lang.LazySeq/sval",
+                                :file "LazySeq.java",
+                                :line 42,
+                                :class "clojure.lang.LazySeq",
+                                :method "sval"}
+                               {:name "clojure.lang.LazySeq/seq",
+                                :file "LazySeq.java",
+                                :line 51,
+                                :class "clojure.lang.LazySeq",
+                                :method "seq"}
+                               {:name "clojure.lang.RT/seq",
+                                :file "RT.java",
+                                :line 535,
+                                :class "clojure.lang.RT",
+                                :method "seq"}
+                               {:name "clojure.core$seq__5467/invokeStatic",
+                                :file "core.clj",
+                                :line 139,
+                                :class "clojure.core$seq__5467",
+                                :method "invokeStatic"}
+                               {:name "clojure.core$dorun/invokeStatic",
+                                :file "core.clj",
+                                :line 3134,
+                                :class "clojure.core$dorun",
+                                :method "invokeStatic"}
+                               {:name "clojure.core$doall/invokeStatic",
+                                :file "core.clj",
+                                :line 3149,
+                                :class "clojure.core$doall",
+                                :method "invokeStatic"}
+                               {:name "clojure.core$doall/invoke",
+                                :file "core.clj",
+                                :line 3149,
+                                :class "clojure.core$doall",
+                                :method "invoke"}
+                               {:name "reval.document.collection$eval_collection/invokeStatic",
+                                :file "collection.clj",
+                                :line 56,
+                                :class "reval.document.collection$eval_collection",
+                                :method "invokeStatic"}
+                               {:name "reval.document.collection$eval_collection/invoke",
+                                :file "collection.clj",
+                                :line 55,
+                                :class "reval.document.collection$eval_collection",
+                                :method "invoke"}
+                               {:name "clojure.core$map$fn__5935/invoke",
+                                :file "core.clj",
+                                :line 2772,
+                                :class "clojure.core$map$fn__5935",
+                                :method "invoke"}
+                               {:name "clojure.lang.LazySeq/sval",
+                                :file "LazySeq.java",
+                                :line 42,
+                                :class "clojure.lang.LazySeq",
+                                :method "sval"}
+                               {:name "clojure.lang.LazySeq/seq",
+                                :file "LazySeq.java",
+                                :line 51,
+                                :class "clojure.lang.LazySeq",
+                                :method "seq"}
+                               {:name "clojure.lang.Cons/next",
+                                :file "Cons.java",
+                                :line 39,
+                                :class "clojure.lang.Cons",
+                                :method "next"}
+                               {:name "clojure.lang.RT/next",
+                                :file "RT.java",
+                                :line 713,
+                                :class "clojure.lang.RT",
+                                :method "next"}
+                               {:name "clojure.core$next__5451/invokeStatic",
+                                :file "core.clj",
+                                :line 64,
+                                :class "clojure.core$next__5451",
+                                :method "invokeStatic"}
+                               {:name "clojure.core$dorun/invokeStatic",
+                                :file "core.clj",
+                                :line 3143,
+                                :class "clojure.core$dorun",
+                                :method "invokeStatic"}
+                               {:name "clojure.core$doall/invokeStatic",
+                                :file "core.clj",
+                                :line 3149,
+                                :class "clojure.core$doall",
+                                :method "invokeStatic"}
+                               {:name "clojure.core$doall/invoke",
+                                :file "core.clj",
+                                :line 3149,
+                                :class "clojure.core$doall",
+                                :method "invoke"}
+                               {:name "reval.document.collection$eval_collections/invokeStatic",
+                                :file "collection.clj",
+                                :line 62,
+                                :class "reval.document.collection$eval_collections",
+                                :method "invokeStatic"}
+                               {:name "reval.document.collection$eval_collections/invoke",
+                                :file "collection.clj",
+                                :line 59,
+                                :class "reval.document.collection$eval_collections",
+                                :method "invoke"}
+                               {:name "reval.task$eval_all_collections/invokeStatic",
+                                :file "task.clj",
+                                :line 32,
+                                :class "reval.task$eval_all_collections",
+                                :method "invokeStatic"}
+                               {:name "reval.task$eval_all_collections/invoke",
+                                :file "task.clj",
+                                :line 22,
+                                :class "reval.task$eval_all_collections",
+                                :method "invoke"}
+                               {:name "modular.system$run_safe/invokeStatic",
+                                :file "system.clj",
+                                :line 17,
+                                :class "modular.system$run_safe",
+                                :method "invokeStatic"}
+                               {:name "modular.system$run_safe/invoke",
+                                :file "system.clj",
+                                :line 13,
+                                :class "modular.system$run_safe",
+                                :method "invoke"}
+                               {:name "modular.system$run_fn/invokeStatic",
+                                :file "system.clj",
+                                :line 26,
+                                :class "modular.system$run_fn",
+                                :method "invokeStatic"}
+                               {:name "modular.system$run_fn/invoke",
+                                :file "system.clj",
+                                :line 24,
+                                :class "modular.system$run_fn",
+                                :method "invoke"}
+                               {:name "modular.system$start_BANG_/invokeStatic",
+                                :file "system.clj",
+                                :line 82,
+                                :class "modular.system$start_BANG_",
+                                :method "invokeStatic"}
+                               {:name "modular.system$start_BANG_/invoke",
+                                :file "system.clj",
+                                :line 72,
+                                :class "modular.system$start_BANG_",
+                                :method "invoke"}
+                               {:name "clojure.lang.AFn/applyToHelper",
+                                :file "AFn.java",
+                                :line 154,
+                                :class "clojure.lang.AFn",
+                                :method "applyToHelper"}
+                               {:name "clojure.lang.AFn/applyTo",
+                                :file "AFn.java",
+                                :line 144,
+                                :class "clojure.lang.AFn",
+                                :method "applyTo"}
+                               {:name "clojure.lang.Var/applyTo",
+                                :file "Var.java",
+                                :line 705,
+                                :class "clojure.lang.Var",
+                                :method "applyTo"}
+                               {:name "clojure.core$apply/invokeStatic",
+                                :file "core.clj",
+                                :line 667,
+                                :class "clojure.core$apply",
+                                :method "invokeStatic"}
+                               {:name "clojure.core$apply/invoke",
+                                :file "core.clj",
+                                :line 662,
+                                :class "clojure.core$apply",
+                                :method "invoke"}
+                               {:name "clojure.run.exec$exec/invokeStatic",
+                                :file "exec.clj",
+                                :line 48,
+                                :class "clojure.run.exec$exec",
+                                :method "invokeStatic"}
+                               {:name "clojure.run.exec$exec/doInvoke",
+                                :file "exec.clj",
+                                :line 39,
+                                :class "clojure.run.exec$exec",
+                                :method "doInvoke"}
+                               {:name "clojure.lang.RestFn/invoke",
+                                :file "RestFn.java",
+                                :line 423,
+                                :class "clojure.lang.RestFn",
+                                :method "invoke"}
+                               {:name "clojure.run.exec$_main$fn__205/invoke",
+                                :file "exec.clj",
+                                :line 180,
+                                :class "clojure.run.exec$_main$fn__205",
+                                :method "invoke"}
+                               {:name "clojure.run.exec$_main/invokeStatic",
+                                :file "exec.clj",
+                                :line 176,
+                                :class "clojure.run.exec$_main",
+                                :method "invokeStatic"}
+                               {:name "clojure.run.exec$_main/doInvoke",
+                                :file "exec.clj",
+                                :line 139,
+                                :class "clojure.run.exec$_main",
+                                :method "doInvoke"}
+                               {:name "clojure.lang.RestFn/invoke",
+                                :file "RestFn.java",
+                                :line 397,
+                                :class "clojure.lang.RestFn",
+                                :method "invoke"}
+                               {:name "clojure.lang.AFn/applyToHelper",
+                                :file "AFn.java",
+                                :line 152,
+                                :class "clojure.lang.AFn",
+                                :method "applyToHelper"}
+                               {:name "clojure.lang.RestFn/applyTo",
+                                :file "RestFn.java",
+                                :line 132,
+                                :class "clojure.lang.RestFn",
+                                :method "applyTo"}
+                               {:name "clojure.lang.Var/applyTo",
+                                :file "Var.java",
+                                :line 705,
+                                :class "clojure.lang.Var",
+                                :method "applyTo"}
+                               {:name "clojure.core$apply/invokeStatic",
+                                :file "core.clj",
+                                :line 667,
+                                :class "clojure.core$apply",
+                                :method "invokeStatic"}
+                               {:name "clojure.main$main_opt/invokeStatic",
+                                :file "main.clj",
+                                :line 514,
+                                :class "clojure.main$main_opt",
+                                :method "invokeStatic"}
+                               {:name "clojure.main$main_opt/invoke",
+                                :file "main.clj",
+                                :line 510,
+                                :class "clojure.main$main_opt",
+                                :method "invoke"}
+                               {:name "clojure.main$main/invokeStatic",
+                                :file "main.clj",
+                                :line 664,
+                                :class "clojure.main$main",
+                                :method "invokeStatic"}
+                               {:name "clojure.main$main/doInvoke",
+                                :file "main.clj",
+                                :line 616,
+                                :class "clojure.main$main",
+                                :method "doInvoke"}
+                               {:name "clojure.lang.RestFn/applyTo",
+                                :file "RestFn.java",
+                                :line 137,
+                                :class "clojure.lang.RestFn",
+                                :method "applyTo"}
+                               {:name "clojure.lang.Var/applyTo",
+                                :file "Var.java",
+                                :line 705,
+                                :class "clojure.lang.Var",
+                                :method "applyTo"}
+                               {:name "clojure.main/main",
+                                :file "main.java",
+                                :line 40,
+                                :class "clojure.main",
+                                :method "main"}]},
+            :id :cf40b23b-621b-4b08-8fae-127cda1ff811,
+            :code "(b/get-bars im {:asset \"FMCDX\" ; mutual fund\n                :calendar [:us :d]\n                :import :alphavantage}\n            {:start dt\n             :mode :append})",
+            :ns "quanta.notebook.docs.import-manager",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.p-2.clj-nil [:p "nil"]]}
+           {:out "",
+            :id :fbeb9546-a809-4727-bbed-adc4300ef2af,
+            :code "(defn date-type [ds]\n  (-> ds :date meta :datatype))",
+            :ns "quanta.notebook.docs.import-manager",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.docs.import-manager/date-type"]}
+           {:out "[32m2024-05-03T17:52:16.645Z nuc12 INFO [ta.import.provider.kibot.ds:76] - get-bars kibot  NG0   [:us :d]   {:start #time/instant \"2020-01-01T00:00:00Z\", :end #time/instant \"2024-01-01T00:00:00Z\"}  ..[0m\n[32m2024-05-03T17:52:16.646Z nuc12 INFO [ta.import.provider.kibot.ds:86] - kibot make request interval:  daily  range:  {:startdate \"2020-12-31\", :enddate \"2024-12-31\"} asset-kibot:  {:type \"futures\", :symbol \"NG\"}[0m\n[32m2024-05-03T17:52:16.646Z nuc12 INFO [ta.import.provider.kibot.raw:68] - kibot history:  {:type \"futures\", :symbol \"NG\", :startdate \"2020-12-31\", :enddate \"2024-12-31\", :interval \"daily\", :timezone \"UTC\", :splitadjusted 1}[0m\n[32m2024-05-03T17:52:18.799Z nuc12 INFO [ta.import.provider.kibot.ds:93] - kibot request finished![0m\n",
+            :id :453cfde4-4049-4675-89fb-276ee01bbfa3,
+            :code "(b/get-bars im {:asset \"NG0\" ; future\n                :calendar [:us :d]\n                :import :kibot}\n            {:start  (t/instant \"2020-01-01T00:00:00Z\")\n             :end (t/instant \"2024-01-01T00:00:00Z\")})",
+            :ns "quanta.notebook.docs.import-manager",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "kibot-bars [840 9]:\n\n|                                    :date | :open | :high |  :low | :close | :volume | :asset | :epoch | :ticks |\n|------------------------------------------|------:|------:|------:|-------:|--------:|--------|-------:|-------:|\n| 2020-12-31T17:00-05:00[America/New_York] | 2.433 | 2.547 | 2.429 |  2.539 |  111108 |    NG0 |      0 |      0 |\n| 2021-01-04T17:00-05:00[America/New_York] | 2.626 | 2.670 | 2.566 |  2.581 |  128377 |    NG0 |      0 |      0 |\n| 2021-01-05T17:00-05:00[America/New_York] | 2.599 | 2.732 | 2.591 |  2.702 |  149828 |    NG0 |      0 |      0 |\n| 2021-01-06T17:00-05:00[America/New_York] | 2.688 | 2.770 | 2.606 |  2.716 |  144690 |    NG0 |      0 |      0 |\n| 2021-01-07T17:00-05:00[America/New_York] | 2.722 | 2.755 | 2.663 |  2.729 |  135480 |    NG0 |      0 |      0 |\n| 2021-01-08T17:00-05:00[America/New_York] | 2.675 | 2.730 | 2.626 |  2.700 |  140239 |    NG0 |      0 |      0 |\n| 2021-01-11T17:00-05:00[America/New_York] | 2.600 | 2.811 | 2.589 |  2.747 |  177248 |    NG0 |      0 |      0 |\n| 2021-01-12T17:00-05:00[America/New_York] | 2.794 | 2.899 | 2.718 |  2.753 |  201432 |    NG0 |      0 |      0 |\n| 2021-01-13T17:00-05:00[America/New_York] | 2.737 | 2.826 | 2.708 |  2.727 |  169240 |    NG0 |      0 |      0 |\n| 2021-01-14T17:00-05:00[America/New_York] | 2.742 | 2.791 | 2.660 |  2.666 |  163043 |    NG0 |      0 |      0 |\n|                                      ... |   ... |   ... |   ... |    ... |     ... |    ... |    ... |    ... |\n| 2024-04-18T17:00-04:00[America/New_York] | 1.722 | 1.780 | 1.713 |  1.757 |  160729 |    NG0 |      0 |      0 |\n| 2024-04-19T17:00-04:00[America/New_York] | 1.741 | 1.806 | 1.724 |  1.752 |  138745 |    NG0 |      0 |      0 |\n| 2024-04-22T17:00-04:00[America/New_York] | 1.765 | 1.800 | 1.721 |  1.791 |   98441 |    NG0 |      0 |      0 |\n| 2024-04-23T17:00-04:00[America/New_York] | 1.798 | 1.848 | 1.745 |  1.812 |   71346 |    NG0 |      0 |      0 |\n| 2024-04-24T17:00-04:00[America/New_York] | 2.128 | 2.133 | 1.960 |  1.979 |  182157 |    NG0 |      0 |      0 |\n| 2024-04-25T17:00-04:00[America/New_York] | 1.969 | 1.993 | 1.926 |  1.986 |  158312 |    NG0 |      0 |      0 |\n| 2024-04-26T17:00-04:00[America/New_York] | 1.977 | 2.002 | 1.909 |  1.923 |  113317 |    NG0 |      0 |      0 |\n| 2024-04-29T17:00-04:00[America/New_York] | 1.923 | 2.056 | 1.916 |  2.030 |  158855 |    NG0 |      0 |      0 |\n| 2024-04-30T17:00-04:00[America/New_York] | 2.050 | 2.092 | 1.951 |  1.991 |  150370 |    NG0 |      0 |      0 |\n| 2024-05-01T17:00-04:00[America/New_York] | 1.954 | 1.970 | 1.913 |  1.932 |  135918 |    NG0 |      0 |      0 |\n| 2024-05-02T17:00-04:00[America/New_York] | 1.931 | 2.050 | 1.927 |  2.035 |  153739 |    NG0 |      0 |      0 |\n"]]}
+           {:out "[32m2024-05-03T17:52:18.803Z nuc12 INFO [ta.import.provider.kibot.ds:76] - get-bars kibot  EUR/USD   [:forex :d]   {:start #time/instant \"2023-09-01T00:00:00Z\", :end #time/instant \"2024-05-01T00:00:00Z\"}  ..[0m\n[32m2024-05-03T17:52:18.804Z nuc12 INFO [ta.import.provider.kibot.ds:86] - kibot make request interval:  daily  range:  {:startdate \"2023-08-31\", :enddate \"2024-04-30\"} asset-kibot:  {:type \"forex\", :symbol \"EURUSD\"}[0m\n[32m2024-05-03T17:52:18.804Z nuc12 INFO [ta.import.provider.kibot.raw:68] - kibot history:  {:type \"forex\", :symbol \"EURUSD\", :startdate \"2023-08-31\", :enddate \"2024-04-30\", :interval \"daily\", :timezone \"UTC\", :splitadjusted 1}[0m\n[32m2024-05-03T17:52:19.382Z nuc12 INFO [ta.import.provider.kibot.ds:93] - kibot request finished![0m\n",
+            :id :6e2de382-6757-4d9c-9274-45634043de6e,
+            :code "(b/get-bars im\n            {:asset \"EUR/USD\" ; forex\n             :calendar [:forex :d]\n             :import :kibot}\n            {:start (t/instant \"2023-09-01T00:00:00Z\")\n             :end (t/instant \"2024-05-01T00:00:00Z\")})",
+            :ns "quanta.notebook.docs.import-manager",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "kibot-bars [174 9]:\n\n|                                    :date |   :open |   :high |    :low |  :close | :volume |  :asset | :epoch | :ticks |\n|------------------------------------------|--------:|--------:|--------:|--------:|--------:|---------|-------:|-------:|\n| 2023-08-31T16:30-04:00[America/New_York] | 1.09230 | 1.09395 | 1.08350 | 1.08433 |  229507 | EUR/USD |      0 |      0 |\n| 2023-09-01T16:30-04:00[America/New_York] | 1.08435 | 1.08820 | 1.07720 | 1.07731 |  252561 | EUR/USD |      0 |      0 |\n| 2023-09-04T16:30-04:00[America/New_York] | 1.07765 | 1.08088 | 1.07716 | 1.07938 |  100151 | EUR/USD |      0 |      0 |\n| 2023-09-05T16:30-04:00[America/New_York] | 1.07939 | 1.07983 | 1.07059 | 1.07220 |  214750 | EUR/USD |      0 |      0 |\n| 2023-09-06T16:30-04:00[America/New_York] | 1.07221 | 1.07488 | 1.07023 | 1.07269 |  213766 | EUR/USD |      0 |      0 |\n| 2023-09-07T16:30-04:00[America/New_York] | 1.07272 | 1.07317 | 1.06858 | 1.06957 |  186169 | EUR/USD |      0 |      0 |\n| 2023-09-08T16:30-04:00[America/New_York] | 1.06966 | 1.07438 | 1.06940 | 1.06982 |  177467 | EUR/USD |      0 |      0 |\n| 2023-09-11T16:30-04:00[America/New_York] | 1.07145 | 1.07593 | 1.07072 | 1.07502 |  196109 | EUR/USD |      0 |      0 |\n| 2023-09-12T16:30-04:00[America/New_York] | 1.07501 | 1.07679 | 1.07055 | 1.07538 |  173051 | EUR/USD |      0 |      0 |\n| 2023-09-13T16:30-04:00[America/New_York] | 1.07538 | 1.07649 | 1.07107 | 1.07292 |  242969 | EUR/USD |      0 |      0 |\n|                                      ... |     ... |     ... |     ... |     ... |     ... |     ... |    ... |    ... |\n| 2024-04-16T16:30-04:00[America/New_York] | 1.06241 | 1.06536 | 1.06011 | 1.06186 |  247391 | EUR/USD |      0 |      0 |\n| 2024-04-17T16:30-04:00[America/New_York] | 1.06185 | 1.06795 | 1.06059 | 1.06727 |  209314 | EUR/USD |      0 |      0 |\n| 2024-04-18T16:30-04:00[America/New_York] | 1.06726 | 1.06900 | 1.06413 | 1.06432 |  177121 | EUR/USD |      0 |      0 |\n| 2024-04-19T16:30-04:00[America/New_York] | 1.06432 | 1.06776 | 1.06104 | 1.06521 |  263202 | EUR/USD |      0 |      0 |\n| 2024-04-22T16:30-04:00[America/New_York] | 1.06530 | 1.06707 | 1.06239 | 1.06539 |  146480 | EUR/USD |      0 |      0 |\n| 2024-04-23T16:30-04:00[America/New_York] | 1.06532 | 1.07113 | 1.06385 | 1.07011 |  168084 | EUR/USD |      0 |      0 |\n| 2024-04-24T16:30-04:00[America/New_York] | 1.07008 | 1.07142 | 1.06780 | 1.06987 |  140013 | EUR/USD |      0 |      0 |\n| 2024-04-25T16:30-04:00[America/New_York] | 1.06987 | 1.07404 | 1.06782 | 1.07298 |  179636 | EUR/USD |      0 |      0 |\n| 2024-04-26T16:30-04:00[America/New_York] | 1.07292 | 1.07528 | 1.06739 | 1.06912 |  174307 | EUR/USD |      0 |      0 |\n| 2024-04-29T16:30-04:00[America/New_York] | 1.06909 | 1.07337 | 1.06901 | 1.07208 |  211949 | EUR/USD |      0 |      0 |\n| 2024-04-30T16:30-04:00[America/New_York] | 1.07198 | 1.07354 | 1.06646 | 1.06654 |  200125 | EUR/USD |      0 |      0 |\n"]]}
+           {:out "[32m2024-05-03T17:52:19.385Z nuc12 INFO [ta.import.provider.kibot.ds:76] - get-bars kibot  EU0   [:us :d]   {:start #time/instant \"2023-09-01T00:00:00Z\", :end #time/instant \"2023-10-01T00:00:00Z\"}  ..[0m\n[32m2024-05-03T17:52:19.386Z nuc12 INFO [ta.import.provider.kibot.ds:86] - kibot make request interval:  daily  range:  {:startdate \"2023-08-31\", :enddate \"2023-09-30\"} asset-kibot:  {:type \"futures\", :symbol \"EU\"}[0m\n[32m2024-05-03T17:52:19.386Z nuc12 INFO [ta.import.provider.kibot.raw:68] - kibot history:  {:type \"futures\", :symbol \"EU\", :startdate \"2023-08-31\", :enddate \"2023-09-30\", :interval \"daily\", :timezone \"UTC\", :splitadjusted 1}[0m\n[32m2024-05-03T17:52:19.921Z nuc12 INFO [ta.import.provider.kibot.ds:93] - kibot request finished![0m\n",
+            :id :6d674dec-96dc-4ebc-8710-580b785daed4,
+            :code "(b/get-bars im {:asset \"EU0\" ; future(forex)\n                :calendar [:us :d]\n                :import :kibot}\n            {:start (t/instant \"2023-09-01T00:00:00Z\")\n             :end (t/instant \"2023-10-01T00:00:00Z\")})",
+            :ns "quanta.notebook.docs.import-manager",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "kibot-bars [21 9]:\n\n|                                    :date |   :open |   :high |    :low |  :close | :volume | :asset | :epoch | :ticks |\n|------------------------------------------|--------:|--------:|--------:|--------:|--------:|--------|-------:|-------:|\n| 2023-08-31T17:00-04:00[America/New_York] | 1.09370 | 1.09475 | 1.08425 | 1.08525 |  253955 |    EU0 |      0 |      0 |\n| 2023-09-01T17:00-04:00[America/New_York] | 1.08505 | 1.08895 | 1.07790 | 1.07860 |  221939 |    EU0 |      0 |      0 |\n| 2023-09-05T17:00-04:00[America/New_York] | 1.07920 | 1.08155 | 1.07125 | 1.07280 |  287431 |    EU0 |      0 |      0 |\n| 2023-09-06T17:00-04:00[America/New_York] | 1.07285 | 1.07550 | 1.07085 | 1.07315 |  220167 |    EU0 |      0 |      0 |\n| 2023-09-07T17:00-04:00[America/New_York] | 1.07315 | 1.07360 | 1.06905 | 1.06990 |  183256 |    EU0 |      0 |      0 |\n| 2023-09-08T17:00-04:00[America/New_York] | 1.06995 | 1.07480 | 1.06980 | 1.07015 |  194048 |    EU0 |      0 |      0 |\n| 2023-09-11T17:00-04:00[America/New_York] | 1.07175 | 1.07630 | 1.07110 | 1.07485 |  223922 |    EU0 |      0 |      0 |\n| 2023-09-12T17:00-04:00[America/New_York] | 1.07550 | 1.07725 | 1.07085 | 1.07355 |  332730 |    EU0 |      0 |      0 |\n| 2023-09-13T17:00-04:00[America/New_York] | 1.07620 | 1.07675 | 1.07130 | 1.07350 |  552945 |    EU0 |      0 |      0 |\n| 2023-09-14T17:00-04:00[America/New_York] | 1.07290 | 1.07535 | 1.06325 | 1.06360 |  385312 |    EU0 |      0 |      0 |\n|                                      ... |     ... |     ... |     ... |     ... |     ... |    ... |    ... |    ... |\n| 2023-09-15T17:00-04:00[America/New_York] | 1.06845 | 1.07305 | 1.06755 | 1.07035 |  228590 |    EU0 |      0 |      0 |\n| 2023-09-18T17:00-04:00[America/New_York] | 1.07070 | 1.07410 | 1.06965 | 1.07200 |  114813 |    EU0 |      0 |      0 |\n| 2023-09-19T17:00-04:00[America/New_York] | 1.07330 | 1.07595 | 1.07160 | 1.07185 |  145568 |    EU0 |      0 |      0 |\n| 2023-09-20T17:00-04:00[America/New_York] | 1.07175 | 1.07780 | 1.06900 | 1.07265 |  210334 |    EU0 |      0 |      0 |\n| 2023-09-21T17:00-04:00[America/New_York] | 1.07015 | 1.07130 | 1.06560 | 1.07010 |  237984 |    EU0 |      0 |      0 |\n| 2023-09-22T17:00-04:00[America/New_York] | 1.07015 | 1.07110 | 1.06530 | 1.06860 |  163738 |    EU0 |      0 |      0 |\n| 2023-09-25T17:00-04:00[America/New_York] | 1.06845 | 1.06935 | 1.06130 | 1.06250 |  165600 |    EU0 |      0 |      0 |\n| 2023-09-26T17:00-04:00[America/New_York] | 1.06310 | 1.06475 | 1.05995 | 1.06035 |  158317 |    EU0 |      0 |      0 |\n| 2023-09-27T17:00-04:00[America/New_York] | 1.06090 | 1.06115 | 1.05255 | 1.05445 |  247273 |    EU0 |      0 |      0 |\n| 2023-09-28T17:00-04:00[America/New_York] | 1.05430 | 1.06145 | 1.05265 | 1.05900 |  273944 |    EU0 |      0 |      0 |\n| 2023-09-29T17:00-04:00[America/New_York] | 1.06000 | 1.06525 | 1.05930 | 1.06125 |  246776 |    EU0 |      0 |      0 |\n"]]}
+           {:out "[32m2024-05-03T17:52:19.924Z nuc12 INFO [ta.import.provider.kibot.ds:76] - get-bars kibot  MSFT   [:us :d]   {:start #time/instant \"2019-12-01T00:00:00Z\", :end #time/instant \"2020-02-01T00:00:00Z\"}  ..[0m\n[32m2024-05-03T17:52:19.925Z nuc12 INFO [ta.import.provider.kibot.ds:86] - kibot make request interval:  daily  range:  {:startdate \"2019-11-30\", :enddate \"2020-01-31\"} asset-kibot:  {:type \"stocks\", :symbol \"MSFT\"}[0m\n[32m2024-05-03T17:52:19.925Z nuc12 INFO [ta.import.provider.kibot.raw:68] - kibot history:  {:type \"stocks\", :symbol \"MSFT\", :startdate \"2019-11-30\", :enddate \"2020-01-31\", :interval \"daily\", :timezone \"UTC\", :splitadjusted 1}[0m\n[32m2024-05-03T17:52:20.519Z nuc12 INFO [ta.import.provider.kibot.ds:93] - kibot request finished![0m\n",
+            :id :8953bf3b-1309-4e89-8089-4a783747d13e,
+            :code "(b/get-bars im\n            {:asset \"MSFT\"\n             :calendar [:us :d]\n             :import :kibot}\n            {:start (t/instant \"2019-12-01T00:00:00Z\")\n             :end (t/instant \"2020-02-01T00:00:00Z\")})",
+            :ns "quanta.notebook.docs.import-manager",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "kibot-bars [42 9]:\n\n|                                    :date |    :open |  :high |     :low | :close |  :volume | :asset | :epoch | :ticks |\n|------------------------------------------|---------:|-------:|---------:|-------:|---------:|--------|-------:|-------:|\n| 2019-12-02T17:00-05:00[America/New_York] | 151.7600 | 151.83 | 148.2809 | 149.51 | 22109394 |   MSFT |      0 |      0 |\n| 2019-12-03T17:00-05:00[America/New_York] | 147.4800 | 149.43 | 146.6500 | 149.32 | 20482601 |   MSFT |      0 |      0 |\n| 2019-12-04T17:00-05:00[America/New_York] | 150.0601 | 150.18 | 149.2000 | 149.83 | 15156335 |   MSFT |      0 |      0 |\n| 2019-12-05T17:00-05:00[America/New_York] | 150.0500 | 150.32 | 149.4800 | 149.92 | 14461357 |   MSFT |      0 |      0 |\n| 2019-12-06T17:00-05:00[America/New_York] | 151.0100 | 151.87 | 150.2700 | 151.75 | 14195802 |   MSFT |      0 |      0 |\n| 2019-12-09T17:00-05:00[America/New_York] | 151.1300 | 152.21 | 150.9100 | 151.36 | 13500368 |   MSFT |      0 |      0 |\n| 2019-12-10T17:00-05:00[America/New_York] | 151.1500 | 151.89 | 150.7650 | 151.17 | 14454333 |   MSFT |      0 |      0 |\n| 2019-12-11T17:00-05:00[America/New_York] | 151.6100 | 151.87 | 150.3300 | 151.69 | 15773430 |   MSFT |      0 |      0 |\n| 2019-12-12T17:00-05:00[America/New_York] | 151.7500 | 153.44 | 151.0200 | 153.23 | 21640365 |   MSFT |      0 |      0 |\n| 2019-12-13T17:00-05:00[America/New_York] | 153.1200 | 154.89 | 152.8300 | 154.54 | 20756083 |   MSFT |      0 |      0 |\n|                                      ... |      ... |    ... |      ... |    ... |      ... |    ... |    ... |    ... |\n| 2020-01-16T17:00-05:00[America/New_York] | 164.3500 | 166.24 | 164.0300 | 166.21 | 21086666 |   MSFT |      0 |      0 |\n| 2020-01-17T17:00-05:00[America/New_York] | 167.4225 | 167.47 | 165.4325 | 167.05 | 28364310 |   MSFT |      0 |      0 |\n| 2020-01-21T17:00-05:00[America/New_York] | 166.7400 | 168.19 | 166.4300 | 166.49 | 25188758 |   MSFT |      0 |      0 |\n| 2020-01-22T17:00-05:00[America/New_York] | 167.2600 | 167.49 | 165.6800 | 165.69 | 20614130 |   MSFT |      0 |      0 |\n| 2020-01-23T17:00-05:00[America/New_York] | 166.1900 | 166.80 | 165.2700 | 166.72 | 16364067 |   MSFT |      0 |      0 |\n| 2020-01-24T17:00-05:00[America/New_York] | 167.4600 | 167.53 | 164.4500 | 165.04 | 21557801 |   MSFT |      0 |      0 |\n| 2020-01-27T17:00-05:00[America/New_York] | 161.1700 | 163.38 | 160.2000 | 162.26 | 27144325 |   MSFT |      0 |      0 |\n| 2020-01-28T17:00-05:00[America/New_York] | 163.7849 | 165.76 | 163.0780 | 165.46 | 21429046 |   MSFT |      0 |      0 |\n| 2020-01-29T17:00-05:00[America/New_York] | 167.8400 | 168.75 | 165.6900 | 168.18 | 29763012 |   MSFT |      0 |      0 |\n| 2020-01-30T17:00-05:00[America/New_York] | 174.0200 | 174.05 | 170.7900 | 172.74 | 45698132 |   MSFT |      0 |      0 |\n| 2020-01-31T17:00-05:00[America/New_York] | 172.1900 | 172.40 | 169.5800 | 170.17 | 31372125 |   MSFT |      0 |      0 |\n"]]}
+           {:out "[33m2024-05-03T17:52:20.525Z nuc12 WARN [ta.import.provider.eodhd.ds:50] - get-bars:  {:asset \"AEE.AU\", :calendar [:us :d], :import :eodhd} {:start #time/instant \"2023-12-01T00:00:00Z\", :end #time/instant \"2024-04-01T00:00:00Z\"}[0m\n[33m2024-05-03T17:52:20.526Z nuc12 WARN [ta.import.provider.eodhd.raw:37] - getting bars asset:  AEE.AU from:  2023-11-30  to:  2024-03-31[0m\n[33m2024-05-03T17:52:21.731Z nuc12 WARN [ta.import.provider.eodhd.raw:30] - eodhd response status:  200[0m\n[33m2024-05-03T17:52:21.732Z nuc12 WARN [ta.import.provider.eodhd.raw:31] - eodhd response:  {:cached nil, :request-time 1203, :repeatable? false, :protocol-version {:name \"HTTP\", :major 1, :minor 1}, :streaming? true, :http-client #object[org.apache.http.impl.client.InternalHttpClient 0x62df2812 \"org.apache.http.impl.client.InternalHttpClient@62df2812\"], :chunked? true, :reason-phrase \"OK\", :headers {\"Access-Control-Allow-Headers\" \"Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With\", \"Server\" \"nginx/1.19.10\", \"Content-Type\" \"application/json\", \"Access-Control-Allow-Origin\" \"*\", \"X-RateLimit-Limit\" \"2000\", \"X-RateLimit-Remaining\" \"1999\", \"Connection\" \"close\", \"Transfer-Encoding\" \"chunked\", \"Access-Control-Allow-Methods\" \"GET, POST, PUT, DELETE, OPTIONS\", \"Date\" \"Fri, 03 May 2024 17:52:21 GMT\", \"Vary\" \"Accept-Encoding\", \"Access-Control-Allow-Credentials\" \"true\", \"Cache-Control\" \"no-cache, private\"}, :orig-content-encoding \"gzip\", :status 200, :length -1, :body \"[{\\\"date\\\":\\\"2023-11-30\\\",\\\"open\\\":0.27,\\\"high\\\":0.285,\\\"low\\\":0.27,\\\"close\\\":0.275,\\\"adjusted_close\\\":0.275,\\\"volume\\\":440453},{\\\"date\\\":\\\"2023-12-01\\\",\\\"open\\\":0.285,\\\"high\\\":0.31,\\\"low\\\":0.275,\\\"close\\\":0.305,\\\"adjusted_close\\\":0.305,\\\"volume\\\":1046797},{\\\"date\\\":\\\"2023-12-04\\\",\\\"open\\\":0.295,\\\"high\\\":0.31,\\\"low\\\":0.295,\\\"close\\\":0.305,\\\"adjusted_close\\\":0.305,\\\"volume\\\":516418},{\\\"date\\\":\\\"2023-12-05\\\",\\\"open\\\":0.295,\\\"high\\\":0.305,\\\"low\\\":0.29,\\\"close\\\":0.3,\\\"adjusted_close\\\":0.3,\\\"volume\\\":289953},{\\\"date\\\":\\\"2023-12-06\\\",\\\"open\\\":0.28,\\\"high\\\":0.295,\\\"low\\\":0.28,\\\"close\\\":0.295,\\\"adjusted_close\\\":0.295,\\\"volume\\\":152281},{\\\"date\\\":\\\"2023-12-07\\\",\\\"open\\\":0.285,\\\"high\\\":0.295,\\\"low\\\":0.265,\\\"close\\\":0.275,\\\"adjusted_close\\\":0.275,\\\"volume\\\":608332},{\\\"date\\\":\\\"2023-12-08\\\",\\\"open\\\":0.275,\\\"high\\\":0.285,\\\"low\\\":0.27,\\\"close\\\":0.285,\\\"adjusted_close\\\":0.285,\\\"volume\\\":266436},{\\\"date\\\":\\\"2023-12-11\\\",\\\"open\\\":0.275,\\\"high\\\":0.275,\\\"low\\\":0.27,\\\"close\\\":0.27,\\\"adjusted_close\\\":0.27,\\\"volume\\\":468034},{\\\"date\\\":\\\"2023-12-12\\\",\\\"open\\\":0.2675,\\\"high\\\":0.2675,\\\"low\\\":0.255,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":582901},{\\\"date\\\":\\\"2023-12-13\\\",\\\"open\\\":0.275,\\\"high\\\":0.275,\\\"low\\\":0.255,\\\"close\\\":0.255,\\\"adjusted_close\\\":0.255,\\\"volume\\\":392068},{\\\"date\\\":\\\"2023-12-14\\\",\\\"open\\\":0.25,\\\"high\\\":0.27,\\\"low\\\":0.2375,\\\"close\\\":0.27,\\\"adjusted_close\\\":0.27,\\\"volume\\\":729357},{\\\"date\\\":\\\"2023-12-15\\\",\\\"open\\\":0.275,\\\"high\\\":0.28,\\\"low\\\":0.245,\\\"close\\\":0.245,\\\"adjusted_close\\\":0.245,\\\"volume\\\":823133},{\\\"date\\\":\\\"2023-12-18\\\",\\\"open\\\":0.255,\\\"high\\\":0.265,\\\"low\\\":0.255,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":106761},{\\\"date\\\":\\\"2023-12-19\\\",\\\"open\\\":0.275,\\\"high\\\":0.275,\\\"low\\\":0.25,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":739020},{\\\"date\\\":\\\"2023-12-20\\\",\\\"open\\\":0.25,\\\"high\\\":0.27,\\\"low\\\":0.245,\\\"close\\\":0.255,\\\"adjusted_close\\\":0.255,\\\"volume\\\":1012618},{\\\"date\\\":\\\"2023-12-21\\\",\\\"open\\\":0.255,\\\"high\\\":0.26,\\\"low\\\":0.2475,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":408016},{\\\"date\\\":\\\"2023-12-22\\\",\\\"open\\\":0.255,\\\"high\\\":0.26,\\\"low\\\":0.255,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":56080},{\\\"date\\\":\\\"2023-12-27\\\",\\\"open\\\":0.26,\\\"high\\\":0.265,\\\"low\\\":0.255,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":380771},{\\\"date\\\":\\\"2023-12-28\\\",\\\"open\\\":0.26,\\\"high\\\":0.265,\\\"low\\\":0.25,\\\"close\\\":0.255,\\\"adjusted_close\\\":0.255,\\\"volume\\\":303014},{\\\"date\\\":\\\"2023-12-29\\\",\\\"open\\\":0.255,\\\"high\\\":0.265,\\\"low\\\":0.25,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":422893},{\\\"date\\\":\\\"2024-01-02\\\",\\\"open\\\":0.255,\\\"high\\\":0.265,\\\"low\\\":0.25,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":233674},{\\\"date\\\":\\\"2024-01-03\\\",\\\"open\\\":0.265,\\\"high\\\":0.27,\\\"low\\\":0.255,\\\"close\\\":0.27,\\\"adjusted_close\\\":0.27,\\\"volume\\\":387084},{\\\"date\\\":\\\"2024-01-04\\\",\\\"open\\\":0.26,\\\"high\\\":0.27,\\\"low\\\":0.255,\\\"close\\\":0.27,\\\"adjusted_close\\\":0.27,\\\"volume\\\":378288},{\\\"date\\\":\\\"2024-01-05\\\",\\\"open\\\":0.265,\\\"high\\\":0.275,\\\"low\\\":0.265,\\\"close\\\":0.275,\\\"adjusted_close\\\":0.275,\\\"volume\\\":555386},{\\\"date\\\":\\\"2024-01-08\\\",\\\"open\\\":0.27,\\\"high\\\":0.275,\\\"low\\\":0.255,\\\"close\\\":0.255,\\\"adjusted_close\\\":0.255,\\\"volume\\\":343975},{\\\"date\\\":\\\"2024-01-09\\\",\\\"open\\\":0.265,\\\"high\\\":0.265,\\\"low\\\":0.255,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":176210},{\\\"date\\\":\\\"2024-01-10\\\",\\\"open\\\":0.27,\\\"high\\\":0.28,\\\"low\\\":0.27,\\\"close\\\":0.28,\\\"adjusted_close\\\":0.28,\\\"volume\\\":1482635},{\\\"date\\\":\\\"2024-01-11\\\",\\\"open\\\":0.275,\\\"high\\\":0.28,\\\"low\\\":0.265,\\\"close\\\":0.275,\\\"adjusted_close\\\":0.275,\\\"volume\\\":525077},{\\\"date\\\":\\\"2024-01-12\\\",\\\"open\\\":0.28,\\\"high\\\":0.295,\\\"low\\\":0.275,\\\"close\\\":0.295,\\\"adjusted_close\\\":0.295,\\\"volume\\\":1693712},{\\\"date\\\":\\\"2024-01-15\\\",\\\"open\\\":0.31,\\\"high\\\":0.31,\\\"low\\\":0.295,\\\"close\\\":0.3025,\\\"adjusted_close\\\":0.3025,\\\"volume\\\":1975712},{\\\"date\\\":\\\"2024-01-16\\\",\\\"open\\\":0.295,\\\"high\\\":0.295,\\\"low\\\":0.26,\\\"close\\\":0.27,\\\"adjusted_close\\\":0.27,\\\"volume\\\":1960610},{\\\"date\\\":\\\"2024-01-17\\\",\\\"open\\\":0.27,\\\"high\\\":0.285,\\\"low\\\":0.27,\\\"close\\\":0.28,\\\"adjusted_close\\\":0.28,\\\"volume\\\":2028568},{\\\"date\\\":\\\"2024-01-18\\\",\\\"open\\\":0.265,\\\"high\\\":0.28,\\\"low\\\":0.2575,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":772776},{\\\"date\\\":\\\"2024-01-19\\\",\\\"open\\\":0.26,\\\"high\\\":0.27,\\\"low\\\":0.25,\\\"close\\\":0.255,\\\"adjusted_close\\\":0.255,\\\"volume\\\":597479},{\\\"date\\\":\\\"2024-01-22\\\",\\\"open\\\":0.26,\\\"high\\\":0.26,\\\"low\\\":0.2425,\\\"close\\\":0.255,\\\"adjusted_close\\\":0.255,\\\"volume\\\":800620},{\\\"date\\\":\\\"2024-01-23\\\",\\\"open\\\":0.24,\\\"high\\\":0.255,\\\"low\\\":0.22,\\\"close\\\":0.22,\\\"adjusted_close\\\":0.22,\\\"volume\\\":968694},{\\\"date\\\":\\\"2024-01-24\\\",\\\"open\\\":0.23,\\\"high\\\":0.245,\\\"low\\\":0.23,\\\"close\\\":0.245,\\\"adjusted_close\\\":0.245,\\\"volume\\\":809591},{\\\"date\\\":\\\"2024-01-25\\\",\\\"open\\\":0.24,\\\"high\\\":0.255,\\\"low\\\":0.24,\\\"close\\\":0.255,\\\"adjusted_close\\\":0.255,\\\"volume\\\":550468},{\\\"date\\\":\\\"2024-01-29\\\",\\\"open\\\":0.255,\\\"high\\\":0.26,\\\"low\\\":0.245,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":716249},{\\\"date\\\":\\\"2024-01-30\\\",\\\"open\\\":0.26,\\\"high\\\":0.26,\\\"low\\\":0.24,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":1015424},{\\\"date\\\":\\\"2024-01-31\\\",\\\"open\\\":0.26,\\\"high\\\":0.285,\\\"low\\\":0.26,\\\"close\\\":0.285,\\\"adjusted_close\\\":0.285,\\\"volume\\\":2205056},{\\\"date\\\":\\\"2024-02-01\\\",\\\"open\\\":0.285,\\\"high\\\":0.285,\\\"low\\\":0.27,\\\"close\\\":0.285,\\\"adjusted_close\\\":0.285,\\\"volume\\\":497860},{\\\"date\\\":\\\"2024-02-02\\\",\\\"open\\\":0.3,\\\"high\\\":0.305,\\\"low\\\":0.28,\\\"close\\\":0.29,\\\"adjusted_close\\\":0.29,\\\"volume\\\":2106524},{\\\"date\\\":\\\"2024-02-05\\\",\\\"open\\\":0.28,\\\"high\\\":0.2825,\\\"low\\\":0.265,\\\"close\\\":0.28,\\\"adjusted_close\\\":0.28,\\\"volume\\\":916512},{\\\"date\\\":\\\"2024-02-06\\\",\\\"open\\\":0.27,\\\"high\\\":0.275,\\\"low\\\":0.26,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":625037},{\\\"date\\\":\\\"2024-02-07\\\",\\\"open\\\":0.265,\\\"high\\\":0.285,\\\"low\\\":0.26,\\\"close\\\":0.285,\\\"adjusted_close\\\":0.285,\\\"volume\\\":522218},{\\\"date\\\":\\\"2024-02-08\\\",\\\"open\\\":0.275,\\\"high\\\":0.285,\\\"low\\\":0.265,\\\"close\\\":0.28,\\\"adjusted_close\\\":0.28,\\\"volume\\\":447738},{\\\"date\\\":\\\"2024-02-09\\\",\\\"open\\\":0.26,\\\"high\\\":0.27,\\\"low\\\":0.26,\\\"close\\\":0.27,\\\"adjusted_close\\\":0.27,\\\"volume\\\":251995},{\\\"date\\\":\\\"2024-02-12\\\",\\\"open\\\":0.265,\\\"high\\\":0.27,\\\"low\\\":0.26,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":761813},{\\\"date\\\":\\\"2024-02-13\\\",\\\"open\\\":0.265,\\\"high\\\":0.27,\\\"low\\\":0.26,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":607792},{\\\"date\\\":\\\"2024-02-14\\\",\\\"open\\\":0.265,\\\"high\\\":0.265,\\\"low\\\":0.25,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":804279},{\\\"date\\\":\\\"2024-02-15\\\",\\\"open\\\":0.255,\\\"high\\\":0.265,\\\"low\\\":0.255,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":137502},{\\\"date\\\":\\\"2024-02-16\\\",\\\"open\\\":0.26,\\\"high\\\":0.265,\\\"low\\\":0.255,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":181836},{\\\"date\\\":\\\"2024-02-19\\\",\\\"open\\\":0.255,\\\"high\\\":0.27,\\\"low\\\":0.255,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":279278},{\\\"date\\\":\\\"2024-02-20\\\",\\\"open\\\":0.255,\\\"high\\\":0.26,\\\"low\\\":0.245,\\\"close\\\":0.25,\\\"adjusted_close\\\":0.25,\\\"volume\\\":625108},{\\\"date\\\":\\\"2024-02-21\\\",\\\"open\\\":0.245,\\\"high\\\":0.255,\\\"low\\\":0.23,\\\"close\\\":0.245,\\\"adjusted_close\\\":0.245,\\\"volume\\\":900568},{\\\"date\\\":\\\"2024-02-22\\\",\\\"open\\\":0.245,\\\"high\\\":0.245,\\\"low\\\":0.235,\\\"close\\\":0.245,\\\"adjusted_close\\\":0.245,\\\"volume\\\":317547},{\\\"date\\\":\\\"2024-02-23\\\",\\\"open\\\":0.235,\\\"high\\\":0.235,\\\"low\\\":0.2175,\\\"close\\\":0.225,\\\"adjusted_close\\\":0.225,\\\"volume\\\":1281150},{\\\"date\\\":\\\"2024-02-26\\\",\\\"open\\\":0.25,\\\"high\\\":0.25,\\\"low\\\":0.215,\\\"close\\\":0.225,\\\"adjusted_close\\\":0.225,\\\"volume\\\":1529370},{\\\"date\\\":\\\"2024-02-27\\\",\\\"open\\\":0.235,\\\"high\\\":0.24,\\\"low\\\":0.215,\\\"close\\\":0.215,\\\"adjusted_close\\\":0.215,\\\"volume\\\":1067838},{\\\"date\\\":\\\"2024-02-28\\\",\\\"open\\\":0.22,\\\"high\\\":0.245,\\\"low\\\":0.22,\\\"close\\\":0.245,\\\"adjusted_close\\\":0.245,\\\"volume\\\":1606174},{\\\"date\\\":\\\"2024-02-29\\\",\\\"open\\\":0.235,\\\"high\\\":0.245,\\\"low\\\":0.23,\\\"close\\\":0.235,\\\"adjusted_close\\\":0.235,\\\"volume\\\":1101317},{\\\"date\\\":\\\"2024-03-01\\\",\\\"open\\\":0.235,\\\"high\\\":0.245,\\\"low\\\":0.215,\\\"close\\\":0.22,\\\"adjusted_close\\\":0.22,\\\"volume\\\":1799192},{\\\"date\\\":\\\"2024-03-04\\\",\\\"open\\\":0.23,\\\"high\\\":0.24,\\\"low\\\":0.225,\\\"close\\\":0.225,\\\"adjusted_close\\\":0.225,\\\"volume\\\":1735574},{\\\"date\\\":\\\"2024-03-05\\\",\\\"open\\\":0.23,\\\"high\\\":0.235,\\\"low\\\":0.22,\\\"close\\\":0.23,\\\"adjusted_close\\\":0.23,\\\"volume\\\":1244028},{\\\"date\\\":\\\"2024-03-06\\\",\\\"open\\\":0.23,\\\"high\\\":0.235,\\\"low\\\":0.225,\\\"close\\\":0.235,\\\"adjusted_close\\\":0.235,\\\"volume\\\":810618},{\\\"date\\\":\\\"2024-03-07\\\",\\\"open\\\":0.24,\\\"high\\\":0.24,\\\"low\\\":0.235,\\\"close\\\":0.24,\\\"adjusted_close\\\":0.24,\\\"volume\\\":468990},{\\\"date\\\":\\\"2024-03-08\\\",\\\"open\\\":0.25,\\\"high\\\":0.255,\\\"low\\\":0.24,\\\"close\\\":0.25,\\\"adjusted_close\\\":0.25,\\\"volume\\\":1456487},{\\\"date\\\":\\\"2024-03-11\\\",\\\"open\\\":0.24,\\\"high\\\":0.24,\\\"low\\\":0.225,\\\"close\\\":0.23,\\\"adjusted_close\\\":0.23,\\\"volume\\\":762587},{\\\"date\\\":\\\"2024-03-12\\\",\\\"open\\\":0.23,\\\"high\\\":0.235,\\\"low\\\":0.225,\\\"close\\\":0.225,\\\"adjusted_close\\\":0.225,\\\"volume\\\":593534},{\\\"date\\\":\\\"2024-03-13\\\",\\\"open\\\":0.23,\\\"high\\\":0.245,\\\"low\\\":0.23,\\\"close\\\":0.245,\\\"adjusted_close\\\":0.245,\\\"volume\\\":713161},{\\\"date\\\":\\\"2024-03-14\\\",\\\"open\\\":0.23,\\\"high\\\":0.235,\\\"low\\\":0.22,\\\"close\\\":0.22,\\\"adjusted_close\\\":0.22,\\\"volume\\\":1635669},{\\\"date\\\":\\\"2024-03-15\\\",\\\"open\\\":0.22,\\\"high\\\":0.22,\\\"low\\\":0.22,\\\"close\\\":0.22,\\\"adjusted_close\\\":0.22,\\\"volume\\\":0},{\\\"date\\\":\\\"2024-03-18\\\",\\\"open\\\":0.18,\\\"high\\\":0.18,\\\"low\\\":0.17,\\\"close\\\":0.17,\\\"adjusted_close\\\":0.17,\\\"volume\\\":14951910},{\\\"date\\\":\\\"2024-03-19\\\",\\\"open\\\":0.17,\\\"high\\\":0.175,\\\"low\\\":0.16,\\\"close\\\":0.165,\\\"adjusted_close\\\":0.165,\\\"volume\\\":12757465},{\\\"date\\\":\\\"2024-03-20\\\",\\\"open\\\":0.17,\\\"high\\\":0.18,\\\"low\\\":0.1675,\\\"close\\\":0.17,\\\"adjusted_close\\\":0.17,\\\"volume\\\":5416539},{\\\"date\\\":\\\"2024-03-21\\\",\\\"open\\\":0.175,\\\"high\\\":0.18,\\\"low\\\":0.1725,\\\"close\\\":0.18,\\\"adjusted_close\\\":0.18,\\\"volume\\\":7560988},{\\\"date\\\":\\\"2024-03-22\\\",\\\"open\\\":0.175,\\\"high\\\":0.18,\\\"low\\\":0.17,\\\"close\\\":0.17,\\\"adjusted_close\\\":0.17,\\\"volume\\\":2209717},{\\\"date\\\":\\\"2024-03-25\\\",\\\"open\\\":0.175,\\\"high\\\":0.175,\\\"low\\\":0.17,\\\"close\\\":0.175,\\\"adjusted_close\\\":0.175,\\\"volume\\\":998907},{\\\"date\\\":\\\"2024-03-26\\\",\\\"open\\\":0.17,\\\"high\\\":0.17,\\\"low\\\":0.165,\\\"close\\\":0.17,\\\"adjusted_close\\\":0.17,\\\"volume\\\":4878225},{\\\"date\\\":\\\"2024-03-27\\\",\\\"open\\\":0.165,\\\"high\\\":0.17,\\\"low\\\":0.165,\\\"close\\\":0.17,\\\"adjusted_close\\\":0.17,\\\"volume\\\":1137841},{\\\"date\\\":\\\"2024-03-28\\\",\\\"open\\\":0.17,\\\"high\\\":0.17,\\\"low\\\":0.165,\\\"close\\\":0.165,\\\"adjusted_close\\\":0.165,\\\"volume\\\":5656805}]\", :trace-redirects []}[0m\n[33m2024-05-03T17:52:21.740Z nuc12 WARN [ta.import.provider.eodhd.ds:54] - r:  ({:date \"2023-11-30\", :open 0.27, :high 0.285, :low 0.27, :close 0.275, :adjusted_close 0.275, :volume 440453} {:date \"2023-12-01\", :open 0.285, :high 0.31, :low 0.275, :close 0.305, :adjusted_close 0.305, :volume 1046797} {:date \"2023-12-04\", :open 0.295, :high 0.31, :low 0.295, :close 0.305, :adjusted_close 0.305, :volume 516418} {:date \"2023-12-05\", :open 0.295, :high 0.305, :low 0.29, :close 0.3, :adjusted_close 0.3, :volume 289953} {:date \"2023-12-06\", :open 0.28, :high 0.295, :low 0.28, :close 0.295, :adjusted_close 0.295, :volume 152281} {:date \"2023-12-07\", :open 0.285, :high 0.295, :low 0.265, :close 0.275, :adjusted_close 0.275, :volume 608332} {:date \"2023-12-08\", :open 0.275, :high 0.285, :low 0.27, :close 0.285, :adjusted_close 0.285, :volume 266436} {:date \"2023-12-11\", :open 0.275, :high 0.275, :low 0.27, :close 0.27, :adjusted_close 0.27, :volume 468034} {:date \"2023-12-12\", :open 0.2675, :high 0.2675, :low 0.255, :close 0.265, :adjusted_close 0.265, :volume 582901} {:date \"2023-12-13\", :open 0.275, :high 0.275, :low 0.255, :close 0.255, :adjusted_close 0.255, :volume 392068} {:date \"2023-12-14\", :open 0.25, :high 0.27, :low 0.2375, :close 0.27, :adjusted_close 0.27, :volume 729357} {:date \"2023-12-15\", :open 0.275, :high 0.28, :low 0.245, :close 0.245, :adjusted_close 0.245, :volume 823133} {:date \"2023-12-18\", :open 0.255, :high 0.265, :low 0.255, :close 0.265, :adjusted_close 0.265, :volume 106761} {:date \"2023-12-19\", :open 0.275, :high 0.275, :low 0.25, :close 0.26, :adjusted_close 0.26, :volume 739020} {:date \"2023-12-20\", :open 0.25, :high 0.27, :low 0.245, :close 0.255, :adjusted_close 0.255, :volume 1012618} {:date \"2023-12-21\", :open 0.255, :high 0.26, :low 0.2475, :close 0.26, :adjusted_close 0.26, :volume 408016} {:date \"2023-12-22\", :open 0.255, :high 0.26, :low 0.255, :close 0.26, :adjusted_close 0.26, :volume 56080} {:date \"2023-12-27\", :open 0.26, :high 0.265, :low 0.255, :close 0.265, :adjusted_close 0.265, :volume 380771} {:date \"2023-12-28\", :open 0.26, :high 0.265, :low 0.25, :close 0.255, :adjusted_close 0.255, :volume 303014} {:date \"2023-12-29\", :open 0.255, :high 0.265, :low 0.25, :close 0.265, :adjusted_close 0.265, :volume 422893} {:date \"2024-01-02\", :open 0.255, :high 0.265, :low 0.25, :close 0.265, :adjusted_close 0.265, :volume 233674} {:date \"2024-01-03\", :open 0.265, :high 0.27, :low 0.255, :close 0.27, :adjusted_close 0.27, :volume 387084} {:date \"2024-01-04\", :open 0.26, :high 0.27, :low 0.255, :close 0.27, :adjusted_close 0.27, :volume 378288} {:date \"2024-01-05\", :open 0.265, :high 0.275, :low 0.265, :close 0.275, :adjusted_close 0.275, :volume 555386} {:date \"2024-01-08\", :open 0.27, :high 0.275, :low 0.255, :close 0.255, :adjusted_close 0.255, :volume 343975} {:date \"2024-01-09\", :open 0.265, :high 0.265, :low 0.255, :close 0.265, :adjusted_close 0.265, :volume 176210} {:date \"2024-01-10\", :open 0.27, :high 0.28, :low 0.27, :close 0.28, :adjusted_close 0.28, :volume 1482635} {:date \"2024-01-11\", :open 0.275, :high 0.28, :low 0.265, :close 0.275, :adjusted_close 0.275, :volume 525077} {:date \"2024-01-12\", :open 0.28, :high 0.295, :low 0.275, :close 0.295, :adjusted_close 0.295, :volume 1693712} {:date \"2024-01-15\", :open 0.31, :high 0.31, :low 0.295, :close 0.3025, :adjusted_close 0.3025, :volume 1975712} {:date \"2024-01-16\", :open 0.295, :high 0.295, :low 0.26, :close 0.27, :adjusted_close 0.27, :volume 1960610} {:date \"2024-01-17\", :open 0.27, :high 0.285, :low 0.27, :close 0.28, :adjusted_close 0.28, :volume 2028568} {:date \"2024-01-18\", :open 0.265, :high 0.28, :low 0.2575, :close 0.26, :adjusted_close 0.26, :volume 772776} {:date \"2024-01-19\", :open 0.26, :high 0.27, :low 0.25, :close 0.255, :adjusted_close 0.255, :volume 597479} {:date \"2024-01-22\", :open 0.26, :high 0.26, :low 0.2425, :close 0.255, :adjusted_close 0.255, :volume 800620} {:date \"2024-01-23\", :open 0.24, :high 0.255, :low 0.22, :close 0.22, :adjusted_close 0.22, :volume 968694} {:date \"2024-01-24\", :open 0.23, :high 0.245, :low 0.23, :close 0.245, :adjusted_close 0.245, :volume 809591} {:date \"2024-01-25\", :open 0.24, :high 0.255, :low 0.24, :close 0.255, :adjusted_close 0.255, :volume 550468} {:date \"2024-01-29\", :open 0.255, :high 0.26, :low 0.245, :close 0.26, :adjusted_close 0.26, :volume 716249} {:date \"2024-01-30\", :open 0.26, :high 0.26, :low 0.24, :close 0.26, :adjusted_close 0.26, :volume 1015424} {:date \"2024-01-31\", :open 0.26, :high 0.285, :low 0.26, :close 0.285, :adjusted_close 0.285, :volume 2205056} {:date \"2024-02-01\", :open 0.285, :high 0.285, :low 0.27, :close 0.285, :adjusted_close 0.285, :volume 497860} {:date \"2024-02-02\", :open 0.3, :high 0.305, :low 0.28, :close 0.29, :adjusted_close 0.29, :volume 2106524} {:date \"2024-02-05\", :open 0.28, :high 0.2825, :low 0.265, :close 0.28, :adjusted_close 0.28, :volume 916512} {:date \"2024-02-06\", :open 0.27, :high 0.275, :low 0.26, :close 0.26, :adjusted_close 0.26, :volume 625037} {:date \"2024-02-07\", :open 0.265, :high 0.285, :low 0.26, :close 0.285, :adjusted_close 0.285, :volume 522218} {:date \"2024-02-08\", :open 0.275, :high 0.285, :low 0.265, :close 0.28, :adjusted_close 0.28, :volume 447738} {:date \"2024-02-09\", :open 0.26, :high 0.27, :low 0.26, :close 0.27, :adjusted_close 0.27, :volume 251995} {:date \"2024-02-12\", :open 0.265, :high 0.27, :low 0.26, :close 0.26, :adjusted_close 0.26, :volume 761813} {:date \"2024-02-13\", :open 0.265, :high 0.27, :low 0.26, :close 0.26, :adjusted_close 0.26, :volume 607792} {:date \"2024-02-14\", :open 0.265, :high 0.265, :low 0.25, :close 0.265, :adjusted_close 0.265, :volume 804279} {:date \"2024-02-15\", :open 0.255, :high 0.265, :low 0.255, :close 0.265, :adjusted_close 0.265, :volume 137502} {:date \"2024-02-16\", :open 0.26, :high 0.265, :low 0.255, :close 0.265, :adjusted_close 0.265, :volume 181836} {:date \"2024-02-19\", :open 0.255, :high 0.27, :low 0.255, :close 0.26, :adjusted_close 0.26, :volume 279278} {:date \"2024-02-20\", :open 0.255, :high 0.26, :low 0.245, :close 0.25, :adjusted_close 0.25, :volume 625108} {:date \"2024-02-21\", :open 0.245, :high 0.255, :low 0.23, :close 0.245, :adjusted_close 0.245, :volume 900568} {:date \"2024-02-22\", :open 0.245, :high 0.245, :low 0.235, :close 0.245, :adjusted_close 0.245, :volume 317547} {:date \"2024-02-23\", :open 0.235, :high 0.235, :low 0.2175, :close 0.225, :adjusted_close 0.225, :volume 1281150} {:date \"2024-02-26\", :open 0.25, :high 0.25, :low 0.215, :close 0.225, :adjusted_close 0.225, :volume 1529370} {:date \"2024-02-27\", :open 0.235, :high 0.24, :low 0.215, :close 0.215, :adjusted_close 0.215, :volume 1067838} {:date \"2024-02-28\", :open 0.22, :high 0.245, :low 0.22, :close 0.245, :adjusted_close 0.245, :volume 1606174} {:date \"2024-02-29\", :open 0.235, :high 0.245, :low 0.23, :close 0.235, :adjusted_close 0.235, :volume 1101317} {:date \"2024-03-01\", :open 0.235, :high 0.245, :low 0.215, :close 0.22, :adjusted_close 0.22, :volume 1799192} {:date \"2024-03-04\", :open 0.23, :high 0.24, :low 0.225, :close 0.225, :adjusted_close 0.225, :volume 1735574} {:date \"2024-03-05\", :open 0.23, :high 0.235, :low 0.22, :close 0.23, :adjusted_close 0.23, :volume 1244028} {:date \"2024-03-06\", :open 0.23, :high 0.235, :low 0.225, :close 0.235, :adjusted_close 0.235, :volume 810618} {:date \"2024-03-07\", :open 0.24, :high 0.24, :low 0.235, :close 0.24, :adjusted_close 0.24, :volume 468990} {:date \"2024-03-08\", :open 0.25, :high 0.255, :low 0.24, :close 0.25, :adjusted_close 0.25, :volume 1456487} {:date \"2024-03-11\", :open 0.24, :high 0.24, :low 0.225, :close 0.23, :adjusted_close 0.23, :volume 762587} {:date \"2024-03-12\", :open 0.23, :high 0.235, :low 0.225, :close 0.225, :adjusted_close 0.225, :volume 593534} {:date \"2024-03-13\", :open 0.23, :high 0.245, :low 0.23, :close 0.245, :adjusted_close 0.245, :volume 713161} {:date \"2024-03-14\", :open 0.23, :high 0.235, :low 0.22, :close 0.22, :adjusted_close 0.22, :volume 1635669} {:date \"2024-03-15\", :open 0.22, :high 0.22, :low 0.22, :close 0.22, :adjusted_close 0.22, :volume 0} {:date \"2024-03-18\", :open 0.18, :high 0.18, :low 0.17, :close 0.17, :adjusted_close 0.17, :volume 14951910} {:date \"2024-03-19\", :open 0.17, :high 0.175, :low 0.16, :close 0.165, :adjusted_close 0.165, :volume 12757465} {:date \"2024-03-20\", :open 0.17, :high 0.18, :low 0.1675, :close 0.17, :adjusted_close 0.17, :volume 5416539} {:date \"2024-03-21\", :open 0.175, :high 0.18, :low 0.1725, :close 0.18, :adjusted_close 0.18, :volume 7560988} {:date \"2024-03-22\", :open 0.175, :high 0.18, :low 0.17, :close 0.17, :adjusted_close 0.17, :volume 2209717} {:date \"2024-03-25\", :open 0.175, :high 0.175, :low 0.17, :close 0.175, :adjusted_close 0.175, :volume 998907} {:date \"2024-03-26\", :open 0.17, :high 0.17, :low 0.165, :close 0.17, :adjusted_close 0.17, :volume 4878225} {:date \"2024-03-27\", :open 0.165, :high 0.17, :low 0.165, :close 0.17, :adjusted_close 0.17, :volume 1137841} {:date \"2024-03-28\", :open 0.17, :high 0.17, :low 0.165, :close 0.165, :adjusted_close 0.165, :volume 5656805})[0m\n",
+            :id :4992d8f4-6cea-483d-a04b-0de8b896b6d5,
+            :code "; eodhd\n\n(b/get-bars im\n            {:asset \"AEE.AU\"\n             :calendar [:us :d]\n             :import :eodhd}\n            {:start (-> \"2023-12-01T00:00:00Z\" t/instant)\n             :end (-> \"2024-04-01T00:00:00Z\" t/instant)})",
+            :ns "quanta.notebook.docs.import-manager",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [82 10]:\n\n|                :date |  :open |  :high |   :low | :close | :adjusted_close |  :volume | :asset | :epoch | :ticks |\n|----------------------|-------:|-------:|-------:|-------:|----------------:|---------:|--------|-------:|-------:|\n| 2023-11-30T00:00:00Z | 0.2700 | 0.2850 | 0.2700 |  0.275 |           0.275 |   440453 | AEE.AU |      0 |      0 |\n| 2023-12-01T00:00:00Z | 0.2850 | 0.3100 | 0.2750 |  0.305 |           0.305 |  1046797 | AEE.AU |      0 |      0 |\n| 2023-12-04T00:00:00Z | 0.2950 | 0.3100 | 0.2950 |  0.305 |           0.305 |   516418 | AEE.AU |      0 |      0 |\n| 2023-12-05T00:00:00Z | 0.2950 | 0.3050 | 0.2900 |  0.300 |           0.300 |   289953 | AEE.AU |      0 |      0 |\n| 2023-12-06T00:00:00Z | 0.2800 | 0.2950 | 0.2800 |  0.295 |           0.295 |   152281 | AEE.AU |      0 |      0 |\n| 2023-12-07T00:00:00Z | 0.2850 | 0.2950 | 0.2650 |  0.275 |           0.275 |   608332 | AEE.AU |      0 |      0 |\n| 2023-12-08T00:00:00Z | 0.2750 | 0.2850 | 0.2700 |  0.285 |           0.285 |   266436 | AEE.AU |      0 |      0 |\n| 2023-12-11T00:00:00Z | 0.2750 | 0.2750 | 0.2700 |  0.270 |           0.270 |   468034 | AEE.AU |      0 |      0 |\n| 2023-12-12T00:00:00Z | 0.2675 | 0.2675 | 0.2550 |  0.265 |           0.265 |   582901 | AEE.AU |      0 |      0 |\n| 2023-12-13T00:00:00Z | 0.2750 | 0.2750 | 0.2550 |  0.255 |           0.255 |   392068 | AEE.AU |      0 |      0 |\n|                  ... |    ... |    ... |    ... |    ... |             ... |      ... |    ... |    ... |    ... |\n| 2024-03-14T00:00:00Z | 0.2300 | 0.2350 | 0.2200 |  0.220 |           0.220 |  1635669 | AEE.AU |      0 |      0 |\n| 2024-03-15T00:00:00Z | 0.2200 | 0.2200 | 0.2200 |  0.220 |           0.220 |        0 | AEE.AU |      0 |      0 |\n| 2024-03-18T00:00:00Z | 0.1800 | 0.1800 | 0.1700 |  0.170 |           0.170 | 14951910 | AEE.AU |      0 |      0 |\n| 2024-03-19T00:00:00Z | 0.1700 | 0.1750 | 0.1600 |  0.165 |           0.165 | 12757465 | AEE.AU |      0 |      0 |\n| 2024-03-20T00:00:00Z | 0.1700 | 0.1800 | 0.1675 |  0.170 |           0.170 |  5416539 | AEE.AU |      0 |      0 |\n| 2024-03-21T00:00:00Z | 0.1750 | 0.1800 | 0.1725 |  0.180 |           0.180 |  7560988 | AEE.AU |      0 |      0 |\n| 2024-03-22T00:00:00Z | 0.1750 | 0.1800 | 0.1700 |  0.170 |           0.170 |  2209717 | AEE.AU |      0 |      0 |\n| 2024-03-25T00:00:00Z | 0.1750 | 0.1750 | 0.1700 |  0.175 |           0.175 |   998907 | AEE.AU |      0 |      0 |\n| 2024-03-26T00:00:00Z | 0.1700 | 0.1700 | 0.1650 |  0.170 |           0.170 |  4878225 | AEE.AU |      0 |      0 |\n| 2024-03-27T00:00:00Z | 0.1650 | 0.1700 | 0.1650 |  0.170 |           0.170 |  1137841 | AEE.AU |      0 |      0 |\n| 2024-03-28T00:00:00Z | 0.1700 | 0.1700 | 0.1650 |  0.165 |           0.165 |  5656805 | AEE.AU |      0 |      0 |\n"]]}
+           {:out "[33m2024-05-03T17:52:21.747Z nuc12 WARN [ta.import.provider.eodhd.ds:50] - get-bars:  {:asset \"AEE.AU\", :calendar [:us :d], :import :eodhd} {:start #time/instant \"2020-12-01T00:00:00Z\", :end #time/instant \"2024-04-01T00:00:00Z\"}[0m\n[33m2024-05-03T17:52:21.747Z nuc12 WARN [ta.import.provider.eodhd.raw:37] - getting bars asset:  AEE.AU from:  2020-11-30  to:  2024-03-31[0m\n[33m2024-05-03T17:52:22.963Z nuc12 WARN [ta.import.provider.eodhd.raw:30] - eodhd response status:  200[0m\n[33m2024-05-03T17:52:22.964Z nuc12 WARN [ta.import.provider.eodhd.raw:31] - eodhd response:  {:cached nil, :request-time 1213, :repeatable? false, :protocol-version {:name \"HTTP\", :major 1, :minor 1}, :streaming? true, :http-client #object[org.apache.http.impl.client.InternalHttpClient 0x1688596b \"org.apache.http.impl.client.InternalHttpClient@1688596b\"], :chunked? true, :reason-phrase \"OK\", :headers {\"Access-Control-Allow-Headers\" \"Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With\", \"Server\" \"nginx/1.19.10\", \"Content-Type\" \"application/json\", \"Access-Control-Allow-Origin\" \"*\", \"X-RateLimit-Limit\" \"2000\", \"X-RateLimit-Remaining\" \"1998\", \"Connection\" \"close\", \"Transfer-Encoding\" \"chunked\", \"Access-Control-Allow-Methods\" \"GET, POST, PUT, DELETE, OPTIONS\", \"Date\" \"Fri, 03 May 2024 17:52:22 GMT\", \"Vary\" \"Accept-Encoding\", \"Access-Control-Allow-Credentials\" \"true\", \"Cache-Control\" \"no-cache, private\"}, :orig-content-encoding \"gzip\", :status 200, :length -1, :body \"[{\\\"date\\\":\\\"2023-05-03\\\",\\\"open\\\":0.19,\\\"high\\\":0.1925,\\\"low\\\":0.185,\\\"close\\\":0.19,\\\"adjusted_close\\\":0.19,\\\"volume\\\":1031720},{\\\"date\\\":\\\"2023-05-04\\\",\\\"open\\\":0.19,\\\"high\\\":0.1925,\\\"low\\\":0.185,\\\"close\\\":0.19,\\\"adjusted_close\\\":0.19,\\\"volume\\\":876659},{\\\"date\\\":\\\"2023-05-05\\\",\\\"open\\\":0.185,\\\"high\\\":0.185,\\\"low\\\":0.18,\\\"close\\\":0.18,\\\"adjusted_close\\\":0.18,\\\"volume\\\":701329},{\\\"date\\\":\\\"2023-05-08\\\",\\\"open\\\":0.18,\\\"high\\\":0.1825,\\\"low\\\":0.175,\\\"close\\\":0.18,\\\"adjusted_close\\\":0.18,\\\"volume\\\":779787},{\\\"date\\\":\\\"2023-05-09\\\",\\\"open\\\":0.175,\\\"high\\\":0.18,\\\"low\\\":0.17,\\\"close\\\":0.18,\\\"adjusted_close\\\":0.18,\\\"volume\\\":798172},{\\\"date\\\":\\\"2023-05-10\\\",\\\"open\\\":0.18,\\\"high\\\":0.195,\\\"low\\\":0.1775,\\\"close\\\":0.185,\\\"adjusted_close\\\":0.185,\\\"volume\\\":1753849},{\\\"date\\\":\\\"2023-05-11\\\",\\\"open\\\":0.19,\\\"high\\\":0.19,\\\"low\\\":0.185,\\\"close\\\":0.19,\\\"adjusted_close\\\":0.19,\\\"volume\\\":154782},{\\\"date\\\":\\\"2023-05-12\\\",\\\"open\\\":0.185,\\\"high\\\":0.19,\\\"low\\\":0.1825,\\\"close\\\":0.19,\\\"adjusted_close\\\":0.19,\\\"volume\\\":356100},{\\\"date\\\":\\\"2023-05-15\\\",\\\"open\\\":0.19,\\\"high\\\":0.195,\\\"low\\\":0.185,\\\"close\\\":0.195,\\\"adjusted_close\\\":0.195,\\\"volume\\\":116690},{\\\"date\\\":\\\"2023-05-16\\\",\\\"open\\\":0.185,\\\"high\\\":0.185,\\\"low\\\":0.185,\\\"close\\\":0.185,\\\"adjusted_close\\\":0.185,\\\"volume\\\":294076},{\\\"date\\\":\\\"2023-05-17\\\",\\\"open\\\":0.185,\\\"high\\\":0.185,\\\"low\\\":0.175,\\\"close\\\":0.18,\\\"adjusted_close\\\":0.18,\\\"volume\\\":404399},{\\\"date\\\":\\\"2023-05-18\\\",\\\"open\\\":0.18,\\\"high\\\":0.185,\\\"low\\\":0.18,\\\"close\\\":0.18,\\\"adjusted_close\\\":0.18,\\\"volume\\\":61099},{\\\"date\\\":\\\"2023-05-19\\\",\\\"open\\\":0.18,\\\"high\\\":0.185,\\\"low\\\":0.175,\\\"close\\\":0.18,\\\"adjusted_close\\\":0.18,\\\"volume\\\":450848},{\\\"date\\\":\\\"2023-05-22\\\",\\\"open\\\":0.18,\\\"high\\\":0.18,\\\"low\\\":0.18,\\\"close\\\":0.18,\\\"adjusted_close\\\":0.18,\\\"volume\\\":260018},{\\\"date\\\":\\\"2023-05-23\\\",\\\"open\\\":0.185,\\\"high\\\":0.185,\\\"low\\\":0.18,\\\"close\\\":0.18,\\\"adjusted_close\\\":0.18,\\\"volume\\\":569302},{\\\"date\\\":\\\"2023-05-24\\\",\\\"open\\\":0.18,\\\"high\\\":0.18,\\\"low\\\":0.17,\\\"close\\\":0.17,\\\"adjusted_close\\\":0.17,\\\"volume\\\":803419},{\\\"date\\\":\\\"2023-05-25\\\",\\\"open\\\":0.17,\\\"high\\\":0.175,\\\"low\\\":0.17,\\\"close\\\":0.17,\\\"adjusted_close\\\":0.17,\\\"volume\\\":92175},{\\\"date\\\":\\\"2023-05-26\\\",\\\"open\\\":0.17,\\\"high\\\":0.17,\\\"low\\\":0.17,\\\"close\\\":0.17,\\\"adjusted_close\\\":0.17,\\\"volume\\\":331999},{\\\"date\\\":\\\"2023-05-29\\\",\\\"open\\\":0.17,\\\"high\\\":0.175,\\\"low\\\":0.165,\\\"close\\\":0.17,\\\"adjusted_close\\\":0.17,\\\"volume\\\":360654},{\\\"date\\\":\\\"2023-05-30\\\",\\\"open\\\":0.17,\\\"high\\\":0.17,\\\"low\\\":0.165,\\\"close\\\":0.165,\\\"adjusted_close\\\":0.165,\\\"volume\\\":209122},{\\\"date\\\":\\\"2023-05-31\\\",\\\"open\\\":0.165,\\\"high\\\":0.17,\\\"low\\\":0.16,\\\"close\\\":0.165,\\\"adjusted_close\\\":0.165,\\\"volume\\\":395600},{\\\"date\\\":\\\"2023-06-01\\\",\\\"open\\\":0.17,\\\"high\\\":0.17,\\\"low\\\":0.165,\\\"close\\\":0.165,\\\"adjusted_close\\\":0.165,\\\"volume\\\":854456},{\\\"date\\\":\\\"2023-06-02\\\",\\\"open\\\":0.175,\\\"high\\\":0.18,\\\"low\\\":0.17,\\\"close\\\":0.18,\\\"adjusted_close\\\":0.18,\\\"volume\\\":611053},{\\\"date\\\":\\\"2023-06-05\\\",\\\"open\\\":0.18,\\\"high\\\":0.19,\\\"low\\\":0.175,\\\"close\\\":0.19,\\\"adjusted_close\\\":0.19,\\\"volume\\\":134371},{\\\"date\\\":\\\"2023-06-06\\\",\\\"open\\\":0.185,\\\"high\\\":0.19,\\\"low\\\":0.18,\\\"close\\\":0.185,\\\"adjusted_close\\\":0.185,\\\"volume\\\":908525},{\\\"date\\\":\\\"2023-06-07\\\",\\\"open\\\":0.18,\\\"high\\\":0.185,\\\"low\\\":0.175,\\\"close\\\":0.185,\\\"adjusted_close\\\":0.185,\\\"volume\\\":196146},{\\\"date\\\":\\\"2023-06-08\\\",\\\"open\\\":0.18,\\\"high\\\":0.185,\\\"low\\\":0.1775,\\\"close\\\":0.185,\\\"adjusted_close\\\":0.185,\\\"volume\\\":382802},{\\\"date\\\":\\\"2023-06-09\\\",\\\"open\\\":0.185,\\\"high\\\":0.19,\\\"low\\\":0.18,\\\"close\\\":0.185,\\\"adjusted_close\\\":0.185,\\\"volume\\\":619976},{\\\"date\\\":\\\"2023-06-13\\\",\\\"open\\\":0.185,\\\"high\\\":0.195,\\\"low\\\":0.185,\\\"close\\\":0.195,\\\"adjusted_close\\\":0.195,\\\"volume\\\":2114594},{\\\"date\\\":\\\"2023-06-14\\\",\\\"open\\\":0.195,\\\"high\\\":0.1975,\\\"low\\\":0.18,\\\"close\\\":0.18,\\\"adjusted_close\\\":0.18,\\\"volume\\\":1063132},{\\\"date\\\":\\\"2023-06-15\\\",\\\"open\\\":0.185,\\\"high\\\":0.19,\\\"low\\\":0.185,\\\"close\\\":0.19,\\\"adjusted_close\\\":0.19,\\\"volume\\\":509721},{\\\"date\\\":\\\"2023-06-16\\\",\\\"open\\\":0.19,\\\"high\\\":0.2,\\\"low\\\":0.185,\\\"close\\\":0.2,\\\"adjusted_close\\\":0.2,\\\"volume\\\":722585},{\\\"date\\\":\\\"2023-06-19\\\",\\\"open\\\":0.19,\\\"high\\\":0.195,\\\"low\\\":0.185,\\\"close\\\":0.185,\\\"adjusted_close\\\":0.185,\\\"volume\\\":303393},{\\\"date\\\":\\\"2023-06-20\\\",\\\"open\\\":0.185,\\\"high\\\":0.19,\\\"low\\\":0.185,\\\"close\\\":0.19,\\\"adjusted_close\\\":0.19,\\\"volume\\\":541098},{\\\"date\\\":\\\"2023-06-21\\\",\\\"open\\\":0.19,\\\"high\\\":0.205,\\\"low\\\":0.19,\\\"close\\\":0.2,\\\"adjusted_close\\\":0.2,\\\"volume\\\":719337},{\\\"date\\\":\\\"2023-06-22\\\",\\\"open\\\":0.2,\\\"high\\\":0.205,\\\"low\\\":0.2,\\\"close\\\":0.205,\\\"adjusted_close\\\":0.205,\\\"volume\\\":771694},{\\\"date\\\":\\\"2023-06-23\\\",\\\"open\\\":0.2,\\\"high\\\":0.21,\\\"low\\\":0.19,\\\"close\\\":0.2,\\\"adjusted_close\\\":0.2,\\\"volume\\\":1444271},{\\\"date\\\":\\\"2023-06-26\\\",\\\"open\\\":0.205,\\\"high\\\":0.205,\\\"low\\\":0.19,\\\"close\\\":0.19,\\\"adjusted_close\\\":0.19,\\\"volume\\\":82474},{\\\"date\\\":\\\"2023-06-27\\\",\\\"open\\\":0.19,\\\"high\\\":0.19,\\\"low\\\":0.18,\\\"close\\\":0.18,\\\"adjusted_close\\\":0.18,\\\"volume\\\":582072},{\\\"date\\\":\\\"2023-06-28\\\",\\\"open\\\":0.175,\\\"high\\\":0.185,\\\"low\\\":0.175,\\\"close\\\":0.185,\\\"adjusted_close\\\":0.185,\\\"volume\\\":491141},{\\\"date\\\":\\\"2023-06-29\\\",\\\"open\\\":0.185,\\\"high\\\":0.185,\\\"low\\\":0.18,\\\"close\\\":0.18,\\\"adjusted_close\\\":0.18,\\\"volume\\\":156996},{\\\"date\\\":\\\"2023-06-30\\\",\\\"open\\\":0.185,\\\"high\\\":0.205,\\\"low\\\":0.185,\\\"close\\\":0.205,\\\"adjusted_close\\\":0.205,\\\"volume\\\":346419},{\\\"date\\\":\\\"2023-07-03\\\",\\\"open\\\":0.2,\\\"high\\\":0.205,\\\"low\\\":0.195,\\\"close\\\":0.2,\\\"adjusted_close\\\":0.2,\\\"volume\\\":507009},{\\\"date\\\":\\\"2023-07-04\\\",\\\"open\\\":0.21,\\\"high\\\":0.21,\\\"low\\\":0.195,\\\"close\\\":0.21,\\\"adjusted_close\\\":0.21,\\\"volume\\\":1237199},{\\\"date\\\":\\\"2023-07-05\\\",\\\"open\\\":0.205,\\\"high\\\":0.21,\\\"low\\\":0.2,\\\"close\\\":0.21,\\\"adjusted_close\\\":0.21,\\\"volume\\\":94101},{\\\"date\\\":\\\"2023-07-06\\\",\\\"open\\\":0.205,\\\"high\\\":0.21,\\\"low\\\":0.195,\\\"close\\\":0.205,\\\"adjusted_close\\\":0.205,\\\"volume\\\":137245},{\\\"date\\\":\\\"2023-07-07\\\",\\\"open\\\":0.195,\\\"high\\\":0.195,\\\"low\\\":0.185,\\\"close\\\":0.19,\\\"adjusted_close\\\":0.19,\\\"volume\\\":378692},{\\\"date\\\":\\\"2023-07-10\\\",\\\"open\\\":0.2,\\\"high\\\":0.2,\\\"low\\\":0.195,\\\"close\\\":0.195,\\\"adjusted_close\\\":0.195,\\\"volume\\\":173916},{\\\"date\\\":\\\"2023-07-11\\\",\\\"open\\\":0.195,\\\"high\\\":0.2,\\\"low\\\":0.19,\\\"close\\\":0.19,\\\"adjusted_close\\\":0.19,\\\"volume\\\":122923},{\\\"date\\\":\\\"2023-07-12\\\",\\\"open\\\":0.195,\\\"high\\\":0.2,\\\"low\\\":0.195,\\\"close\\\":0.2,\\\"adjusted_close\\\":0.2,\\\"volume\\\":124360},{\\\"date\\\":\\\"2023-07-13\\\",\\\"open\\\":0.195,\\\"high\\\":0.2,\\\"low\\\":0.19,\\\"close\\\":0.2,\\\"adjusted_close\\\":0.2,\\\"volume\\\":574394},{\\\"date\\\":\\\"2023-07-14\\\",\\\"open\\\":0.2,\\\"high\\\":0.21,\\\"low\\\":0.2,\\\"close\\\":0.205,\\\"adjusted_close\\\":0.205,\\\"volume\\\":1059333},{\\\"date\\\":\\\"2023-07-17\\\",\\\"open\\\":0.2,\\\"high\\\":0.21,\\\"low\\\":0.195,\\\"close\\\":0.21,\\\"adjusted_close\\\":0.21,\\\"volume\\\":506514},{\\\"date\\\":\\\"2023-07-18\\\",\\\"open\\\":0.205,\\\"high\\\":0.21,\\\"low\\\":0.2,\\\"close\\\":0.205,\\\"adjusted_close\\\":0.205,\\\"volume\\\":526633},{\\\"date\\\":\\\"2023-07-19\\\",\\\"open\\\":0.21,\\\"high\\\":0.21,\\\"low\\\":0.205,\\\"close\\\":0.21,\\\"adjusted_close\\\":0.21,\\\"volume\\\":512894},{\\\"date\\\":\\\"2023-07-20\\\",\\\"open\\\":0.21,\\\"high\\\":0.21,\\\"low\\\":0.205,\\\"close\\\":0.21,\\\"adjusted_close\\\":0.21,\\\"volume\\\":371620},{\\\"date\\\":\\\"2023-07-21\\\",\\\"open\\\":0.21,\\\"high\\\":0.21,\\\"low\\\":0.21,\\\"close\\\":0.21,\\\"adjusted_close\\\":0.21,\\\"volume\\\":75966},{\\\"date\\\":\\\"2023-07-24\\\",\\\"open\\\":0.21,\\\"high\\\":0.21,\\\"low\\\":0.205,\\\"close\\\":0.21,\\\"adjusted_close\\\":0.21,\\\"volume\\\":158570},{\\\"date\\\":\\\"2023-07-25\\\",\\\"open\\\":0.2,\\\"high\\\":0.205,\\\"low\\\":0.195,\\\"close\\\":0.205,\\\"adjusted_close\\\":0.205,\\\"volume\\\":346528},{\\\"date\\\":\\\"2023-07-26\\\",\\\"open\\\":0.205,\\\"high\\\":0.205,\\\"low\\\":0.1975,\\\"close\\\":0.2,\\\"adjusted_close\\\":0.2,\\\"volume\\\":69170},{\\\"date\\\":\\\"2023-07-27\\\",\\\"open\\\":0.2,\\\"high\\\":0.2,\\\"low\\\":0.195,\\\"close\\\":0.2,\\\"adjusted_close\\\":0.2,\\\"volume\\\":120753},{\\\"date\\\":\\\"2023-07-28\\\",\\\"open\\\":0.195,\\\"high\\\":0.195,\\\"low\\\":0.19,\\\"close\\\":0.195,\\\"adjusted_close\\\":0.195,\\\"volume\\\":693822},{\\\"date\\\":\\\"2023-07-31\\\",\\\"open\\\":0.2,\\\"high\\\":0.2,\\\"low\\\":0.19,\\\"close\\\":0.195,\\\"adjusted_close\\\":0.195,\\\"volume\\\":1580993},{\\\"date\\\":\\\"2023-08-01\\\",\\\"open\\\":0.2,\\\"high\\\":0.21,\\\"low\\\":0.2,\\\"close\\\":0.21,\\\"adjusted_close\\\":0.21,\\\"volume\\\":314153},{\\\"date\\\":\\\"2023-08-02\\\",\\\"open\\\":0.205,\\\"high\\\":0.22,\\\"low\\\":0.205,\\\"close\\\":0.22,\\\"adjusted_close\\\":0.22,\\\"volume\\\":1365121},{\\\"date\\\":\\\"2023-08-03\\\",\\\"open\\\":0.22,\\\"high\\\":0.23,\\\"low\\\":0.215,\\\"close\\\":0.23,\\\"adjusted_close\\\":0.23,\\\"volume\\\":757844},{\\\"date\\\":\\\"2023-08-04\\\",\\\"open\\\":0.225,\\\"high\\\":0.23,\\\"low\\\":0.22,\\\"close\\\":0.23,\\\"adjusted_close\\\":0.23,\\\"volume\\\":115125},{\\\"date\\\":\\\"2023-08-07\\\",\\\"open\\\":0.23,\\\"high\\\":0.235,\\\"low\\\":0.225,\\\"close\\\":0.23,\\\"adjusted_close\\\":0.23,\\\"volume\\\":911723},{\\\"date\\\":\\\"2023-08-08\\\",\\\"open\\\":0.23,\\\"high\\\":0.23,\\\"low\\\":0.225,\\\"close\\\":0.23,\\\"adjusted_close\\\":0.23,\\\"volume\\\":9849},{\\\"date\\\":\\\"2023-08-09\\\",\\\"open\\\":0.22,\\\"high\\\":0.225,\\\"low\\\":0.22,\\\"close\\\":0.225,\\\"adjusted_close\\\":0.225,\\\"volume\\\":38654},{\\\"date\\\":\\\"2023-08-10\\\",\\\"open\\\":0.22,\\\"high\\\":0.235,\\\"low\\\":0.215,\\\"close\\\":0.235,\\\"adjusted_close\\\":0.235,\\\"volume\\\":656449},{\\\"date\\\":\\\"2023-08-11\\\",\\\"open\\\":0.23,\\\"high\\\":0.235,\\\"low\\\":0.225,\\\"close\\\":0.235,\\\"adjusted_close\\\":0.235,\\\"volume\\\":283363},{\\\"date\\\":\\\"2023-08-14\\\",\\\"open\\\":0.23,\\\"high\\\":0.235,\\\"low\\\":0.225,\\\"close\\\":0.235,\\\"adjusted_close\\\":0.235,\\\"volume\\\":109451},{\\\"date\\\":\\\"2023-08-15\\\",\\\"open\\\":0.235,\\\"high\\\":0.235,\\\"low\\\":0.23,\\\"close\\\":0.235,\\\"adjusted_close\\\":0.235,\\\"volume\\\":311666},{\\\"date\\\":\\\"2023-08-16\\\",\\\"open\\\":0.23,\\\"high\\\":0.23,\\\"low\\\":0.22,\\\"close\\\":0.23,\\\"adjusted_close\\\":0.23,\\\"volume\\\":29597},{\\\"date\\\":\\\"2023-08-17\\\",\\\"open\\\":0.23,\\\"high\\\":0.23,\\\"low\\\":0.22,\\\"close\\\":0.23,\\\"adjusted_close\\\":0.23,\\\"volume\\\":193540},{\\\"date\\\":\\\"2023-08-18\\\",\\\"open\\\":0.225,\\\"high\\\":0.23,\\\"low\\\":0.22,\\\"close\\\":0.23,\\\"adjusted_close\\\":0.23,\\\"volume\\\":340183},{\\\"date\\\":\\\"2023-08-21\\\",\\\"open\\\":0.23,\\\"high\\\":0.24,\\\"low\\\":0.23,\\\"close\\\":0.24,\\\"adjusted_close\\\":0.24,\\\"volume\\\":387940},{\\\"date\\\":\\\"2023-08-22\\\",\\\"open\\\":0.24,\\\"high\\\":0.25,\\\"low\\\":0.24,\\\"close\\\":0.25,\\\"adjusted_close\\\":0.25,\\\"volume\\\":1278467},{\\\"date\\\":\\\"2023-08-23\\\",\\\"open\\\":0.255,\\\"high\\\":0.26,\\\"low\\\":0.25,\\\"close\\\":0.255,\\\"adjusted_close\\\":0.255,\\\"volume\\\":1004282},{\\\"date\\\":\\\"2023-08-24\\\",\\\"open\\\":0.26,\\\"high\\\":0.275,\\\"low\\\":0.26,\\\"close\\\":0.275,\\\"adjusted_close\\\":0.275,\\\"volume\\\":1384980},{\\\"date\\\":\\\"2023-08-25\\\",\\\"open\\\":0.275,\\\"high\\\":0.275,\\\"low\\\":0.26,\\\"close\\\":0.27,\\\"adjusted_close\\\":0.27,\\\"volume\\\":278179},{\\\"date\\\":\\\"2023-08-28\\\",\\\"open\\\":0.275,\\\"high\\\":0.28,\\\"low\\\":0.265,\\\"close\\\":0.28,\\\"adjusted_close\\\":0.28,\\\"volume\\\":613868},{\\\"date\\\":\\\"2023-08-29\\\",\\\"open\\\":0.28,\\\"high\\\":0.28,\\\"low\\\":0.265,\\\"close\\\":0.275,\\\"adjusted_close\\\":0.275,\\\"volume\\\":268185},{\\\"date\\\":\\\"2023-08-30\\\",\\\"open\\\":0.275,\\\"high\\\":0.275,\\\"low\\\":0.26,\\\"close\\\":0.275,\\\"adjusted_close\\\":0.275,\\\"volume\\\":157318},{\\\"date\\\":\\\"2023-08-31\\\",\\\"open\\\":0.27,\\\"high\\\":0.275,\\\"low\\\":0.265,\\\"close\\\":0.275,\\\"adjusted_close\\\":0.275,\\\"volume\\\":257665},{\\\"date\\\":\\\"2023-09-01\\\",\\\"open\\\":0.275,\\\"high\\\":0.285,\\\"low\\\":0.27,\\\"close\\\":0.28,\\\"adjusted_close\\\":0.28,\\\"volume\\\":355296},{\\\"date\\\":\\\"2023-09-04\\\",\\\"open\\\":0.285,\\\"high\\\":0.31,\\\"low\\\":0.285,\\\"close\\\":0.31,\\\"adjusted_close\\\":0.31,\\\"volume\\\":3033689},{\\\"date\\\":\\\"2023-09-05\\\",\\\"open\\\":0.295,\\\"high\\\":0.305,\\\"low\\\":0.29,\\\"close\\\":0.3,\\\"adjusted_close\\\":0.3,\\\"volume\\\":792212},{\\\"date\\\":\\\"2023-09-06\\\",\\\"open\\\":0.3,\\\"high\\\":0.31,\\\"low\\\":0.29,\\\"close\\\":0.31,\\\"adjusted_close\\\":0.31,\\\"volume\\\":1160783},{\\\"date\\\":\\\"2023-09-07\\\",\\\"open\\\":0.31,\\\"high\\\":0.31,\\\"low\\\":0.285,\\\"close\\\":0.3,\\\"adjusted_close\\\":0.3,\\\"volume\\\":238976},{\\\"date\\\":\\\"2023-09-08\\\",\\\"open\\\":0.29,\\\"high\\\":0.305,\\\"low\\\":0.29,\\\"close\\\":0.305,\\\"adjusted_close\\\":0.305,\\\"volume\\\":396005},{\\\"date\\\":\\\"2023-09-11\\\",\\\"open\\\":0.3,\\\"high\\\":0.3,\\\"low\\\":0.28,\\\"close\\\":0.285,\\\"adjusted_close\\\":0.285,\\\"volume\\\":478609},{\\\"date\\\":\\\"2023-09-12\\\",\\\"open\\\":0.29,\\\"high\\\":0.295,\\\"low\\\":0.285,\\\"close\\\":0.295,\\\"adjusted_close\\\":0.295,\\\"volume\\\":455818},{\\\"date\\\":\\\"2023-09-13\\\",\\\"open\\\":0.295,\\\"high\\\":0.3,\\\"low\\\":0.285,\\\"close\\\":0.3,\\\"adjusted_close\\\":0.3,\\\"volume\\\":380767},{\\\"date\\\":\\\"2023-09-14\\\",\\\"open\\\":0.31,\\\"high\\\":0.32,\\\"low\\\":0.305,\\\"close\\\":0.315,\\\"adjusted_close\\\":0.315,\\\"volume\\\":1604382},{\\\"date\\\":\\\"2023-09-15\\\",\\\"open\\\":0.32,\\\"high\\\":0.325,\\\"low\\\":0.31,\\\"close\\\":0.32,\\\"adjusted_close\\\":0.32,\\\"volume\\\":1260867},{\\\"date\\\":\\\"2023-09-18\\\",\\\"open\\\":0.315,\\\"high\\\":0.33,\\\"low\\\":0.305,\\\"close\\\":0.32,\\\"adjusted_close\\\":0.32,\\\"volume\\\":1281841},{\\\"date\\\":\\\"2023-09-19\\\",\\\"open\\\":0.315,\\\"high\\\":0.325,\\\"low\\\":0.31,\\\"close\\\":0.315,\\\"adjusted_close\\\":0.315,\\\"volume\\\":521479},{\\\"date\\\":\\\"2023-09-20\\\",\\\"open\\\":0.31,\\\"high\\\":0.31,\\\"low\\\":0.2925,\\\"close\\\":0.31,\\\"adjusted_close\\\":0.31,\\\"volume\\\":1011940},{\\\"date\\\":\\\"2023-09-21\\\",\\\"open\\\":0.3,\\\"high\\\":0.32,\\\"low\\\":0.295,\\\"close\\\":0.305,\\\"adjusted_close\\\":0.305,\\\"volume\\\":350812},{\\\"date\\\":\\\"2023-09-22\\\",\\\"open\\\":0.3,\\\"high\\\":0.3,\\\"low\\\":0.29,\\\"close\\\":0.295,\\\"adjusted_close\\\":0.295,\\\"volume\\\":512834},{\\\"date\\\":\\\"2023-09-25\\\",\\\"open\\\":0.32,\\\"high\\\":0.325,\\\"low\\\":0.315,\\\"close\\\":0.325,\\\"adjusted_close\\\":0.325,\\\"volume\\\":1482852},{\\\"date\\\":\\\"2023-09-26\\\",\\\"open\\\":0.33,\\\"high\\\":0.335,\\\"low\\\":0.325,\\\"close\\\":0.335,\\\"adjusted_close\\\":0.335,\\\"volume\\\":1573456},{\\\"date\\\":\\\"2023-09-27\\\",\\\"open\\\":0.33,\\\"high\\\":0.34,\\\"low\\\":0.325,\\\"close\\\":0.34,\\\"adjusted_close\\\":0.34,\\\"volume\\\":1438614},{\\\"date\\\":\\\"2023-09-28\\\",\\\"open\\\":0.335,\\\"high\\\":0.34,\\\"low\\\":0.315,\\\"close\\\":0.315,\\\"adjusted_close\\\":0.315,\\\"volume\\\":681002},{\\\"date\\\":\\\"2023-09-29\\\",\\\"open\\\":0.325,\\\"high\\\":0.345,\\\"low\\\":0.315,\\\"close\\\":0.34,\\\"adjusted_close\\\":0.34,\\\"volume\\\":4373063},{\\\"date\\\":\\\"2023-10-02\\\",\\\"open\\\":0.32,\\\"high\\\":0.355,\\\"low\\\":0.32,\\\"close\\\":0.355,\\\"adjusted_close\\\":0.355,\\\"volume\\\":1345704},{\\\"date\\\":\\\"2023-10-03\\\",\\\"open\\\":0.345,\\\"high\\\":0.345,\\\"low\\\":0.33,\\\"close\\\":0.33,\\\"adjusted_close\\\":0.33,\\\"volume\\\":393921},{\\\"date\\\":\\\"2023-10-04\\\",\\\"open\\\":0.33,\\\"high\\\":0.33,\\\"low\\\":0.31,\\\"close\\\":0.32,\\\"adjusted_close\\\":0.32,\\\"volume\\\":973833},{\\\"date\\\":\\\"2023-10-05\\\",\\\"open\\\":0.32,\\\"high\\\":0.32,\\\"low\\\":0.31,\\\"close\\\":0.32,\\\"adjusted_close\\\":0.32,\\\"volume\\\":504182},{\\\"date\\\":\\\"2023-10-06\\\",\\\"open\\\":0.33,\\\"high\\\":0.33,\\\"low\\\":0.315,\\\"close\\\":0.32,\\\"adjusted_close\\\":0.32,\\\"volume\\\":665610},{\\\"date\\\":\\\"2023-10-09\\\",\\\"open\\\":0.315,\\\"high\\\":0.315,\\\"low\\\":0.3,\\\"close\\\":0.31,\\\"adjusted_close\\\":0.31,\\\"volume\\\":697129},{\\\"date\\\":\\\"2023-10-10\\\",\\\"open\\\":0.3,\\\"high\\\":0.315,\\\"low\\\":0.295,\\\"close\\\":0.315,\\\"adjusted_close\\\":0.315,\\\"volume\\\":607992},{\\\"date\\\":\\\"2023-10-11\\\",\\\"open\\\":0.315,\\\"high\\\":0.315,\\\"low\\\":0.295,\\\"close\\\":0.3,\\\"adjusted_close\\\":0.3,\\\"volume\\\":323737},{\\\"date\\\":\\\"2023-10-12\\\",\\\"open\\\":0.3,\\\"high\\\":0.305,\\\"low\\\":0.295,\\\"close\\\":0.3,\\\"adjusted_close\\\":0.3,\\\"volume\\\":1330220},{\\\"date\\\":\\\"2023-10-13\\\",\\\"open\\\":0.29,\\\"high\\\":0.295,\\\"low\\\":0.28,\\\"close\\\":0.28,\\\"adjusted_close\\\":0.28,\\\"volume\\\":698941},{\\\"date\\\":\\\"2023-10-16\\\",\\\"open\\\":0.28,\\\"high\\\":0.3,\\\"low\\\":0.28,\\\"close\\\":0.295,\\\"adjusted_close\\\":0.295,\\\"volume\\\":441702},{\\\"date\\\":\\\"2023-10-17\\\",\\\"open\\\":0.29,\\\"high\\\":0.29,\\\"low\\\":0.2775,\\\"close\\\":0.285,\\\"adjusted_close\\\":0.285,\\\"volume\\\":461140},{\\\"date\\\":\\\"2023-10-18\\\",\\\"open\\\":0.295,\\\"high\\\":0.3025,\\\"low\\\":0.29,\\\"close\\\":0.29,\\\"adjusted_close\\\":0.29,\\\"volume\\\":1407216},{\\\"date\\\":\\\"2023-10-19\\\",\\\"open\\\":0.285,\\\"high\\\":0.295,\\\"low\\\":0.28,\\\"close\\\":0.295,\\\"adjusted_close\\\":0.295,\\\"volume\\\":190362},{\\\"date\\\":\\\"2023-10-20\\\",\\\"open\\\":0.295,\\\"high\\\":0.3,\\\"low\\\":0.285,\\\"close\\\":0.3,\\\"adjusted_close\\\":0.3,\\\"volume\\\":482471},{\\\"date\\\":\\\"2023-10-23\\\",\\\"open\\\":0.3,\\\"high\\\":0.31,\\\"low\\\":0.3,\\\"close\\\":0.31,\\\"adjusted_close\\\":0.31,\\\"volume\\\":729979},{\\\"date\\\":\\\"2023-10-24\\\",\\\"open\\\":0.3,\\\"high\\\":0.315,\\\"low\\\":0.3,\\\"close\\\":0.3,\\\"adjusted_close\\\":0.3,\\\"volume\\\":246198},{\\\"date\\\":\\\"2023-10-25\\\",\\\"open\\\":0.31,\\\"high\\\":0.315,\\\"low\\\":0.305,\\\"close\\\":0.305,\\\"adjusted_close\\\":0.305,\\\"volume\\\":472064},{\\\"date\\\":\\\"2023-10-26\\\",\\\"open\\\":0.31,\\\"high\\\":0.32,\\\"low\\\":0.31,\\\"close\\\":0.32,\\\"adjusted_close\\\":0.32,\\\"volume\\\":612224},{\\\"date\\\":\\\"2023-10-27\\\",\\\"open\\\":0.32,\\\"high\\\":0.32,\\\"low\\\":0.305,\\\"close\\\":0.315,\\\"adjusted_close\\\":0.315,\\\"volume\\\":80591},{\\\"date\\\":\\\"2023-10-30\\\",\\\"open\\\":0.305,\\\"high\\\":0.31,\\\"low\\\":0.3,\\\"close\\\":0.305,\\\"adjusted_close\\\":0.305,\\\"volume\\\":1155560},{\\\"date\\\":\\\"2023-10-31\\\",\\\"open\\\":0.3,\\\"high\\\":0.3,\\\"low\\\":0.29,\\\"close\\\":0.295,\\\"adjusted_close\\\":0.295,\\\"volume\\\":524941},{\\\"date\\\":\\\"2023-11-01\\\",\\\"open\\\":0.3,\\\"high\\\":0.325,\\\"low\\\":0.3,\\\"close\\\":0.32,\\\"adjusted_close\\\":0.32,\\\"volume\\\":2669204},{\\\"date\\\":\\\"2023-11-02\\\",\\\"open\\\":0.315,\\\"high\\\":0.32,\\\"low\\\":0.31,\\\"close\\\":0.315,\\\"adjusted_close\\\":0.315,\\\"volume\\\":302645},{\\\"date\\\":\\\"2023-11-03\\\",\\\"open\\\":0.31,\\\"high\\\":0.315,\\\"low\\\":0.295,\\\"close\\\":0.3,\\\"adjusted_close\\\":0.3,\\\"volume\\\":519905},{\\\"date\\\":\\\"2023-11-06\\\",\\\"open\\\":0.295,\\\"high\\\":0.295,\\\"low\\\":0.28,\\\"close\\\":0.29,\\\"adjusted_close\\\":0.29,\\\"volume\\\":981049},{\\\"date\\\":\\\"2023-11-07\\\",\\\"open\\\":0.285,\\\"high\\\":0.3,\\\"low\\\":0.285,\\\"close\\\":0.3,\\\"adjusted_close\\\":0.3,\\\"volume\\\":410070},{\\\"date\\\":\\\"2023-11-08\\\",\\\"open\\\":0.295,\\\"high\\\":0.3,\\\"low\\\":0.29,\\\"close\\\":0.29,\\\"adjusted_close\\\":0.29,\\\"volume\\\":197073},{\\\"date\\\":\\\"2023-11-09\\\",\\\"open\\\":0.285,\\\"high\\\":0.29,\\\"low\\\":0.275,\\\"close\\\":0.28,\\\"adjusted_close\\\":0.28,\\\"volume\\\":508004},{\\\"date\\\":\\\"2023-11-10\\\",\\\"open\\\":0.285,\\\"high\\\":0.29,\\\"low\\\":0.28,\\\"close\\\":0.28,\\\"adjusted_close\\\":0.28,\\\"volume\\\":107768},{\\\"date\\\":\\\"2023-11-13\\\",\\\"open\\\":0.28,\\\"high\\\":0.29,\\\"low\\\":0.28,\\\"close\\\":0.29,\\\"adjusted_close\\\":0.29,\\\"volume\\\":496412},{\\\"date\\\":\\\"2023-11-14\\\",\\\"open\\\":0.3,\\\"high\\\":0.3,\\\"low\\\":0.29,\\\"close\\\":0.295,\\\"adjusted_close\\\":0.295,\\\"volume\\\":860078},{\\\"date\\\":\\\"2023-11-15\\\",\\\"open\\\":0.3,\\\"high\\\":0.3,\\\"low\\\":0.285,\\\"close\\\":0.295,\\\"adjusted_close\\\":0.295,\\\"volume\\\":502642},{\\\"date\\\":\\\"2023-11-16\\\",\\\"open\\\":0.295,\\\"high\\\":0.295,\\\"low\\\":0.275,\\\"close\\\":0.275,\\\"adjusted_close\\\":0.275,\\\"volume\\\":453138},{\\\"date\\\":\\\"2023-11-17\\\",\\\"open\\\":0.285,\\\"high\\\":0.295,\\\"low\\\":0.285,\\\"close\\\":0.295,\\\"adjusted_close\\\":0.295,\\\"volume\\\":865235},{\\\"date\\\":\\\"2023-11-20\\\",\\\"open\\\":0.3,\\\"high\\\":0.305,\\\"low\\\":0.285,\\\"close\\\":0.3,\\\"adjusted_close\\\":0.3,\\\"volume\\\":1118160},{\\\"date\\\":\\\"2023-11-21\\\",\\\"open\\\":0.3,\\\"high\\\":0.3275,\\\"low\\\":0.295,\\\"close\\\":0.32,\\\"adjusted_close\\\":0.32,\\\"volume\\\":4052299},{\\\"date\\\":\\\"2023-11-22\\\",\\\"open\\\":0.315,\\\"high\\\":0.315,\\\"low\\\":0.305,\\\"close\\\":0.305,\\\"adjusted_close\\\":0.305,\\\"volume\\\":456975},{\\\"date\\\":\\\"2023-11-23\\\",\\\"open\\\":0.305,\\\"high\\\":0.31,\\\"low\\\":0.3,\\\"close\\\":0.305,\\\"adjusted_close\\\":0.305,\\\"volume\\\":263697},{\\\"date\\\":\\\"2023-11-24\\\",\\\"open\\\":0.31,\\\"high\\\":0.315,\\\"low\\\":0.305,\\\"close\\\":0.315,\\\"adjusted_close\\\":0.315,\\\"volume\\\":274684},{\\\"date\\\":\\\"2023-11-27\\\",\\\"open\\\":0.31,\\\"high\\\":0.315,\\\"low\\\":0.295,\\\"close\\\":0.295,\\\"adjusted_close\\\":0.295,\\\"volume\\\":824401},{\\\"date\\\":\\\"2023-11-28\\\",\\\"open\\\":0.295,\\\"high\\\":0.3,\\\"low\\\":0.285,\\\"close\\\":0.3,\\\"adjusted_close\\\":0.3,\\\"volume\\\":622250},{\\\"date\\\":\\\"2023-11-29\\\",\\\"open\\\":0.285,\\\"high\\\":0.285,\\\"low\\\":0.27,\\\"close\\\":0.28,\\\"adjusted_close\\\":0.28,\\\"volume\\\":538639},{\\\"date\\\":\\\"2023-11-30\\\",\\\"open\\\":0.27,\\\"high\\\":0.285,\\\"low\\\":0.27,\\\"close\\\":0.275,\\\"adjusted_close\\\":0.275,\\\"volume\\\":440453},{\\\"date\\\":\\\"2023-12-01\\\",\\\"open\\\":0.285,\\\"high\\\":0.31,\\\"low\\\":0.275,\\\"close\\\":0.305,\\\"adjusted_close\\\":0.305,\\\"volume\\\":1046797},{\\\"date\\\":\\\"2023-12-04\\\",\\\"open\\\":0.295,\\\"high\\\":0.31,\\\"low\\\":0.295,\\\"close\\\":0.305,\\\"adjusted_close\\\":0.305,\\\"volume\\\":516418},{\\\"date\\\":\\\"2023-12-05\\\",\\\"open\\\":0.295,\\\"high\\\":0.305,\\\"low\\\":0.29,\\\"close\\\":0.3,\\\"adjusted_close\\\":0.3,\\\"volume\\\":289953},{\\\"date\\\":\\\"2023-12-06\\\",\\\"open\\\":0.28,\\\"high\\\":0.295,\\\"low\\\":0.28,\\\"close\\\":0.295,\\\"adjusted_close\\\":0.295,\\\"volume\\\":152281},{\\\"date\\\":\\\"2023-12-07\\\",\\\"open\\\":0.285,\\\"high\\\":0.295,\\\"low\\\":0.265,\\\"close\\\":0.275,\\\"adjusted_close\\\":0.275,\\\"volume\\\":608332},{\\\"date\\\":\\\"2023-12-08\\\",\\\"open\\\":0.275,\\\"high\\\":0.285,\\\"low\\\":0.27,\\\"close\\\":0.285,\\\"adjusted_close\\\":0.285,\\\"volume\\\":266436},{\\\"date\\\":\\\"2023-12-11\\\",\\\"open\\\":0.275,\\\"high\\\":0.275,\\\"low\\\":0.27,\\\"close\\\":0.27,\\\"adjusted_close\\\":0.27,\\\"volume\\\":468034},{\\\"date\\\":\\\"2023-12-12\\\",\\\"open\\\":0.2675,\\\"high\\\":0.2675,\\\"low\\\":0.255,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":582901},{\\\"date\\\":\\\"2023-12-13\\\",\\\"open\\\":0.275,\\\"high\\\":0.275,\\\"low\\\":0.255,\\\"close\\\":0.255,\\\"adjusted_close\\\":0.255,\\\"volume\\\":392068},{\\\"date\\\":\\\"2023-12-14\\\",\\\"open\\\":0.25,\\\"high\\\":0.27,\\\"low\\\":0.2375,\\\"close\\\":0.27,\\\"adjusted_close\\\":0.27,\\\"volume\\\":729357},{\\\"date\\\":\\\"2023-12-15\\\",\\\"open\\\":0.275,\\\"high\\\":0.28,\\\"low\\\":0.245,\\\"close\\\":0.245,\\\"adjusted_close\\\":0.245,\\\"volume\\\":823133},{\\\"date\\\":\\\"2023-12-18\\\",\\\"open\\\":0.255,\\\"high\\\":0.265,\\\"low\\\":0.255,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":106761},{\\\"date\\\":\\\"2023-12-19\\\",\\\"open\\\":0.275,\\\"high\\\":0.275,\\\"low\\\":0.25,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":739020},{\\\"date\\\":\\\"2023-12-20\\\",\\\"open\\\":0.25,\\\"high\\\":0.27,\\\"low\\\":0.245,\\\"close\\\":0.255,\\\"adjusted_close\\\":0.255,\\\"volume\\\":1012618},{\\\"date\\\":\\\"2023-12-21\\\",\\\"open\\\":0.255,\\\"high\\\":0.26,\\\"low\\\":0.2475,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":408016},{\\\"date\\\":\\\"2023-12-22\\\",\\\"open\\\":0.255,\\\"high\\\":0.26,\\\"low\\\":0.255,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":56080},{\\\"date\\\":\\\"2023-12-27\\\",\\\"open\\\":0.26,\\\"high\\\":0.265,\\\"low\\\":0.255,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":380771},{\\\"date\\\":\\\"2023-12-28\\\",\\\"open\\\":0.26,\\\"high\\\":0.265,\\\"low\\\":0.25,\\\"close\\\":0.255,\\\"adjusted_close\\\":0.255,\\\"volume\\\":303014},{\\\"date\\\":\\\"2023-12-29\\\",\\\"open\\\":0.255,\\\"high\\\":0.265,\\\"low\\\":0.25,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":422893},{\\\"date\\\":\\\"2024-01-02\\\",\\\"open\\\":0.255,\\\"high\\\":0.265,\\\"low\\\":0.25,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":233674},{\\\"date\\\":\\\"2024-01-03\\\",\\\"open\\\":0.265,\\\"high\\\":0.27,\\\"low\\\":0.255,\\\"close\\\":0.27,\\\"adjusted_close\\\":0.27,\\\"volume\\\":387084},{\\\"date\\\":\\\"2024-01-04\\\",\\\"open\\\":0.26,\\\"high\\\":0.27,\\\"low\\\":0.255,\\\"close\\\":0.27,\\\"adjusted_close\\\":0.27,\\\"volume\\\":378288},{\\\"date\\\":\\\"2024-01-05\\\",\\\"open\\\":0.265,\\\"high\\\":0.275,\\\"low\\\":0.265,\\\"close\\\":0.275,\\\"adjusted_close\\\":0.275,\\\"volume\\\":555386},{\\\"date\\\":\\\"2024-01-08\\\",\\\"open\\\":0.27,\\\"high\\\":0.275,\\\"low\\\":0.255,\\\"close\\\":0.255,\\\"adjusted_close\\\":0.255,\\\"volume\\\":343975},{\\\"date\\\":\\\"2024-01-09\\\",\\\"open\\\":0.265,\\\"high\\\":0.265,\\\"low\\\":0.255,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":176210},{\\\"date\\\":\\\"2024-01-10\\\",\\\"open\\\":0.27,\\\"high\\\":0.28,\\\"low\\\":0.27,\\\"close\\\":0.28,\\\"adjusted_close\\\":0.28,\\\"volume\\\":1482635},{\\\"date\\\":\\\"2024-01-11\\\",\\\"open\\\":0.275,\\\"high\\\":0.28,\\\"low\\\":0.265,\\\"close\\\":0.275,\\\"adjusted_close\\\":0.275,\\\"volume\\\":525077},{\\\"date\\\":\\\"2024-01-12\\\",\\\"open\\\":0.28,\\\"high\\\":0.295,\\\"low\\\":0.275,\\\"close\\\":0.295,\\\"adjusted_close\\\":0.295,\\\"volume\\\":1693712},{\\\"date\\\":\\\"2024-01-15\\\",\\\"open\\\":0.31,\\\"high\\\":0.31,\\\"low\\\":0.295,\\\"close\\\":0.3025,\\\"adjusted_close\\\":0.3025,\\\"volume\\\":1975712},{\\\"date\\\":\\\"2024-01-16\\\",\\\"open\\\":0.295,\\\"high\\\":0.295,\\\"low\\\":0.26,\\\"close\\\":0.27,\\\"adjusted_close\\\":0.27,\\\"volume\\\":1960610},{\\\"date\\\":\\\"2024-01-17\\\",\\\"open\\\":0.27,\\\"high\\\":0.285,\\\"low\\\":0.27,\\\"close\\\":0.28,\\\"adjusted_close\\\":0.28,\\\"volume\\\":2028568},{\\\"date\\\":\\\"2024-01-18\\\",\\\"open\\\":0.265,\\\"high\\\":0.28,\\\"low\\\":0.2575,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":772776},{\\\"date\\\":\\\"2024-01-19\\\",\\\"open\\\":0.26,\\\"high\\\":0.27,\\\"low\\\":0.25,\\\"close\\\":0.255,\\\"adjusted_close\\\":0.255,\\\"volume\\\":597479},{\\\"date\\\":\\\"2024-01-22\\\",\\\"open\\\":0.26,\\\"high\\\":0.26,\\\"low\\\":0.2425,\\\"close\\\":0.255,\\\"adjusted_close\\\":0.255,\\\"volume\\\":800620},{\\\"date\\\":\\\"2024-01-23\\\",\\\"open\\\":0.24,\\\"high\\\":0.255,\\\"low\\\":0.22,\\\"close\\\":0.22,\\\"adjusted_close\\\":0.22,\\\"volume\\\":968694},{\\\"date\\\":\\\"2024-01-24\\\",\\\"open\\\":0.23,\\\"high\\\":0.245,\\\"low\\\":0.23,\\\"close\\\":0.245,\\\"adjusted_close\\\":0.245,\\\"volume\\\":809591},{\\\"date\\\":\\\"2024-01-25\\\",\\\"open\\\":0.24,\\\"high\\\":0.255,\\\"low\\\":0.24,\\\"close\\\":0.255,\\\"adjusted_close\\\":0.255,\\\"volume\\\":550468},{\\\"date\\\":\\\"2024-01-29\\\",\\\"open\\\":0.255,\\\"high\\\":0.26,\\\"low\\\":0.245,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":716249},{\\\"date\\\":\\\"2024-01-30\\\",\\\"open\\\":0.26,\\\"high\\\":0.26,\\\"low\\\":0.24,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":1015424},{\\\"date\\\":\\\"2024-01-31\\\",\\\"open\\\":0.26,\\\"high\\\":0.285,\\\"low\\\":0.26,\\\"close\\\":0.285,\\\"adjusted_close\\\":0.285,\\\"volume\\\":2205056},{\\\"date\\\":\\\"2024-02-01\\\",\\\"open\\\":0.285,\\\"high\\\":0.285,\\\"low\\\":0.27,\\\"close\\\":0.285,\\\"adjusted_close\\\":0.285,\\\"volume\\\":497860},{\\\"date\\\":\\\"2024-02-02\\\",\\\"open\\\":0.3,\\\"high\\\":0.305,\\\"low\\\":0.28,\\\"close\\\":0.29,\\\"adjusted_close\\\":0.29,\\\"volume\\\":2106524},{\\\"date\\\":\\\"2024-02-05\\\",\\\"open\\\":0.28,\\\"high\\\":0.2825,\\\"low\\\":0.265,\\\"close\\\":0.28,\\\"adjusted_close\\\":0.28,\\\"volume\\\":916512},{\\\"date\\\":\\\"2024-02-06\\\",\\\"open\\\":0.27,\\\"high\\\":0.275,\\\"low\\\":0.26,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":625037},{\\\"date\\\":\\\"2024-02-07\\\",\\\"open\\\":0.265,\\\"high\\\":0.285,\\\"low\\\":0.26,\\\"close\\\":0.285,\\\"adjusted_close\\\":0.285,\\\"volume\\\":522218},{\\\"date\\\":\\\"2024-02-08\\\",\\\"open\\\":0.275,\\\"high\\\":0.285,\\\"low\\\":0.265,\\\"close\\\":0.28,\\\"adjusted_close\\\":0.28,\\\"volume\\\":447738},{\\\"date\\\":\\\"2024-02-09\\\",\\\"open\\\":0.26,\\\"high\\\":0.27,\\\"low\\\":0.26,\\\"close\\\":0.27,\\\"adjusted_close\\\":0.27,\\\"volume\\\":251995},{\\\"date\\\":\\\"2024-02-12\\\",\\\"open\\\":0.265,\\\"high\\\":0.27,\\\"low\\\":0.26,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":761813},{\\\"date\\\":\\\"2024-02-13\\\",\\\"open\\\":0.265,\\\"high\\\":0.27,\\\"low\\\":0.26,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":607792},{\\\"date\\\":\\\"2024-02-14\\\",\\\"open\\\":0.265,\\\"high\\\":0.265,\\\"low\\\":0.25,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":804279},{\\\"date\\\":\\\"2024-02-15\\\",\\\"open\\\":0.255,\\\"high\\\":0.265,\\\"low\\\":0.255,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":137502},{\\\"date\\\":\\\"2024-02-16\\\",\\\"open\\\":0.26,\\\"high\\\":0.265,\\\"low\\\":0.255,\\\"close\\\":0.265,\\\"adjusted_close\\\":0.265,\\\"volume\\\":181836},{\\\"date\\\":\\\"2024-02-19\\\",\\\"open\\\":0.255,\\\"high\\\":0.27,\\\"low\\\":0.255,\\\"close\\\":0.26,\\\"adjusted_close\\\":0.26,\\\"volume\\\":279278},{\\\"date\\\":\\\"2024-02-20\\\",\\\"open\\\":0.255,\\\"high\\\":0.26,\\\"low\\\":0.245,\\\"close\\\":0.25,\\\"adjusted_close\\\":0.25,\\\"volume\\\":625108},{\\\"date\\\":\\\"2024-02-21\\\",\\\"open\\\":0.245,\\\"high\\\":0.255,\\\"low\\\":0.23,\\\"close\\\":0.245,\\\"adjusted_close\\\":0.245,\\\"volume\\\":900568},{\\\"date\\\":\\\"2024-02-22\\\",\\\"open\\\":0.245,\\\"high\\\":0.245,\\\"low\\\":0.235,\\\"close\\\":0.245,\\\"adjusted_close\\\":0.245,\\\"volume\\\":317547},{\\\"date\\\":\\\"2024-02-23\\\",\\\"open\\\":0.235,\\\"high\\\":0.235,\\\"low\\\":0.2175,\\\"close\\\":0.225,\\\"adjusted_close\\\":0.225,\\\"volume\\\":1281150},{\\\"date\\\":\\\"2024-02-26\\\",\\\"open\\\":0.25,\\\"high\\\":0.25,\\\"low\\\":0.215,\\\"close\\\":0.225,\\\"adjusted_close\\\":0.225,\\\"volume\\\":1529370},{\\\"date\\\":\\\"2024-02-27\\\",\\\"open\\\":0.235,\\\"high\\\":0.24,\\\"low\\\":0.215,\\\"close\\\":0.215,\\\"adjusted_close\\\":0.215,\\\"volume\\\":1067838},{\\\"date\\\":\\\"2024-02-28\\\",\\\"open\\\":0.22,\\\"high\\\":0.245,\\\"low\\\":0.22,\\\"close\\\":0.245,\\\"adjusted_close\\\":0.245,\\\"volume\\\":1606174},{\\\"date\\\":\\\"2024-02-29\\\",\\\"open\\\":0.235,\\\"high\\\":0.245,\\\"low\\\":0.23,\\\"close\\\":0.235,\\\"adjusted_close\\\":0.235,\\\"volume\\\":1101317},{\\\"date\\\":\\\"2024-03-01\\\",\\\"open\\\":0.235,\\\"high\\\":0.245,\\\"low\\\":0.215,\\\"close\\\":0.22,\\\"adjusted_close\\\":0.22,\\\"volume\\\":1799192},{\\\"date\\\":\\\"2024-03-04\\\",\\\"open\\\":0.23,\\\"high\\\":0.24,\\\"low\\\":0.225,\\\"close\\\":0.225,\\\"adjusted_close\\\":0.225,\\\"volume\\\":1735574},{\\\"date\\\":\\\"2024-03-05\\\",\\\"open\\\":0.23,\\\"high\\\":0.235,\\\"low\\\":0.22,\\\"close\\\":0.23,\\\"adjusted_close\\\":0.23,\\\"volume\\\":1244028},{\\\"date\\\":\\\"2024-03-06\\\",\\\"open\\\":0.23,\\\"high\\\":0.235,\\\"low\\\":0.225,\\\"close\\\":0.235,\\\"adjusted_close\\\":0.235,\\\"volume\\\":810618},{\\\"date\\\":\\\"2024-03-07\\\",\\\"open\\\":0.24,\\\"high\\\":0.24,\\\"low\\\":0.235,\\\"close\\\":0.24,\\\"adjusted_close\\\":0.24,\\\"volume\\\":468990},{\\\"date\\\":\\\"2024-03-08\\\",\\\"open\\\":0.25,\\\"high\\\":0.255,\\\"low\\\":0.24,\\\"close\\\":0.25,\\\"adjusted_close\\\":0.25,\\\"volume\\\":1456487},{\\\"date\\\":\\\"2024-03-11\\\",\\\"open\\\":0.24,\\\"high\\\":0.24,\\\"low\\\":0.225,\\\"close\\\":0.23,\\\"adjusted_close\\\":0.23,\\\"volume\\\":762587},{\\\"date\\\":\\\"2024-03-12\\\",\\\"open\\\":0.23,\\\"high\\\":0.235,\\\"low\\\":0.225,\\\"close\\\":0.225,\\\"adjusted_close\\\":0.225,\\\"volume\\\":593534},{\\\"date\\\":\\\"2024-03-13\\\",\\\"open\\\":0.23,\\\"high\\\":0.245,\\\"low\\\":0.23,\\\"close\\\":0.245,\\\"adjusted_close\\\":0.245,\\\"volume\\\":713161},{\\\"date\\\":\\\"2024-03-14\\\",\\\"open\\\":0.23,\\\"high\\\":0.235,\\\"low\\\":0.22,\\\"close\\\":0.22,\\\"adjusted_close\\\":0.22,\\\"volume\\\":1635669},{\\\"date\\\":\\\"2024-03-15\\\",\\\"open\\\":0.22,\\\"high\\\":0.22,\\\"low\\\":0.22,\\\"close\\\":0.22,\\\"adjusted_close\\\":0.22,\\\"volume\\\":0},{\\\"date\\\":\\\"2024-03-18\\\",\\\"open\\\":0.18,\\\"high\\\":0.18,\\\"low\\\":0.17,\\\"close\\\":0.17,\\\"adjusted_close\\\":0.17,\\\"volume\\\":14951910},{\\\"date\\\":\\\"2024-03-19\\\",\\\"open\\\":0.17,\\\"high\\\":0.175,\\\"low\\\":0.16,\\\"close\\\":0.165,\\\"adjusted_close\\\":0.165,\\\"volume\\\":12757465},{\\\"date\\\":\\\"2024-03-20\\\",\\\"open\\\":0.17,\\\"high\\\":0.18,\\\"low\\\":0.1675,\\\"close\\\":0.17,\\\"adjusted_close\\\":0.17,\\\"volume\\\":5416539},{\\\"date\\\":\\\"2024-03-21\\\",\\\"open\\\":0.175,\\\"high\\\":0.18,\\\"low\\\":0.1725,\\\"close\\\":0.18,\\\"adjusted_close\\\":0.18,\\\"volume\\\":7560988},{\\\"date\\\":\\\"2024-03-22\\\",\\\"open\\\":0.175,\\\"high\\\":0.18,\\\"low\\\":0.17,\\\"close\\\":0.17,\\\"adjusted_close\\\":0.17,\\\"volume\\\":2209717},{\\\"date\\\":\\\"2024-03-25\\\",\\\"open\\\":0.175,\\\"high\\\":0.175,\\\"low\\\":0.17,\\\"close\\\":0.175,\\\"adjusted_close\\\":0.175,\\\"volume\\\":998907},{\\\"date\\\":\\\"2024-03-26\\\",\\\"open\\\":0.17,\\\"high\\\":0.17,\\\"low\\\":0.165,\\\"close\\\":0.17,\\\"adjusted_close\\\":0.17,\\\"volume\\\":4878225},{\\\"date\\\":\\\"2024-03-27\\\",\\\"open\\\":0.165,\\\"high\\\":0.17,\\\"low\\\":0.165,\\\"close\\\":0.17,\\\"adjusted_close\\\":0.17,\\\"volume\\\":1137841},{\\\"date\\\":\\\"2024-03-28\\\",\\\"open\\\":0.17,\\\"high\\\":0.17,\\\"low\\\":0.165,\\\"close\\\":0.165,\\\"adjusted_close\\\":0.165,\\\"volume\\\":5656805,\\\"warning\\\":\\\"Data is limited by one year as you have free subscription\\\"}]\", :trace-redirects []}[0m\n[33m2024-05-03T17:52:22.970Z nuc12 WARN [ta.import.provider.eodhd.ds:54] - r:  ({:date \"2023-05-03\", :open 0.19, :high 0.1925, :low 0.185, :close 0.19, :adjusted_close 0.19, :volume 1031720} {:date \"2023-05-04\", :open 0.19, :high 0.1925, :low 0.185, :close 0.19, :adjusted_close 0.19, :volume 876659} {:date \"2023-05-05\", :open 0.185, :high 0.185, :low 0.18, :close 0.18, :adjusted_close 0.18, :volume 701329} {:date \"2023-05-08\", :open 0.18, :high 0.1825, :low 0.175, :close 0.18, :adjusted_close 0.18, :volume 779787} {:date \"2023-05-09\", :open 0.175, :high 0.18, :low 0.17, :close 0.18, :adjusted_close 0.18, :volume 798172} {:date \"2023-05-10\", :open 0.18, :high 0.195, :low 0.1775, :close 0.185, :adjusted_close 0.185, :volume 1753849} {:date \"2023-05-11\", :open 0.19, :high 0.19, :low 0.185, :close 0.19, :adjusted_close 0.19, :volume 154782} {:date \"2023-05-12\", :open 0.185, :high 0.19, :low 0.1825, :close 0.19, :adjusted_close 0.19, :volume 356100} {:date \"2023-05-15\", :open 0.19, :high 0.195, :low 0.185, :close 0.195, :adjusted_close 0.195, :volume 116690} {:date \"2023-05-16\", :open 0.185, :high 0.185, :low 0.185, :close 0.185, :adjusted_close 0.185, :volume 294076} {:date \"2023-05-17\", :open 0.185, :high 0.185, :low 0.175, :close 0.18, :adjusted_close 0.18, :volume 404399} {:date \"2023-05-18\", :open 0.18, :high 0.185, :low 0.18, :close 0.18, :adjusted_close 0.18, :volume 61099} {:date \"2023-05-19\", :open 0.18, :high 0.185, :low 0.175, :close 0.18, :adjusted_close 0.18, :volume 450848} {:date \"2023-05-22\", :open 0.18, :high 0.18, :low 0.18, :close 0.18, :adjusted_close 0.18, :volume 260018} {:date \"2023-05-23\", :open 0.185, :high 0.185, :low 0.18, :close 0.18, :adjusted_close 0.18, :volume 569302} {:date \"2023-05-24\", :open 0.18, :high 0.18, :low 0.17, :close 0.17, :adjusted_close 0.17, :volume 803419} {:date \"2023-05-25\", :open 0.17, :high 0.175, :low 0.17, :close 0.17, :adjusted_close 0.17, :volume 92175} {:date \"2023-05-26\", :open 0.17, :high 0.17, :low 0.17, :close 0.17, :adjusted_close 0.17, :volume 331999} {:date \"2023-05-29\", :open 0.17, :high 0.175, :low 0.165, :close 0.17, :adjusted_close 0.17, :volume 360654} {:date \"2023-05-30\", :open 0.17, :high 0.17, :low 0.165, :close 0.165, :adjusted_close 0.165, :volume 209122} {:date \"2023-05-31\", :open 0.165, :high 0.17, :low 0.16, :close 0.165, :adjusted_close 0.165, :volume 395600} {:date \"2023-06-01\", :open 0.17, :high 0.17, :low 0.165, :close 0.165, :adjusted_close 0.165, :volume 854456} {:date \"2023-06-02\", :open 0.175, :high 0.18, :low 0.17, :close 0.18, :adjusted_close 0.18, :volume 611053} {:date \"2023-06-05\", :open 0.18, :high 0.19, :low 0.175, :close 0.19, :adjusted_close 0.19, :volume 134371} {:date \"2023-06-06\", :open 0.185, :high 0.19, :low 0.18, :close 0.185, :adjusted_close 0.185, :volume 908525} {:date \"2023-06-07\", :open 0.18, :high 0.185, :low 0.175, :close 0.185, :adjusted_close 0.185, :volume 196146} {:date \"2023-06-08\", :open 0.18, :high 0.185, :low 0.1775, :close 0.185, :adjusted_close 0.185, :volume 382802} {:date \"2023-06-09\", :open 0.185, :high 0.19, :low 0.18, :close 0.185, :adjusted_close 0.185, :volume 619976} {:date \"2023-06-13\", :open 0.185, :high 0.195, :low 0.185, :close 0.195, :adjusted_close 0.195, :volume 2114594} {:date \"2023-06-14\", :open 0.195, :high 0.1975, :low 0.18, :close 0.18, :adjusted_close 0.18, :volume 1063132} {:date \"2023-06-15\", :open 0.185, :high 0.19, :low 0.185, :close 0.19, :adjusted_close 0.19, :volume 509721} {:date \"2023-06-16\", :open 0.19, :high 0.2, :low 0.185, :close 0.2, :adjusted_close 0.2, :volume 722585} {:date \"2023-06-19\", :open 0.19, :high 0.195, :low 0.185, :close 0.185, :adjusted_close 0.185, :volume 303393} {:date \"2023-06-20\", :open 0.185, :high 0.19, :low 0.185, :close 0.19, :adjusted_close 0.19, :volume 541098} {:date \"2023-06-21\", :open 0.19, :high 0.205, :low 0.19, :close 0.2, :adjusted_close 0.2, :volume 719337} {:date \"2023-06-22\", :open 0.2, :high 0.205, :low 0.2, :close 0.205, :adjusted_close 0.205, :volume 771694} {:date \"2023-06-23\", :open 0.2, :high 0.21, :low 0.19, :close 0.2, :adjusted_close 0.2, :volume 1444271} {:date \"2023-06-26\", :open 0.205, :high 0.205, :low 0.19, :close 0.19, :adjusted_close 0.19, :volume 82474} {:date \"2023-06-27\", :open 0.19, :high 0.19, :low 0.18, :close 0.18, :adjusted_close 0.18, :volume 582072} {:date \"2023-06-28\", :open 0.175, :high 0.185, :low 0.175, :close 0.185, :adjusted_close 0.185, :volume 491141} {:date \"2023-06-29\", :open 0.185, :high 0.185, :low 0.18, :close 0.18, :adjusted_close 0.18, :volume 156996} {:date \"2023-06-30\", :open 0.185, :high 0.205, :low 0.185, :close 0.205, :adjusted_close 0.205, :volume 346419} {:date \"2023-07-03\", :open 0.2, :high 0.205, :low 0.195, :close 0.2, :adjusted_close 0.2, :volume 507009} {:date \"2023-07-04\", :open 0.21, :high 0.21, :low 0.195, :close 0.21, :adjusted_close 0.21, :volume 1237199} {:date \"2023-07-05\", :open 0.205, :high 0.21, :low 0.2, :close 0.21, :adjusted_close 0.21, :volume 94101} {:date \"2023-07-06\", :open 0.205, :high 0.21, :low 0.195, :close 0.205, :adjusted_close 0.205, :volume 137245} {:date \"2023-07-07\", :open 0.195, :high 0.195, :low 0.185, :close 0.19, :adjusted_close 0.19, :volume 378692} {:date \"2023-07-10\", :open 0.2, :high 0.2, :low 0.195, :close 0.195, :adjusted_close 0.195, :volume 173916} {:date \"2023-07-11\", :open 0.195, :high 0.2, :low 0.19, :close 0.19, :adjusted_close 0.19, :volume 122923} {:date \"2023-07-12\", :open 0.195, :high 0.2, :low 0.195, :close 0.2, :adjusted_close 0.2, :volume 124360} {:date \"2023-07-13\", :open 0.195, :high 0.2, :low 0.19, :close 0.2, :adjusted_close 0.2, :volume 574394} {:date \"2023-07-14\", :open 0.2, :high 0.21, :low 0.2, :close 0.205, :adjusted_close 0.205, :volume 1059333} {:date \"2023-07-17\", :open 0.2, :high 0.21, :low 0.195, :close 0.21, :adjusted_close 0.21, :volume 506514} {:date \"2023-07-18\", :open 0.205, :high 0.21, :low 0.2, :close 0.205, :adjusted_close 0.205, :volume 526633} {:date \"2023-07-19\", :open 0.21, :high 0.21, :low 0.205, :close 0.21, :adjusted_close 0.21, :volume 512894} {:date \"2023-07-20\", :open 0.21, :high 0.21, :low 0.205, :close 0.21, :adjusted_close 0.21, :volume 371620} {:date \"2023-07-21\", :open 0.21, :high 0.21, :low 0.21, :close 0.21, :adjusted_close 0.21, :volume 75966} {:date \"2023-07-24\", :open 0.21, :high 0.21, :low 0.205, :close 0.21, :adjusted_close 0.21, :volume 158570} {:date \"2023-07-25\", :open 0.2, :high 0.205, :low 0.195, :close 0.205, :adjusted_close 0.205, :volume 346528} {:date \"2023-07-26\", :open 0.205, :high 0.205, :low 0.1975, :close 0.2, :adjusted_close 0.2, :volume 69170} {:date \"2023-07-27\", :open 0.2, :high 0.2, :low 0.195, :close 0.2, :adjusted_close 0.2, :volume 120753} {:date \"2023-07-28\", :open 0.195, :high 0.195, :low 0.19, :close 0.195, :adjusted_close 0.195, :volume 693822} {:date \"2023-07-31\", :open 0.2, :high 0.2, :low 0.19, :close 0.195, :adjusted_close 0.195, :volume 1580993} {:date \"2023-08-01\", :open 0.2, :high 0.21, :low 0.2, :close 0.21, :adjusted_close 0.21, :volume 314153} {:date \"2023-08-02\", :open 0.205, :high 0.22, :low 0.205, :close 0.22, :adjusted_close 0.22, :volume 1365121} {:date \"2023-08-03\", :open 0.22, :high 0.23, :low 0.215, :close 0.23, :adjusted_close 0.23, :volume 757844} {:date \"2023-08-04\", :open 0.225, :high 0.23, :low 0.22, :close 0.23, :adjusted_close 0.23, :volume 115125} {:date \"2023-08-07\", :open 0.23, :high 0.235, :low 0.225, :close 0.23, :adjusted_close 0.23, :volume 911723} {:date \"2023-08-08\", :open 0.23, :high 0.23, :low 0.225, :close 0.23, :adjusted_close 0.23, :volume 9849} {:date \"2023-08-09\", :open 0.22, :high 0.225, :low 0.22, :close 0.225, :adjusted_close 0.225, :volume 38654} {:date \"2023-08-10\", :open 0.22, :high 0.235, :low 0.215, :close 0.235, :adjusted_close 0.235, :volume 656449} {:date \"2023-08-11\", :open 0.23, :high 0.235, :low 0.225, :close 0.235, :adjusted_close 0.235, :volume 283363} {:date \"2023-08-14\", :open 0.23, :high 0.235, :low 0.225, :close 0.235, :adjusted_close 0.235, :volume 109451} {:date \"2023-08-15\", :open 0.235, :high 0.235, :low 0.23, :close 0.235, :adjusted_close 0.235, :volume 311666} {:date \"2023-08-16\", :open 0.23, :high 0.23, :low 0.22, :close 0.23, :adjusted_close 0.23, :volume 29597} {:date \"2023-08-17\", :open 0.23, :high 0.23, :low 0.22, :close 0.23, :adjusted_close 0.23, :volume 193540} {:date \"2023-08-18\", :open 0.225, :high 0.23, :low 0.22, :close 0.23, :adjusted_close 0.23, :volume 340183} {:date \"2023-08-21\", :open 0.23, :high 0.24, :low 0.23, :close 0.24, :adjusted_close 0.24, :volume 387940} {:date \"2023-08-22\", :open 0.24, :high 0.25, :low 0.24, :close 0.25, :adjusted_close 0.25, :volume 1278467} {:date \"2023-08-23\", :open 0.255, :high 0.26, :low 0.25, :close 0.255, :adjusted_close 0.255, :volume 1004282} {:date \"2023-08-24\", :open 0.26, :high 0.275, :low 0.26, :close 0.275, :adjusted_close 0.275, :volume 1384980} {:date \"2023-08-25\", :open 0.275, :high 0.275, :low 0.26, :close 0.27, :adjusted_close 0.27, :volume 278179} {:date \"2023-08-28\", :open 0.275, :high 0.28, :low 0.265, :close 0.28, :adjusted_close 0.28, :volume 613868} {:date \"2023-08-29\", :open 0.28, :high 0.28, :low 0.265, :close 0.275, :adjusted_close 0.275, :volume 268185} {:date \"2023-08-30\", :open 0.275, :high 0.275, :low 0.26, :close 0.275, :adjusted_close 0.275, :volume 157318} {:date \"2023-08-31\", :open 0.27, :high 0.275, :low 0.265, :close 0.275, :adjusted_close 0.275, :volume 257665} {:date \"2023-09-01\", :open 0.275, :high 0.285, :low 0.27, :close 0.28, :adjusted_close 0.28, :volume 355296} {:date \"2023-09-04\", :open 0.285, :high 0.31, :low 0.285, :close 0.31, :adjusted_close 0.31, :volume 3033689} {:date \"2023-09-05\", :open 0.295, :high 0.305, :low 0.29, :close 0.3, :adjusted_close 0.3, :volume 792212} {:date \"2023-09-06\", :open 0.3, :high 0.31, :low 0.29, :close 0.31, :adjusted_close 0.31, :volume 1160783} {:date \"2023-09-07\", :open 0.31, :high 0.31, :low 0.285, :close 0.3, :adjusted_close 0.3, :volume 238976} {:date \"2023-09-08\", :open 0.29, :high 0.305, :low 0.29, :close 0.305, :adjusted_close 0.305, :volume 396005} {:date \"2023-09-11\", :open 0.3, :high 0.3, :low 0.28, :close 0.285, :adjusted_close 0.285, :volume 478609} {:date \"2023-09-12\", :open 0.29, :high 0.295, :low 0.285, :close 0.295, :adjusted_close 0.295, :volume 455818} {:date \"2023-09-13\", :open 0.295, :high 0.3, :low 0.285, :close 0.3, :adjusted_close 0.3, :volume 380767} {:date \"2023-09-14\", :open 0.31, :high 0.32, :low 0.305, :close 0.315, :adjusted_close 0.315, :volume 1604382} {:date \"2023-09-15\", :open 0.32, :high 0.325, :low 0.31, :close 0.32, :adjusted_close 0.32, :volume 1260867} {:date \"2023-09-18\", :open 0.315, :high 0.33, :low 0.305, :close 0.32, :adjusted_close 0.32, :volume 1281841} {:date \"2023-09-19\", :open 0.315, :high 0.325, :low 0.31, :close 0.315, :adjusted_close 0.315, :volume 521479} {:date \"2023-09-20\", :open 0.31, :high 0.31, :low 0.2925, :close 0.31, :adjusted_close 0.31, :volume 1011940} {:date \"2023-09-21\", :open 0.3, :high 0.32, :low 0.295, :close 0.305, :adjusted_close 0.305, :volume 350812} {:date \"2023-09-22\", :open 0.3, :high 0.3, :low 0.29, :close 0.295, :adjusted_close 0.295, :volume 512834} {:date \"2023-09-25\", :open 0.32, :high 0.325, :low 0.315, :close 0.325, :adjusted_close 0.325, :volume 1482852} {:date \"2023-09-26\", :open 0.33, :high 0.335, :low 0.325, :close 0.335, :adjusted_close 0.335, :volume 1573456} {:date \"2023-09-27\", :open 0.33, :high 0.34, :low 0.325, :close 0.34, :adjusted_close 0.34, :volume 1438614} {:date \"2023-09-28\", :open 0.335, :high 0.34, :low 0.315, :close 0.315, :adjusted_close 0.315, :volume 681002} {:date \"2023-09-29\", :open 0.325, :high 0.345, :low 0.315, :close 0.34, :adjusted_close 0.34, :volume 4373063} {:date \"2023-10-02\", :open 0.32, :high 0.355, :low 0.32, :close 0.355, :adjusted_close 0.355, :volume 1345704} {:date \"2023-10-03\", :open 0.345, :high 0.345, :low 0.33, :close 0.33, :adjusted_close 0.33, :volume 393921} {:date \"2023-10-04\", :open 0.33, :high 0.33, :low 0.31, :close 0.32, :adjusted_close 0.32, :volume 973833} {:date \"2023-10-05\", :open 0.32, :high 0.32, :low 0.31, :close 0.32, :adjusted_close 0.32, :volume 504182} {:date \"2023-10-06\", :open 0.33, :high 0.33, :low 0.315, :close 0.32, :adjusted_close 0.32, :volume 665610} {:date \"2023-10-09\", :open 0.315, :high 0.315, :low 0.3, :close 0.31, :adjusted_close 0.31, :volume 697129} {:date \"2023-10-10\", :open 0.3, :high 0.315, :low 0.295, :close 0.315, :adjusted_close 0.315, :volume 607992} {:date \"2023-10-11\", :open 0.315, :high 0.315, :low 0.295, :close 0.3, :adjusted_close 0.3, :volume 323737} {:date \"2023-10-12\", :open 0.3, :high 0.305, :low 0.295, :close 0.3, :adjusted_close 0.3, :volume 1330220} {:date \"2023-10-13\", :open 0.29, :high 0.295, :low 0.28, :close 0.28, :adjusted_close 0.28, :volume 698941} {:date \"2023-10-16\", :open 0.28, :high 0.3, :low 0.28, :close 0.295, :adjusted_close 0.295, :volume 441702} {:date \"2023-10-17\", :open 0.29, :high 0.29, :low 0.2775, :close 0.285, :adjusted_close 0.285, :volume 461140} {:date \"2023-10-18\", :open 0.295, :high 0.3025, :low 0.29, :close 0.29, :adjusted_close 0.29, :volume 1407216} {:date \"2023-10-19\", :open 0.285, :high 0.295, :low 0.28, :close 0.295, :adjusted_close 0.295, :volume 190362} {:date \"2023-10-20\", :open 0.295, :high 0.3, :low 0.285, :close 0.3, :adjusted_close 0.3, :volume 482471} {:date \"2023-10-23\", :open 0.3, :high 0.31, :low 0.3, :close 0.31, :adjusted_close 0.31, :volume 729979} {:date \"2023-10-24\", :open 0.3, :high 0.315, :low 0.3, :close 0.3, :adjusted_close 0.3, :volume 246198} {:date \"2023-10-25\", :open 0.31, :high 0.315, :low 0.305, :close 0.305, :adjusted_close 0.305, :volume 472064} {:date \"2023-10-26\", :open 0.31, :high 0.32, :low 0.31, :close 0.32, :adjusted_close 0.32, :volume 612224} {:date \"2023-10-27\", :open 0.32, :high 0.32, :low 0.305, :close 0.315, :adjusted_close 0.315, :volume 80591} {:date \"2023-10-30\", :open 0.305, :high 0.31, :low 0.3, :close 0.305, :adjusted_close 0.305, :volume 1155560} {:date \"2023-10-31\", :open 0.3, :high 0.3, :low 0.29, :close 0.295, :adjusted_close 0.295, :volume 524941} {:date \"2023-11-01\", :open 0.3, :high 0.325, :low 0.3, :close 0.32, :adjusted_close 0.32, :volume 2669204} {:date \"2023-11-02\", :open 0.315, :high 0.32, :low 0.31, :close 0.315, :adjusted_close 0.315, :volume 302645} {:date \"2023-11-03\", :open 0.31, :high 0.315, :low 0.295, :close 0.3, :adjusted_close 0.3, :volume 519905} {:date \"2023-11-06\", :open 0.295, :high 0.295, :low 0.28, :close 0.29, :adjusted_close 0.29, :volume 981049} {:date \"2023-11-07\", :open 0.285, :high 0.3, :low 0.285, :close 0.3, :adjusted_close 0.3, :volume 410070} {:date \"2023-11-08\", :open 0.295, :high 0.3, :low 0.29, :close 0.29, :adjusted_close 0.29, :volume 197073} {:date \"2023-11-09\", :open 0.285, :high 0.29, :low 0.275, :close 0.28, :adjusted_close 0.28, :volume 508004} {:date \"2023-11-10\", :open 0.285, :high 0.29, :low 0.28, :close 0.28, :adjusted_close 0.28, :volume 107768} {:date \"2023-11-13\", :open 0.28, :high 0.29, :low 0.28, :close 0.29, :adjusted_close 0.29, :volume 496412} {:date \"2023-11-14\", :open 0.3, :high 0.3, :low 0.29, :close 0.295, :adjusted_close 0.295, :volume 860078} {:date \"2023-11-15\", :open 0.3, :high 0.3, :low 0.285, :close 0.295, :adjusted_close 0.295, :volume 502642} {:date \"2023-11-16\", :open 0.295, :high 0.295, :low 0.275, :close 0.275, :adjusted_close 0.275, :volume 453138} {:date \"2023-11-17\", :open 0.285, :high 0.295, :low 0.285, :close 0.295, :adjusted_close 0.295, :volume 865235} {:date \"2023-11-20\", :open 0.3, :high 0.305, :low 0.285, :close 0.3, :adjusted_close 0.3, :volume 1118160} {:date \"2023-11-21\", :open 0.3, :high 0.3275, :low 0.295, :close 0.32, :adjusted_close 0.32, :volume 4052299} {:date \"2023-11-22\", :open 0.315, :high 0.315, :low 0.305, :close 0.305, :adjusted_close 0.305, :volume 456975} {:date \"2023-11-23\", :open 0.305, :high 0.31, :low 0.3, :close 0.305, :adjusted_close 0.305, :volume 263697} {:date \"2023-11-24\", :open 0.31, :high 0.315, :low 0.305, :close 0.315, :adjusted_close 0.315, :volume 274684} {:date \"2023-11-27\", :open 0.31, :high 0.315, :low 0.295, :close 0.295, :adjusted_close 0.295, :volume 824401} {:date \"2023-11-28\", :open 0.295, :high 0.3, :low 0.285, :close 0.3, :adjusted_close 0.3, :volume 622250} {:date \"2023-11-29\", :open 0.285, :high 0.285, :low 0.27, :close 0.28, :adjusted_close 0.28, :volume 538639} {:date \"2023-11-30\", :open 0.27, :high 0.285, :low 0.27, :close 0.275, :adjusted_close 0.275, :volume 440453} {:date \"2023-12-01\", :open 0.285, :high 0.31, :low 0.275, :close 0.305, :adjusted_close 0.305, :volume 1046797} {:date \"2023-12-04\", :open 0.295, :high 0.31, :low 0.295, :close 0.305, :adjusted_close 0.305, :volume 516418} {:date \"2023-12-05\", :open 0.295, :high 0.305, :low 0.29, :close 0.3, :adjusted_close 0.3, :volume 289953} {:date \"2023-12-06\", :open 0.28, :high 0.295, :low 0.28, :close 0.295, :adjusted_close 0.295, :volume 152281} {:date \"2023-12-07\", :open 0.285, :high 0.295, :low 0.265, :close 0.275, :adjusted_close 0.275, :volume 608332} {:date \"2023-12-08\", :open 0.275, :high 0.285, :low 0.27, :close 0.285, :adjusted_close 0.285, :volume 266436} {:date \"2023-12-11\", :open 0.275, :high 0.275, :low 0.27, :close 0.27, :adjusted_close 0.27, :volume 468034} {:date \"2023-12-12\", :open 0.2675, :high 0.2675, :low 0.255, :close 0.265, :adjusted_close 0.265, :volume 582901} {:date \"2023-12-13\", :open 0.275, :high 0.275, :low 0.255, :close 0.255, :adjusted_close 0.255, :volume 392068} {:date \"2023-12-14\", :open 0.25, :high 0.27, :low 0.2375, :close 0.27, :adjusted_close 0.27, :volume 729357} {:date \"2023-12-15\", :open 0.275, :high 0.28, :low 0.245, :close 0.245, :adjusted_close 0.245, :volume 823133} {:date \"2023-12-18\", :open 0.255, :high 0.265, :low 0.255, :close 0.265, :adjusted_close 0.265, :volume 106761} {:date \"2023-12-19\", :open 0.275, :high 0.275, :low 0.25, :close 0.26, :adjusted_close 0.26, :volume 739020} {:date \"2023-12-20\", :open 0.25, :high 0.27, :low 0.245, :close 0.255, :adjusted_close 0.255, :volume 1012618} {:date \"2023-12-21\", :open 0.255, :high 0.26, :low 0.2475, :close 0.26, :adjusted_close 0.26, :volume 408016} {:date \"2023-12-22\", :open 0.255, :high 0.26, :low 0.255, :close 0.26, :adjusted_close 0.26, :volume 56080} {:date \"2023-12-27\", :open 0.26, :high 0.265, :low 0.255, :close 0.265, :adjusted_close 0.265, :volume 380771} {:date \"2023-12-28\", :open 0.26, :high 0.265, :low 0.25, :close 0.255, :adjusted_close 0.255, :volume 303014} {:date \"2023-12-29\", :open 0.255, :high 0.265, :low 0.25, :close 0.265, :adjusted_close 0.265, :volume 422893} {:date \"2024-01-02\", :open 0.255, :high 0.265, :low 0.25, :close 0.265, :adjusted_close 0.265, :volume 233674} {:date \"2024-01-03\", :open 0.265, :high 0.27, :low 0.255, :close 0.27, :adjusted_close 0.27, :volume 387084} {:date \"2024-01-04\", :open 0.26, :high 0.27, :low 0.255, :close 0.27, :adjusted_close 0.27, :volume 378288} {:date \"2024-01-05\", :open 0.265, :high 0.275, :low 0.265, :close 0.275, :adjusted_close 0.275, :volume 555386} {:date \"2024-01-08\", :open 0.27, :high 0.275, :low 0.255, :close 0.255, :adjusted_close 0.255, :volume 343975} {:date \"2024-01-09\", :open 0.265, :high 0.265, :low 0.255, :close 0.265, :adjusted_close 0.265, :volume 176210} {:date \"2024-01-10\", :open 0.27, :high 0.28, :low 0.27, :close 0.28, :adjusted_close 0.28, :volume 1482635} {:date \"2024-01-11\", :open 0.275, :high 0.28, :low 0.265, :close 0.275, :adjusted_close 0.275, :volume 525077} {:date \"2024-01-12\", :open 0.28, :high 0.295, :low 0.275, :close 0.295, :adjusted_close 0.295, :volume 1693712} {:date \"2024-01-15\", :open 0.31, :high 0.31, :low 0.295, :close 0.3025, :adjusted_close 0.3025, :volume 1975712} {:date \"2024-01-16\", :open 0.295, :high 0.295, :low 0.26, :close 0.27, :adjusted_close 0.27, :volume 1960610} {:date \"2024-01-17\", :open 0.27, :high 0.285, :low 0.27, :close 0.28, :adjusted_close 0.28, :volume 2028568} {:date \"2024-01-18\", :open 0.265, :high 0.28, :low 0.2575, :close 0.26, :adjusted_close 0.26, :volume 772776} {:date \"2024-01-19\", :open 0.26, :high 0.27, :low 0.25, :close 0.255, :adjusted_close 0.255, :volume 597479} {:date \"2024-01-22\", :open 0.26, :high 0.26, :low 0.2425, :close 0.255, :adjusted_close 0.255, :volume 800620} {:date \"2024-01-23\", :open 0.24, :high 0.255, :low 0.22, :close 0.22, :adjusted_close 0.22, :volume 968694} {:date \"2024-01-24\", :open 0.23, :high 0.245, :low 0.23, :close 0.245, :adjusted_close 0.245, :volume 809591} {:date \"2024-01-25\", :open 0.24, :high 0.255, :low 0.24, :close 0.255, :adjusted_close 0.255, :volume 550468} {:date \"2024-01-29\", :open 0.255, :high 0.26, :low 0.245, :close 0.26, :adjusted_close 0.26, :volume 716249} {:date \"2024-01-30\", :open 0.26, :high 0.26, :low 0.24, :close 0.26, :adjusted_close 0.26, :volume 1015424} {:date \"2024-01-31\", :open 0.26, :high 0.285, :low 0.26, :close 0.285, :adjusted_close 0.285, :volume 2205056} {:date \"2024-02-01\", :open 0.285, :high 0.285, :low 0.27, :close 0.285, :adjusted_close 0.285, :volume 497860} {:date \"2024-02-02\", :open 0.3, :high 0.305, :low 0.28, :close 0.29, :adjusted_close 0.29, :volume 2106524} {:date \"2024-02-05\", :open 0.28, :high 0.2825, :low 0.265, :close 0.28, :adjusted_close 0.28, :volume 916512} {:date \"2024-02-06\", :open 0.27, :high 0.275, :low 0.26, :close 0.26, :adjusted_close 0.26, :volume 625037} {:date \"2024-02-07\", :open 0.265, :high 0.285, :low 0.26, :close 0.285, :adjusted_close 0.285, :volume 522218} {:date \"2024-02-08\", :open 0.275, :high 0.285, :low 0.265, :close 0.28, :adjusted_close 0.28, :volume 447738} {:date \"2024-02-09\", :open 0.26, :high 0.27, :low 0.26, :close 0.27, :adjusted_close 0.27, :volume 251995} {:date \"2024-02-12\", :open 0.265, :high 0.27, :low 0.26, :close 0.26, :adjusted_close 0.26, :volume 761813} {:date \"2024-02-13\", :open 0.265, :high 0.27, :low 0.26, :close 0.26, :adjusted_close 0.26, :volume 607792} {:date \"2024-02-14\", :open 0.265, :high 0.265, :low 0.25, :close 0.265, :adjusted_close 0.265, :volume 804279} {:date \"2024-02-15\", :open 0.255, :high 0.265, :low 0.255, :close 0.265, :adjusted_close 0.265, :volume 137502} {:date \"2024-02-16\", :open 0.26, :high 0.265, :low 0.255, :close 0.265, :adjusted_close 0.265, :volume 181836} {:date \"2024-02-19\", :open 0.255, :high 0.27, :low 0.255, :close 0.26, :adjusted_close 0.26, :volume 279278} {:date \"2024-02-20\", :open 0.255, :high 0.26, :low 0.245, :close 0.25, :adjusted_close 0.25, :volume 625108} {:date \"2024-02-21\", :open 0.245, :high 0.255, :low 0.23, :close 0.245, :adjusted_close 0.245, :volume 900568} {:date \"2024-02-22\", :open 0.245, :high 0.245, :low 0.235, :close 0.245, :adjusted_close 0.245, :volume 317547} {:date \"2024-02-23\", :open 0.235, :high 0.235, :low 0.2175, :close 0.225, :adjusted_close 0.225, :volume 1281150} {:date \"2024-02-26\", :open 0.25, :high 0.25, :low 0.215, :close 0.225, :adjusted_close 0.225, :volume 1529370} {:date \"2024-02-27\", :open 0.235, :high 0.24, :low 0.215, :close 0.215, :adjusted_close 0.215, :volume 1067838} {:date \"2024-02-28\", :open 0.22, :high 0.245, :low 0.22, :close 0.245, :adjusted_close 0.245, :volume 1606174} {:date \"2024-02-29\", :open 0.235, :high 0.245, :low 0.23, :close 0.235, :adjusted_close 0.235, :volume 1101317} {:date \"2024-03-01\", :open 0.235, :high 0.245, :low 0.215, :close 0.22, :adjusted_close 0.22, :volume 1799192} {:date \"2024-03-04\", :open 0.23, :high 0.24, :low 0.225, :close 0.225, :adjusted_close 0.225, :volume 1735574} {:date \"2024-03-05\", :open 0.23, :high 0.235, :low 0.22, :close 0.23, :adjusted_close 0.23, :volume 1244028} {:date \"2024-03-06\", :open 0.23, :high 0.235, :low 0.225, :close 0.235, :adjusted_close 0.235, :volume 810618} {:date \"2024-03-07\", :open 0.24, :high 0.24, :low 0.235, :close 0.24, :adjusted_close 0.24, :volume 468990} {:date \"2024-03-08\", :open 0.25, :high 0.255, :low 0.24, :close 0.25, :adjusted_close 0.25, :volume 1456487} {:date \"2024-03-11\", :open 0.24, :high 0.24, :low 0.225, :close 0.23, :adjusted_close 0.23, :volume 762587} {:date \"2024-03-12\", :open 0.23, :high 0.235, :low 0.225, :close 0.225, :adjusted_close 0.225, :volume 593534} {:date \"2024-03-13\", :open 0.23, :high 0.245, :low 0.23, :close 0.245, :adjusted_close 0.245, :volume 713161} {:date \"2024-03-14\", :open 0.23, :high 0.235, :low 0.22, :close 0.22, :adjusted_close 0.22, :volume 1635669} {:date \"2024-03-15\", :open 0.22, :high 0.22, :low 0.22, :close 0.22, :adjusted_close 0.22, :volume 0} {:date \"2024-03-18\", :open 0.18, :high 0.18, :low 0.17, :close 0.17, :adjusted_close 0.17, :volume 14951910} {:date \"2024-03-19\", :open 0.17, :high 0.175, :low 0.16, :close 0.165, :adjusted_close 0.165, :volume 12757465} {:date \"2024-03-20\", :open 0.17, :high 0.18, :low 0.1675, :close 0.17, :adjusted_close 0.17, :volume 5416539} {:date \"2024-03-21\", :open 0.175, :high 0.18, :low 0.1725, :close 0.18, :adjusted_close 0.18, :volume 7560988} {:date \"2024-03-22\", :open 0.175, :high 0.18, :low 0.17, :close 0.17, :adjusted_close 0.17, :volume 2209717} {:date \"2024-03-25\", :open 0.175, :high 0.175, :low 0.17, :close 0.175, :adjusted_close 0.175, :volume 998907} {:date \"2024-03-26\", :open 0.17, :high 0.17, :low 0.165, :close 0.17, :adjusted_close 0.17, :volume 4878225} {:date \"2024-03-27\", :open 0.165, :high 0.17, :low 0.165, :close 0.17, :adjusted_close 0.17, :volume 1137841} {:date \"2024-03-28\", :open 0.17, :high 0.17, :low 0.165, :close 0.165, :adjusted_close 0.165, :volume 5656805, :warning \"Data is limited by one year as you have free subscription\"})[0m\n",
+            :id :0ff5b1d4-77d7-4133-897d-eb9fb591384d,
+            :code "(b/get-bars im\n            {:asset \"AEE.AU\"\n             :calendar [:us :d]\n             :import :eodhd}\n            ; fails because more than a year ago\n            {:start (-> \"2020-12-01T00:00:00Z\" t/instant)\n             :end (-> \"2024-04-01T00:00:00Z\" t/instant)})",
+            :ns "quanta.notebook.docs.import-manager",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class clojure.lang.PersistentVector"]
+                   [:span
+                    "[:de.otto.nom.core/anomaly :ta.import.provider.eodhd.ds/eodhd-get-history {:message \"Data is limited by one year as you have free subscription\", :opts {:asset \"AEE.AU\", :calendar [:us :d], :import :eodhd}, :window {:start #time/instant \"2020-12-01T00:00:00Z\", :end #time/instant \"2024-04-01T00:00:00Z\"}}]"]]}],
+ :meta {:id :5162e802-a371-4cb9-a640-8fedd0aeaf1b,
+        :eval-time "2024-05-03 12:52:22",
+        :ns "quanta.notebook.docs.import-manager",
+        :java "19.0.2",
+        :clojure "1.11.1"}}

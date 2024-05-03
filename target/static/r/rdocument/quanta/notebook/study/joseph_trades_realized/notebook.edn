@@ -1,0 +1,3166 @@
+; saved on 2024-05-03 12:52:11
+{:content [{:out "",
+            :id :b51cad75-b286-4087-927c-df6c8318dd92,
+            :code "(ns quanta.notebook.study.joseph-trades-realized\n  (:require\n   [tablecloth.api :as tc]\n   [ta.trade.roundtrip.core :refer [roundtrip-stats]]\n   [ta.viz.trade.core :refer [roundtrip-stats-ui]]\n   [joseph.trade.db :refer [load-trades-resource]]))",
+            :ns "quanta.notebook.study.joseph-trades-realized",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.p-2.clj-nil [:p "nil"]]}
+           {:out "",
+            :id :cdb9fbf5-3ffa-4918-9c83-9a11899de024,
+            :code "(def trades (load-trades-resource))",
+            :ns "quanta.notebook.study.joseph-trades-realized",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.joseph-trades-realized/trades"]}
+           {:out "",
+            :id :97e6341f-d753-40c6-af42-0cdcf0ad70cb,
+            :code "(def trade-ds (tc/dataset trades))",
+            :ns "quanta.notebook.study.joseph-trades-realized",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.joseph-trades-realized/trade-ds"]}
+           {:out "",
+            :id :996f70e1-4655-4fed-aba9-cde7b8722016,
+            :code "(tc/select-columns trade-ds\n                   [:asset :side\n                    :entry-price\n                    :entry-date\n                    :exit-price\n                    :exit-date])",
+            :ns "quanta.notebook.study.joseph-trades-realized",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [179 6]:\n\n| :asset |  :side | :entry-price |      :entry-date | :exit-price |       :exit-date |\n|--------|--------|-------------:|------------------|------------:|------------------|\n|    NG0 |  :long |       2.9640 | 2023-01-10T00:00 |      2.9690 | 2023-02-27T00:00 |\n|   PLTR |  :long |       7.6300 | 2023-01-27T00:00 |      8.0900 | 2023-02-01T00:00 |\n|   AMZN |  :long |     103.1200 | 2023-01-27T00:00 |    111.8100 | 2023-02-02T00:00 |\n|    NG0 |  :long |       2.9640 | 2023-01-29T00:00 |      2.9690 | 2023-02-27T00:00 |\n|   RIVN |  :long |      19.8200 | 2023-01-30T00:00 |     20.7800 | 2023-02-02T00:00 |\n|   FCEL |  :long |       3.5450 | 2023-01-31T00:00 |      4.1650 | 2023-02-02T00:00 |\n|    RB0 |  :long |       2.5254 | 2023-02-01T00:00 |      2.5313 | 2023-02-07T00:00 |\n|   PLTR |  :long |       8.1000 | 2023-02-01T00:00 |      8.8100 | 2023-02-02T00:00 |\n|    ZC0 | :short |     668.0000 | 2023-02-01T00:00 |    663.5000 | 2023-02-02T00:00 |\n|   PLTR |  :long |       8.3600 | 2023-02-02T00:00 |      9.4400 | 2023-02-15T00:00 |\n|    ... |    ... |          ... |              ... |         ... |              ... |\n|   DAX0 |  :long |   15767.4000 | 2023-07-10T00:00 |  15899.0000 | 2023-07-11T00:00 |\n|   MES0 |  :long |    4485.6200 | 2023-07-10T00:00 |   4506.5000 | 2023-07-11T00:00 |\n|   PLTR |  :long |      16.5100 | 2023-07-11T00:00 |     17.3920 | 2023-07-17T00:00 |\n|    RB0 | :short |       2.2262 | 2023-07-11T00:00 |      2.2120 | 2023-07-16T00:00 |\n|    ZC0 |  :long |     489.7500 | 2023-07-12T00:00 |    490.7500 | 2023-07-13T00:00 |\n|    RB0 | :short |       2.2262 | 2023-07-12T00:00 |      2.2120 | 2023-07-16T00:00 |\n|    ZC0 |  :long |     491.0000 | 2023-07-13T00:00 |    497.5000 | 2023-07-13T00:00 |\n|    BZ0 | :short |      79.6600 | 2023-07-13T00:00 |     79.2600 | 2023-07-13T00:00 |\n|    BZ0 | :short |      79.2600 | 2023-07-13T00:00 |     78.3200 | 2023-07-16T00:00 |\n|    ZC0 |  :long |     497.0000 | 2023-07-13T00:00 |    522.2500 | 2023-07-16T00:00 |\n|   NKLA |  :long |       2.0600 | 2023-07-13T00:00 |      2.6300 | 2023-07-14T00:00 |\n"]]}
+           {:out "",
+            :id :5c35cef1-cdac-4c33-9bd6-773d34458b90,
+            :code "(-> trade-ds roundtrip-stats roundtrip-stats-ui)",
+            :ns "quanta.notebook.study.joseph-trades-realized",
+            :render-fn ta.viz.renderfn/render-spec,
+            :data ^{:render-fn ta.viz.renderfn/render-spec}
+                  {:render-fn ta.viz.trade.core/roundtrip-stats-ui,
+                   :data {:metrics {:roundtrip {:avg-win-log 0.018667443224729473,
+                                                :avg-bars-win 0.0,
+                                                :win-nr-prct 96.08938547486035,
+                                                :pf 1.0445098923136633,
+                                                :avg-log 7.643710695010237E-4,
+                                                :pl-log-cum 0.13682242144068324,
+                                                :avg-loss-log -0.4391396876018266,
+                                                :trades 179,
+                                                :avg-bars-loss 0.0},
+                                    :nav {:cum-pl 187393.83344,
+                                          :max-dd 72996.70000000001}},
+                          :chart ^{:render-fn ta.viz.renderfn/render-spec}
+                                 {:render-fn ta.viz.renderfn.vega/vega-lite,
+                                  :data {:values [^{}
+                                                  {:exit-date #time/date-time "2023-02-01T00:00",
+                                                   :cum-ret-volume 3220.0}
+^{}
+{:exit-date #time/date-time "2023-02-02T00:00",
+ :cum-ret-volume 7565.0}
+^{}
+{:exit-date #time/date-time "2023-02-02T00:00",
+ :cum-ret-volume 9485.0}
+^{}
+{:exit-date #time/date-time "2023-02-02T00:00",
+ :cum-ret-volume 10105.0}
+^{}
+{:exit-date #time/date-time "2023-02-02T00:00",
+ :cum-ret-volume 14365.0}
+^{}
+{:exit-date #time/date-time "2023-02-02T00:00",
+ :cum-ret-volume 15490.0}
+^{}
+{:exit-date #time/date-time "2023-02-07T00:00",
+ :cum-ret-volume 15737.800000000003}
+^{}
+{:exit-date #time/date-time "2023-02-07T00:00",
+ :cum-ret-volume 15989.800000000017}
+^{}
+{:exit-date #time/date-time "2023-02-08T00:00",
+ :cum-ret-volume 17447.20000000001}
+^{}
+{:exit-date #time/date-time "2023-02-09T00:00",
+ :cum-ret-volume 17697.20000000001}
+^{}
+{:exit-date #time/date-time "2023-02-10T00:00",
+ :cum-ret-volume 19885.40000000001}
+^{}
+{:exit-date #time/date-time "2023-02-15T00:00",
+ :cum-ret-volume 22045.40000000001}
+^{}
+{:exit-date #time/date-time "2023-02-15T00:00",
+ :cum-ret-volume 23125.40000000001}
+^{}
+{:exit-date #time/date-time "2023-02-16T00:00",
+ :cum-ret-volume 23687.90000000001}
+^{}
+{:exit-date #time/date-time "2023-02-16T00:00",
+ :cum-ret-volume 24217.90000000001}
+^{}
+{:exit-date #time/date-time "2023-02-27T00:00",
+ :cum-ret-volume 24267.90000000001}
+^{}
+{:exit-date #time/date-time "2023-02-27T00:00",
+ :cum-ret-volume 24317.90000000001}
+^{}
+{:exit-date #time/date-time "2023-02-27T00:00",
+ :cum-ret-volume 24417.90000000001}
+^{}
+{:exit-date #time/date-time "2023-02-27T00:00",
+ :cum-ret-volume 24617.90000000001}
+^{}
+{:exit-date #time/date-time "2023-02-27T00:00",
+ :cum-ret-volume 26867.90000000001}
+^{}
+{:exit-date #time/date-time "2023-03-01T00:00",
+ :cum-ret-volume 27827.90000000001}
+^{}
+{:exit-date #time/date-time "2023-03-03T00:00",
+ :cum-ret-volume 28492.90000000001}
+^{}
+{:exit-date #time/date-time "2023-03-03T00:00",
+ :cum-ret-volume 29822.90000000001}
+^{}
+{:exit-date #time/date-time "2023-03-03T00:00",
+ :cum-ret-volume 31051.90000000001}
+^{}
+{:exit-date #time/date-time "2023-03-03T00:00",
+ :cum-ret-volume 32571.90000000001}
+^{}
+{:exit-date #time/date-time "2023-03-06T00:00",
+ :cum-ret-volume 34341.90000000001}
+^{}
+{:exit-date #time/date-time "2023-03-06T00:00",
+ :cum-ret-volume 35801.90000000001}
+^{}
+{:exit-date #time/date-time "2023-03-13T00:00",
+ :cum-ret-volume 40951.90000000001}
+^{}
+{:exit-date #time/date-time "2023-03-13T00:00",
+ :cum-ret-volume 56431.90000000001}
+^{}
+{:exit-date #time/date-time "2023-03-15T00:00",
+ :cum-ret-volume 58636.90000000001}
+^{}
+{:exit-date #time/date-time "2023-03-16T00:00",
+ :cum-ret-volume 60476.90000000001}
+^{}
+{:exit-date #time/date-time "2023-03-16T00:00",
+ :cum-ret-volume 62616.90000000001}
+^{}
+{:exit-date #time/date-time "2023-03-16T00:00",
+ :cum-ret-volume 63536.90000000001}
+^{}
+{:exit-date #time/date-time "2023-03-21T00:00",
+ :cum-ret-volume 64327.40000000001}
+^{}
+{:exit-date #time/date-time "2023-03-21T00:00",
+ :cum-ret-volume 64722.65000000001}
+^{}
+{:exit-date #time/date-time "2023-03-21T00:00",
+ :cum-ret-volume 65038.850000000006}
+^{}
+{:exit-date #time/date-time "2023-03-21T00:00",
+ :cum-ret-volume 65613.85}
+^{}
+{:exit-date #time/date-time "2023-03-21T00:00",
+ :cum-ret-volume 65851.0}
+^{}
+{:exit-date #time/date-time "2023-03-21T00:00",
+ :cum-ret-volume 66088.15}
+^{}
+{:exit-date #time/date-time "2023-03-21T00:00",
+ :cum-ret-volume 68388.15}
+^{}
+{:exit-date #time/date-time "2023-03-22T00:00",
+ :cum-ret-volume 69925.34999999999}
+^{}
+{:exit-date #time/date-time "2023-03-27T00:00",
+ :cum-ret-volume 71935.34999999999}
+^{}
+{:exit-date #time/date-time "2023-03-27T00:00",
+ :cum-ret-volume 73945.34999999999}
+^{}
+{:exit-date #time/date-time "2023-03-27T00:00",
+ :cum-ret-volume 75955.34999999999}
+^{}
+{:exit-date #time/date-time "2023-03-29T00:00",
+ :cum-ret-volume 76571.09999999999}
+^{}
+{:exit-date #time/date-time "2023-03-29T00:00",
+ :cum-ret-volume 77351.09999999999}
+^{}
+{:exit-date #time/date-time "2023-03-29T00:00",
+ :cum-ret-volume 78131.09999999999}
+^{}
+{:exit-date #time/date-time "2023-03-31T00:00",
+ :cum-ret-volume 78728.59999999999}
+^{}
+{:exit-date #time/date-time "2023-03-31T00:00",
+ :cum-ret-volume 79326.09999999999}
+^{}
+{:exit-date #time/date-time "2023-04-17T00:00",
+ :cum-ret-volume 80366.09999999999}
+^{}
+{:exit-date #time/date-time "2023-04-17T00:00",
+ :cum-ret-volume 80906.09999999999}
+^{}
+{:exit-date #time/date-time "2023-04-17T00:00",
+ :cum-ret-volume 81066.1}
+^{}
+{:exit-date #time/date-time "2023-04-17T00:00",
+ :cum-ret-volume 81226.1}
+^{}
+{:exit-date #time/date-time "2023-04-17T00:00",
+ :cum-ret-volume 82846.1}
+^{}
+{:exit-date #time/date-time "2023-04-17T00:00",
+ :cum-ret-volume 83166.1}
+^{}
+{:exit-date #time/date-time "2023-04-17T00:00",
+ :cum-ret-volume 83976.1}
+^{}
+{:exit-date #time/date-time "2023-04-17T00:00",
+ :cum-ret-volume 84136.1}
+^{}
+{:exit-date #time/date-time "2023-04-17T00:00",
+ :cum-ret-volume 85524.02}
+^{}
+{:exit-date #time/date-time "2023-04-17T00:00",
+ :cum-ret-volume 86604.02}
+^{}
+{:exit-date #time/date-time "2023-04-17T00:00",
+ :cum-ret-volume 86924.02000000002}
+^{}
+{:exit-date #time/date-time "2023-04-17T00:00",
+ :cum-ret-volume 88044.02000000002}
+^{}
+{:exit-date #time/date-time "2023-04-18T00:00",
+ :cum-ret-volume 88224.02000000002}
+^{}
+{:exit-date #time/date-time "2023-04-18T00:00",
+ :cum-ret-volume 91324.02000000002}
+^{}
+{:exit-date #time/date-time "2023-04-19T00:00",
+ :cum-ret-volume 91364.02000000002}
+^{}
+{:exit-date #time/date-time "2023-04-19T00:00",
+ :cum-ret-volume 91404.02000000002}
+^{}
+{:exit-date #time/date-time "2023-04-19T00:00",
+ :cum-ret-volume 92094.02000000002}
+^{}
+{:exit-date #time/date-time "2023-04-19T00:00",
+ :cum-ret-volume 93474.02000000002}
+^{}
+{:exit-date #time/date-time "2023-04-19T00:00",
+ :cum-ret-volume 94854.02000000002}
+^{}
+{:exit-date #time/date-time "2023-04-21T00:00",
+ :cum-ret-volume 96790.22000000003}
+^{}
+{:exit-date #time/date-time "2023-04-24T00:00",
+ :cum-ret-volume 100090.22000000003}
+^{}
+{:exit-date #time/date-time "2023-04-24T00:00",
+ :cum-ret-volume 100570.22000000003}
+^{}
+{:exit-date #time/date-time "2023-04-24T00:00",
+ :cum-ret-volume 101050.22000000003}
+^{}
+{:exit-date #time/date-time "2023-04-24T00:00",
+ :cum-ret-volume 102902.42000000003}
+^{}
+{:exit-date #time/date-time "2023-04-27T00:00",
+ :cum-ret-volume 103967.42000000003}
+^{}
+{:exit-date #time/date-time "2023-04-28T00:00",
+ :cum-ret-volume 105731.42000000004}
+^{}
+{:exit-date #time/date-time "2023-05-03T00:00",
+ :cum-ret-volume 95303.32000000004}
+^{}
+{:exit-date #time/date-time "2023-05-03T00:00",
+ :cum-ret-volume 32734.720000000038}
+^{}
+{:exit-date #time/date-time "2023-05-10T00:00",
+ :cum-ret-volume 37174.72000000004}
+^{}
+{:exit-date #time/date-time "2023-05-10T00:00",
+ :cum-ret-volume 41614.72000000004}
+^{}
+{:exit-date #time/date-time "2023-05-11T00:00",
+ :cum-ret-volume 48694.72000000004}
+^{}
+{:exit-date #time/date-time "2023-05-11T00:00",
+ :cum-ret-volume 54004.72000000003}
+^{}
+{:exit-date #time/date-time "2023-05-11T00:00",
+ :cum-ret-volume 59314.72000000003}
+^{}
+{:exit-date #time/date-time "2023-05-15T00:00",
+ :cum-ret-volume 61254.72000000003}
+^{}
+{:exit-date #time/date-time "2023-05-15T00:00",
+ :cum-ret-volume 63174.72000000003}
+^{}
+{:exit-date #time/date-time "2023-05-15T00:00",
+ :cum-ret-volume 65114.72000000003}
+^{}
+{:exit-date #time/date-time "2023-05-16T00:00",
+ :cum-ret-volume 67154.72000000003}
+^{}
+{:exit-date #time/date-time "2023-05-18T00:00",
+ :cum-ret-volume 75694.72000000003}
+^{}
+{:exit-date #time/date-time "2023-05-18T00:00",
+ :cum-ret-volume 82694.72000000003}
+^{}
+{:exit-date #time/date-time "2023-05-19T00:00",
+ :cum-ret-volume 84354.72000000003}
+^{}
+{:exit-date #time/date-time "2023-05-23T00:00",
+ :cum-ret-volume 84354.72000000003}
+^{}
+{:exit-date #time/date-time "2023-05-23T00:00",
+ :cum-ret-volume 84354.72000000003}
+^{}
+{:exit-date #time/date-time "2023-05-23T00:00",
+ :cum-ret-volume 84354.72000000003}
+^{}
+{:exit-date #time/date-time "2023-05-23T00:00",
+ :cum-ret-volume 87674.72000000003}
+^{}
+{:exit-date #time/date-time "2023-05-23T00:00",
+ :cum-ret-volume 87674.72000000003}
+^{}
+{:exit-date #time/date-time "2023-05-23T00:00",
+ :cum-ret-volume 87674.72000000003}
+^{}
+{:exit-date #time/date-time "2023-05-24T00:00",
+ :cum-ret-volume 89030.17000000003}
+^{}
+{:exit-date #time/date-time "2023-06-01T00:00",
+ :cum-ret-volume 91890.17000000003}
+^{}
+{:exit-date #time/date-time "2023-06-06T00:00",
+ :cum-ret-volume 94929.17000000003}
+^{}
+{:exit-date #time/date-time "2023-06-07T00:00",
+ :cum-ret-volume 95529.17000000003}
+^{}
+{:exit-date #time/date-time "2023-06-07T00:00",
+ :cum-ret-volume 95972.45000000003}
+^{}
+{:exit-date #time/date-time "2023-06-07T00:00",
+ :cum-ret-volume 96212.45000000003}
+^{}
+{:exit-date #time/date-time "2023-06-07T00:00",
+ :cum-ret-volume 96572.45000000003}
+^{}
+{:exit-date #time/date-time "2023-06-07T00:00",
+ :cum-ret-volume 97172.45000000003}
+^{}
+{:exit-date #time/date-time "2023-06-08T00:00",
+ :cum-ret-volume 99382.45000000003}
+^{}
+{:exit-date #time/date-time "2023-06-08T00:00",
+ :cum-ret-volume 103802.45000000003}
+^{}
+{:exit-date #time/date-time "2023-06-12T00:00",
+ :cum-ret-volume 106457.45000000003}
+^{}
+{:exit-date #time/date-time "2023-06-13T00:00",
+ :cum-ret-volume 107801.45000000003}
+^{}
+{:exit-date #time/date-time "2023-06-13T00:00",
+ :cum-ret-volume 110061.45000000003}
+^{}
+{:exit-date #time/date-time "2023-06-13T00:00",
+ :cum-ret-volume 110951.45000000003}
+^{}
+{:exit-date #time/date-time "2023-06-14T00:00",
+ :cum-ret-volume 115194.15000000002}
+^{}
+{:exit-date #time/date-time "2023-06-15T00:00",
+ :cum-ret-volume 116574.15000000002}
+^{}
+{:exit-date #time/date-time "2023-06-15T00:00",
+ :cum-ret-volume 117844.15000000002}
+^{}
+{:exit-date #time/date-time "2023-06-15T00:00",
+ :cum-ret-volume 119104.15000000002}
+^{}
+{:exit-date #time/date-time "2023-06-15T00:00",
+ :cum-ret-volume 120054.15000000002}
+^{}
+{:exit-date #time/date-time "2023-06-20T00:00",
+ :cum-ret-volume 120184.15000000002}
+^{}
+{:exit-date #time/date-time "2023-06-20T00:00",
+ :cum-ret-volume 120565.60000000003}
+^{}
+{:exit-date #time/date-time "2023-06-20T00:00",
+ :cum-ret-volume 123015.60000000003}
+^{}
+{:exit-date #time/date-time "2023-06-20T00:00",
+ :cum-ret-volume 123520.20000000004}
+^{}
+{:exit-date #time/date-time "2023-06-20T00:00",
+ :cum-ret-volume 124024.80000000005}
+^{}
+{:exit-date #time/date-time "2023-06-20T00:00",
+ :cum-ret-volume 124148.35344000005}
+^{}
+{:exit-date #time/date-time "2023-06-20T00:00",
+ :cum-ret-volume 124278.35344000005}
+^{}
+{:exit-date #time/date-time "2023-06-20T00:00",
+ :cum-ret-volume 124408.35344000005}
+^{}
+{:exit-date #time/date-time "2023-06-21T00:00",
+ :cum-ret-volume 124845.87344000005}
+^{}
+{:exit-date #time/date-time "2023-06-22T00:00",
+ :cum-ret-volume 125545.87344000005}
+^{}
+{:exit-date #time/date-time "2023-06-22T00:00",
+ :cum-ret-volume 126358.37344000005}
+^{}
+{:exit-date #time/date-time "2023-06-22T00:00",
+ :cum-ret-volume 126533.37344000005}
+^{}
+{:exit-date #time/date-time "2023-06-22T00:00",
+ :cum-ret-volume 127418.37344000005}
+^{}
+{:exit-date #time/date-time "2023-06-23T00:00",
+ :cum-ret-volume 131843.37344000005}
+^{}
+{:exit-date #time/date-time "2023-06-27T00:00",
+ :cum-ret-volume 133818.37344000005}
+^{}
+{:exit-date #time/date-time "2023-06-28T00:00",
+ :cum-ret-volume 134858.37344000005}
+^{}
+{:exit-date #time/date-time "2023-06-28T00:00",
+ :cum-ret-volume 135548.37344000005}
+^{}
+{:exit-date #time/date-time "2023-06-29T00:00",
+ :cum-ret-volume 137118.37344000005}
+^{}
+{:exit-date #time/date-time "2023-06-29T00:00",
+ :cum-ret-volume 137770.37344000005}
+^{}
+{:exit-date #time/date-time "2023-06-29T00:00",
+ :cum-ret-volume 140125.37344000005}
+^{}
+{:exit-date #time/date-time "2023-06-30T00:00",
+ :cum-ret-volume 141662.57344000007}
+^{}
+{:exit-date #time/date-time "2023-06-30T00:00",
+ :cum-ret-volume 144682.57344000007}
+^{}
+{:exit-date #time/date-time "2023-06-30T00:00",
+ :cum-ret-volume 145532.57344000007}
+^{}
+{:exit-date #time/date-time "2023-06-30T00:00",
+ :cum-ret-volume 145732.57344000007}
+^{}
+{:exit-date #time/date-time "2023-07-04T00:00",
+ :cum-ret-volume 146501.17344000004}
+^{}
+{:exit-date #time/date-time "2023-07-05T00:00",
+ :cum-ret-volume 147380.37344000005}
+^{}
+{:exit-date #time/date-time "2023-07-05T00:00",
+ :cum-ret-volume 148039.77344000005}
+^{}
+{:exit-date #time/date-time "2023-07-05T00:00",
+ :cum-ret-volume 149164.77344000005}
+^{}
+{:exit-date #time/date-time "2023-07-05T00:00",
+ :cum-ret-volume 149824.17344000004}
+^{}
+{:exit-date #time/date-time "2023-07-06T00:00",
+ :cum-ret-volume 150542.93344000005}
+^{}
+{:exit-date #time/date-time "2023-07-06T00:00",
+ :cum-ret-volume 151480.43344000005}
+^{}
+{:exit-date #time/date-time "2023-07-06T00:00",
+ :cum-ret-volume 152105.43344000005}
+^{}
+{:exit-date #time/date-time "2023-07-06T00:00",
+ :cum-ret-volume 157545.43344000005}
+^{}
+{:exit-date #time/date-time "2023-07-07T00:00",
+ :cum-ret-volume 158014.83344000005}
+^{}
+{:exit-date #time/date-time "2023-07-07T00:00",
+ :cum-ret-volume 159840.83344000005}
+^{}
+{:exit-date #time/date-time "2023-07-11T00:00",
+ :cum-ret-volume 160528.33344000005}
+^{}
+{:exit-date #time/date-time "2023-07-11T00:00",
+ :cum-ret-volume 161572.33344000005}
+^{}
+{:exit-date #time/date-time "2023-07-11T00:00",
+ :cum-ret-volume 162947.33344000005}
+^{}
+{:exit-date #time/date-time "2023-07-11T00:00",
+ :cum-ret-volume 164000.13344000006}
+^{}
+{:exit-date #time/date-time "2023-07-11T00:00",
+ :cum-ret-volume 165375.13344000006}
+^{}
+{:exit-date #time/date-time "2023-07-13T00:00",
+ :cum-ret-volume 165494.13344000006}
+^{}
+{:exit-date #time/date-time "2023-07-13T00:00",
+ :cum-ret-volume 166469.13344000006}
+^{}
+{:exit-date #time/date-time "2023-07-13T00:00",
+ :cum-ret-volume 166499.13344000006}
+^{}
+{:exit-date #time/date-time "2023-07-13T00:00",
+ :cum-ret-volume 166519.13344000006}
+^{}
+{:exit-date #time/date-time "2023-07-13T00:00",
+ :cum-ret-volume 166569.13344000006}
+^{}
+{:exit-date #time/date-time "2023-07-13T00:00",
+ :cum-ret-volume 166589.13344000006}
+^{}
+{:exit-date #time/date-time "2023-07-13T00:00",
+ :cum-ret-volume 166639.13344000006}
+^{}
+{:exit-date #time/date-time "2023-07-13T00:00",
+ :cum-ret-volume 166669.13344000006}
+^{}
+{:exit-date #time/date-time "2023-07-13T00:00",
+ :cum-ret-volume 167469.13344000006}
+^{}
+{:exit-date #time/date-time "2023-07-13T00:00",
+ :cum-ret-volume 167489.13344000006}
+^{}
+{:exit-date #time/date-time "2023-07-13T00:00",
+ :cum-ret-volume 167519.13344000006}
+^{}
+{:exit-date #time/date-time "2023-07-13T00:00",
+ :cum-ret-volume 167719.13344000006}
+^{}
+{:exit-date #time/date-time "2023-07-14T00:00",
+ :cum-ret-volume 179119.13344000006}
+^{}
+{:exit-date #time/date-time "2023-07-16T00:00",
+ :cum-ret-volume 179715.53344000003}
+^{}
+{:exit-date #time/date-time "2023-07-16T00:00",
+ :cum-ret-volume 180311.93344}
+^{}
+{:exit-date #time/date-time "2023-07-16T00:00",
+ :cum-ret-volume 181251.93344}
+^{}
+{:exit-date #time/date-time "2023-07-16T00:00",
+ :cum-ret-volume 182514.43344}
+^{}
+{:exit-date #time/date-time "2023-07-17T00:00",
+ :cum-ret-volume 183114.43344}
+^{}
+{:exit-date #time/date-time "2023-07-17T00:00",
+ :cum-ret-volume 183414.43344}
+^{}
+{:exit-date #time/date-time "2023-07-17T00:00",
+ :cum-ret-volume 184504.43344}
+^{}
+{:exit-date #time/date-time "2023-07-17T00:00",
+ :cum-ret-volume 184736.93344}
+^{}
+{:exit-date #time/date-time "2023-07-17T00:00",
+ :cum-ret-volume 184804.43344}
+^{}
+{:exit-date #time/date-time "2023-07-17T00:00",
+ :cum-ret-volume 185349.43344}
+^{}
+{:exit-date #time/date-time "2023-07-17T00:00",
+ :cum-ret-volume 186848.83344}
+^{}
+{:exit-date #time/date-time "2023-07-17T00:00",
+ :cum-ret-volume 187393.83344}]},
+                                  :spec {:width "700",
+                                         :height "550",
+                                         :description "NAV",
+                                         :mark "line",
+                                         :encoding {:y {:field :cum-ret-volume,
+                                                        :type "quantitative",
+                                                        :color "blue"},
+                                                    :x {:type "temporal",
+                                                        :field :exit-date}}}},
+                          :rt ^{:render-fn ta.viz.renderfn/render-spec}
+                              {:render-fn ta.viz.renderfn.rtable/rtable,
+                               :data [^{}
+                                      {:entry-date #time/date-time "2023-01-27T00:00",
+                                       :asset "PLTR",
+                                       :side :long,
+                                       :qty 7000.0,
+                                       :entry-price 7.63,
+                                       :entry-vol 53410.0,
+                                       :exit-date #time/date-time "2023-02-01T00:00",
+                                       :exit-price 8.09,
+                                       :pl 3220,
+                                       :win? true,
+                                       :ret-prct 6.028833551769332,
+                                       :ret-log 0.025423983657391735,
+                                       :cum-ret-volume 3220.0}
+^{}
+{:entry-date #time/date-time "2023-01-27T00:00",
+ :asset "AMZN",
+ :side :long,
+ :qty 500.0,
+ :entry-price 103.12,
+ :entry-vol 51560.0,
+ :exit-date #time/date-time "2023-02-02T00:00",
+ :exit-price 111.81,
+ :pl 4345,
+ :win? true,
+ :ret-prct 8.427075252133434,
+ :ret-log 0.03513774312815521,
+ :cum-ret-volume 7565.0}
+^{}
+{:entry-date #time/date-time "2023-01-30T00:00",
+ :asset "RIVN",
+ :side :long,
+ :qty 2000.0,
+ :entry-price 19.82,
+ :entry-vol 39640.0,
+ :exit-date #time/date-time "2023-02-02T00:00",
+ :exit-price 20.78,
+ :pl 1920,
+ :win? true,
+ :ret-prct 4.843592330978813,
+ :ret-log 0.02054189307190213,
+ :cum-ret-volume 9485.0}
+^{}
+{:entry-date #time/date-time "2023-01-31T00:00",
+ :asset "FCEL",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 3.545,
+ :entry-vol 3545.0,
+ :exit-date #time/date-time "2023-02-02T00:00",
+ :exit-price 4.165,
+ :pl 620,
+ :win? true,
+ :ret-prct 17.489421720733432,
+ :ret-log 0.06999876622372103,
+ :cum-ret-volume 10105.0}
+^{}
+{:entry-date #time/date-time "2023-02-01T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 6000.0,
+ :entry-price 8.1,
+ :entry-vol 48600.0,
+ :exit-date #time/date-time "2023-02-02T00:00",
+ :exit-price 8.81,
+ :pl 4260,
+ :win? true,
+ :ret-prct 8.765432098765443,
+ :ret-log 0.036490889533398185,
+ :cum-ret-volume 14365.0}
+^{}
+{:entry-date #time/date-time "2023-02-01T00:00",
+ :asset "ZC0",
+ :side :short,
+ :qty 250.0,
+ :entry-price 668.0,
+ :entry-vol 167000.0,
+ :exit-date #time/date-time "2023-02-02T00:00",
+ :exit-price 663.5,
+ :pl 1125,
+ :win? true,
+ :ret-prct 0.6736526946107785,
+ :ret-log 0.0029355352750917163,
+ :cum-ret-volume 15490.0}
+^{}
+{:entry-date #time/date-time "2023-02-01T00:00",
+ :asset "RB0",
+ :side :long,
+ :qty 42000.0,
+ :entry-price 2.5254,
+ :entry-vol 106066.79999999999,
+ :exit-date #time/date-time "2023-02-07T00:00",
+ :exit-price 2.5313,
+ :pl 247,
+ :win? true,
+ :ret-prct 0.23362635622079736,
+ :ret-log 0.001013442998784142,
+ :cum-ret-volume 15737.800000000003}
+^{}
+{:entry-date #time/date-time "2023-02-03T00:00",
+ :asset "RB0",
+ :side :long,
+ :qty 42000.0,
+ :entry-price 2.5254,
+ :entry-vol 106066.79999999999,
+ :exit-date #time/date-time "2023-02-07T00:00",
+ :exit-price 2.5314,
+ :pl 252,
+ :win? true,
+ :ret-prct 0.23758612497031076,
+ :ret-log 0.0010305996338587087,
+ :cum-ret-volume 15989.800000000017}
+^{}
+{:entry-date #time/date-time "2023-02-07T00:00",
+ :asset "RB0",
+ :side :long,
+ :qty 42000.0,
+ :entry-price 2.5343,
+ :entry-vol 106440.6,
+ :exit-date #time/date-time "2023-02-08T00:00",
+ :exit-price 2.569,
+ :pl 1457,
+ :win? true,
+ :ret-prct 1.3692143787239062,
+ :ret-log 0.0059060806831037205,
+ :cum-ret-volume 17447.20000000001}
+^{}
+{:entry-date #time/date-time "2023-02-02T00:00",
+ :asset "ZC0",
+ :side :short,
+ :qty 250.0,
+ :entry-price 663.25,
+ :entry-vol 165812.5,
+ :exit-date #time/date-time "2023-02-09T00:00",
+ :exit-price 662.25,
+ :pl 250,
+ :win? true,
+ :ret-prct 0.15077271013946475,
+ :ret-log 6.552916850979251E-4,
+ :cum-ret-volume 17697.20000000001}
+^{}
+{:entry-date #time/date-time "2023-02-09T00:00",
+ :asset "RB0",
+ :side :long,
+ :qty 42000.0,
+ :entry-price 2.5413,
+ :entry-vol 106734.6,
+ :exit-date #time/date-time "2023-02-10T00:00",
+ :exit-price 2.5934,
+ :pl 2188,
+ :win? true,
+ :ret-prct 2.050131822295668,
+ :ret-log 0.008813570048254171,
+ :cum-ret-volume 19885.40000000001}
+^{}
+{:entry-date #time/date-time "2023-02-02T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 2000.0,
+ :entry-price 8.36,
+ :entry-vol 16720.0,
+ :exit-date #time/date-time "2023-02-15T00:00",
+ :exit-price 9.44,
+ :pl 2160,
+ :win? true,
+ :ret-prct 12.918660287081341,
+ :ret-log 0.052765716859052514,
+ :cum-ret-volume 22045.40000000001}
+^{}
+{:entry-date #time/date-time "2023-02-13T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 8.36,
+ :entry-vol 8360.0,
+ :exit-date #time/date-time "2023-02-15T00:00",
+ :exit-price 9.44,
+ :pl 1080,
+ :win? true,
+ :ret-prct 12.918660287081341,
+ :ret-log 0.052765716859052514,
+ :cum-ret-volume 23125.40000000001}
+^{}
+{:entry-date #time/date-time "2023-02-10T00:00",
+ :asset "ZC0",
+ :side :short,
+ :qty 250.0,
+ :entry-price 610.75,
+ :entry-vol 152687.5,
+ :exit-date #time/date-time "2023-02-16T00:00",
+ :exit-price 608.5,
+ :pl 562,
+ :win? true,
+ :ret-prct 0.3683995088006549,
+ :ret-log 0.0016028930793905438,
+ :cum-ret-volume 23687.90000000001}
+^{}
+{:entry-date #time/date-time "2023-02-02T00:00",
+ :asset "RIVN",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 20.74,
+ :entry-vol 20740.0,
+ :exit-date #time/date-time "2023-02-16T00:00",
+ :exit-price 21.27,
+ :pl 530,
+ :win? true,
+ :ret-prct 2.5554484088717513,
+ :ret-log 0.010958737849706912,
+ :cum-ret-volume 24217.90000000001}
+^{}
+{:entry-date #time/date-time "2023-01-29T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 10000.0,
+ :entry-price 2.964,
+ :entry-vol 29640.0,
+ :exit-date #time/date-time "2023-02-27T00:00",
+ :exit-price 2.969,
+ :pl 50,
+ :win? true,
+ :ret-prct 0.16869095816463878,
+ :ret-log 7.319982887540322E-4,
+ :cum-ret-volume 24267.90000000001}
+^{}
+{:entry-date #time/date-time "2023-01-10T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 10000.0,
+ :entry-price 2.964,
+ :entry-vol 29640.0,
+ :exit-date #time/date-time "2023-02-27T00:00",
+ :exit-price 2.969,
+ :pl 50,
+ :win? true,
+ :ret-prct 0.16869095816463878,
+ :ret-log 7.319982887540322E-4,
+ :cum-ret-volume 24317.90000000001}
+^{}
+{:entry-date #time/date-time "2023-02-17T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 20000.0,
+ :entry-price 2.964,
+ :entry-vol 59280.0,
+ :exit-date #time/date-time "2023-02-27T00:00",
+ :exit-price 2.969,
+ :pl 100,
+ :win? true,
+ :ret-prct 0.16869095816463878,
+ :ret-log 7.319982887540322E-4,
+ :cum-ret-volume 24417.90000000001}
+^{}
+{:entry-date #time/date-time "2023-02-21T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 40000.0,
+ :entry-price 2.964,
+ :entry-vol 118560.0,
+ :exit-date #time/date-time "2023-02-27T00:00",
+ :exit-price 2.969,
+ :pl 200,
+ :win? true,
+ :ret-prct 0.16869095816463878,
+ :ret-log 7.319982887540322E-4,
+ :cum-ret-volume 24617.90000000001}
+^{}
+{:entry-date #time/date-time "2023-02-27T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 50000.0,
+ :entry-price 2.974,
+ :entry-vol 148700.0,
+ :exit-date #time/date-time "2023-02-27T00:00",
+ :exit-price 3.019,
+ :pl 2250,
+ :win? true,
+ :ret-prct 1.5131136516476102,
+ :ret-log 0.006522148837162289,
+ :cum-ret-volume 26867.90000000001}
+^{}
+{:entry-date #time/date-time "2023-02-27T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 20000.0,
+ :entry-price 3.235,
+ :entry-vol 64700.0,
+ :exit-date #time/date-time "2023-03-01T00:00",
+ :exit-price 3.283,
+ :pl 960,
+ :win? true,
+ :ret-prct 1.4837712519319952,
+ :ret-log 0.006396597724620867,
+ :cum-ret-volume 27827.90000000001}
+^{}
+{:entry-date #time/date-time "2023-02-08T00:00",
+ :asset "GOOGL",
+ :side :long,
+ :qty 500.0,
+ :entry-price 92.01,
+ :entry-vol 46005.0,
+ :exit-date #time/date-time "2023-03-03T00:00",
+ :exit-price 93.34,
+ :pl 665,
+ :win? true,
+ :ret-prct 1.4454950548853367,
+ :ret-log 0.0062327658469891745,
+ :cum-ret-volume 28492.90000000001}
+^{}
+{:entry-date #time/date-time "2023-02-24T00:00",
+ :asset "GOOGL",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 92.01,
+ :entry-vol 92010.0,
+ :exit-date #time/date-time "2023-03-03T00:00",
+ :exit-price 93.34,
+ :pl 1330,
+ :win? true,
+ :ret-prct 1.4454950548853367,
+ :ret-log 0.0062327658469891745,
+ :cum-ret-volume 29822.90000000001}
+^{}
+{:entry-date #time/date-time "2023-02-27T00:00",
+ :asset "M2K0",
+ :side :long,
+ :qty 50.0,
+ :entry-price 1918.72,
+ :entry-vol 95936.0,
+ :exit-date #time/date-time "2023-03-03T00:00",
+ :exit-price 1943.3,
+ :pl 1229,
+ :win? true,
+ :ret-prct 1.2810623749166072,
+ :ret-log 0.0055282481743086365,
+ :cum-ret-volume 31051.90000000001}
+^{}
+{:entry-date #time/date-time "2023-02-28T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 10000.0,
+ :entry-price 3.288,
+ :entry-vol 32880.0,
+ :exit-date #time/date-time "2023-03-03T00:00",
+ :exit-price 3.44,
+ :pl 1520,
+ :win? true,
+ :ret-prct 4.622871046228715,
+ :ret-log 0.01962663370351725,
+ :cum-ret-volume 32571.90000000001}
+^{}
+{:entry-date #time/date-time "2023-03-01T00:00",
+ :asset "RIVN",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 15.85,
+ :entry-vol 15850.0,
+ :exit-date #time/date-time "2023-03-06T00:00",
+ :exit-price 17.62,
+ :pl 1770,
+ :win? true,
+ :ret-prct 11.16719242902209,
+ :ret-log 0.045976637522259,
+ :cum-ret-volume 34341.90000000001}
+^{}
+{:entry-date #time/date-time "2023-03-03T00:00",
+ :asset "GOOGL",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 93.35,
+ :entry-vol 93350.0,
+ :exit-date #time/date-time "2023-03-06T00:00",
+ :exit-price 94.81,
+ :pl 1460,
+ :win? true,
+ :ret-prct 1.564006427423683,
+ :ret-log 0.006739824291121854,
+ :cum-ret-volume 35801.90000000001}
+^{}
+{:entry-date #time/date-time "2023-03-13T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 500.0,
+ :entry-price 30.7,
+ :entry-vol 15350.0,
+ :exit-date #time/date-time "2023-03-13T00:00",
+ :exit-price 41.0,
+ :pl 5150,
+ :win? true,
+ :ret-prct 33.55048859934853,
+ :ret-log 0.12564548124254893,
+ :cum-ret-volume 40951.90000000001}
+^{}
+{:entry-date #time/date-time "2023-03-13T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 18.52,
+ :entry-vol 18520.0,
+ :exit-date #time/date-time "2023-03-13T00:00",
+ :exit-price 34.0,
+ :pl 15480,
+ :win? true,
+ :ret-prct 83.58531317494601,
+ :ret-log 0.26383793469633954,
+ :cum-ret-volume 56431.90000000001}
+^{}
+{:entry-date #time/date-time "2023-03-15T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 500.0,
+ :entry-price 31.73,
+ :entry-vol 15865.0,
+ :exit-date #time/date-time "2023-03-15T00:00",
+ :exit-price 36.14,
+ :pl 2205,
+ :win? true,
+ :ret-prct 13.898518751969744,
+ :ret-log 0.05651807612450099,
+ :cum-ret-volume 58636.90000000001}
+^{}
+{:entry-date #time/date-time "2023-03-16T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 24.36,
+ :entry-vol 24360.0,
+ :exit-date #time/date-time "2023-03-16T00:00",
+ :exit-price 26.2,
+ :pl 1840,
+ :win? true,
+ :ret-prct 7.55336617405583,
+ :ret-log 0.0316240073589078,
+ :cum-ret-volume 60476.90000000001}
+^{}
+{:entry-date #time/date-time "2023-03-06T00:00",
+ :asset "GOOGL",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 94.78,
+ :entry-vol 94780.0,
+ :exit-date #time/date-time "2023-03-16T00:00",
+ :exit-price 96.92,
+ :pl 2140,
+ :win? true,
+ :ret-prct 2.257860308081874,
+ :ret-log 0.009696701102086092,
+ :cum-ret-volume 62616.90000000001}
+^{}
+{:entry-date #time/date-time "2023-03-15T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 500.0,
+ :entry-price 24.36,
+ :entry-vol 12180.0,
+ :exit-date #time/date-time "2023-03-16T00:00",
+ :exit-price 26.2,
+ :pl 920,
+ :win? true,
+ :ret-prct 7.55336617405583,
+ :ret-log 0.0316240073589078,
+ :cum-ret-volume 63536.90000000001}
+^{}
+{:entry-date #time/date-time "2023-03-09T00:00",
+ :asset "MES0",
+ :side :long,
+ :qty 50.0,
+ :entry-price 4002.94,
+ :entry-vol 200147.0,
+ :exit-date #time/date-time "2023-03-21T00:00",
+ :exit-price 4018.75,
+ :pl 790,
+ :win? true,
+ :ret-prct 0.39495970461710506,
+ :ret-log 0.0017119097470548184,
+ :cum-ret-volume 64327.40000000001}
+^{}
+{:entry-date #time/date-time "2023-03-10T00:00",
+ :asset "MES0",
+ :side :long,
+ :qty 25.0,
+ :entry-price 4002.94,
+ :entry-vol 100073.5,
+ :exit-date #time/date-time "2023-03-21T00:00",
+ :exit-price 4018.75,
+ :pl 395,
+ :win? true,
+ :ret-prct 0.39495970461710506,
+ :ret-log 0.0017119097470548184,
+ :cum-ret-volume 64722.65000000001}
+^{}
+{:entry-date #time/date-time "2023-03-07T00:00",
+ :asset "MES0",
+ :side :long,
+ :qty 20.0,
+ :entry-price 4002.94,
+ :entry-vol 80058.8,
+ :exit-date #time/date-time "2023-03-21T00:00",
+ :exit-price 4018.75,
+ :pl 316,
+ :win? true,
+ :ret-prct 0.39495970461710506,
+ :ret-log 0.0017119097470548184,
+ :cum-ret-volume 65038.850000000006}
+^{}
+{:entry-date #time/date-time "2023-03-17T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 500.0,
+ :entry-price 16.26,
+ :entry-vol 8130.000000000001,
+ :exit-date #time/date-time "2023-03-21T00:00",
+ :exit-price 17.41,
+ :pl 575,
+ :win? true,
+ :ret-prct 7.072570725707248,
+ :ret-log 0.029678229859281702,
+ :cum-ret-volume 65613.85}
+^{}
+{:entry-date #time/date-time "2023-02-13T00:00",
+ :asset "MES0",
+ :side :long,
+ :qty 15.0,
+ :entry-price 4002.94,
+ :entry-vol 60044.1,
+ :exit-date #time/date-time "2023-03-21T00:00",
+ :exit-price 4018.75,
+ :pl 237,
+ :win? true,
+ :ret-prct 0.39495970461710506,
+ :ret-log 0.0017119097470548184,
+ :cum-ret-volume 65851.0}
+^{}
+{:entry-date #time/date-time "2023-02-16T00:00",
+ :asset "MES0",
+ :side :long,
+ :qty 15.0,
+ :entry-price 4002.94,
+ :entry-vol 60044.1,
+ :exit-date #time/date-time "2023-03-21T00:00",
+ :exit-price 4018.75,
+ :pl 237,
+ :win? true,
+ :ret-prct 0.39495970461710506,
+ :ret-log 0.0017119097470548184,
+ :cum-ret-volume 66088.15}
+^{}
+{:entry-date #time/date-time "2023-03-20T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 2000.0,
+ :entry-price 16.26,
+ :entry-vol 32520.000000000004,
+ :exit-date #time/date-time "2023-03-21T00:00",
+ :exit-price 17.41,
+ :pl 2300,
+ :win? true,
+ :ret-prct 7.072570725707248,
+ :ret-log 0.029678229859281702,
+ :cum-ret-volume 68388.15}
+^{}
+{:entry-date #time/date-time "2023-03-21T00:00",
+ :asset "RB0",
+ :side :long,
+ :qty 42000.0,
+ :entry-price 2.1482,
+ :entry-vol 90224.40000000001,
+ :exit-date #time/date-time "2023-03-22T00:00",
+ :exit-price 2.1848,
+ :pl 1537,
+ :win? true,
+ :ret-prct 1.7037519784005197,
+ :ret-log 0.0073369748839906546,
+ :cum-ret-volume 69925.34999999999}
+^{}
+{:entry-date #time/date-time "2023-03-22T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 13.73,
+ :entry-vol 13730.0,
+ :exit-date #time/date-time "2023-03-27T00:00",
+ :exit-price 15.74,
+ :pl 2010,
+ :win? true,
+ :ret-prct 14.639475600873997,
+ :ret-log 0.059334190786290764,
+ :cum-ret-volume 71935.34999999999}
+^{}
+{:entry-date #time/date-time "2023-03-22T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 13.73,
+ :entry-vol 13730.0,
+ :exit-date #time/date-time "2023-03-27T00:00",
+ :exit-price 15.74,
+ :pl 2010,
+ :win? true,
+ :ret-prct 14.639475600873997,
+ :ret-log 0.059334190786290764,
+ :cum-ret-volume 73945.34999999999}
+^{}
+{:entry-date #time/date-time "2023-03-23T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 13.73,
+ :entry-vol 13730.0,
+ :exit-date #time/date-time "2023-03-27T00:00",
+ :exit-price 15.74,
+ :pl 2010,
+ :win? true,
+ :ret-prct 14.639475600873997,
+ :ret-log 0.059334190786290764,
+ :cum-ret-volume 75955.34999999999}
+^{}
+{:entry-date #time/date-time "2023-03-26T00:00",
+ :asset "MES0",
+ :side :long,
+ :qty 25.0,
+ :entry-price 4050.37,
+ :entry-vol 101259.25,
+ :exit-date #time/date-time "2023-03-29T00:00",
+ :exit-price 4075.0,
+ :pl 615,
+ :win? true,
+ :ret-prct 0.6080925940099327,
+ :ret-log 0.00263291538758903,
+ :cum-ret-volume 76571.09999999999}
+^{}
+{:entry-date #time/date-time "2023-03-27T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 13.7,
+ :entry-vol 13700.0,
+ :exit-date #time/date-time "2023-03-29T00:00",
+ :exit-price 14.48,
+ :pl 780,
+ :win? true,
+ :ret-prct 5.693430656934315,
+ :ret-log 0.02404799470472141,
+ :cum-ret-volume 77351.09999999999}
+^{}
+{:entry-date #time/date-time "2023-03-28T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 13.7,
+ :entry-vol 13700.0,
+ :exit-date #time/date-time "2023-03-29T00:00",
+ :exit-price 14.48,
+ :pl 780,
+ :win? true,
+ :ret-prct 5.693430656934315,
+ :ret-log 0.02404799470472141,
+ :cum-ret-volume 78131.09999999999}
+^{}
+{:entry-date #time/date-time "2023-02-21T00:00",
+ :asset "MYM0",
+ :side :long,
+ :qty 2.5,
+ :entry-price 33076.0,
+ :entry-vol 82690.0,
+ :exit-date #time/date-time "2023-03-31T00:00",
+ :exit-price 33315.0,
+ :pl 597,
+ :win? true,
+ :ret-prct 0.7225783045108236,
+ :ret-log 0.0031268343465287174,
+ :cum-ret-volume 78728.59999999999}
+^{}
+{:entry-date #time/date-time "2023-03-09T00:00",
+ :asset "MYM0",
+ :side :long,
+ :qty 2.5,
+ :entry-price 33076.0,
+ :entry-vol 82690.0,
+ :exit-date #time/date-time "2023-03-31T00:00",
+ :exit-price 33315.0,
+ :pl 597,
+ :win? true,
+ :ret-prct 0.7225783045108236,
+ :ret-log 0.0031268343465287174,
+ :cum-ret-volume 79326.09999999999}
+^{}
+{:entry-date #time/date-time "2023-03-16T00:00",
+ :asset "WFC",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 39.46,
+ :entry-vol 39460.0,
+ :exit-date #time/date-time "2023-04-17T00:00",
+ :exit-price 40.5,
+ :pl 1040,
+ :win? true,
+ :ret-prct 2.6355803345159634,
+ :ret-log 0.011297942298496011,
+ :cum-ret-volume 80366.09999999999}
+^{}
+{:entry-date #time/date-time "2023-03-20T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 8.42,
+ :entry-vol 8420.0,
+ :exit-date #time/date-time "2023-04-17T00:00",
+ :exit-price 8.96,
+ :pl 540,
+ :win? true,
+ :ret-prct 6.413301662707849,
+ :ret-log 0.026995918162475707,
+ :cum-ret-volume 80906.09999999999}
+^{}
+{:entry-date #time/date-time "2023-03-21T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 20000.0,
+ :entry-price 2.7,
+ :entry-vol 54000.0,
+ :exit-date #time/date-time "2023-04-17T00:00",
+ :exit-price 2.708,
+ :pl 160,
+ :win? true,
+ :ret-prct 0.29629629629629656,
+ :ret-log 0.0012848958541193944,
+ :cum-ret-volume 81066.1}
+^{}
+{:entry-date #time/date-time "2023-03-27T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 10000.0,
+ :entry-price 2.7,
+ :entry-vol 27000.0,
+ :exit-date #time/date-time "2023-04-17T00:00",
+ :exit-price 2.716,
+ :pl 160,
+ :win? true,
+ :ret-prct 0.5925925925925931,
+ :ret-log 0.002566001449476718,
+ :cum-ret-volume 81226.1}
+^{}
+{:entry-date #time/date-time "2023-04-12T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 3000.0,
+ :entry-price 8.42,
+ :entry-vol 25260.0,
+ :exit-date #time/date-time "2023-04-17T00:00",
+ :exit-price 8.96,
+ :pl 1620,
+ :win? true,
+ :ret-prct 6.413301662707849,
+ :ret-log 0.026995918162475707,
+ :cum-ret-volume 82846.1}
+^{}
+{:entry-date #time/date-time "2023-04-12T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 20000.0,
+ :entry-price 2.7,
+ :entry-vol 54000.0,
+ :exit-date #time/date-time "2023-04-17T00:00",
+ :exit-price 2.716,
+ :pl 320,
+ :win? true,
+ :ret-prct 0.5925925925925931,
+ :ret-log 0.002566001449476718,
+ :cum-ret-volume 83166.1}
+^{}
+{:entry-date #time/date-time "2023-02-15T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 1500.0,
+ :entry-price 8.42,
+ :entry-vol 12630.0,
+ :exit-date #time/date-time "2023-04-17T00:00",
+ :exit-price 8.96,
+ :pl 810,
+ :win? true,
+ :ret-prct 6.413301662707849,
+ :ret-log 0.026995918162475707,
+ :cum-ret-volume 83976.1}
+^{}
+{:entry-date #time/date-time "2023-03-03T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 10000.0,
+ :entry-price 2.7,
+ :entry-vol 27000.0,
+ :exit-date #time/date-time "2023-04-17T00:00",
+ :exit-price 2.716,
+ :pl 160,
+ :win? true,
+ :ret-prct 0.5925925925925931,
+ :ret-log 0.002566001449476718,
+ :cum-ret-volume 84136.1}
+^{}
+{:entry-date #time/date-time "2023-03-06T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 10000.0,
+ :entry-price 2.7,
+ :entry-vol 27000.0,
+ :exit-date #time/date-time "2023-04-17T00:00",
+ :exit-price 2.838792,
+ :pl 1387,
+ :win? true,
+ :ret-prct 5.140444444444445,
+ :ret-log 0.02176980851426652,
+ :cum-ret-volume 85524.02}
+^{}
+{:entry-date #time/date-time "2023-04-05T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 2000.0,
+ :entry-price 8.42,
+ :entry-vol 16840.0,
+ :exit-date #time/date-time "2023-04-17T00:00",
+ :exit-price 8.96,
+ :pl 1080,
+ :win? true,
+ :ret-prct 6.413301662707849,
+ :ret-log 0.026995918162475707,
+ :cum-ret-volume 86604.02}
+^{}
+{:entry-date #time/date-time "2023-04-06T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 20000.0,
+ :entry-price 2.7,
+ :entry-vol 54000.0,
+ :exit-date #time/date-time "2023-04-17T00:00",
+ :exit-price 2.716,
+ :pl 320,
+ :win? true,
+ :ret-prct 0.5925925925925931,
+ :ret-log 0.002566001449476718,
+ :cum-ret-volume 86924.02000000002}
+^{}
+{:entry-date #time/date-time "2023-04-03T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 70000.0,
+ :entry-price 2.7,
+ :entry-vol 189000.0,
+ :exit-date #time/date-time "2023-04-17T00:00",
+ :exit-price 2.716,
+ :pl 1120,
+ :win? true,
+ :ret-prct 0.5925925925925931,
+ :ret-log 0.002566001449476718,
+ :cum-ret-volume 88044.02000000002}
+^{}
+{:entry-date #time/date-time "2023-04-18T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 20000.0,
+ :entry-price 2.78,
+ :entry-vol 55599.99999999999,
+ :exit-date #time/date-time "2023-04-18T00:00",
+ :exit-price 2.789,
+ :pl 180,
+ :win? true,
+ :ret-prct 0.3237410071942569,
+ :ret-log 0.0014037183479736481,
+ :cum-ret-volume 88224.02000000002}
+^{}
+{:entry-date #time/date-time "2023-04-17T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 50000.0,
+ :entry-price 2.72,
+ :entry-vol 136000.0,
+ :exit-date #time/date-time "2023-04-18T00:00",
+ :exit-price 2.782,
+ :pl 3100,
+ :win? true,
+ :ret-prct 2.279411764705876,
+ :ret-log 0.009788221621828852,
+ :cum-ret-volume 91324.02000000002}
+^{}
+{:entry-date #time/date-time "2023-02-03T00:00",
+ :asset "AMZN",
+ :side :long,
+ :qty 500.0,
+ :entry-price 104.86,
+ :entry-vol 52430.0,
+ :exit-date #time/date-time "2023-04-19T00:00",
+ :exit-price 104.94,
+ :pl 40,
+ :win? true,
+ :ret-prct 0.07629219912263809,
+ :ret-log 3.3120648461570923E-4,
+ :cum-ret-volume 91364.02000000002}
+^{}
+{:entry-date #time/date-time "2023-02-06T00:00",
+ :asset "AMZN",
+ :side :long,
+ :qty 500.0,
+ :entry-price 104.86,
+ :entry-vol 52430.0,
+ :exit-date #time/date-time "2023-04-19T00:00",
+ :exit-price 104.94,
+ :pl 40,
+ :win? true,
+ :ret-prct 0.07629219912263809,
+ :ret-log 3.3120648461570923E-4,
+ :cum-ret-volume 91404.02000000002}
+^{}
+{:entry-date #time/date-time "2023-03-29T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 13.55,
+ :entry-vol 13550.0,
+ :exit-date #time/date-time "2023-04-19T00:00",
+ :exit-price 14.24,
+ :pl 690,
+ :win? true,
+ :ret-prct 5.092250922509221,
+ :ret-log 0.021570694090413012,
+ :cum-ret-volume 92094.02000000002}
+^{}
+{:entry-date #time/date-time "2023-03-30T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 2000.0,
+ :entry-price 13.55,
+ :entry-vol 27100.0,
+ :exit-date #time/date-time "2023-04-19T00:00",
+ :exit-price 14.24,
+ :pl 1380,
+ :win? true,
+ :ret-prct 5.092250922509221,
+ :ret-log 0.021570694090413012,
+ :cum-ret-volume 93474.02000000002}
+^{}
+{:entry-date #time/date-time "2023-04-17T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 2000.0,
+ :entry-price 13.55,
+ :entry-vol 27100.0,
+ :exit-date #time/date-time "2023-04-19T00:00",
+ :exit-price 14.24,
+ :pl 1380,
+ :win? true,
+ :ret-prct 5.092250922509221,
+ :ret-log 0.021570694090413012,
+ :cum-ret-volume 94854.02000000002}
+^{}
+{:entry-date #time/date-time "2023-04-20T00:00",
+ :asset "RB0",
+ :side :long,
+ :qty 42000.0,
+ :entry-price 2.5153,
+ :entry-vol 105642.59999999999,
+ :exit-date #time/date-time "2023-04-21T00:00",
+ :exit-price 2.5614,
+ :pl 1936,
+ :win? true,
+ :ret-prct 1.8327833658012973,
+ :ret-log 0.007887614374366969,
+ :cum-ret-volume 96790.22000000003}
+^{}
+{:entry-date #time/date-time "2023-04-19T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 3000.0,
+ :entry-price 14.25,
+ :entry-vol 42750.0,
+ :exit-date #time/date-time "2023-04-24T00:00",
+ :exit-price 15.35,
+ :pl 3300,
+ :win? true,
+ :ret-prct 7.719298245614033,
+ :ret-log 0.032293515468676315,
+ :cum-ret-volume 100090.22000000003}
+^{}
+{:entry-date #time/date-time "2023-04-19T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 20000.0,
+ :entry-price 2.69,
+ :entry-vol 53800.0,
+ :exit-date #time/date-time "2023-04-24T00:00",
+ :exit-price 2.714,
+ :pl 480,
+ :win? true,
+ :ret-prct 0.8921933085501866,
+ :ret-log 0.00385756332131032,
+ :cum-ret-volume 100570.22000000003}
+^{}
+{:entry-date #time/date-time "2023-04-18T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 20000.0,
+ :entry-price 2.69,
+ :entry-vol 53800.0,
+ :exit-date #time/date-time "2023-04-24T00:00",
+ :exit-price 2.714,
+ :pl 480,
+ :win? true,
+ :ret-prct 0.8921933085501866,
+ :ret-log 0.00385756332131032,
+ :cum-ret-volume 101050.22000000003}
+^{}
+{:entry-date #time/date-time "2023-04-23T00:00",
+ :asset "RB0",
+ :side :long,
+ :qty 42000.0,
+ :entry-price 2.515,
+ :entry-vol 105630.0,
+ :exit-date #time/date-time "2023-04-24T00:00",
+ :exit-price 2.5591,
+ :pl 1852,
+ :win? true,
+ :ret-prct 1.7534791252485011,
+ :ret-log 0.007549267421245287,
+ :cum-ret-volume 102902.42000000003}
+^{}
+{:entry-date #time/date-time "2023-04-25T00:00",
+ :asset "MYM0",
+ :side :long,
+ :qty 5.0,
+ :entry-price 33980.0,
+ :entry-vol 169900.0,
+ :exit-date #time/date-time "2023-04-27T00:00",
+ :exit-price 34193.0,
+ :pl 1065,
+ :win? true,
+ :ret-prct 0.6268393172454385,
+ :ret-log 0.0027138317414365787,
+ :cum-ret-volume 103967.42000000003}
+^{}
+{:entry-date #time/date-time "2023-04-27T00:00",
+ :asset "RB0",
+ :side :long,
+ :qty 42000.0,
+ :entry-price 2.2001,
+ :entry-vol 92404.2,
+ :exit-date #time/date-time "2023-04-28T00:00",
+ :exit-price 2.2421,
+ :pl 1764,
+ :win? true,
+ :ret-prct 1.9090041361756402,
+ :ret-log 0.008212557646241847,
+ :cum-ret-volume 105731.42000000004}
+^{}
+{:entry-date #time/date-time "2023-04-24T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 10.74,
+ :entry-vol 10740.0,
+ :exit-date #time/date-time "2023-05-03T00:00",
+ :exit-price 0.3119,
+ :pl -10429,
+ :win? false,
+ :ret-prct -97.09590316573556,
+ :ret-log -1.536988906606393,
+ :cum-ret-volume 95303.32000000004}
+^{}
+{:entry-date #time/date-time "2023-04-25T00:00",
+ :asset "FRC",
+ :side :long,
+ :qty 6000.0,
+ :entry-price 10.74,
+ :entry-vol 64440.0,
+ :exit-date #time/date-time "2023-05-03T00:00",
+ :exit-price 0.3119,
+ :pl -62569,
+ :win? false,
+ :ret-prct -97.09590316573556,
+ :ret-log -1.536988906606393,
+ :cum-ret-volume 32734.720000000038}
+^{}
+{:entry-date #time/date-time "2023-05-01T00:00",
+ :asset "AMZN",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 104.51,
+ :entry-vol 104510.0,
+ :exit-date #time/date-time "2023-05-10T00:00",
+ :exit-price 108.95,
+ :pl 4440,
+ :win? true,
+ :ret-prct 4.248397282556691,
+ :ret-log 0.01806938684299242,
+ :cum-ret-volume 37174.72000000004}
+^{}
+{:entry-date #time/date-time "2023-04-28T00:00",
+ :asset "AMZN",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 104.51,
+ :entry-vol 104510.0,
+ :exit-date #time/date-time "2023-05-10T00:00",
+ :exit-price 108.95,
+ :pl 4440,
+ :win? true,
+ :ret-prct 4.248397282556691,
+ :ret-log 0.01806938684299242,
+ :cum-ret-volume 41614.72000000004}
+^{}
+{:entry-date #time/date-time "2023-04-17T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 4000.0,
+ :entry-price 8.27,
+ :entry-vol 33080.0,
+ :exit-date #time/date-time "2023-05-11T00:00",
+ :exit-price 10.04,
+ :pl 7080,
+ :win? true,
+ :ret-prct 21.402660217654166,
+ :ret-log 0.08422820325645386,
+ :cum-ret-volume 48694.72000000004}
+^{}
+{:entry-date #time/date-time "2023-04-25T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 3000.0,
+ :entry-price 8.27,
+ :entry-vol 24810.0,
+ :exit-date #time/date-time "2023-05-11T00:00",
+ :exit-price 10.04,
+ :pl 5310,
+ :win? true,
+ :ret-prct 21.402660217654166,
+ :ret-log 0.08422820325645386,
+ :cum-ret-volume 54004.72000000003}
+^{}
+{:entry-date #time/date-time "2023-04-27T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 3000.0,
+ :entry-price 8.27,
+ :entry-vol 24810.0,
+ :exit-date #time/date-time "2023-05-11T00:00",
+ :exit-price 10.04,
+ :pl 5310,
+ :win? true,
+ :ret-prct 21.402660217654166,
+ :ret-log 0.08422820325645386,
+ :cum-ret-volume 59314.72000000003}
+^{}
+{:entry-date #time/date-time "2023-05-11T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 20000.0,
+ :entry-price 2.517,
+ :entry-vol 50340.0,
+ :exit-date #time/date-time "2023-05-15T00:00",
+ :exit-price 2.614,
+ :pl 1940,
+ :win? true,
+ :ret-prct 3.8537941994437817,
+ :ret-log 0.016422367696162787,
+ :cum-ret-volume 61254.72000000003}
+^{}
+{:entry-date #time/date-time "2023-04-24T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 20000.0,
+ :entry-price 2.517,
+ :entry-vol 50340.0,
+ :exit-date #time/date-time "2023-05-15T00:00",
+ :exit-price 2.613,
+ :pl 1920,
+ :win? true,
+ :ret-prct 3.814064362336118,
+ :ret-log 0.016256194178962957,
+ :cum-ret-volume 63174.72000000003}
+^{}
+{:entry-date #time/date-time "2023-05-11T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 20000.0,
+ :entry-price 2.517,
+ :entry-vol 50340.0,
+ :exit-date #time/date-time "2023-05-15T00:00",
+ :exit-price 2.614,
+ :pl 1940,
+ :win? true,
+ :ret-prct 3.8537941994437817,
+ :ret-log 0.016422367696162787,
+ :cum-ret-volume 65114.72000000003}
+^{}
+{:entry-date #time/date-time "2023-05-15T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 30000.0,
+ :entry-price 2.61,
+ :entry-vol 78300.0,
+ :exit-date #time/date-time "2023-05-16T00:00",
+ :exit-price 2.678,
+ :pl 2040,
+ :win? true,
+ :ret-prct 2.605363984674332,
+ :ret-log 0.0111700653377092,
+ :cum-ret-volume 67154.72000000003}
+^{}
+{:entry-date #time/date-time "2023-05-10T00:00",
+ :asset "AMZN",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 108.91,
+ :entry-vol 108910.0,
+ :exit-date #time/date-time "2023-05-18T00:00",
+ :exit-price 117.45,
+ :pl 8540,
+ :win? true,
+ :ret-prct 7.841336883665418,
+ :ret-log 0.03278526307106722,
+ :cum-ret-volume 75694.72000000003}
+^{}
+{:entry-date #time/date-time "2023-05-11T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 5000.0,
+ :entry-price 10.06,
+ :entry-vol 50300.0,
+ :exit-date #time/date-time "2023-05-18T00:00",
+ :exit-price 11.46,
+ :pl 7000,
+ :win? true,
+ :ret-prct 13.916500994035788,
+ :ret-log 0.05658663691146271,
+ :cum-ret-volume 82694.72000000003}
+^{}
+{:entry-date #time/date-time "2023-05-17T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 10000.0,
+ :entry-price 2.679,
+ :entry-vol 26790.0,
+ :exit-date #time/date-time "2023-05-19T00:00",
+ :exit-price 2.845,
+ :pl 1660,
+ :win? true,
+ :ret-prct 6.196341918626367,
+ :ret-log 0.02610955712288121,
+ :cum-ret-volume 84354.72000000003}
+^{}
+{:entry-date #time/date-time "2023-03-22T00:00",
+ :asset "M2K0",
+ :side :long,
+ :qty 25.0,
+ :entry-price 1821.0,
+ :entry-vol 45525.0,
+ :exit-date #time/date-time "2023-05-23T00:00",
+ :exit-price 1821.0,
+ :pl 0,
+ :win? false,
+ :ret-prct 0.0,
+ :ret-log 0.0,
+ :cum-ret-volume 84354.72000000003}
+^{}
+{:entry-date #time/date-time "2023-03-09T00:00",
+ :asset "M2K0",
+ :side :long,
+ :qty 50.0,
+ :entry-price 1821.0,
+ :entry-vol 91050.0,
+ :exit-date #time/date-time "2023-05-23T00:00",
+ :exit-price 1821.0,
+ :pl 0,
+ :win? false,
+ :ret-prct 0.0,
+ :ret-log 0.0,
+ :cum-ret-volume 84354.72000000003}
+^{}
+{:entry-date #time/date-time "2023-03-03T00:00",
+ :asset "M2K0",
+ :side :long,
+ :qty 25.0,
+ :entry-price 1821.0,
+ :entry-vol 45525.0,
+ :exit-date #time/date-time "2023-05-23T00:00",
+ :exit-price 1821.0,
+ :pl 0,
+ :win? false,
+ :ret-prct 0.0,
+ :ret-log 0.0,
+ :cum-ret-volume 84354.72000000003}
+^{}
+{:entry-date #time/date-time "2023-05-18T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 2000.0,
+ :entry-price 11.47,
+ :entry-vol 22940.0,
+ :exit-date #time/date-time "2023-05-23T00:00",
+ :exit-price 13.13,
+ :pl 3320,
+ :win? true,
+ :ret-prct 14.472537053182213,
+ :ret-log 0.05870130818821173,
+ :cum-ret-volume 87674.72000000003}
+^{}
+{:entry-date #time/date-time "2023-04-24T00:00",
+ :asset "M2K0",
+ :side :long,
+ :qty 50.0,
+ :entry-price 1821.0,
+ :entry-vol 91050.0,
+ :exit-date #time/date-time "2023-05-23T00:00",
+ :exit-price 1821.0,
+ :pl 0,
+ :win? false,
+ :ret-prct 0.0,
+ :ret-log 0.0,
+ :cum-ret-volume 87674.72000000003}
+^{}
+{:entry-date #time/date-time "2023-03-10T00:00",
+ :asset "M2K0",
+ :side :long,
+ :qty 50.0,
+ :entry-price 1821.0,
+ :entry-vol 91050.0,
+ :exit-date #time/date-time "2023-05-23T00:00",
+ :exit-price 1821.0,
+ :pl 0,
+ :win? false,
+ :ret-prct 0.0,
+ :ret-log 0.0,
+ :cum-ret-volume 87674.72000000003}
+^{}
+{:entry-date #time/date-time "2023-05-18T00:00",
+ :asset "DAX0",
+ :side :short,
+ :qty 5.0,
+ :entry-price 16346.84,
+ :entry-vol 81734.2,
+ :exit-date #time/date-time "2023-05-24T00:00",
+ :exit-price 16075.75,
+ :pl 1355,
+ :win? true,
+ :ret-prct 1.6583633289369697,
+ :ret-log 0.007262568149817739,
+ :cum-ret-volume 89030.17000000003}
+^{}
+{:entry-date #time/date-time "2023-05-31T00:00",
+ :asset "BZ0",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 70.95,
+ :entry-vol 70950.0,
+ :exit-date #time/date-time "2023-06-01T00:00",
+ :exit-price 73.81,
+ :pl 2860,
+ :win? true,
+ :ret-prct 4.031007751937984,
+ :ret-log 0.01716280553372429,
+ :cum-ret-volume 91890.17000000003}
+^{}
+{:entry-date #time/date-time "2023-05-23T00:00",
+ :asset "M2K0",
+ :side :long,
+ :qty 50.0,
+ :entry-price 1814.12,
+ :entry-vol 90706.0,
+ :exit-date #time/date-time "2023-06-06T00:00",
+ :exit-price 1874.9,
+ :pl 3039,
+ :win? true,
+ :ret-prct 3.350384759552852,
+ :ret-log 0.014312097786138622,
+ :cum-ret-volume 94929.17000000003}
+^{}
+{:entry-date #time/date-time "2023-06-01T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 50000.0,
+ :entry-price 2.424,
+ :entry-vol 121200.0,
+ :exit-date #time/date-time "2023-06-07T00:00",
+ :exit-price 2.436,
+ :pl 600,
+ :win? true,
+ :ret-prct 0.4950495049504955,
+ :ret-log 0.002144668466589117,
+ :cum-ret-volume 95529.17000000003}
+^{}
+{:entry-date #time/date-time "2023-06-07T00:00",
+ :asset "MNQ0",
+ :side :short,
+ :qty 4.0,
+ :entry-price 14615.57,
+ :entry-vol 58462.28,
+ :exit-date #time/date-time "2023-06-07T00:00",
+ :exit-price 14504.75,
+ :pl 443,
+ :win? true,
+ :ret-prct 0.7582324876826543,
+ :ret-log 0.0033055094742904245,
+ :cum-ret-volume 95972.45000000003}
+^{}
+{:entry-date #time/date-time "2023-05-26T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 20000.0,
+ :entry-price 2.424,
+ :entry-vol 48480.0,
+ :exit-date #time/date-time "2023-06-07T00:00",
+ :exit-price 2.436,
+ :pl 240,
+ :win? true,
+ :ret-prct 0.4950495049504955,
+ :ret-log 0.002144668466589117,
+ :cum-ret-volume 96212.45000000003}
+^{}
+{:entry-date #time/date-time "2023-05-22T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 30000.0,
+ :entry-price 2.424,
+ :entry-vol 72720.0,
+ :exit-date #time/date-time "2023-06-07T00:00",
+ :exit-price 2.436,
+ :pl 360,
+ :win? true,
+ :ret-prct 0.4950495049504955,
+ :ret-log 0.002144668466589117,
+ :cum-ret-volume 96572.45000000003}
+^{}
+{:entry-date #time/date-time "2023-05-30T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 50000.0,
+ :entry-price 2.424,
+ :entry-vol 121200.0,
+ :exit-date #time/date-time "2023-06-07T00:00",
+ :exit-price 2.436,
+ :pl 600,
+ :win? true,
+ :ret-prct 0.4950495049504955,
+ :ret-log 0.002144668466589117,
+ :cum-ret-volume 97172.45000000003}
+^{}
+{:entry-date #time/date-time "2023-05-18T00:00",
+ :asset "AMZN",
+ :side :long,
+ :qty 500.0,
+ :entry-price 119.95,
+ :entry-vol 59975.0,
+ :exit-date #time/date-time "2023-06-08T00:00",
+ :exit-price 124.37,
+ :pl 2210,
+ :win? true,
+ :ret-prct 3.684868695289705,
+ :ret-log 0.0157153820243372,
+ :cum-ret-volume 99382.45000000003}
+^{}
+{:entry-date #time/date-time "2023-06-07T00:00",
+ :asset "AMZN",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 119.95,
+ :entry-vol 119950.0,
+ :exit-date #time/date-time "2023-06-08T00:00",
+ :exit-price 124.37,
+ :pl 4420,
+ :win? true,
+ :ret-prct 3.684868695289705,
+ :ret-log 0.0157153820243372,
+ :cum-ret-volume 103802.45000000003}
+^{}
+{:entry-date #time/date-time "2023-05-23T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 12.89,
+ :entry-vol 12890.0,
+ :exit-date #time/date-time "2023-06-12T00:00",
+ :exit-price 15.545,
+ :pl 2655,
+ :win? true,
+ :ret-prct 20.597362296353758,
+ :ret-log 0.08133780902580767,
+ :cum-ret-volume 106457.45000000003}
+^{}
+{:entry-date #time/date-time "2023-06-12T00:00",
+ :asset "RB0",
+ :side :long,
+ :qty 42000.0,
+ :entry-price 2.126,
+ :entry-vol 89292.0,
+ :exit-date #time/date-time "2023-06-13T00:00",
+ :exit-price 2.158,
+ :pl 1344,
+ :win? true,
+ :ret-prct 1.5051740357478847,
+ :ret-log 0.006488180159613888,
+ :cum-ret-volume 107801.45000000003}
+^{}
+{:entry-date #time/date-time "2023-06-12T00:00",
+ :asset "BZ0",
+ :side :long,
+ :qty 2000.0,
+ :entry-price 71.38,
+ :entry-vol 142760.0,
+ :exit-date #time/date-time "2023-06-13T00:00",
+ :exit-price 72.51,
+ :pl 2260,
+ :win? true,
+ :ret-prct 1.5830764920145834,
+ :ret-log 0.006821361507671098,
+ :cum-ret-volume 110061.45000000003}
+^{}
+{:entry-date #time/date-time "2023-06-13T00:00",
+ :asset "BZ0",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 72.53,
+ :entry-vol 72530.0,
+ :exit-date #time/date-time "2023-06-13T00:00",
+ :exit-price 73.42,
+ :pl 890,
+ :win? true,
+ :ret-prct 1.2270784502964298,
+ :ret-log 0.005296702706221845,
+ :cum-ret-volume 110951.45000000003}
+^{}
+{:entry-date #time/date-time "2023-06-06T00:00",
+ :asset "INTC",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 30.93,
+ :entry-vol 30930.0,
+ :exit-date #time/date-time "2023-06-14T00:00",
+ :exit-price 35.1727,
+ :pl 4242,
+ :win? true,
+ :ret-prct 13.717103136113803,
+ :ret-log 0.055825787810306116,
+ :cum-ret-volume 115194.15000000002}
+^{}
+{:entry-date #time/date-time "2023-06-07T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 60000.0,
+ :entry-price 2.436,
+ :entry-vol 146160.0,
+ :exit-date #time/date-time "2023-06-15T00:00",
+ :exit-price 2.459,
+ :pl 1380,
+ :win? true,
+ :ret-prct 0.944170771756984,
+ :ret-log 0.004081244777879467,
+ :cum-ret-volume 116574.15000000002}
+^{}
+{:entry-date #time/date-time "2023-06-14T00:00",
+ :asset "BZ0",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 72.86,
+ :entry-vol 72860.0,
+ :exit-date #time/date-time "2023-06-15T00:00",
+ :exit-price 74.13,
+ :pl 1270,
+ :win? true,
+ :ret-prct 1.7430688992588472,
+ :ret-log 0.0075048332158447195,
+ :cum-ret-volume 117844.15000000002}
+^{}
+{:entry-date #time/date-time "2023-06-15T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 30000.0,
+ :entry-price 2.465,
+ :entry-vol 73950.0,
+ :exit-date #time/date-time "2023-06-15T00:00",
+ :exit-price 2.507,
+ :pl 1260,
+ :win? true,
+ :ret-prct 1.703853955375264,
+ :ret-log 0.007337410344967765,
+ :cum-ret-volume 119104.15000000002}
+^{}
+{:entry-date #time/date-time "2023-06-15T00:00",
+ :asset "NG0",
+ :side :long,
+ :qty 10000.0,
+ :entry-price 2.506,
+ :entry-vol 25059.999999999996,
+ :exit-date #time/date-time "2023-06-15T00:00",
+ :exit-price 2.601,
+ :pl 950,
+ :win? true,
+ :ret-prct 3.790901835594581,
+ :ret-log 0.016159285537741597,
+ :cum-ret-volume 120054.15000000002}
+^{}
+{:entry-date #time/date-time "2023-03-06T00:00",
+ :asset "RIVN",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 15.45,
+ :entry-vol 15450.0,
+ :exit-date #time/date-time "2023-06-20T00:00",
+ :exit-price 15.58,
+ :pl 130,
+ :win? true,
+ :ret-prct 0.8414239482200698,
+ :ret-log 0.003638969575692208,
+ :cum-ret-volume 120184.15000000002}
+^{}
+{:entry-date #time/date-time "2023-06-12T00:00",
+ :asset "DAX0",
+ :side :short,
+ :qty 3.0,
+ :entry-price 16398.15,
+ :entry-vol 49194.450000000004,
+ :exit-date #time/date-time "2023-06-20T00:00",
+ :exit-price 16271.0,
+ :pl 381,
+ :win? true,
+ :ret-prct 0.7753923460878297,
+ :ret-log 0.003380609670260881,
+ :cum-ret-volume 120565.60000000003}
+^{}
+{:entry-date #time/date-time "2023-06-19T00:00",
+ :asset "ZC0",
+ :side :short,
+ :qty 200.0,
+ :entry-price 605.25,
+ :entry-vol 121050.0,
+ :exit-date #time/date-time "2023-06-20T00:00",
+ :exit-price 593.0,
+ :pl 2450,
+ :win? true,
+ :ret-prct 2.0239570425444033,
+ :ret-log 0.008880104749507733,
+ :cum-ret-volume 123015.60000000003}
+^{}
+{:entry-date #time/date-time "2023-06-14T00:00",
+ :asset "DAX0",
+ :side :short,
+ :qty 4.0,
+ :entry-price 16398.15,
+ :entry-vol 65592.6,
+ :exit-date #time/date-time "2023-06-20T00:00",
+ :exit-price 16272.0,
+ :pl 504,
+ :win? true,
+ :ret-prct 0.7692940971999979,
+ :ret-log 0.0033539191695668436,
+ :cum-ret-volume 123520.20000000004}
+^{}
+{:entry-date #time/date-time "2023-06-14T00:00",
+ :asset "DAX0",
+ :side :short,
+ :qty 4.0,
+ :entry-price 16398.15,
+ :entry-vol 65592.6,
+ :exit-date #time/date-time "2023-06-20T00:00",
+ :exit-price 16272.0,
+ :pl 504,
+ :win? true,
+ :ret-prct 0.7692940971999979,
+ :ret-log 0.0033539191695668436,
+ :cum-ret-volume 124024.80000000005}
+^{}
+{:entry-date #time/date-time "2023-05-18T00:00",
+ :asset "DAX0",
+ :side :short,
+ :qty 1.077,
+ :entry-price 16386.72,
+ :entry-vol 17648.49744,
+ :exit-date #time/date-time "2023-06-20T00:00",
+ :exit-price 16272.0,
+ :pl 123,
+ :win? true,
+ :ret-prct 0.7000790884325915,
+ :ret-log 0.003051097402741121,
+ :cum-ret-volume 124148.35344000005}
+^{}
+{:entry-date #time/date-time "2023-03-14T00:00",
+ :asset "RIVN",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 15.45,
+ :entry-vol 15450.0,
+ :exit-date #time/date-time "2023-06-20T00:00",
+ :exit-price 15.58,
+ :pl 130,
+ :win? true,
+ :ret-prct 0.8414239482200698,
+ :ret-log 0.003638969575692208,
+ :cum-ret-volume 124278.35344000005}
+^{}
+{:entry-date #time/date-time "2023-03-07T00:00",
+ :asset "RIVN",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 15.45,
+ :entry-vol 15450.0,
+ :exit-date #time/date-time "2023-06-20T00:00",
+ :exit-price 15.58,
+ :pl 130,
+ :win? true,
+ :ret-prct 0.8414239482200698,
+ :ret-log 0.003638969575692208,
+ :cum-ret-volume 124408.35344000005}
+^{}
+{:entry-date #time/date-time "2023-06-13T00:00",
+ :asset "MNQ0",
+ :side :short,
+ :qty 8.0,
+ :entry-price 15074.69,
+ :entry-vol 120597.52,
+ :exit-date #time/date-time "2023-06-21T00:00",
+ :exit-price 15020.0,
+ :pl 437,
+ :win? true,
+ :ret-prct 0.36279353008254567,
+ :ret-log 0.0015784572867474367,
+ :cum-ret-volume 124845.87344000005}
+^{}
+{:entry-date #time/date-time "2023-06-20T00:00",
+ :asset "ZC0",
+ :side :short,
+ :qty 200.0,
+ :entry-price 613.0,
+ :entry-vol 122600.0,
+ :exit-date #time/date-time "2023-06-22T00:00",
+ :exit-price 609.5,
+ :pl 700,
+ :win? true,
+ :ret-prct 0.5709624796084829,
+ :ret-log 0.002486764564014532,
+ :cum-ret-volume 125545.87344000005}
+^{}
+{:entry-date #time/date-time "2023-06-21T00:00",
+ :asset "ZC0",
+ :side :short,
+ :qty 250.0,
+ :entry-price 613.0,
+ :entry-vol 153250.0,
+ :exit-date #time/date-time "2023-06-22T00:00",
+ :exit-price 609.75,
+ :pl 812,
+ :win? true,
+ :ret-prct 0.5301794453507341,
+ :ret-log 0.0023086655326469696,
+ :cum-ret-volume 126358.37344000005}
+^{}
+{:entry-date #time/date-time "2023-06-20T00:00",
+ :asset "ZC0",
+ :side :short,
+ :qty 50.0,
+ :entry-price 613.0,
+ :entry-vol 30650.0,
+ :exit-date #time/date-time "2023-06-22T00:00",
+ :exit-price 609.5,
+ :pl 175,
+ :win? true,
+ :ret-prct 0.5709624796084829,
+ :ret-log 0.002486764564014532,
+ :cum-ret-volume 126533.37344000005}
+^{}
+{:entry-date #time/date-time "2023-06-20T00:00",
+ :asset "DAX0",
+ :side :short,
+ :qty 3.0,
+ :entry-price 16282.0,
+ :entry-vol 48846.0,
+ :exit-date #time/date-time "2023-06-22T00:00",
+ :exit-price 15987.0,
+ :pl 885,
+ :win? true,
+ :ret-prct 1.8118167301314334,
+ :ret-log 0.00794077544611227,
+ :cum-ret-volume 127418.37344000005}
+^{}
+{:entry-date #time/date-time "2023-06-22T00:00",
+ :asset "ZC0",
+ :side :short,
+ :qty 300.0,
+ :entry-price 609.5,
+ :entry-vol 182850.0,
+ :exit-date #time/date-time "2023-06-23T00:00",
+ :exit-price 594.75,
+ :pl 4425,
+ :win? true,
+ :ret-prct 2.4200164068908943,
+ :ret-log 0.010639259245096788,
+ :cum-ret-volume 131843.37344000005}
+^{}
+{:entry-date #time/date-time "2023-06-23T00:00",
+ :asset "ZC0",
+ :side :short,
+ :qty 100.0,
+ :entry-price 593.75,
+ :entry-vol 59375.0,
+ :exit-date #time/date-time "2023-06-27T00:00",
+ :exit-price 574.0,
+ :pl 1975,
+ :win? true,
+ :ret-prct 3.3263157894736843,
+ :ret-log 0.014691730234949407,
+ :cum-ret-volume 133818.37344000005}
+^{}
+{:entry-date #time/date-time "2023-06-27T00:00",
+ :asset "BZ0",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 73.42,
+ :entry-vol 73420.0,
+ :exit-date #time/date-time "2023-06-28T00:00",
+ :exit-price 74.46,
+ :pl 1040,
+ :win? true,
+ :ret-prct 1.4165077635521548,
+ :ret-log 0.006108651714405333,
+ :cum-ret-volume 134858.37344000005}
+^{}
+{:entry-date #time/date-time "2023-06-22T00:00",
+ :asset "BZ0",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 73.42,
+ :entry-vol 73420.0,
+ :exit-date #time/date-time "2023-06-28T00:00",
+ :exit-price 74.11,
+ :pl 690,
+ :win? true,
+ :ret-prct 0.9397984200490298,
+ :ret-log 0.00406243309879839,
+ :cum-ret-volume 135548.37344000005}
+^{}
+{:entry-date #time/date-time "2023-06-20T00:00",
+ :asset "RIVN",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 14.39,
+ :entry-vol 14390.0,
+ :exit-date #time/date-time "2023-06-29T00:00",
+ :exit-price 15.96,
+ :pl 1570,
+ :win? true,
+ :ret-prct 10.910354412786658,
+ :ret-log 0.04497209307810546,
+ :cum-ret-volume 137118.37344000005}
+^{}
+{:entry-date #time/date-time "2023-06-26T00:00",
+ :asset "MYM0",
+ :side :long,
+ :qty 2.0,
+ :entry-price 34308.0,
+ :entry-vol 68616.0,
+ :exit-date #time/date-time "2023-06-29T00:00",
+ :exit-price 34634.0,
+ :pl 652,
+ :win? true,
+ :ret-prct 0.950215693132797,
+ :ret-log 0.004107251206723284,
+ :cum-ret-volume 137770.37344000005}
+^{}
+{:entry-date #time/date-time "2023-06-27T00:00",
+ :asset "RIVN",
+ :side :long,
+ :qty 1500.0,
+ :entry-price 14.39,
+ :entry-vol 21585.0,
+ :exit-date #time/date-time "2023-06-29T00:00",
+ :exit-price 15.96,
+ :pl 2355,
+ :win? true,
+ :ret-prct 10.910354412786658,
+ :ret-log 0.04497209307810546,
+ :cum-ret-volume 140125.37344000005}
+^{}
+{:entry-date #time/date-time "2023-06-22T00:00",
+ :asset "RB0",
+ :side :long,
+ :qty 42000.0,
+ :entry-price 2.0684,
+ :entry-vol 86872.8,
+ :exit-date #time/date-time "2023-06-30T00:00",
+ :exit-price 2.105,
+ :pl 1537,
+ :win? true,
+ :ret-prct 1.7694836588667553,
+ :ret-log 0.007617571071654949,
+ :cum-ret-volume 141662.57344000007}
+^{}
+{:entry-date #time/date-time "2023-06-08T00:00",
+ :asset "AMZN",
+ :side :long,
+ :qty 500.0,
+ :entry-price 124.37,
+ :entry-vol 62185.0,
+ :exit-date #time/date-time "2023-06-30T00:00",
+ :exit-price 130.41,
+ :pl 3020,
+ :win? true,
+ :ret-prct 4.8564766422770695,
+ :ret-log 0.020595260582312758,
+ :cum-ret-volume 144682.57344000007}
+^{}
+{:entry-date #time/date-time "2023-06-28T00:00",
+ :asset "BZ0",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 74.14,
+ :entry-vol 74140.0,
+ :exit-date #time/date-time "2023-06-30T00:00",
+ :exit-price 74.99,
+ :pl 850,
+ :win? true,
+ :ret-prct 1.1464796331265097,
+ :ret-log 0.004950771906496065,
+ :cum-ret-volume 145532.57344000007}
+^{}
+{:entry-date #time/date-time "2023-06-30T00:00",
+ :asset "BZ0",
+ :side :short,
+ :qty 1000.0,
+ :entry-price 75.06,
+ :entry-vol 75060.0,
+ :exit-date #time/date-time "2023-06-30T00:00",
+ :exit-price 74.86,
+ :pl 200,
+ :win? true,
+ :ret-prct 0.2664535038635796,
+ :ret-log 0.0011587372986605615,
+ :cum-ret-volume 145732.57344000007}
+^{}
+{:entry-date #time/date-time "2023-07-03T00:00",
+ :asset "RB0",
+ :side :long,
+ :qty 42000.0,
+ :entry-price 2.0771,
+ :entry-vol 87238.20000000001,
+ :exit-date #time/date-time "2023-07-04T00:00",
+ :exit-price 2.0954,
+ :pl 768,
+ :win? true,
+ :ret-prct 0.8810360598911936,
+ :ret-log 0.0038095338424152803,
+ :cum-ret-volume 146501.17344000004}
+^{}
+{:entry-date #time/date-time "2023-07-03T00:00",
+ :asset "DAX0",
+ :side :short,
+ :qty 4.0,
+ :entry-price 16263.8,
+ :entry-vol 65055.2,
+ :exit-date #time/date-time "2023-07-05T00:00",
+ :exit-price 16044.0,
+ :pl 879,
+ :win? true,
+ :ret-prct 1.351467676680722,
+ :ret-log 0.005909371725780765,
+ :cum-ret-volume 147380.37344000005}
+^{}
+{:entry-date #time/date-time "2023-07-02T00:00",
+ :asset "DAX0",
+ :side :short,
+ :qty 3.0,
+ :entry-price 16263.8,
+ :entry-vol 48791.399999999994,
+ :exit-date #time/date-time "2023-07-05T00:00",
+ :exit-price 16044.0,
+ :pl 659,
+ :win? true,
+ :ret-prct 1.351467676680722,
+ :ret-log 0.005909371725780765,
+ :cum-ret-volume 148039.77344000005}
+^{}
+{:entry-date #time/date-time "2023-07-02T00:00",
+ :asset "ZC0",
+ :side :long,
+ :qty 250.0,
+ :entry-price 494.0,
+ :entry-vol 123500.0,
+ :exit-date #time/date-time "2023-07-05T00:00",
+ :exit-price 498.5,
+ :pl 1125,
+ :win? true,
+ :ret-prct 0.9109311740890689,
+ :ret-log 0.003938213724027584,
+ :cum-ret-volume 149164.77344000005}
+^{}
+{:entry-date #time/date-time "2023-06-30T00:00",
+ :asset "DAX0",
+ :side :short,
+ :qty 3.0,
+ :entry-price 16263.8,
+ :entry-vol 48791.399999999994,
+ :exit-date #time/date-time "2023-07-05T00:00",
+ :exit-price 16044.0,
+ :pl 659,
+ :win? true,
+ :ret-prct 1.351467676680722,
+ :ret-log 0.005909371725780765,
+ :cum-ret-volume 149824.17344000004}
+^{}
+{:entry-date #time/date-time "2023-07-05T00:00",
+ :asset "MNQ0",
+ :side :short,
+ :qty 4.0,
+ :entry-price 15542.44,
+ :entry-vol 62169.76,
+ :exit-date #time/date-time "2023-07-06T00:00",
+ :exit-price 15362.75,
+ :pl 718,
+ :win? true,
+ :ret-prct 1.156124778348834,
+ :ret-log 0.0050502362122122335,
+ :cum-ret-volume 150542.93344000005}
+^{}
+{:entry-date #time/date-time "2023-07-05T00:00",
+ :asset "ZC0",
+ :side :long,
+ :qty 150.0,
+ :entry-price 496.75,
+ :entry-vol 74512.5,
+ :exit-date #time/date-time "2023-07-06T00:00",
+ :exit-price 503.0,
+ :pl 937,
+ :win? true,
+ :ret-prct 1.2581781580271767,
+ :ret-log 0.005430109274074724,
+ :cum-ret-volume 151480.43344000005}
+^{}
+{:entry-date #time/date-time "2023-07-05T00:00",
+ :asset "ZC0",
+ :side :long,
+ :qty 100.0,
+ :entry-price 496.75,
+ :entry-vol 49675.0,
+ :exit-date #time/date-time "2023-07-06T00:00",
+ :exit-price 503.0,
+ :pl 625,
+ :win? true,
+ :ret-prct 1.2581781580271767,
+ :ret-log 0.005430109274074724,
+ :cum-ret-volume 152105.43344000005}
+^{}
+{:entry-date #time/date-time "2023-06-29T00:00",
+ :asset "RIVN",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 15.98,
+ :entry-vol 15980.0,
+ :exit-date #time/date-time "2023-07-06T00:00",
+ :exit-price 21.42,
+ :pl 5440,
+ :win? true,
+ :ret-prct 34.04255319148937,
+ :ret-log 0.12724269151786416,
+ :cum-ret-volume 157545.43344000005}
+^{}
+{:entry-date #time/date-time "2023-07-06T00:00",
+ :asset "DAX0",
+ :side :long,
+ :qty 4.0,
+ :entry-price 15631.65,
+ :entry-vol 62526.6,
+ :exit-date #time/date-time "2023-07-07T00:00",
+ :exit-price 15749.0,
+ :pl 469,
+ :win? true,
+ :ret-prct 0.7507204933580292,
+ :ret-log 0.0032481605716663253,
+ :cum-ret-volume 158014.83344000005}
+^{}
+{:entry-date #time/date-time "2023-07-06T00:00",
+ :asset "RIVN",
+ :side :long,
+ :qty 500.0,
+ :entry-price 21.39,
+ :entry-vol 10695.0,
+ :exit-date #time/date-time "2023-07-07T00:00",
+ :exit-price 25.042,
+ :pl 1826,
+ :win? true,
+ :ret-prct 17.073398784478734,
+ :ret-log 0.06845822663929191,
+ :cum-ret-volume 159840.83344000005}
+^{}
+{:entry-date #time/date-time "2023-06-12T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 500.0,
+ :entry-price 15.13,
+ :entry-vol 7565.0,
+ :exit-date #time/date-time "2023-07-11T00:00",
+ :exit-price 16.505,
+ :pl 687,
+ :win? true,
+ :ret-prct 9.087904824851277,
+ :ret-log 0.0377766006431437,
+ :cum-ret-volume 160528.33344000005}
+^{}
+{:entry-date #time/date-time "2023-07-10T00:00",
+ :asset "MES0",
+ :side :long,
+ :qty 50.0,
+ :entry-price 4485.62,
+ :entry-vol 224281.0,
+ :exit-date #time/date-time "2023-07-11T00:00",
+ :exit-price 4506.5,
+ :pl 1044,
+ :win? true,
+ :ret-prct 0.4654874911383512,
+ :ret-log 0.002016895922217543,
+ :cum-ret-volume 161572.33344000005}
+^{}
+{:entry-date #time/date-time "2023-06-28T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 15.13,
+ :entry-vol 15130.0,
+ :exit-date #time/date-time "2023-07-11T00:00",
+ :exit-price 16.505,
+ :pl 1375,
+ :win? true,
+ :ret-prct 9.087904824851277,
+ :ret-log 0.0377766006431437,
+ :cum-ret-volume 162947.33344000005}
+^{}
+{:entry-date #time/date-time "2023-07-10T00:00",
+ :asset "DAX0",
+ :side :long,
+ :qty 8.0,
+ :entry-price 15767.4,
+ :entry-vol 126139.2,
+ :exit-date #time/date-time "2023-07-11T00:00",
+ :exit-price 15899.0,
+ :pl 1052,
+ :win? true,
+ :ret-prct 0.8346334842776892,
+ :ret-log 0.0036097240513752737,
+ :cum-ret-volume 164000.13344000006}
+^{}
+{:entry-date #time/date-time "2023-07-05T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 15.13,
+ :entry-vol 15130.0,
+ :exit-date #time/date-time "2023-07-11T00:00",
+ :exit-price 16.505,
+ :pl 1375,
+ :win? true,
+ :ret-prct 9.087904824851277,
+ :ret-log 0.0377766006431437,
+ :cum-ret-volume 165375.13344000006}
+^{}
+{:entry-date #time/date-time "2023-04-14T00:00",
+ :asset "NKLA",
+ :side :long,
+ :qty 11900.0,
+ :entry-price 2.05,
+ :entry-vol 24394.999999999996,
+ :exit-date #time/date-time "2023-07-13T00:00",
+ :exit-price 2.06,
+ :pl 119,
+ :win? true,
+ :ret-prct 0.4878048780487918,
+ :ret-log 0.002113359313399177,
+ :cum-ret-volume 165494.13344000006}
+^{}
+{:entry-date #time/date-time "2023-07-13T00:00",
+ :asset "ZC0",
+ :side :long,
+ :qty 150.0,
+ :entry-price 491.0,
+ :entry-vol 73650.0,
+ :exit-date #time/date-time "2023-07-13T00:00",
+ :exit-price 497.5,
+ :pl 975,
+ :win? true,
+ :ret-prct 1.3238289205702647,
+ :ret-log 0.0057115929587756575,
+ :cum-ret-volume 166469.13344000006}
+^{}
+{:entry-date #time/date-time "2023-02-21T00:00",
+ :asset "NKLA",
+ :side :long,
+ :qty 3000.0,
+ :entry-price 2.05,
+ :entry-vol 6149.999999999999,
+ :exit-date #time/date-time "2023-07-13T00:00",
+ :exit-price 2.06,
+ :pl 30,
+ :win? true,
+ :ret-prct 0.4878048780487918,
+ :ret-log 0.002113359313399177,
+ :cum-ret-volume 166499.13344000006}
+^{}
+{:entry-date #time/date-time "2023-02-09T00:00",
+ :asset "NKLA",
+ :side :long,
+ :qty 2000.0,
+ :entry-price 2.05,
+ :entry-vol 4100.0,
+ :exit-date #time/date-time "2023-07-13T00:00",
+ :exit-price 2.06,
+ :pl 20,
+ :win? true,
+ :ret-prct 0.4878048780487918,
+ :ret-log 0.002113359313399177,
+ :cum-ret-volume 166519.13344000006}
+^{}
+{:entry-date #time/date-time "2023-02-08T00:00",
+ :asset "NKLA",
+ :side :long,
+ :qty 5000.0,
+ :entry-price 2.05,
+ :entry-vol 10250.0,
+ :exit-date #time/date-time "2023-07-13T00:00",
+ :exit-price 2.06,
+ :pl 50,
+ :win? true,
+ :ret-prct 0.4878048780487918,
+ :ret-log 0.002113359313399177,
+ :cum-ret-volume 166569.13344000006}
+^{}
+{:entry-date #time/date-time "2023-02-07T00:00",
+ :asset "NKLA",
+ :side :long,
+ :qty 2000.0,
+ :entry-price 2.05,
+ :entry-vol 4100.0,
+ :exit-date #time/date-time "2023-07-13T00:00",
+ :exit-price 2.06,
+ :pl 20,
+ :win? true,
+ :ret-prct 0.4878048780487918,
+ :ret-log 0.002113359313399177,
+ :cum-ret-volume 166589.13344000006}
+^{}
+{:entry-date #time/date-time "2023-07-06T00:00",
+ :asset "ZC0",
+ :side :long,
+ :qty 50.0,
+ :entry-price 489.75,
+ :entry-vol 24487.5,
+ :exit-date #time/date-time "2023-07-13T00:00",
+ :exit-price 490.75,
+ :pl 50,
+ :win? true,
+ :ret-prct 0.20418580908626852,
+ :ret-log 8.858636052697655E-4,
+ :cum-ret-volume 166639.13344000006}
+^{}
+{:entry-date #time/date-time "2023-02-02T00:00",
+ :asset "NKLA",
+ :side :long,
+ :qty 3000.0,
+ :entry-price 2.05,
+ :entry-vol 6149.999999999999,
+ :exit-date #time/date-time "2023-07-13T00:00",
+ :exit-price 2.06,
+ :pl 30,
+ :win? true,
+ :ret-prct 0.4878048780487918,
+ :ret-log 0.002113359313399177,
+ :cum-ret-volume 166669.13344000006}
+^{}
+{:entry-date #time/date-time "2023-07-13T00:00",
+ :asset "BZ0",
+ :side :short,
+ :qty 2000.0,
+ :entry-price 79.66,
+ :entry-vol 159320.0,
+ :exit-date #time/date-time "2023-07-13T00:00",
+ :exit-price 79.26,
+ :pl 800,
+ :win? true,
+ :ret-prct 0.502134069796625,
+ :ret-log 0.0021862340751381826,
+ :cum-ret-volume 167469.13344000006}
+^{}
+{:entry-date #time/date-time "2023-01-31T00:00",
+ :asset "NKLA",
+ :side :long,
+ :qty 2000.0,
+ :entry-price 2.05,
+ :entry-vol 4100.0,
+ :exit-date #time/date-time "2023-07-13T00:00",
+ :exit-price 2.06,
+ :pl 20,
+ :win? true,
+ :ret-prct 0.4878048780487918,
+ :ret-log 0.002113359313399177,
+ :cum-ret-volume 167489.13344000006}
+^{}
+{:entry-date #time/date-time "2023-01-30T00:00",
+ :asset "NKLA",
+ :side :long,
+ :qty 3000.0,
+ :entry-price 2.05,
+ :entry-vol 6149.999999999999,
+ :exit-date #time/date-time "2023-07-13T00:00",
+ :exit-price 2.06,
+ :pl 30,
+ :win? true,
+ :ret-prct 0.4878048780487918,
+ :ret-log 0.002113359313399177,
+ :cum-ret-volume 167519.13344000006}
+^{}
+{:entry-date #time/date-time "2023-07-12T00:00",
+ :asset "ZC0",
+ :side :long,
+ :qty 200.0,
+ :entry-price 489.75,
+ :entry-vol 97950.0,
+ :exit-date #time/date-time "2023-07-13T00:00",
+ :exit-price 490.75,
+ :pl 200,
+ :win? true,
+ :ret-prct 0.20418580908626852,
+ :ret-log 8.858636052697655E-4,
+ :cum-ret-volume 167719.13344000006}
+^{}
+{:entry-date #time/date-time "2023-07-13T00:00",
+ :asset "NKLA",
+ :side :long,
+ :qty 20000.0,
+ :entry-price 2.06,
+ :entry-vol 41200.0,
+ :exit-date #time/date-time "2023-07-14T00:00",
+ :exit-price 2.63,
+ :pl 11400,
+ :win? true,
+ :ret-prct 27.669902912621353,
+ :ret-log 0.10608852812060443,
+ :cum-ret-volume 179119.13344000006}
+^{}
+{:entry-date #time/date-time "2023-07-11T00:00",
+ :asset "RB0",
+ :side :short,
+ :qty 42000.0,
+ :entry-price 2.2262,
+ :entry-vol 93500.4,
+ :exit-date #time/date-time "2023-07-16T00:00",
+ :exit-price 2.212,
+ :pl 596,
+ :win? true,
+ :ret-prct 0.6378582337615564,
+ :ret-log 0.0027790557822899853,
+ :cum-ret-volume 179715.53344000003}
+^{}
+{:entry-date #time/date-time "2023-07-12T00:00",
+ :asset "RB0",
+ :side :short,
+ :qty 42000.0,
+ :entry-price 2.2262,
+ :entry-vol 93500.4,
+ :exit-date #time/date-time "2023-07-16T00:00",
+ :exit-price 2.212,
+ :pl 596,
+ :win? true,
+ :ret-prct 0.6378582337615564,
+ :ret-log 0.0027790557822899853,
+ :cum-ret-volume 180311.93344}
+^{}
+{:entry-date #time/date-time "2023-07-13T00:00",
+ :asset "BZ0",
+ :side :short,
+ :qty 1000.0,
+ :entry-price 79.26,
+ :entry-vol 79260.0,
+ :exit-date #time/date-time "2023-07-16T00:00",
+ :exit-price 78.32,
+ :pl 940,
+ :win? true,
+ :ret-prct 1.1859702245773553,
+ :ret-log 0.005181389203089415,
+ :cum-ret-volume 181251.93344}
+^{}
+{:entry-date #time/date-time "2023-07-13T00:00",
+ :asset "ZC0",
+ :side :long,
+ :qty 50.0,
+ :entry-price 497.0,
+ :entry-vol 24850.0,
+ :exit-date #time/date-time "2023-07-16T00:00",
+ :exit-price 522.25,
+ :pl 1262,
+ :win? true,
+ :ret-prct 5.0804828973843055,
+ :ret-log 0.021522059919014236,
+ :cum-ret-volume 182514.43344}
+^{}
+{:entry-date #time/date-time "2023-06-29T00:00",
+ :asset "FCEL",
+ :side :long,
+ :qty 8000.0,
+ :entry-price 2.45,
+ :entry-vol 19600.0,
+ :exit-date #time/date-time "2023-07-17T00:00",
+ :exit-price 2.525,
+ :pl 600,
+ :win? true,
+ :ret-prct 3.061224489795907,
+ :ret-log 0.0130952980901477,
+ :cum-ret-volume 183114.43344}
+^{}
+{:entry-date #time/date-time "2023-05-17T00:00",
+ :asset "FCEL",
+ :side :long,
+ :qty 4000.0,
+ :entry-price 2.45,
+ :entry-vol 9800.0,
+ :exit-date #time/date-time "2023-07-17T00:00",
+ :exit-price 2.525,
+ :pl 300,
+ :win? true,
+ :ret-prct 3.061224489795907,
+ :ret-log 0.0130952980901477,
+ :cum-ret-volume 183414.43344}
+^{}
+{:entry-date #time/date-time "2023-06-29T00:00",
+ :asset "INTC",
+ :side :long,
+ :qty 1000.0,
+ :entry-price 33.04,
+ :entry-vol 33040.0,
+ :exit-date #time/date-time "2023-07-17T00:00",
+ :exit-price 34.13,
+ :pl 1090,
+ :win? true,
+ :ret-prct 3.2990314769975893,
+ :ret-log 0.0140962496302941,
+ :cum-ret-volume 184504.43344}
+^{}
+{:entry-date #time/date-time "2023-03-27T00:00",
+ :asset "FCEL",
+ :side :long,
+ :qty 3100.0,
+ :entry-price 2.45,
+ :entry-vol 7595.000000000001,
+ :exit-date #time/date-time "2023-07-17T00:00",
+ :exit-price 2.525,
+ :pl 232,
+ :win? true,
+ :ret-prct 3.061224489795907,
+ :ret-log 0.0130952980901477,
+ :cum-ret-volume 184736.93344}
+^{}
+{:entry-date #time/date-time "2023-02-02T00:00",
+ :asset "FCEL",
+ :side :long,
+ :qty 900.0,
+ :entry-price 2.45,
+ :entry-vol 2205.0,
+ :exit-date #time/date-time "2023-07-17T00:00",
+ :exit-price 2.525,
+ :pl 67,
+ :win? true,
+ :ret-prct 3.061224489795907,
+ :ret-log 0.0130952980901477,
+ :cum-ret-volume 184804.43344}
+^{}
+{:entry-date #time/date-time "2023-06-14T00:00",
+ :asset "INTC",
+ :side :long,
+ :qty 500.0,
+ :entry-price 33.04,
+ :entry-vol 16520.0,
+ :exit-date #time/date-time "2023-07-17T00:00",
+ :exit-price 34.13,
+ :pl 545,
+ :win? true,
+ :ret-prct 3.2990314769975893,
+ :ret-log 0.0140962496302941,
+ :cum-ret-volume 185349.43344}
+^{}
+{:entry-date #time/date-time "2023-07-11T00:00",
+ :asset "PLTR",
+ :side :long,
+ :qty 1700.0,
+ :entry-price 16.51,
+ :entry-vol 28067.000000000004,
+ :exit-date #time/date-time "2023-07-17T00:00",
+ :exit-price 17.392,
+ :pl 1499,
+ :win? true,
+ :ret-prct 5.342216838279817,
+ :ret-log 0.022602453479425577,
+ :cum-ret-volume 186848.83344}
+^{}
+{:entry-date #time/date-time "2023-07-06T00:00",
+ :asset "INTC",
+ :side :long,
+ :qty 500.0,
+ :entry-price 33.04,
+ :entry-vol 16520.0,
+ :exit-date #time/date-time "2023-07-17T00:00",
+ :exit-price 34.13,
+ :pl 545,
+ :win? true,
+ :ret-prct 3.2990314769975893,
+ :ret-log 0.0140962496302941,
+ :cum-ret-volume 187393.83344}],
+                               :spec {:class "table-head-fixed padding-sm table-blue table-striped table-hover",
+                                      :style {:width "100%",
+                                              :height "100%",
+                                              :border "1px solid blue"},
+                                      :columns ({:path :entry-date,
+                                                 :format ta.viz.trade.format/fmt-yyyymmdd,
+                                                 :header "dt-e"}
+                                                {:path :asset,
+                                                 :header "asset"}
+                                                {:path :side,
+                                                 :header "side"}
+                                                {:path :qty,
+                                                 :header "qty",
+                                                 :attrs ta.viz.trade.format/align-right,
+                                                 :format ta.viz.trade.format/round-digit-1}
+                                                {:path :entry-price,
+                                                 :header "px-e",
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :entry-vol,
+                                                 :format ta.viz.trade.format/round-digit-0,
+                                                 :header "vol-e",
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :exit-date,
+                                                 :format ta.viz.trade.format/fmt-yyyymmdd,
+                                                 :header "dt-x"}
+                                                {:path :exit-price,
+                                                 :header "px-x",
+                                                 :max-width 50,
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :pl,
+                                                 :header "p/l",
+                                                 :format ta.viz.trade.format/round-digit-0,
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :win?,
+                                                 :header "w?",
+                                                 :max-width 50}
+                                                {:path :ret-prct,
+                                                 :header "%",
+                                                 :max-width 50,
+                                                 :format ta.viz.trade.format/round-digit-0,
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :ret-log,
+                                                 :header "log",
+                                                 :max-width 50,
+                                                 :format ta.viz.trade.format/round-digit-2,
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :cum-ret-volume,
+                                                 :header "cum$",
+                                                 :max-width 50,
+                                                 :format ta.viz.trade.format/round-digit-0,
+                                                 :attrs ta.viz.trade.format/align-right})}}},
+                   :spec {}}}],
+ :meta {:id :a1f722cf-b172-46af-8b3f-120a149fe382,
+        :eval-time "2024-05-03 12:52:11",
+        :ns "quanta.notebook.study.joseph-trades-realized",
+        :java "19.0.2",
+        :clojure "1.11.1"}}

@@ -1,0 +1,81 @@
+; saved on 2024-05-03 12:52:12
+{:content [{:out "",
+            :id :2eeccd02-92ce-4f5b-9eb2-45926d0aad59,
+            :code "(ns quanta.notebook.docs.import-bardb-dynamic\n  (:require\n   [tick.core :as t]\n   [modular.system]\n   [ta.calendar.core :as cal]\n   [ta.db.bars.protocol :as b]))",
+            :ns "quanta.notebook.docs.import-bardb-dynamic",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.p-2.clj-nil [:p "nil"]]}
+           {:out "",
+            :id :0ab486e9-e53f-43bb-ac44-4a1491ee3e27,
+            :code "(def db (modular.system/system :bardb-dynamic))",
+            :ns "quanta.notebook.docs.import-bardb-dynamic",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.docs.import-bardb-dynamic/db"]}
+           {:out "",
+            :id :90b7ea86-d9a4-4233-8847-374e9dbfe578,
+            :code "(def window-daily\n  (cal/trailing-range [:us :d] 200\n                      (t/zoned-date-time \"2024-05-02T17:30-05:00[America/New_York]\")))",
+            :ns "quanta.notebook.docs.import-bardb-dynamic",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.docs.import-bardb-dynamic/window-daily"]}
+           {:out "",
+            :id :e3e25aef-fbad-4807-8e1d-6b15324076a5,
+            :code "window-daily",
+            :ns "quanta.notebook.docs.import-bardb-dynamic",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class clojure.lang.PersistentArrayMap"]
+                   [:span
+                    "{:end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\", :start #time/zoned-date-time \"2023-07-28T17:00-04:00[America/New_York]\"}"]]}
+           {:out "[32m2024-05-03T17:52:12.531Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:asset \"AEE.AU\", :calendar [:us :d], :import :eodhd} {:end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\", :start #time/zoned-date-time \"2023-07-28T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:12.532Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:asset \"AEE.AU\", :calendar [:us :d], :import :eodhd} {:end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\", :start #time/zoned-date-time \"2023-07-28T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:12.538Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ({:type :missing-prior, :start #time/zoned-date-time \"2023-07-28T17:00-04:00[America/New_York]\", :end #inst \"2024-03-04T22:00:00.000-00:00\", :db {:start #time/zoned-date-time \"2023-07-28T17:00-04:00[America/New_York]\"}} {:type :missing-after, :start #inst \"2024-03-15T21:00:00.000-00:00\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\", :db {:end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}})[0m\n[33m2024-05-03T17:52:12.541Z nuc12 WARN [ta.import.provider.eodhd.ds:50] - get-bars:  {:asset \"AEE.AU\", :calendar [:us :d], :import :eodhd} {:type :missing-prior, :start #time/zoned-date-time \"2023-07-28T17:00-04:00[America/New_York]\", :end #inst \"2024-03-04T22:00:00.000-00:00\", :db {:start #time/zoned-date-time \"2023-07-28T17:00-04:00[America/New_York]\"}}[0m\n[31m2024-05-03T17:52:12.543Z nuc12 ERROR [ta.db.bars.dynamic.import:64] - run-import-task  {:asset \"AEE.AU\", :calendar [:us :d], :import :eodhd} error:  [:de.otto.nom.core/anomaly :ta.db.bars.dynamic.import/get-bars-safe {:message \"import-provider get-bars has thrown an exception\", :opts {:asset \"AEE.AU\", :calendar [:us :d], :import :eodhd}, :task {:type :missing-prior, :start #time/zoned-date-time \"2023-07-28T17:00-04:00[America/New_York]\", :end #inst \"2024-03-04T22:00:00.000-00:00\", :db {:start #time/zoned-date-time \"2023-07-28T17:00-04:00[America/New_York]\"}}, :ex nil}][0m\n[33m2024-05-03T17:52:12.544Z nuc12 WARN [ta.import.provider.eodhd.ds:50] - get-bars:  {:asset \"AEE.AU\", :calendar [:us :d], :import :eodhd} {:type :missing-after, :start #inst \"2024-03-15T21:00:00.000-00:00\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\", :db {:end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}}[0m\n[31m2024-05-03T17:52:12.545Z nuc12 ERROR [ta.db.bars.dynamic.import:64] - run-import-task  {:asset \"AEE.AU\", :calendar [:us :d], :import :eodhd} error:  [:de.otto.nom.core/anomaly :ta.db.bars.dynamic.import/get-bars-safe {:message \"import-provider get-bars has thrown an exception\", :opts {:asset \"AEE.AU\", :calendar [:us :d], :import :eodhd}, :task {:type :missing-after, :start #inst \"2024-03-15T21:00:00.000-00:00\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\", :db {:end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}}, :ex nil}][0m\n[32m2024-05-03T17:52:12.545Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:asset \"AEE.AU\", :calendar [:us :d], :import :eodhd} {:end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\", :start #time/zoned-date-time \"2023-07-28T17:00-04:00[America/New_York]\"}[0m\n",
+            :id :14e0a668-17f5-4e35-97eb-f87b677d1315,
+            :code "(b/get-bars db {:asset \"AEE.AU\"\n                :calendar [:us :d]\n                :import :eodhd}\n            window-daily)",
+            :ns "quanta.notebook.docs.import-bardb-dynamic",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:class "clj-vector"}
+                   [:span.font-bold.teal-700.mr-1 "["]
+                   [:span.items
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":de.otto.nom.core/anomaly"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":ta.db.bars.duckdb/get-bars-duckdb"]
+                    [:span " "]
+                    [:span
+                     {:class "clj-map"}
+                     [:span.font-bold.teal-700.mr-1 "{"]
+                     [:span.items
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":message"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "grey"}}
+                       "\"asset AEE.AU has no bars in duckdb!\""]]
+                     [:span.font-bold.teal-700.ml-1 "}"]]]
+                   [:span.font-bold.teal-700.ml-1 "]"]]}
+           {:out "[32m2024-05-03T17:52:12.551Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:asset \"BTCUSDT\", :calendar [:us :d], :import :bybit} {:end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\", :start #time/zoned-date-time \"2023-07-28T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:12.552Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:asset \"BTCUSDT\", :calendar [:us :d], :import :bybit} {:end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\", :start #time/zoned-date-time \"2023-07-28T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:12.556Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:12.556Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:asset \"BTCUSDT\", :calendar [:us :d], :import :bybit} {:end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\", :start #time/zoned-date-time \"2023-07-28T17:00-04:00[America/New_York]\"}[0m\n",
+            :id :7f1e9be1-3a56-41af-95b0-266f0a4cb6fd,
+            :code "(b/get-bars db {:asset \"BTCUSDT\"\n                :calendar [:us :d]\n                :import :bybit}\n            window-daily)",
+            :ns "quanta.notebook.docs.import-bardb-dynamic",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    ":_unnamed [280 9]:\n\n|    :open | :epoch |                :date |   :close |      :volume |    :high |     :low | :ticks |  :asset |\n|---------:|-------:|----------------------|---------:|-------------:|---------:|---------:|-------:|---------|\n| 29320.01 |      0 | 2023-07-29T00:00:00Z | 29356.38 |  1054.286652 | 29407.07 | 29261.07 |      0 | BTCUSDT |\n| 29356.38 |      0 | 2023-07-30T00:00:00Z | 29281.98 |  2577.240299 | 29449.49 | 29027.51 |      0 | BTCUSDT |\n| 29281.98 |      0 | 2023-07-31T00:00:00Z | 29234.04 |  3942.494885 | 29530.37 | 29115.46 |      0 | BTCUSDT |\n| 29234.04 |      0 | 2023-08-01T00:00:00Z | 29706.00 |  8188.992092 | 29732.99 | 28555.00 |      0 | BTCUSDT |\n| 29706.00 |      0 | 2023-08-02T00:00:00Z | 29178.74 |  8488.864789 | 30037.50 | 28926.54 |      0 | BTCUSDT |\n| 29178.74 |      0 | 2023-08-03T00:00:00Z | 29194.00 |  4547.948602 | 29429.98 | 28968.01 |      0 | BTCUSDT |\n| 29194.00 |      0 | 2023-08-04T00:00:00Z | 29114.01 |  4680.836674 | 29329.31 | 28800.00 |      0 | BTCUSDT |\n| 29114.01 |      0 | 2023-08-05T00:00:00Z | 29074.89 |  1369.485183 | 29154.04 | 28985.62 |      0 | BTCUSDT |\n| 29074.89 |      0 | 2023-08-06T00:00:00Z | 29091.99 |  1754.906843 | 29199.98 | 28989.75 |      0 | BTCUSDT |\n| 29091.99 |      0 | 2023-08-07T00:00:00Z | 29214.08 |  4850.113255 | 29275.31 | 28703.10 |      0 | BTCUSDT |\n|      ... |    ... |                  ... |      ... |          ... |      ... |      ... |    ... |     ... |\n| 66811.56 |      0 | 2024-04-23T00:00:00Z | 66417.53 | 12381.038037 | 67181.60 | 65790.31 |      0 | BTCUSDT |\n| 66811.56 |      0 | 2024-04-23T00:00:00Z | 66417.53 | 12381.038037 | 67181.60 | 65790.31 |      0 | BTCUSDT |\n| 66417.53 |      0 | 2024-04-24T00:00:00Z | 64286.90 | 16171.480986 | 67088.80 | 63602.00 |      0 | BTCUSDT |\n| 64286.90 |      0 | 2024-04-25T00:00:00Z | 64495.92 | 17461.266457 | 65303.00 | 62777.36 |      0 | BTCUSDT |\n| 64495.92 |      0 | 2024-04-26T00:00:00Z | 63777.35 | 17141.815069 | 64822.78 | 63313.70 |      0 | BTCUSDT |\n| 63777.35 |      0 | 2024-04-27T00:00:00Z | 63455.86 | 11511.057753 | 63929.01 | 62395.80 |      0 | BTCUSDT |\n| 63455.86 |      0 | 2024-04-28T00:00:00Z | 63121.38 | 11025.671094 | 64374.92 | 62759.00 |      0 | BTCUSDT |\n| 63121.38 |      0 | 2024-04-29T00:00:00Z | 63867.84 | 16453.028200 | 64218.75 | 61774.09 |      0 | BTCUSDT |\n| 63867.84 |      0 | 2024-04-30T00:00:00Z | 60681.36 | 20140.608003 | 64735.32 | 59180.12 |      0 | BTCUSDT |\n| 60681.36 |      0 | 2024-05-01T00:00:00Z | 58341.10 | 23911.377215 | 60856.77 | 56542.32 |      0 | BTCUSDT |\n| 58341.10 |      0 | 2024-05-02T00:00:00Z | 59023.55 | 12610.829504 | 59465.76 | 56937.51 |      0 | BTCUSDT |\n"]]}],
+ :meta {:id :855cd011-fd63-4416-b7cb-5a2992b1dfe4,
+        :eval-time "2024-05-03 12:52:12",
+        :ns "quanta.notebook.docs.import-bardb-dynamic",
+        :java "19.0.2",
+        :clojure "1.11.1"}}

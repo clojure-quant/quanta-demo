@@ -1,0 +1,27 @@
+
+
+@font-face {
+    font-family: FiraCodeRegular;
+    src: url('/r/FiraCode/FiraCode-Regular.ttf');
+}
+
+
+pre code.hljs  {
+   font-family: FiraCodeRegular, Consolas, "courier new" !important;  /* #Fira Code,Consolas,courier new; */
+   color: black !important;
+   background-color: #afcbe4 !important;
+   width: 100%;
+   padding: 2px;
+   font-size: small;
+}
+
+/*
+.clojure .hljs-name {
+    color: #88C0D0 !important;;
+  }
+  
+  .clojure .hljs-symbol {
+    color: #EBCB8B !important;;
+  }
+
+  */

@@ -1,0 +1,5 @@
+{:name "quanta-static"
+ ; runtime
+ :cljs-routes  {"" reval.page.viewer/viewer-page}
+;
+ }

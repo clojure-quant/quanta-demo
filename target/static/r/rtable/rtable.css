@@ -1,0 +1,146 @@
+.reagent-table {
+  table-layout: fixed;
+}
+
+.reagent-table * table {
+  table-layout: fixed;
+}
+
+ .reagent-table * td {
+  min-width: 80px;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.tableFixHead {
+  overflow-y: auto;
+  /* make the table scrollable if height is more than 200 px  */
+  height: 200px;
+  /* gives an initial height of 200px to the table */
+}
+
+.tableFixHead thead tr th {
+  position: sticky;
+  /* make the table heads sticky */
+  top: 0px;
+  /* table head will be placed from the top of the table and sticks to it */
+  border: "5px solid orange";
+}
+
+.tableFixHead thead {
+  position: sticky;
+  /* make the table heads sticky */
+  top: 0px;
+  /* table head will be placed from the top of the table and sticks to it */
+  border: "5px solid orange";
+}
+
+
+.reagent-table-resize-widget {
+  display: inline-block;
+  width: 8px;
+  position: absolute;
+  cursor: ew-resize;
+  height: 100%;
+  top: 0;
+  right: 0;
+  /* background-color: black;  for debug */
+  }
+
+
+  /* y scrolling */
+
+  .x-auto {
+    overflow-x: auto;
+  }
+
+  .r-table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap
+  }
+
+  .r-table tbody{
+    width: 100%;
+    display: table;
+  }
+
+  .r-table td {
+    word-wrap: break-word;
+  }
+
+  .r-table tr {
+    word-wrap: break-word;
+  }
+
+  /* fixed header */
+  /* https://www.w3docs.com/snippets/html/how-to-create-a-table-with-a-fixed-header-and-scrollable-body.html */
+
+  .table-head-fixed {
+    overflow-y: auto; /* make the table scrollable if its height is more than the container hight  */
+  }
+  
+  .table-head-fixed thead {
+    position: sticky;
+    /* make the table heads sticky */
+    top: 0px;
+    /* table head will be placed from the top of the table and sticks to it */
+    border: "5px solid orange";
+    background-color: coral;
+  }
+
+  .table-head-fixed tbody tr th {
+    position: sticky;  /* make the table heads sticky */
+    top: 0px;  /* table head will be placed from the top of the table and sticks to it */
+    /*border: "5px solid orange";*/
+    /*background-color: red;*/
+  }
+  
+ .padding-sm td {
+    padding: 0.2rem;
+  }
+
+  .table-red tbody {
+    background-color: rgb(247, 169, 169);
+  }
+  
+  .table-blue tbody {
+    background-color: rgb(165, 193, 222);
+  }
+
+  .table-blue {
+    background-color: rgb(165, 193, 222);
+  }
+
+  .table-blue tbody tr th{
+    background-color: rgb(37, 113, 195);
+  }
+
+
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+
+  .table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.175);
+  }
+
+
+  .table-full {
+    width: 100%;
+    height: 100%;}  
+
+  .table-auto table {
+    height: auto;
+    width: auto;
+  }
+
+  .table-auto {
+    height: auto;
+    width: auto;
+  }

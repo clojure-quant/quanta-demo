@@ -1,0 +1,25 @@
+
+.options-label-top {
+    display: grid;
+    gap: "1rem";
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    grid-template-rows: 20px 20px repeat(auto-fill, 20px);
+    grid-auto-flow: column;
+    /* overflow-x: scroll; scroll does not look nice */
+    overflow-x: hidden;
+  }
+
+.options-label-left {
+    display: grid;
+    gap: "1rem";
+    grid-template-columns: repeat(auto-fit, 100px 200px ); /* minmax(200px,1fr) */
+    grid-template-rows: repeat(auto-fill, 30px);
+    grid-auto-flow: row;
+   
+  }
+
+
+ .options-debug {
+    border: 3px solid green;
+    background-color: tomato;
+ }

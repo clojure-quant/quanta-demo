@@ -1,0 +1,166 @@
+; saved on 2024-05-03 12:52:23
+{:content [{:out "",
+            :id :26838e91-8216-4a0e-8fd9-603e529291fa,
+            :code "(ns quanta.notebook.docs.mark2market\n  (:require\n   [tick.core :as t]\n   [modular.system]\n   [ta.trade.roundtrip.nav.mark2market :refer [portfolio]]\n   [ta.viz.trade.m2m.core :refer [m2m-chart]]\n   [ta.db.bars.protocol :as b]))",
+            :ns "quanta.notebook.docs.mark2market",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.p-2.clj-nil [:p "nil"]]}
+           {:out "",
+            :id :5a68943f-8e9e-41c8-9d81-7caca904d20f,
+            :code "(def bardb (modular.system/system :bardb-dynamic))",
+            :ns "quanta.notebook.docs.mark2market",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.docs.mark2market/bardb"]}
+           {:out "",
+            :id :5631a878-7b51-4ad6-a14e-ebcfc0f5734a,
+            :code "(def rts [{:asset \"ETHUSDT\"\n           :side :long\n           :qty 100.0\n           :entry-date (t/instant \"2023-03-09T23:59:59Z\")\n           :entry-price 1400.78\n           :exit-date (t/instant \"2023-03-16T23:59:59Z\")\n           :exit-price 1600.92}])",
+            :ns "quanta.notebook.docs.mark2market",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.docs.mark2market/rts"]}
+           {:out "[32m2024-05-03T17:52:23.058Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:crypto :d], :import :bybit, :asset \"ETHUSDT\"} {:start #time/instant \"2023-03-06T23:59:59Z\", :end #time/instant \"2023-03-18T23:59:59Z\"}[0m\n[32m2024-05-03T17:52:23.058Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:crypto :d], :import :bybit, :asset \"ETHUSDT\"} {:start #time/instant \"2023-03-06T23:59:59Z\", :end #time/instant \"2023-03-18T23:59:59Z\"}[0m\n[32m2024-05-03T17:52:23.063Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:23.064Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:crypto :d], :import :bybit, :asset \"ETHUSDT\"} {:start #time/instant \"2023-03-06T23:59:59Z\", :end #time/instant \"2023-03-18T23:59:59Z\"}[0m\n[32m2024-05-03T17:52:23.074Z nuc12 INFO [ta.trade.roundtrip.nav.mark2market:183] - bar-ds count:  13[0m\n[32m2024-05-03T17:52:23.077Z nuc12 INFO [ta.trade.roundtrip.nav.mark2market:154] - calculating  13[0m\n",
+            :id :13599b73-314c-4241-a792-ee8a23f9a065,
+            :code "(-> (portfolio bardb rts {:calendar [:crypto :d]\n                          :import :bybit})\n    (m2m-chart)\n ;pr-str\n  )",
+            :ns "quanta.notebook.docs.mark2market",
+            :render-fn ta.viz.trade.m2m.vega/m2m-chart,
+            :data ^{:render-fn ta.viz.trade.m2m.vega/m2m-chart}
+                  [^{}
+                   {:open# 0,
+                    :long$ 0.0,
+                    :short$ 0.0,
+                    :net$ 0.0,
+                    :pl-u 0.0,
+                    :pl-r 0.0,
+                    :date #time/instant "2023-03-06T23:59:59Z",
+                    :pl-r-cum 0.0,
+                    :pl-cum 0.0}
+^{}
+{:open# 0,
+ :long$ 0.0,
+ :short$ 0.0,
+ :net$ 0.0,
+ :pl-u 0.0,
+ :pl-r 0.0,
+ :date #time/instant "2023-03-07T23:59:59Z",
+ :pl-r-cum 0.0,
+ :pl-cum 0.0}
+^{}
+{:open# 0,
+ :long$ 0.0,
+ :short$ 0.0,
+ :net$ 0.0,
+ :pl-u 0.0,
+ :pl-r 0.0,
+ :date #time/instant "2023-03-08T23:59:59Z",
+ :pl-r-cum 0.0,
+ :pl-cum 0.0}
+^{}
+{:open# 1,
+ :long$ 142660.0,
+ :short$ 0.0,
+ :net$ 142660.0,
+ :pl-u -2582.0,
+ :pl-r 0.0,
+ :date #time/instant "2023-03-09T23:59:59Z",
+ :pl-r-cum 0.0,
+ :pl-cum -2582.0}
+^{}
+{:open# 1,
+ :long$ 147191.0,
+ :short$ 0.0,
+ :net$ 147191.0,
+ :pl-u -7113.0,
+ :pl-r 0.0,
+ :date #time/instant "2023-03-10T23:59:59Z",
+ :pl-r-cum 0.0,
+ :pl-cum -7113.0}
+^{}
+{:open# 1,
+ :long$ 157971.0,
+ :short$ 0.0,
+ :net$ 157971.0,
+ :pl-u -17893.0,
+ :pl-r 0.0,
+ :date #time/instant "2023-03-11T23:59:59Z",
+ :pl-r-cum 0.0,
+ :pl-cum -17893.0}
+^{}
+{:open# 1,
+ :long$ 167341.0,
+ :short$ 0.0,
+ :net$ 167341.0,
+ :pl-u -27263.0,
+ :pl-r 0.0,
+ :date #time/instant "2023-03-12T23:59:59Z",
+ :pl-r-cum 0.0,
+ :pl-cum -27263.0}
+^{}
+{:open# 1,
+ :long$ 169917.0,
+ :short$ 0.0,
+ :net$ 169917.0,
+ :pl-u -29839.0,
+ :pl-r 0.0,
+ :date #time/instant "2023-03-13T23:59:59Z",
+ :pl-r-cum 0.0,
+ :pl-cum -29839.0}
+^{}
+{:open# 1,
+ :long$ 164982.0,
+ :short$ 0.0,
+ :net$ 164982.0,
+ :pl-u -24904.0,
+ :pl-r 0.0,
+ :date #time/instant "2023-03-14T23:59:59Z",
+ :pl-r-cum 0.0,
+ :pl-cum -24904.0}
+^{}
+{:open# 1,
+ :long$ 167326.0,
+ :short$ 0.0,
+ :net$ 167326.0,
+ :pl-u -27248.0,
+ :pl-r 0.0,
+ :date #time/instant "2023-03-15T23:59:59Z",
+ :pl-r-cum 0.0,
+ :pl-cum -27248.0}
+^{}
+{:open# 0,
+ :long$ 0.0,
+ :short$ 0.0,
+ :net$ 0.0,
+ :pl-u 0.0,
+ :pl-r 20014.00000000001,
+ :date #time/instant "2023-03-16T23:59:59Z",
+ :pl-r-cum 20014.00000000001,
+ :pl-cum 20014.00000000001}
+^{}
+{:open# 0,
+ :long$ 0.0,
+ :short$ 0.0,
+ :net$ 0.0,
+ :pl-u 0.0,
+ :pl-r 0.0,
+ :date #time/instant "2023-03-17T23:59:59Z",
+ :pl-r-cum 20014.00000000001,
+ :pl-cum 20014.00000000001}
+^{}
+{:open# 0,
+ :long$ 0.0,
+ :short$ 0.0,
+ :net$ 0.0,
+ :pl-u 0.0,
+ :pl-r 0.0,
+ :date #time/instant "2023-03-18T23:59:59Z",
+ :pl-r-cum 20014.00000000001,
+ :pl-cum 20014.00000000001}]}],
+ :meta {:id :8fb1696b-beeb-4699-bfee-e620583d440b,
+        :eval-time "2024-05-03 12:52:23",
+        :ns "quanta.notebook.docs.mark2market",
+        :java "19.0.2",
+        :clojure "1.11.1"}}

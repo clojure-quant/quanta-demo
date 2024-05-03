@@ -1,0 +1,296 @@
+; saved on 2024-05-03 12:52:23
+{:content [{:out "",
+            :id :f7159859-03ce-4180-bdb4-519993b1795c,
+            :code "(ns quanta.notebook.docs.trade-position\n  (:require\n   [tick.core :as t]\n   [tablecloth.api :as tc]\n   [ta.trade.backtest.from-position :refer [signal->roundtrips]]\n   [ta.trade.roundtrip.core :refer [roundtrip-stats]]\n   [ta.viz.trade.core :refer [roundtrip-stats-ui]]))",
+            :ns "quanta.notebook.docs.trade-position",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.p-2.clj-nil [:p "nil"]]}
+           {:out "",
+            :id :52fab8c1-36b8-48fc-99a0-f88b2917e231,
+            :code "(def signal-ds (tc/dataset {:date [(t/instant \"2020-01-01T00:00:00Z\")\n                                   (t/instant \"2020-01-02T00:00:00Z\")\n                                   (t/instant \"2020-01-03T00:00:00Z\")\n                                   (t/instant \"2020-02-04T00:00:00Z\")\n                                   (t/instant \"2020-03-05T00:00:00Z\")\n                                   (t/instant \"2020-04-06T00:00:00Z\")\n                                   (t/instant \"2020-05-07T00:00:00Z\")]\n                            :asset [\"BTCUSDT\" \"BTCUSDT\" \"BTCUSDT\" \"BTCUSDT\"\n                                    \"BTCUSDT\" \"BTCUSDT\" \"BTCUSDT\"]\n                            :close [1.0 2.0 3.0 4.0 5.0 6.0 7.0]\n                            :signal [:long :hold :flat ;rt1 \n                                     :short :hold :hold :flat ; rt2\n                                     ]}))",
+            :ns "quanta.notebook.docs.trade-position",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.docs.trade-position/signal-ds"]}
+           {:out "",
+            :id :6c09b553-42ee-4221-9afd-8fcdc0d594bd,
+            :code "signal-ds",
+            :ns "quanta.notebook.docs.trade-position",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [7 4]:\n\n|                :date |  :asset | :close | :signal |\n|----------------------|---------|-------:|---------|\n| 2020-01-01T00:00:00Z | BTCUSDT |    1.0 |   :long |\n| 2020-01-02T00:00:00Z | BTCUSDT |    2.0 |   :hold |\n| 2020-01-03T00:00:00Z | BTCUSDT |    3.0 |   :flat |\n| 2020-02-04T00:00:00Z | BTCUSDT |    4.0 |  :short |\n| 2020-03-05T00:00:00Z | BTCUSDT |    5.0 |   :hold |\n| 2020-04-06T00:00:00Z | BTCUSDT |    6.0 |   :hold |\n| 2020-05-07T00:00:00Z | BTCUSDT |    7.0 |   :flat |\n"]]}
+           {:out "",
+            :id :16d8a3ca-aecc-41a8-b757-83526fb2d218,
+            :code "(def rts (signal->roundtrips signal-ds))",
+            :ns "quanta.notebook.docs.trade-position",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.docs.trade-position/rts"]}
+           {:out "",
+            :id :72f4f3e9-4c58-4637-88ec-b9a1bb113e8d,
+            :code "(def r (roundtrip-stats rts))",
+            :ns "quanta.notebook.docs.trade-position",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.docs.trade-position/r"]}
+           {:out "",
+            :id :476ffa4f-f046-4219-99a6-2e6360202574,
+            :code "(:roundtrip-ds r)",
+            :ns "quanta.notebook.docs.trade-position",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [2 20]:\n\n| :entry-idx |          :entry-date | :entry-price | :exit-idx | :id |  :side |     :qty | :exit-price |  :asset |           :exit-date | :cum-ret-volume | :cum-ret-prct | :bars | :win? | :ret-abs |    :ret-log | :ret-prct | :cum-ret-abs | :cum-ret-log |       :nav |\n|-----------:|----------------------|-------------:|----------:|----:|--------|---------:|------------:|---------|----------------------|----------------:|--------------:|------:|-------|---------:|------------:|----------:|-------------:|-------------:|-----------:|\n|          0 | 2020-01-01T00:00:00Z |          1.0 |         2 |   1 |  :long | 100000.0 |         3.0 | BTCUSDT | 2020-01-03T00:00:00Z |        200000.0 |         200.0 |     2 |  true |      2.0 |  0.47712125 |     200.0 |          2.0 |   0.47712125 | 2.47712125 |\n|          3 | 2020-02-04T00:00:00Z |          4.0 |         6 |   2 | :short |  25000.0 |         7.0 | BTCUSDT | 2020-05-07T00:00:00Z |        125000.0 |         125.0 |     3 | false |     -3.0 | -0.24303805 |     -75.0 |         -1.0 |   0.23408321 | 2.23408321 |\n"]]}
+           {:out "",
+            :id :cc1474c6-c6f1-458a-99de-0b6de7da5047,
+            :code "(:metrics r)",
+            :ns "quanta.notebook.docs.trade-position",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:class "clj-map"}
+                   [:span.font-bold.teal-700.mr-1 "{"]
+                   [:span.items
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":roundtrip"]
+                    [:span " "]
+                    [:span
+                     {:class "clj-map"}
+                     [:span.font-bold.teal-700.mr-1 "{"]
+                     [:span.items
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":avg-win-log"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "darkgreen"}}
+                       "0.47712125471966244"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":avg-bars-win"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "darkgreen"}}
+                       "2.0"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":win-nr-prct"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "darkgreen"}}
+                       "50.0"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":pf"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "darkgreen"}}
+                       "1.9631545648867308"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":avg-log"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "darkgreen"}}
+                       "0.11704160301668401"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":pl-log-cum"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "darkgreen"}}
+                       "0.23408320603336802"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":avg-loss-log"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "darkgreen"}}
+                       "-0.24303804868629442"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":trades"]
+                      [:span " "]
+                      [:span {:style {:color "blue"}} "2"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":avg-bars-loss"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "darkgreen"}}
+                       "3.0"]]
+                     [:span.font-bold.teal-700.ml-1 "}"]]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":nav"]
+                    [:span " "]
+                    [:span
+                     {:class "clj-map"}
+                     [:span.font-bold.teal-700.mr-1 "{"]
+                     [:span.items
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":cum-pl"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "darkgreen"}}
+                       "125000.0"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":max-dd"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "darkgreen"}}
+                       "75000.0"]]
+                     [:span.font-bold.teal-700.ml-1 "}"]]]
+                   [:span.font-bold.teal-700.ml-1 "}"]]}
+           {:out "",
+            :id :1035d8e7-139e-4bbb-a8fc-40bf67ab5ebc,
+            :code "(:nav-ds r)",
+            :ns "quanta.notebook.docs.trade-position",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [2 6]:\n\n| :year-month-day |    :ret-log | :trades | :cum-ret-log |         :nav |  :drawdown |\n|----------------:|------------:|--------:|-------------:|-------------:|-----------:|\n|        20200102 |  0.47712125 |       1 |   0.47712125 | 300.00000000 | 0.00000000 |\n|        20200506 | -0.24303805 |       1 |   0.23408321 | 171.42857143 | 0.24303805 |\n"]]}
+           {:out "",
+            :id :97aa01ae-12ec-4f74-908a-60917a9c3112,
+            :code "(roundtrip-stats-ui r)",
+            :ns "quanta.notebook.docs.trade-position",
+            :render-fn ta.viz.renderfn/render-spec,
+            :data ^{:render-fn ta.viz.renderfn/render-spec}
+                  {:render-fn ta.viz.trade.core/roundtrip-stats-ui,
+                   :data {:metrics {:roundtrip {:avg-win-log 0.47712125471966244,
+                                                :avg-bars-win 2.0,
+                                                :win-nr-prct 50.0,
+                                                :pf 1.9631545648867308,
+                                                :avg-log 0.11704160301668401,
+                                                :pl-log-cum 0.23408320603336802,
+                                                :avg-loss-log -0.24303804868629442,
+                                                :trades 2,
+                                                :avg-bars-loss 3.0},
+                                    :nav {:cum-pl 125000.0,
+                                          :max-dd 75000.0}},
+                          :chart ^{:render-fn ta.viz.renderfn/render-spec}
+                                 {:render-fn ta.viz.renderfn.vega/vega-lite,
+                                  :data {:values [^{}
+                                                  {:exit-date #time/instant "2020-01-03T00:00:00Z",
+                                                   :cum-ret-volume 200000.0}
+^{}
+{:exit-date #time/instant "2020-05-07T00:00:00Z",
+ :cum-ret-volume 125000.0}]},
+                                  :spec {:width "700",
+                                         :height "550",
+                                         :description "NAV",
+                                         :mark "line",
+                                         :encoding {:y {:field :cum-ret-volume,
+                                                        :type "quantitative",
+                                                        :color "blue"},
+                                                    :x {:type "temporal",
+                                                        :field :exit-date}}}},
+                          :rt ^{:render-fn ta.viz.renderfn/render-spec}
+                              {:render-fn ta.viz.renderfn.rtable/rtable,
+                               :data [^{}
+                                      {:entry-date #time/instant "2020-01-01T00:00:00Z",
+                                       :asset "BTCUSDT",
+                                       :side :long,
+                                       :qty 100000.0,
+                                       :entry-price 1.0,
+                                       :exit-date #time/instant "2020-01-03T00:00:00Z",
+                                       :exit-price 3.0,
+                                       :win? true,
+                                       :ret-prct 200.0,
+                                       :ret-log 0.47712125471966244,
+                                       :cum-ret-volume 200000.0}
+^{}
+{:entry-date #time/instant "2020-02-04T00:00:00Z",
+ :asset "BTCUSDT",
+ :side :short,
+ :qty 25000.0,
+ :entry-price 4.0,
+ :exit-date #time/instant "2020-05-07T00:00:00Z",
+ :exit-price 7.0,
+ :win? false,
+ :ret-prct -75.0,
+ :ret-log -0.24303804868629442,
+ :cum-ret-volume 125000.0}],
+                               :spec {:class "table-head-fixed padding-sm table-blue table-striped table-hover",
+                                      :style {:width "100%",
+                                              :height "100%",
+                                              :border "1px solid blue"},
+                                      :columns ({:path :entry-date,
+                                                 :format ta.viz.trade.format/fmt-yyyymmdd,
+                                                 :header "dt-e"}
+                                                {:path :asset,
+                                                 :header "asset"}
+                                                {:path :side,
+                                                 :header "side"}
+                                                {:path :qty,
+                                                 :header "qty",
+                                                 :attrs ta.viz.trade.format/align-right,
+                                                 :format ta.viz.trade.format/round-digit-1}
+                                                {:path :entry-price,
+                                                 :header "px-e",
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :entry-vol,
+                                                 :format ta.viz.trade.format/round-digit-0,
+                                                 :header "vol-e",
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :exit-date,
+                                                 :format ta.viz.trade.format/fmt-yyyymmdd,
+                                                 :header "dt-x"}
+                                                {:path :exit-price,
+                                                 :header "px-x",
+                                                 :max-width 50,
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :pl,
+                                                 :header "p/l",
+                                                 :format ta.viz.trade.format/round-digit-0,
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :win?,
+                                                 :header "w?",
+                                                 :max-width 50}
+                                                {:path :ret-prct,
+                                                 :header "%",
+                                                 :max-width 50,
+                                                 :format ta.viz.trade.format/round-digit-0,
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :ret-log,
+                                                 :header "log",
+                                                 :max-width 50,
+                                                 :format ta.viz.trade.format/round-digit-2,
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :cum-ret-volume,
+                                                 :header "cum$",
+                                                 :max-width 50,
+                                                 :format ta.viz.trade.format/round-digit-0,
+                                                 :attrs ta.viz.trade.format/align-right})}}},
+                   :spec {}}}],
+ :meta {:id :e0133a8f-babd-4164-9d4d-aa8f4c500b2a,
+        :eval-time "2024-05-03 12:52:23",
+        :ns "quanta.notebook.docs.trade-position",
+        :java "19.0.2",
+        :clojure "1.11.1"}}

@@ -1,0 +1,205 @@
+; saved on 2024-05-03 12:52:12
+{:content [{:out "",
+            :id :1c6c016f-8d08-466b-a20a-d41c35b3e9d8,
+            :code "(ns quanta.notebook.docs.bardb-duck\n  (:require\n   [tick.core :as t]\n   [tablecloth.api :as tc]\n   [ta.db.bars.protocol :as b]\n   [ta.db.bars.duckdb :as duck]\n   [modular.system]))",
+            :ns "quanta.notebook.docs.bardb-duck",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.p-2.clj-nil [:p "nil"]]}
+           {:out "",
+            :id :dcfef1de-e255-4294-ae17-99c68b00da45,
+            :code "(def db (modular.system/system :duckdb))",
+            :ns "quanta.notebook.docs.bardb-duck",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.docs.bardb-duck/db"]}
+           {:out "",
+            :id :eecccae8-7ca2-468d-9bbc-3e9024ec29fb,
+            :code ";(def db (modular.system/system :bardb-dynamic))\n\n(def window {:start (t/instant \"2022-03-05T00:00:00Z\")\n             :end (t/instant \"2024-03-20T20:00:00Z\")})",
+            :ns "quanta.notebook.docs.bardb-duck",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.docs.bardb-duck/window"]}
+           {:out "[32m2024-05-03T17:52:12.430Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:asset \"USD/JPY\", :calendar [:forex :d]} {:start #time/instant \"2022-03-05T00:00:00Z\", :end #time/instant \"2024-03-20T20:00:00Z\"}[0m\n",
+            :id :3603e891-4551-4da0-8016-0b7475384e9b,
+            :code "(b/get-bars db\n            {:asset \"USD/JPY\"\n             :calendar [:forex :d]\n            ;:import :kibot\n             }\n            window)",
+            :ns "quanta.notebook.docs.bardb-duck",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    ":_unnamed [652 9]:\n\n|   :open | :epoch |                :date |  :close |  :volume |   :high |    :low | :ticks |  :asset |\n|--------:|-------:|----------------------|--------:|---------:|--------:|--------:|-------:|---------|\n| 114.910 |      0 | 2022-03-07T21:30:00Z | 115.258 | 274333.0 | 115.472 | 114.815 |      0 | USD/JPY |\n| 115.259 |      0 | 2022-03-08T21:30:00Z | 115.624 | 247128.0 | 115.791 | 115.243 |      0 | USD/JPY |\n| 115.608 |      0 | 2022-03-09T21:30:00Z | 115.814 | 188285.0 | 115.942 | 115.555 |      0 | USD/JPY |\n| 115.814 |      0 | 2022-03-10T21:30:00Z | 116.132 | 187178.0 | 116.196 | 115.806 |      0 | USD/JPY |\n| 116.133 |      0 | 2022-03-11T21:30:00Z | 117.270 | 175514.0 | 117.357 | 116.076 |      0 | USD/JPY |\n| 117.310 |      0 | 2022-03-14T20:30:00Z | 118.182 | 152265.0 | 118.217 | 117.307 |      0 | USD/JPY |\n| 118.182 |      0 | 2022-03-15T20:30:00Z | 118.292 | 191584.0 | 118.450 | 117.696 |      0 | USD/JPY |\n| 118.290 |      0 | 2022-03-16T20:30:00Z | 118.702 | 222008.0 | 119.122 | 118.173 |      0 | USD/JPY |\n| 118.683 |      0 | 2022-03-17T20:30:00Z | 118.588 | 204767.0 | 119.025 | 118.365 |      0 | USD/JPY |\n| 118.588 |      0 | 2022-03-18T20:30:00Z | 119.145 | 128838.0 | 119.399 | 118.470 |      0 | USD/JPY |\n|     ... |    ... |                  ... |     ... |      ... |     ... |     ... |    ... |     ... |\n| 146.938 |      0 | 2024-03-12T20:30:00Z | 147.644 | 355202.0 | 148.163 | 146.618 |      0 | USD/JPY |\n| 146.938 |      0 | 2024-03-12T20:30:00Z | 147.644 | 355202.0 | 148.163 | 146.618 |      0 | USD/JPY |\n| 147.638 |      0 | 2024-03-13T20:30:00Z | 147.751 | 266454.0 | 148.046 | 147.232 |      0 | USD/JPY |\n| 147.638 |      0 | 2024-03-13T20:30:00Z | 147.751 | 266454.0 | 148.046 | 147.232 |      0 | USD/JPY |\n| 147.746 |      0 | 2024-03-14T20:30:00Z | 148.294 | 325279.0 | 148.357 | 147.428 |      0 | USD/JPY |\n| 147.746 |      0 | 2024-03-14T20:30:00Z | 148.294 | 325279.0 | 148.357 | 147.428 |      0 | USD/JPY |\n| 147.746 |      0 | 2024-03-14T20:30:00Z | 148.294 | 325279.0 | 148.357 | 147.428 |      0 | USD/JPY |\n| 148.294 |      0 | 2024-03-15T20:30:00Z | 148.994 | 263878.0 | 149.163 | 148.031 |      0 | USD/JPY |\n| 148.941 |      0 | 2024-03-18T20:30:00Z | 149.144 | 248634.0 | 149.332 | 148.905 |      0 | USD/JPY |\n| 148.941 |      0 | 2024-03-18T20:30:00Z | 149.144 | 248634.0 | 149.332 | 148.905 |      0 | USD/JPY |\n| 149.145 |      0 | 2024-03-19T20:30:00Z | 150.845 | 341665.0 | 150.961 | 148.972 |      0 | USD/JPY |\n"]]}
+           {:out "[32m2024-05-03T17:52:12.440Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:asset \"UUP\", :calendar [:us :d], :import :kibot} {:start #time/instant \"2022-03-05T00:00:00Z\", :end #time/instant \"2024-03-20T20:00:00Z\"}[0m\n",
+            :id :5439916d-7263-4849-9e86-f065db9018a6,
+            :code "; daily:  2024-03-14T20:30:00Z \n\n; minute: 2024-03-15T16:14:00Z\n\n(b/get-bars db\n            {:asset \"UUP\"\n             :calendar [:us :d]\n             :import :kibot}\n            window)",
+            :ns "quanta.notebook.docs.bardb-duck",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    ":_unnamed [1535 9]:\n\n| :open | :epoch |                :date | :close |   :volume |  :high |    :low | :ticks | :asset |\n|------:|-------:|----------------------|-------:|----------:|-------:|--------:|-------:|--------|\n| 26.43 |      0 | 2022-03-07T22:00:00Z | 26.545 | 2386187.0 | 26.580 | 26.4201 |      0 |    UUP |\n| 26.43 |      0 | 2022-03-07T22:00:00Z | 26.545 | 2386187.0 | 26.580 | 26.4201 |      0 |    UUP |\n| 26.43 |      0 | 2022-03-07T22:00:00Z | 26.545 | 2386187.0 | 26.580 | 26.4201 |      0 |    UUP |\n| 26.50 |      0 | 2022-03-08T22:00:00Z | 26.510 | 1465786.0 | 26.565 | 26.4126 |      0 |    UUP |\n| 26.50 |      0 | 2022-03-08T22:00:00Z | 26.510 | 1465786.0 | 26.565 | 26.4126 |      0 |    UUP |\n| 26.50 |      0 | 2022-03-08T22:00:00Z | 26.510 | 1465786.0 | 26.565 | 26.4126 |      0 |    UUP |\n| 26.25 |      0 | 2022-03-09T22:00:00Z | 26.230 | 1567883.0 | 26.310 | 26.1900 |      0 |    UUP |\n| 26.25 |      0 | 2022-03-09T22:00:00Z | 26.230 | 1567883.0 | 26.310 | 26.1900 |      0 |    UUP |\n| 26.25 |      0 | 2022-03-09T22:00:00Z | 26.230 | 1567883.0 | 26.310 | 26.1900 |      0 |    UUP |\n| 26.31 |      0 | 2022-03-10T22:00:00Z | 26.375 | 1081834.0 | 26.380 | 26.2901 |      0 |    UUP |\n|   ... |    ... |                  ... |    ... |       ... |    ... |     ... |    ... |    ... |\n| 27.81 |      0 | 2024-03-13T21:00:00Z | 27.790 |  289583.0 | 27.830 | 27.7550 |      0 |    UUP |\n| 27.81 |      0 | 2024-03-13T21:00:00Z | 27.790 |  289583.0 | 27.830 | 27.7550 |      0 |    UUP |\n| 27.81 |      0 | 2024-03-13T21:00:00Z | 27.790 |  289583.0 | 27.830 | 27.7550 |      0 |    UUP |\n| 27.86 |      0 | 2024-03-14T21:00:00Z | 27.940 | 1033596.0 | 27.970 | 27.8550 |      0 |    UUP |\n| 27.86 |      0 | 2024-03-14T21:00:00Z | 27.940 | 1033596.0 | 27.970 | 27.8550 |      0 |    UUP |\n| 27.99 |      0 | 2024-03-15T21:00:00Z | 27.985 |  384815.0 | 28.000 | 27.9600 |      0 |    UUP |\n| 27.99 |      0 | 2024-03-15T21:00:00Z | 27.985 |  384815.0 | 28.000 | 27.9600 |      0 |    UUP |\n| 27.99 |      0 | 2024-03-18T21:00:00Z | 28.040 |  646199.0 | 28.050 | 27.9900 |      0 |    UUP |\n| 27.99 |      0 | 2024-03-18T21:00:00Z | 28.040 |  646199.0 | 28.050 | 27.9900 |      0 |    UUP |\n| 28.12 |      0 | 2024-03-19T21:00:00Z | 28.100 |  638901.0 | 28.140 | 28.0900 |      0 |    UUP |\n| 28.12 |      0 | 2024-03-19T21:00:00Z | 28.100 |  638901.0 | 28.140 | 28.0900 |      0 |    UUP |\n"]]}
+           {:out "[32m2024-05-03T17:52:12.449Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:asset \"AEE.AU\", :calendar [:us :d], :import :kibot} {:start #time/instant \"2022-03-05T00:00:00Z\", :end #time/instant \"2024-03-20T20:00:00Z\"}[0m\n",
+            :id :d795a724-1235-41c7-a581-ea1406c1e4cf,
+            :code "; test for unknown asset\n\n(b/get-bars db\n            {:asset \"AEE.AU\"\n             :calendar [:us :d]\n             :import :kibot}\n            window)",
+            :ns "quanta.notebook.docs.bardb-duck",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:class "clj-vector"}
+                   [:span.font-bold.teal-700.mr-1 "["]
+                   [:span.items
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":de.otto.nom.core/anomaly"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":ta.db.bars.duckdb/get-bars-duckdb"]
+                    [:span " "]
+                    [:span
+                     {:class "clj-map"}
+                     [:span.font-bold.teal-700.mr-1 "{"]
+                     [:span.items
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":message"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "grey"}}
+                       "\"asset AEE.AU has no bars in duckdb!\""]]
+                     [:span.font-bold.teal-700.ml-1 "}"]]]
+                   [:span.font-bold.teal-700.ml-1 "]"]]}
+           {:out "",
+            :id :057d7812-95b2-4f9b-9582-6c3ec884cdc8,
+            :code "(duck/delete-bars db [:us :d] \"AEE.AU\")",
+            :ns "quanta.notebook.docs.bardb-duck",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "rgb(30, 30, 82)"}}
+                   ":ok"]}
+           {:out "[32m2024-05-03T17:52:12.459Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:asset \"USD/JPY\", :calendar [:us :m]} {:start #time/instant \"2022-03-05T00:00:00Z\", :end #time/instant \"2024-03-20T20:00:00Z\"}[0m\n",
+            :id :8c30ba79-a544-4377-b98e-b33d11537b67,
+            :code "(b/get-bars db {:asset \"USD/JPY\"\n                :calendar [:us :m]}\n            window)",
+            :ns "quanta.notebook.docs.bardb-duck",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:class "clj-vector"}
+                   [:span.font-bold.teal-700.mr-1 "["]
+                   [:span.items
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":de.otto.nom.core/anomaly"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":ta.db.bars.duckdb/get-bars-duckdb"]
+                    [:span " "]
+                    [:span
+                     {:class "clj-map"}
+                     [:span.font-bold.teal-700.mr-1 "{"]
+                     [:span.items
+                      [:span
+                       {:style {:color "rgb(30, 30, 82)"}}
+                       ":message"]
+                      [:span " "]
+                      [:span
+                       {:style {:color "grey"}}
+                       "\"asset USD/JPY has no bars in duckdb!\""]]
+                     [:span.font-bold.teal-700.ml-1 "}"]]]
+                   [:span.font-bold.teal-700.ml-1 "]"]]}
+           {:out "[32m2024-05-03T17:52:12.465Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:asset \"BTCUSDT\", :calendar [:crypto :d]} {:start #time/instant \"2022-03-05T00:00:00Z\", :end #time/instant \"2024-03-20T20:00:00Z\"}[0m\n",
+            :id :7f31bf17-934c-4522-87ef-ddf2d3233142,
+            :code "(-> (b/get-bars db {:asset \"BTCUSDT\"\n                    ;:import :bybit\n                    :calendar [:crypto :d]}\n                window)\n    (tc/select-columns [:date :close :volume :epoch :ticks]))",
+            :ns "quanta.notebook.docs.bardb-duck",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    ":_unnamed [747 5]:\n\n|                :date |  :close |    :volume | :epoch | :ticks |\n|----------------------|--------:|-----------:|-------:|-------:|\n| 2022-03-05T00:00:00Z | 39360.0 |  42833.465 |      0 |      0 |\n| 2022-03-06T00:00:00Z | 38394.0 |  83152.158 |      0 |      0 |\n| 2022-03-07T00:00:00Z | 37976.0 | 118715.418 |      0 |      0 |\n| 2022-03-08T00:00:00Z | 38726.5 | 103859.811 |      0 |      0 |\n| 2022-03-09T00:00:00Z | 41941.5 | 112368.715 |      0 |      0 |\n| 2022-03-10T00:00:00Z | 39408.0 | 134309.741 |      0 |      0 |\n| 2022-03-11T00:00:00Z | 38726.0 | 125849.454 |      0 |      0 |\n| 2022-03-12T00:00:00Z | 38793.0 |  42633.865 |      0 |      0 |\n| 2022-03-13T00:00:00Z | 37756.0 |  51212.893 |      0 |      0 |\n| 2022-03-14T00:00:00Z | 39645.5 |  84899.346 |      0 |      0 |\n|                  ... |     ... |        ... |    ... |    ... |\n| 2024-03-10T00:00:00Z | 68999.6 |  97914.417 |      0 |      0 |\n| 2024-03-11T00:00:00Z | 72152.4 | 181576.665 |      0 |      0 |\n| 2024-03-12T00:00:00Z | 71512.0 | 201923.678 |      0 |      0 |\n| 2024-03-13T00:00:00Z | 73133.0 | 127778.397 |      0 |      0 |\n| 2024-03-14T00:00:00Z | 71473.1 | 209363.193 |      0 |      0 |\n| 2024-03-15T00:00:00Z | 69523.8 | 290396.760 |      0 |      0 |\n| 2024-03-16T00:00:00Z | 65331.2 | 147941.177 |      0 |      0 |\n| 2024-03-17T00:00:00Z | 68432.2 | 127270.331 |      0 |      0 |\n| 2024-03-18T00:00:00Z | 67643.9 | 139068.527 |      0 |      0 |\n| 2024-03-19T00:00:00Z | 61971.5 | 270938.291 |      0 |      0 |\n| 2024-03-20T00:00:00Z | 67850.5 | 240043.647 |      0 |      0 |\n"]]}
+           {:out "[32m2024-05-03T17:52:12.474Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:asset \"EUR/USD\", :calendar [:us :d], :import :kibot} {:start #time/instant \"2024-02-29T05:00:00Z\", :end #time/instant \"2024-03-01T05:00:00Z\"}[0m\n",
+            :id :b5394655-bb24-4286-9db3-407bc306c599,
+            :code "(b/get-bars db\n            {:asset \"EUR/USD\"\n             :calendar [:us :d]\n             :import :kibot}\n            {:start (t/instant \"2024-02-29T05:00:00Z\")\n             :end (t/instant \"2024-03-01T05:00:00Z\")})",
+            :ns "quanta.notebook.docs.bardb-duck",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    ":_unnamed [2 9]:\n\n|   :open | :epoch |                :date |  :close |  :volume |   :high |    :low | :ticks |  :asset |\n|--------:|-------:|----------------------|--------:|---------:|--------:|--------:|-------:|---------|\n| 1.08375 |      0 | 2024-02-29T22:00:00Z | 1.08052 | 241417.0 | 1.08558 | 1.07958 |      0 | EUR/USD |\n| 1.08375 |      0 | 2024-02-29T22:00:00Z | 1.08052 | 241417.0 | 1.08558 | 1.07958 |      0 | EUR/USD |\n"]]}
+           {:out "",
+            :id :f4ee7b14-603f-44bb-a31f-bfc475b1ba51,
+            :code "{:type \"forex\", :symbol \"EURUSD\", :startdate \"2024-02-29\", :enddate \"2024-03-01\",\n :interval \"daily\", :timezone \"UTC\", :splitadjusted 1}",
+            :ns "quanta.notebook.docs.bardb-duck",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:class "clj-map"}
+                   [:span.font-bold.teal-700.mr-1 "{"]
+                   [:span.items
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":type"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"forex\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":symbol"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"EURUSD\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":startdate"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"2024-02-29\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":enddate"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"2024-03-01\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":interval"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"daily\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":timezone"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"UTC\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "rgb(30, 30, 82)"}}
+                     ":splitadjusted"]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "1"]]
+                   [:span.font-bold.teal-700.ml-1 "}"]]}],
+ :meta {:id :f6d1d81f-7a56-4b7f-b04c-c40f73c133ca,
+        :eval-time "2024-05-03 12:52:12",
+        :ns "quanta.notebook.docs.bardb-duck",
+        :java "19.0.2",
+        :clojure "1.11.1"}}

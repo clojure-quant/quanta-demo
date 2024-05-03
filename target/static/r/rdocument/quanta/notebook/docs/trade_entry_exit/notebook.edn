@@ -1,0 +1,163 @@
+; saved on 2024-05-03 12:52:23
+{:content [{:out "",
+            :id :dc4a8679-e977-42f6-96b6-9504194219df,
+            :code "(ns quanta.notebook.docs.trade-entry-exit\n  (:require\n   [tick.core :as t]\n   [tablecloth.api :as tc]\n   [ta.trade.backtest.from-entry :refer [entry-signal->roundtrips]]\n   [ta.trade.roundtrip.core :refer [roundtrip-stats]]\n   [ta.viz.trade.core :refer [roundtrip-stats-ui]]))",
+            :ns "quanta.notebook.docs.trade-entry-exit",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.p-2.clj-nil [:p "nil"]]}
+           {:out "",
+            :id :46e4c283-74db-4cd7-a9e2-df3a16b036a1,
+            :code "(def ds (tc/dataset {:date (repeatedly 6 #(t/instant))\n                     :close [100.0 104.0 106.0 103.0 102.0 108.0]\n                     :high [100.0 104.0 106.0 103.0 102.0 108.0]\n                     :low [100.0 104.0 106.0 103.0 102.0 108.0]\n                     :entry [:long :nil nil :short :nil :nil]}))",
+            :ns "quanta.notebook.docs.trade-entry-exit",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.docs.trade-entry-exit/ds"]}
+           {:out "",
+            :id :219f00a6-2b32-4d3d-be07-c831f1875bd7,
+            :code "ds",
+            :ns "quanta.notebook.docs.trade-entry-exit",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [6 5]:\n\n|                       :date | :close | :high |  :low | :entry |\n|-----------------------------|-------:|------:|------:|--------|\n| 2024-05-03T17:52:23.133576Z |  100.0 | 100.0 | 100.0 |  :long |\n| 2024-05-03T17:52:23.133642Z |  104.0 | 104.0 | 104.0 |   :nil |\n| 2024-05-03T17:52:23.133645Z |  106.0 | 106.0 | 106.0 |        |\n| 2024-05-03T17:52:23.133648Z |  103.0 | 103.0 | 103.0 | :short |\n| 2024-05-03T17:52:23.133650Z |  102.0 | 102.0 | 102.0 |   :nil |\n| 2024-05-03T17:52:23.133651Z |  108.0 | 108.0 | 108.0 |   :nil |\n"]]}
+           {:out "processing row:  {:date #time/instant \"2024-05-03T17:52:23.133576Z\", :close 100.0, :high 100.0, :low 100.0, :entry :long, :idx 0}\nprocessing row:  {:date #time/instant \"2024-05-03T17:52:23.133642Z\", :close 104.0, :high 104.0, :low 104.0, :entry :nil, :idx 1}\nreturn-prct:  4.0 profit-target-prct:  5.0\nprocessing row:  {:date #time/instant \"2024-05-03T17:52:23.133645Z\", :close 106.0, :high 106.0, :low 106.0, :idx 2}\nreturn-prct:  6.0 profit-target-prct:  5.0\nprocessing row:  {:date #time/instant \"2024-05-03T17:52:23.133648Z\", :close 103.0, :high 103.0, :low 103.0, :entry :short, :idx 3}\nprocessing row:  {:date #time/instant \"2024-05-03T17:52:23.133650Z\", :close 102.0, :high 102.0, :low 102.0, :entry :nil, :idx 4}\nreturn-prct:  0.9708737864077669 profit-target-prct:  5.0\nprocessing row:  {:date #time/instant \"2024-05-03T17:52:23.133651Z\", :close 108.0, :high 108.0, :low 108.0, :entry :nil, :idx 5}\n",
+            :id :73b35eff-35b8-47c9-97cf-221484725f8e,
+            :code "(def rts (-> (entry-signal->roundtrips {:asset \"QQQ\"\n                                :entry [:fixed-qty 3.1]\n                                :exit [:time 2\n                                       :loss-percent 2.5\n                                       :profit-percent 5.0]}\n                               ds)\n             :roundtrips))",
+            :ns "quanta.notebook.docs.trade-entry-exit",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.docs.trade-entry-exit/rts"]}
+           {:out "",
+            :id :70a3c6be-8d20-465d-874a-e99aad821e43,
+            :code "rts",
+            :ns "quanta.notebook.docs.trade-entry-exit",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [2 11]:\n\n| :entry-idx |                 :entry-date | :entry-price | :exit-idx | :id |  :side | :qty | :exit-price |      :exit-rule | :asset |                  :exit-date |\n|-----------:|-----------------------------|-------------:|----------:|----:|--------|-----:|------------:|-----------------|--------|-----------------------------|\n|          0 | 2024-05-03T17:52:23.133576Z |        100.0 |         2 |   1 |  :long |  3.1 |     105.000 | :profit-percent |    QQQ | 2024-05-03T17:52:23.133645Z |\n|          3 | 2024-05-03T17:52:23.133648Z |        103.0 |         5 |   2 | :short |  3.1 |     105.575 |   :loss-percent |    QQQ | 2024-05-03T17:52:23.133651Z |\n"]]}
+           {:out "",
+            :id :c8cb0d75-ab7d-496b-9459-d5719a1972e9,
+            :code "(-> (roundtrip-stats rts)\n    (roundtrip-stats-ui)\n )",
+            :ns "quanta.notebook.docs.trade-entry-exit",
+            :render-fn ta.viz.renderfn/render-spec,
+            :data ^{:render-fn ta.viz.renderfn/render-spec}
+                  {:render-fn ta.viz.trade.core/roundtrip-stats-ui,
+                   :data {:metrics {:roundtrip {:avg-win-log 0.021189299069938272,
+                                                :avg-bars-win 2.0,
+                                                :win-nr-prct 50.0,
+                                                :pf 1.9759012534970124,
+                                                :avg-log 0.005232716839082441,
+                                                :pl-log-cum 0.010465433678164882,
+                                                :avg-loss-log -0.01072386539177339,
+                                                :trades 2,
+                                                :avg-bars-loss 2.0},
+                                    :nav {:cum-pl 7.517500000000041,
+                                          :max-dd 7.982499999999959}},
+                          :chart ^{:render-fn ta.viz.renderfn/render-spec}
+                                 {:render-fn ta.viz.renderfn.vega/vega-lite,
+                                  :data {:values [^{}
+                                                  {:exit-date #time/instant "2024-05-03T17:52:23.133645Z",
+                                                   :cum-ret-volume 15.5}
+^{}
+{:exit-date #time/instant "2024-05-03T17:52:23.133651Z",
+ :cum-ret-volume 7.517500000000041}]},
+                                  :spec {:width "700",
+                                         :height "550",
+                                         :description "NAV",
+                                         :mark "line",
+                                         :encoding {:y {:field :cum-ret-volume,
+                                                        :type "quantitative",
+                                                        :color "blue"},
+                                                    :x {:type "temporal",
+                                                        :field :exit-date}}}},
+                          :rt ^{:render-fn ta.viz.renderfn/render-spec}
+                              {:render-fn ta.viz.renderfn.rtable/rtable,
+                               :data [^{}
+                                      {:entry-date #time/instant "2024-05-03T17:52:23.133576Z",
+                                       :asset "QQQ",
+                                       :side :long,
+                                       :qty 3.1,
+                                       :entry-price 100.0,
+                                       :exit-date #time/instant "2024-05-03T17:52:23.133645Z",
+                                       :exit-price 105.0,
+                                       :win? true,
+                                       :ret-prct 5.0,
+                                       :ret-log 0.021189299069938272,
+                                       :cum-ret-volume 15.5}
+^{}
+{:entry-date #time/instant "2024-05-03T17:52:23.133648Z",
+ :asset "QQQ",
+ :side :short,
+ :qty 3.1,
+ :entry-price 103.0,
+ :exit-date #time/instant "2024-05-03T17:52:23.133651Z",
+ :exit-price 105.57499999999999,
+ :win? false,
+ :ret-prct -2.499999999999989,
+ :ret-log -0.01072386539177339,
+ :cum-ret-volume 7.517500000000041}],
+                               :spec {:class "table-head-fixed padding-sm table-blue table-striped table-hover",
+                                      :style {:width "100%",
+                                              :height "100%",
+                                              :border "1px solid blue"},
+                                      :columns ({:path :entry-date,
+                                                 :format ta.viz.trade.format/fmt-yyyymmdd,
+                                                 :header "dt-e"}
+                                                {:path :asset,
+                                                 :header "asset"}
+                                                {:path :side,
+                                                 :header "side"}
+                                                {:path :qty,
+                                                 :header "qty",
+                                                 :attrs ta.viz.trade.format/align-right,
+                                                 :format ta.viz.trade.format/round-digit-1}
+                                                {:path :entry-price,
+                                                 :header "px-e",
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :entry-vol,
+                                                 :format ta.viz.trade.format/round-digit-0,
+                                                 :header "vol-e",
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :exit-date,
+                                                 :format ta.viz.trade.format/fmt-yyyymmdd,
+                                                 :header "dt-x"}
+                                                {:path :exit-price,
+                                                 :header "px-x",
+                                                 :max-width 50,
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :pl,
+                                                 :header "p/l",
+                                                 :format ta.viz.trade.format/round-digit-0,
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :win?,
+                                                 :header "w?",
+                                                 :max-width 50}
+                                                {:path :ret-prct,
+                                                 :header "%",
+                                                 :max-width 50,
+                                                 :format ta.viz.trade.format/round-digit-0,
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :ret-log,
+                                                 :header "log",
+                                                 :max-width 50,
+                                                 :format ta.viz.trade.format/round-digit-2,
+                                                 :attrs ta.viz.trade.format/align-right}
+                                                {:path :cum-ret-volume,
+                                                 :header "cum$",
+                                                 :max-width 50,
+                                                 :format ta.viz.trade.format/round-digit-0,
+                                                 :attrs ta.viz.trade.format/align-right})}}},
+                   :spec {}}}],
+ :meta {:id :201105be-f2a4-471f-af85-b617b6ef2c53,
+        :eval-time "2024-05-03 12:52:23",
+        :ns "quanta.notebook.docs.trade-entry-exit",
+        :java "19.0.2",
+        :clojure "1.11.1"}}

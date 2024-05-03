@@ -1,0 +1,1450 @@
+; saved on 2024-05-03 12:52:11
+{:content [{:out "",
+            :id :af978efb-b87b-49b2-ab04-9a6733acf798,
+            :code "(ns quanta.notebook.study.cluster\n  (:require\n   [tech.v3.dataset.print :as print]\n   [tech.v3.datatype.functional :as fun]\n   [tech.v3.tensor :as tensor]\n   [tablecloth.api :as tc]\n   [fastmath.stats :as stats]\n   [fastmath.clustering :as clustering]\n   [loom.graph]\n   [loom.alg]\n   [modular.system]\n   [ta.math.stats :refer [standardize]]\n   [ta.calendar.core :as cal]\n   [ta.db.asset.symbollist :refer [load-list]]\n   [ta.db.bars.aligned :refer [get-bars-aligned-filled]]\n   [ta.db.asset.db :as asset-db]\n   [ta.indicator.returns :refer [diff]]\n   [ta.indicator.fastmath :as ifm]\n   [ui.cytoscape :refer [cytoscape]]))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.p-2.clj-nil [:p "nil"]]}
+           {:out "",
+            :id :f1e05bc1-c8c8-4200-8b8a-79463ac7df95,
+            :code "; fidelity-select are mutualfunds, which are not supported by kibot. \n\n;(def assets (load-list \"fidelity-select\"))\n\n(def assets (load-list \"resources/symbollist/equity-sector.edn\"))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.cluster/assets"]}
+           {:out "",
+            :id :f51cdfb2-bf03-46f2-847d-fed3b27b0fbe,
+            :code "(count assets)",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span {:style {:color "blue"}} "13"]}
+           {:out "",
+            :id :dedc8683-5a6e-411a-a75b-60216caaa225,
+            :code "assets",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:class "clj-lazy-seq"}
+                   [:span.font-bold.teal-700.mr-1 "("]
+                   [:span.items
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYW\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYK\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYC\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYH\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYF\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYG\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYR\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYZ\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYJ\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYM\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYE\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IDU\""]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYT\""]]
+                   [:span.font-bold.teal-700.ml-1 ")"]]}
+           {:out "",
+            :id :4bd8d06a-00cc-418a-b41c-43fc4bd0b12b,
+            :code "(def db (modular.system/system :bardb-dynamic))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.cluster/db"]}
+           {:out "",
+            :id :b8cc2be3-99bb-4509-892e-b4d00e5dd9ed,
+            :code "(def window (cal/trailing-window [:us :d] 1000))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.cluster/window"]}
+           {:out "",
+            :id :b3490306-35bf-4797-9bce-85879196b396,
+            :code "(defn load-ds [asset]\n  (get-bars-aligned-filled db {:calendar [:us :d]\n                               :import :kibot\n                               :asset asset} window))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.cluster/load-ds"]}
+           {:out "[32m2024-05-03T17:52:10.397Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:us :d], :import :kibot, :asset \"MSFT\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.403Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:us :d], :import :kibot, :asset \"MSFT\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.410Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:10.412Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:us :d], :import :kibot, :asset \"MSFT\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n",
+            :id :6cb72399-3139-451f-9bf1-9e338db67a60,
+            :code "(load-ds \"MSFT\")",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    ":_unnamed [1000 9]:\n\n|                :date |  :open | :epoch |        :volume |    :high |     :low | :ticks | :asset |  :close |\n|----------------------|-------:|-------:|---------------:|---------:|---------:|-------:|--------|--------:|\n| 2020-07-03T21:00:00Z |        |        |                |          |          |        |        |   0.000 |\n| 2020-07-06T21:00:00Z | 208.71 |      0 | 2.63207570E+07 | 211.1300 | 208.0900 |      0 |   MSFT | 210.690 |\n| 2020-07-07T21:00:00Z | 210.65 |      0 | 2.83259500E+07 | 214.6700 | 207.9900 |      0 |   MSFT | 208.240 |\n| 2020-07-08T21:00:00Z | 210.07 |      0 | 2.86686220E+07 | 213.2600 | 208.6900 |      0 |   MSFT | 212.840 |\n| 2020-07-09T21:00:00Z | 216.33 |      0 | 2.72126960E+07 | 216.3900 | 211.4700 |      0 |   MSFT | 214.400 |\n| 2020-07-10T21:00:00Z | 213.50 |      0 | 2.17553330E+07 | 214.0800 | 211.0800 |      0 |   MSFT | 213.650 |\n| 2020-07-13T21:00:00Z | 214.47 |      0 | 3.12068480E+07 | 215.8000 | 206.5000 |      0 |   MSFT | 207.100 |\n| 2020-07-14T21:00:00Z | 206.61 |      0 | 2.95613340E+07 | 208.8500 | 202.0300 |      0 |   MSFT | 208.390 |\n| 2020-07-15T21:00:00Z | 209.77 |      0 | 2.53493530E+07 | 211.3300 | 205.0300 |      0 |   MSFT | 208.050 |\n| 2020-07-16T21:00:00Z | 205.32 |      0 | 2.41199680E+07 | 205.7000 | 202.3100 |      0 |   MSFT | 203.920 |\n|                  ... |    ... |    ... |            ... |      ... |      ... |    ... |    ... |     ... |\n| 2024-04-18T21:00:00Z | 410.79 |      0 | 1.20899050E+07 | 411.8900 | 403.9500 |      0 |   MSFT | 404.150 |\n| 2024-04-19T21:00:00Z | 404.11 |      0 | 1.62654300E+07 | 405.4800 | 397.7700 |      0 |   MSFT | 399.110 |\n| 2024-04-22T21:00:00Z | 400.08 |      0 | 1.25867240E+07 | 402.8500 | 395.7500 |      0 |   MSFT | 400.820 |\n| 2024-04-23T21:00:00Z | 404.23 |      0 | 9.25761100E+06 | 408.2000 | 403.0600 |      0 |   MSFT | 407.481 |\n| 2024-04-24T21:00:00Z | 409.56 |      0 | 9.25902500E+06 | 412.4700 | 406.7800 |      0 |   MSFT | 408.860 |\n| 2024-04-25T21:00:00Z | 394.22 |      0 | 2.77995290E+07 | 399.8899 | 388.0300 |      0 |   MSFT | 399.510 |\n| 2024-04-26T21:00:00Z | 412.10 |      0 | 2.04669400E+07 | 413.0000 | 405.7601 |      0 |   MSFT | 406.140 |\n| 2024-04-29T21:00:00Z | 405.25 |      0 | 1.32034860E+07 | 406.3200 | 399.1900 |      0 |   MSFT | 402.210 |\n| 2024-04-30T21:00:00Z | 401.49 |      0 | 1.99851260E+07 | 402.1600 | 389.1700 |      0 |   MSFT | 389.200 |\n| 2024-05-01T21:00:00Z | 392.61 |      0 | 1.61107070E+07 | 401.7199 | 390.3100 |      0 |   MSFT | 394.900 |\n| 2024-05-02T21:00:00Z | 397.56 |      0 | 1.14030210E+07 | 399.9300 | 394.6515 |      0 |   MSFT | 397.940 |\n"]]}
+           {:out "",
+            :id :523be4aa-a496-48e3-9943-2138f53a9572,
+            :code "(defn add-calcs [bars-ds]\n  (tc/add-columns bars-ds {:return (diff (:close bars-ds))}))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.cluster/add-calcs"]}
+           {:out "[32m2024-05-03T17:52:10.586Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:us :d], :import :kibot, :asset \"MSFT\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.586Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:us :d], :import :kibot, :asset \"MSFT\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.594Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:10.594Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:us :d], :import :kibot, :asset \"MSFT\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n",
+            :id :44315060-8507-41ef-ac11-5adcdb0393c3,
+            :code "((comp add-calcs load-ds) \"MSFT\")",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    ":_unnamed [1000 10]:\n\n|                :date |  :open | :epoch |        :volume |    :high |     :low | :ticks | :asset |  :close | :return |\n|----------------------|-------:|-------:|---------------:|---------:|---------:|-------:|--------|--------:|--------:|\n| 2020-07-03T21:00:00Z |        |        |                |          |          |        |        |   0.000 |         |\n| 2020-07-06T21:00:00Z | 208.71 |      0 | 2.63207570E+07 | 211.1300 | 208.0900 |      0 |   MSFT | 210.690 | 210.690 |\n| 2020-07-07T21:00:00Z | 210.65 |      0 | 2.83259500E+07 | 214.6700 | 207.9900 |      0 |   MSFT | 208.240 |  -2.450 |\n| 2020-07-08T21:00:00Z | 210.07 |      0 | 2.86686220E+07 | 213.2600 | 208.6900 |      0 |   MSFT | 212.840 |   4.600 |\n| 2020-07-09T21:00:00Z | 216.33 |      0 | 2.72126960E+07 | 216.3900 | 211.4700 |      0 |   MSFT | 214.400 |   1.560 |\n| 2020-07-10T21:00:00Z | 213.50 |      0 | 2.17553330E+07 | 214.0800 | 211.0800 |      0 |   MSFT | 213.650 |  -0.750 |\n| 2020-07-13T21:00:00Z | 214.47 |      0 | 3.12068480E+07 | 215.8000 | 206.5000 |      0 |   MSFT | 207.100 |  -6.550 |\n| 2020-07-14T21:00:00Z | 206.61 |      0 | 2.95613340E+07 | 208.8500 | 202.0300 |      0 |   MSFT | 208.390 |   1.290 |\n| 2020-07-15T21:00:00Z | 209.77 |      0 | 2.53493530E+07 | 211.3300 | 205.0300 |      0 |   MSFT | 208.050 |  -0.340 |\n| 2020-07-16T21:00:00Z | 205.32 |      0 | 2.41199680E+07 | 205.7000 | 202.3100 |      0 |   MSFT | 203.920 |  -4.130 |\n|                  ... |    ... |    ... |            ... |      ... |      ... |    ... |    ... |     ... |     ... |\n| 2024-04-18T21:00:00Z | 410.79 |      0 | 1.20899050E+07 | 411.8900 | 403.9500 |      0 |   MSFT | 404.150 |  -7.580 |\n| 2024-04-19T21:00:00Z | 404.11 |      0 | 1.62654300E+07 | 405.4800 | 397.7700 |      0 |   MSFT | 399.110 |  -5.040 |\n| 2024-04-22T21:00:00Z | 400.08 |      0 | 1.25867240E+07 | 402.8500 | 395.7500 |      0 |   MSFT | 400.820 |   1.710 |\n| 2024-04-23T21:00:00Z | 404.23 |      0 | 9.25761100E+06 | 408.2000 | 403.0600 |      0 |   MSFT | 407.481 |   6.661 |\n| 2024-04-24T21:00:00Z | 409.56 |      0 | 9.25902500E+06 | 412.4700 | 406.7800 |      0 |   MSFT | 408.860 |   1.379 |\n| 2024-04-25T21:00:00Z | 394.22 |      0 | 2.77995290E+07 | 399.8899 | 388.0300 |      0 |   MSFT | 399.510 |  -9.350 |\n| 2024-04-26T21:00:00Z | 412.10 |      0 | 2.04669400E+07 | 413.0000 | 405.7601 |      0 |   MSFT | 406.140 |   6.630 |\n| 2024-04-29T21:00:00Z | 405.25 |      0 | 1.32034860E+07 | 406.3200 | 399.1900 |      0 |   MSFT | 402.210 |  -3.930 |\n| 2024-04-30T21:00:00Z | 401.49 |      0 | 1.99851260E+07 | 402.1600 | 389.1700 |      0 |   MSFT | 389.200 | -13.010 |\n| 2024-05-01T21:00:00Z | 392.61 |      0 | 1.61107070E+07 | 401.7199 | 390.3100 |      0 |   MSFT | 394.900 |   5.700 |\n| 2024-05-02T21:00:00Z | 397.56 |      0 | 1.14030210E+07 | 399.9300 | 394.6515 |      0 |   MSFT | 397.940 |   3.040 |\n"]]}
+           {:out "",
+            :id :01cb6b68-5cd9-4e10-925a-743e025a21f6,
+            :code "; we need to remove 2 rows, because the second row has huge gain, as the\n\n; price has been 0 on the first row.\n\n(defn remove-first-2-rows [ds-bars]\n  (tc/select-rows ds-bars (range 2 (tc/row-count ds-bars))))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.cluster/remove-first-2-rows"]}
+           {:out "[32m2024-05-03T17:52:10.689Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:us :d], :import :kibot, :asset \"MSFT\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.689Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:us :d], :import :kibot, :asset \"MSFT\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.698Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:10.699Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:us :d], :import :kibot, :asset \"MSFT\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n",
+            :id :258cb064-ca4e-42f3-898f-1c0db89c2503,
+            :code "(-> (load-ds \"MSFT\")\n    add-calcs\n    remove-first-2-rows)",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    ":_unnamed [998 10]:\n\n|                :date |  :open | :epoch |        :volume |    :high |     :low | :ticks | :asset |  :close | :return |\n|----------------------|-------:|-------:|---------------:|---------:|---------:|-------:|--------|--------:|--------:|\n| 2020-07-07T21:00:00Z | 210.65 |      0 | 2.83259500E+07 | 214.6700 | 207.9900 |      0 |   MSFT | 208.240 |  -2.450 |\n| 2020-07-08T21:00:00Z | 210.07 |      0 | 2.86686220E+07 | 213.2600 | 208.6900 |      0 |   MSFT | 212.840 |   4.600 |\n| 2020-07-09T21:00:00Z | 216.33 |      0 | 2.72126960E+07 | 216.3900 | 211.4700 |      0 |   MSFT | 214.400 |   1.560 |\n| 2020-07-10T21:00:00Z | 213.50 |      0 | 2.17553330E+07 | 214.0800 | 211.0800 |      0 |   MSFT | 213.650 |  -0.750 |\n| 2020-07-13T21:00:00Z | 214.47 |      0 | 3.12068480E+07 | 215.8000 | 206.5000 |      0 |   MSFT | 207.100 |  -6.550 |\n| 2020-07-14T21:00:00Z | 206.61 |      0 | 2.95613340E+07 | 208.8500 | 202.0300 |      0 |   MSFT | 208.390 |   1.290 |\n| 2020-07-15T21:00:00Z | 209.77 |      0 | 2.53493530E+07 | 211.3300 | 205.0300 |      0 |   MSFT | 208.050 |  -0.340 |\n| 2020-07-16T21:00:00Z | 205.32 |      0 | 2.41199680E+07 | 205.7000 | 202.3100 |      0 |   MSFT | 203.920 |  -4.130 |\n| 2020-07-17T21:00:00Z | 204.46 |      0 | 2.58839350E+07 | 205.0400 | 201.3900 |      0 |   MSFT | 202.870 |  -1.050 |\n| 2020-07-20T21:00:00Z | 205.00 |      0 | 3.12571680E+07 | 212.3000 | 203.0100 |      0 |   MSFT | 211.490 |   8.620 |\n|                  ... |    ... |    ... |            ... |      ... |      ... |    ... |    ... |     ... |     ... |\n| 2024-04-18T21:00:00Z | 410.79 |      0 | 1.20899050E+07 | 411.8900 | 403.9500 |      0 |   MSFT | 404.150 |  -7.580 |\n| 2024-04-19T21:00:00Z | 404.11 |      0 | 1.62654300E+07 | 405.4800 | 397.7700 |      0 |   MSFT | 399.110 |  -5.040 |\n| 2024-04-22T21:00:00Z | 400.08 |      0 | 1.25867240E+07 | 402.8500 | 395.7500 |      0 |   MSFT | 400.820 |   1.710 |\n| 2024-04-23T21:00:00Z | 404.23 |      0 | 9.25761100E+06 | 408.2000 | 403.0600 |      0 |   MSFT | 407.481 |   6.661 |\n| 2024-04-24T21:00:00Z | 409.56 |      0 | 9.25902500E+06 | 412.4700 | 406.7800 |      0 |   MSFT | 408.860 |   1.379 |\n| 2024-04-25T21:00:00Z | 394.22 |      0 | 2.77995290E+07 | 399.8899 | 388.0300 |      0 |   MSFT | 399.510 |  -9.350 |\n| 2024-04-26T21:00:00Z | 412.10 |      0 | 2.04669400E+07 | 413.0000 | 405.7601 |      0 |   MSFT | 406.140 |   6.630 |\n| 2024-04-29T21:00:00Z | 405.25 |      0 | 1.32034860E+07 | 406.3200 | 399.1900 |      0 |   MSFT | 402.210 |  -3.930 |\n| 2024-04-30T21:00:00Z | 401.49 |      0 | 1.99851260E+07 | 402.1600 | 389.1700 |      0 |   MSFT | 389.200 | -13.010 |\n| 2024-05-01T21:00:00Z | 392.61 |      0 | 1.61107070E+07 | 401.7199 | 390.3100 |      0 |   MSFT | 394.900 |   5.700 |\n| 2024-05-02T21:00:00Z | 397.56 |      0 | 1.14030210E+07 | 399.9300 | 394.6515 |      0 |   MSFT | 397.940 |   3.040 |\n"]]}
+           {:out "",
+            :id :6b20641b-1707-49e7-ba0e-11c92ca27878,
+            :code "(def bar-ds-list\n  (map (comp remove-first-2-rows add-calcs load-ds) assets))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.cluster/bar-ds-list"]}
+           {:out "",
+            :id :7fb45286-04a6-42bc-a2f1-c25bc317f314,
+            :code "; since we have requested the 1000 most recent bars,\n\n; we should see only 1000 here, but we removed 2 bars, so we have 998 everywhere.\n\n(map tc/row-count bar-ds-list)",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:class "clj-lazy-seq"}
+                   [:span.font-bold.teal-700.mr-1 "("]
+                   [:span.items
+                    [:span {:style {:color "blue"}} "998"]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "998"]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "998"]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "998"]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "998"]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "998"]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "998"]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "998"]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "998"]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "998"]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "998"]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "998"]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "998"]]
+                   [:span.font-bold.teal-700.ml-1 ")"]]}
+           {:out "[32m2024-05-03T17:52:10.765Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYW\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.766Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:us :d], :import :kibot, :asset \"IYW\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.771Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:10.771Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYW\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.824Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYK\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.825Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:us :d], :import :kibot, :asset \"IYK\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.831Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:10.832Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYK\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.880Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYC\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.880Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:us :d], :import :kibot, :asset \"IYC\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.886Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:10.886Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYC\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.934Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYH\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.935Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:us :d], :import :kibot, :asset \"IYH\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.940Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:10.940Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYH\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.992Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYF\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.993Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:us :d], :import :kibot, :asset \"IYF\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:10.999Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:10.999Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYF\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.046Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYG\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.047Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:us :d], :import :kibot, :asset \"IYG\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.052Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:11.053Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYG\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.093Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYR\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.093Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:us :d], :import :kibot, :asset \"IYR\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.100Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:11.100Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYR\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.150Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYZ\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.151Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:us :d], :import :kibot, :asset \"IYZ\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.157Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:11.157Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYZ\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.196Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYJ\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.196Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:us :d], :import :kibot, :asset \"IYJ\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.205Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:11.205Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYJ\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.245Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYM\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.245Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:us :d], :import :kibot, :asset \"IYM\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.251Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:11.251Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYM\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.287Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYE\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.287Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:us :d], :import :kibot, :asset \"IYE\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.292Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:11.292Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYE\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.328Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:us :d], :import :kibot, :asset \"IDU\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.329Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:us :d], :import :kibot, :asset \"IDU\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.334Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:11.335Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:us :d], :import :kibot, :asset \"IDU\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.368Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYT\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.369Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:calendar [:us :d], :import :kibot, :asset \"IYT\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:11.374Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:11.374Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:calendar [:us :d], :import :kibot, :asset \"IYT\"} {:start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\", :end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\"}[0m\n",
+            :id :c6d9877e-2d9e-4db7-b5cd-3a3d3296831f,
+            :code "(def corrs\n  (->> bar-ds-list\n       (map #(-> % :return standardize))\n       stats/covariance-matrix\n       tensor/->tensor))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.cluster/corrs"]}
+           {:out "",
+            :id :f3c50941-d18c-45e3-ae35-1270c1b5530d,
+            :code "corrs",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.tensor_api.DirectTensor"]
+                   [:span
+                    "#tech.v3.tensor<object>[13 13]\n[[ 1.000  0.1122 0.8304  0.1268 0.5752 0.2312 0.5606 0.6382 0.7265 0.5484  0.2436 0.2997 0.2152]\n [0.1122   1.000 0.1731  0.9610 0.2097 0.9138 0.2074 0.2338 0.2054 0.1690 0.09297 0.2090 0.9251]\n [0.8304  0.1731  1.000  0.1623 0.7444 0.3346 0.6770 0.7368 0.8459 0.6857  0.3573 0.4208 0.3078]\n [0.1268  0.9610 0.1623   1.000 0.1826 0.9246 0.1881 0.2133 0.1798 0.1329 0.07199 0.1519 0.9361]\n [0.5752  0.2097 0.7444  0.1826  1.000 0.4562 0.6949 0.7240 0.8718 0.7851  0.5356 0.5107 0.3287]\n [0.2312  0.9138 0.3346  0.9246 0.4562  1.000 0.3011 0.3528 0.3873 0.3292  0.2303 0.1898 0.9573]\n [0.5606  0.2074 0.6770  0.1881 0.6949 0.3011  1.000 0.6939 0.7446 0.6337  0.3540 0.6990 0.2694]\n [0.6382  0.2338 0.7368  0.2133 0.7240 0.3528 0.6939  1.000 0.7787 0.6677  0.3992 0.5359 0.3103]\n [0.7265  0.2054 0.8459  0.1798 0.8718 0.3873 0.7446 0.7787  1.000 0.8407  0.5015 0.5393 0.3407]\n [0.5484  0.1690 0.6857  0.1329 0.7851 0.3292 0.6337 0.6677 0.8407  1.000  0.6129 0.4915 0.2813]\n [0.2436 0.09297 0.3573 0.07199 0.5356 0.2303 0.3540 0.3992 0.5015 0.6129   1.000 0.3033 0.1663]\n [0.2997  0.2090 0.4208  0.1519 0.5107 0.1898 0.6990 0.5359 0.5393 0.4915  0.3033  1.000 0.1693]\n [0.2152  0.9251 0.3078  0.9361 0.3287 0.9573 0.2694 0.3103 0.3407 0.2813  0.1663 0.1693  1.000]]"]]}
+           {:out "",
+            :id :8980026b-bdfc-4bf4-b8ef-75c83b247d98,
+            :code "(->> (ifm/correlations-dataset \n      (map #(-> % :return standardize) bar-ds-list)\n      (vec assets))\n     (ifm/vegalite-correlation))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn ui.vega/vegalite,
+            :data ^{:render-fn ui.vega/vegalite}
+                  {:spec {:$schema "https://vega.github.io/schema/vega-lite/v5.json",
+                          :mark "rect",
+                          :data {:values [^{}
+                                          {:i 0,
+                                           :j 0,
+                                           :coli "IYW",
+                                           :colj "IYW",
+                                           :corr 1.0}
+^{}
+{:i 0,
+ :j 1,
+ :coli "IYW",
+ :colj "IYK",
+ :corr 0.11217135353709967}
+^{}
+{:i 0,
+ :j 2,
+ :coli "IYW",
+ :colj "IYC",
+ :corr 0.8304468789099309}
+^{}
+{:i 0,
+ :j 3,
+ :coli "IYW",
+ :colj "IYH",
+ :corr 0.12682617832614157}
+^{}
+{:i 0,
+ :j 4,
+ :coli "IYW",
+ :colj "IYF",
+ :corr 0.5752239117474198}
+^{}
+{:i 0,
+ :j 5,
+ :coli "IYW",
+ :colj "IYG",
+ :corr 0.23115218589621786}
+^{}
+{:i 0,
+ :j 6,
+ :coli "IYW",
+ :colj "IYR",
+ :corr 0.5605611728308366}
+^{}
+{:i 0,
+ :j 7,
+ :coli "IYW",
+ :colj "IYZ",
+ :corr 0.6381525876447857}
+^{}
+{:i 0,
+ :j 8,
+ :coli "IYW",
+ :colj "IYJ",
+ :corr 0.72647315130553}
+^{}
+{:i 0,
+ :j 9,
+ :coli "IYW",
+ :colj "IYM",
+ :corr 0.5484042854348387}
+^{}
+{:i 0,
+ :j 10,
+ :coli "IYW",
+ :colj "IYE",
+ :corr 0.24358704631875094}
+^{}
+{:i 0,
+ :j 11,
+ :coli "IYW",
+ :colj "IDU",
+ :corr 0.29972222338970983}
+^{}
+{:i 0,
+ :j 12,
+ :coli "IYW",
+ :colj "IYT",
+ :corr 0.21523300704175258}
+^{}
+{:i 1,
+ :j 0,
+ :coli "IYK",
+ :colj "IYW",
+ :corr 0.11217135353709967}
+^{}
+{:i 1, :j 1, :coli "IYK", :colj "IYK", :corr 1.0}
+^{}
+{:i 1,
+ :j 2,
+ :coli "IYK",
+ :colj "IYC",
+ :corr 0.17311735945045884}
+^{}
+{:i 1,
+ :j 3,
+ :coli "IYK",
+ :colj "IYH",
+ :corr 0.9609519110932049}
+^{}
+{:i 1,
+ :j 4,
+ :coli "IYK",
+ :colj "IYF",
+ :corr 0.2096644543641192}
+^{}
+{:i 1,
+ :j 5,
+ :coli "IYK",
+ :colj "IYG",
+ :corr 0.9138289745817233}
+^{}
+{:i 1,
+ :j 6,
+ :coli "IYK",
+ :colj "IYR",
+ :corr 0.2073523511349448}
+^{}
+{:i 1,
+ :j 7,
+ :coli "IYK",
+ :colj "IYZ",
+ :corr 0.23378357234780567}
+^{}
+{:i 1,
+ :j 8,
+ :coli "IYK",
+ :colj "IYJ",
+ :corr 0.205413425986494}
+^{}
+{:i 1,
+ :j 9,
+ :coli "IYK",
+ :colj "IYM",
+ :corr 0.16895312508355076}
+^{}
+{:i 1,
+ :j 10,
+ :coli "IYK",
+ :colj "IYE",
+ :corr 0.0929660794992253}
+^{}
+{:i 1,
+ :j 11,
+ :coli "IYK",
+ :colj "IDU",
+ :corr 0.20897214597911953}
+^{}
+{:i 1,
+ :j 12,
+ :coli "IYK",
+ :colj "IYT",
+ :corr 0.9251171044327041}
+^{}
+{:i 2,
+ :j 0,
+ :coli "IYC",
+ :colj "IYW",
+ :corr 0.8304468789099309}
+^{}
+{:i 2,
+ :j 1,
+ :coli "IYC",
+ :colj "IYK",
+ :corr 0.17311735945045884}
+^{}
+{:i 2, :j 2, :coli "IYC", :colj "IYC", :corr 1.0}
+^{}
+{:i 2,
+ :j 3,
+ :coli "IYC",
+ :colj "IYH",
+ :corr 0.1622921877093892}
+^{}
+{:i 2,
+ :j 4,
+ :coli "IYC",
+ :colj "IYF",
+ :corr 0.7444252579757688}
+^{}
+{:i 2,
+ :j 5,
+ :coli "IYC",
+ :colj "IYG",
+ :corr 0.3345903642722283}
+^{}
+{:i 2,
+ :j 6,
+ :coli "IYC",
+ :colj "IYR",
+ :corr 0.6769569455243694}
+^{}
+{:i 2,
+ :j 7,
+ :coli "IYC",
+ :colj "IYZ",
+ :corr 0.7368046606298088}
+^{}
+{:i 2,
+ :j 8,
+ :coli "IYC",
+ :colj "IYJ",
+ :corr 0.845861532233218}
+^{}
+{:i 2,
+ :j 9,
+ :coli "IYC",
+ :colj "IYM",
+ :corr 0.6857088175098396}
+^{}
+{:i 2,
+ :j 10,
+ :coli "IYC",
+ :colj "IYE",
+ :corr 0.35729215079452}
+^{}
+{:i 2,
+ :j 11,
+ :coli "IYC",
+ :colj "IDU",
+ :corr 0.42081006101092644}
+^{}
+{:i 2,
+ :j 12,
+ :coli "IYC",
+ :colj "IYT",
+ :corr 0.3078171457415712}
+^{}
+{:i 3,
+ :j 0,
+ :coli "IYH",
+ :colj "IYW",
+ :corr 0.12682617832614157}
+^{}
+{:i 3,
+ :j 1,
+ :coli "IYH",
+ :colj "IYK",
+ :corr 0.9609519110932049}
+^{}
+{:i 3,
+ :j 2,
+ :coli "IYH",
+ :colj "IYC",
+ :corr 0.1622921877093892}
+^{}
+{:i 3, :j 3, :coli "IYH", :colj "IYH", :corr 1.0}
+^{}
+{:i 3,
+ :j 4,
+ :coli "IYH",
+ :colj "IYF",
+ :corr 0.18258677151749456}
+^{}
+{:i 3,
+ :j 5,
+ :coli "IYH",
+ :colj "IYG",
+ :corr 0.9245556402156447}
+^{}
+{:i 3,
+ :j 6,
+ :coli "IYH",
+ :colj "IYR",
+ :corr 0.18810439486237768}
+^{}
+{:i 3,
+ :j 7,
+ :coli "IYH",
+ :colj "IYZ",
+ :corr 0.21328516609444015}
+^{}
+{:i 3,
+ :j 8,
+ :coli "IYH",
+ :colj "IYJ",
+ :corr 0.1797972551382028}
+^{}
+{:i 3,
+ :j 9,
+ :coli "IYH",
+ :colj "IYM",
+ :corr 0.13293897424715878}
+^{}
+{:i 3,
+ :j 10,
+ :coli "IYH",
+ :colj "IYE",
+ :corr 0.07199283288903106}
+^{}
+{:i 3,
+ :j 11,
+ :coli "IYH",
+ :colj "IDU",
+ :corr 0.1518753109023894}
+^{}
+{:i 3,
+ :j 12,
+ :coli "IYH",
+ :colj "IYT",
+ :corr 0.9361107852477049}
+^{}
+{:i 4,
+ :j 0,
+ :coli "IYF",
+ :colj "IYW",
+ :corr 0.5752239117474198}
+^{}
+{:i 4,
+ :j 1,
+ :coli "IYF",
+ :colj "IYK",
+ :corr 0.2096644543641192}
+^{}
+{:i 4,
+ :j 2,
+ :coli "IYF",
+ :colj "IYC",
+ :corr 0.7444252579757688}
+^{}
+{:i 4,
+ :j 3,
+ :coli "IYF",
+ :colj "IYH",
+ :corr 0.18258677151749456}
+^{}
+{:i 4, :j 4, :coli "IYF", :colj "IYF", :corr 1.0}
+^{}
+{:i 4,
+ :j 5,
+ :coli "IYF",
+ :colj "IYG",
+ :corr 0.45620282719015665}
+^{}
+{:i 4,
+ :j 6,
+ :coli "IYF",
+ :colj "IYR",
+ :corr 0.6948835458010727}
+^{}
+{:i 4,
+ :j 7,
+ :coli "IYF",
+ :colj "IYZ",
+ :corr 0.7239777636488955}
+^{}
+{:i 4,
+ :j 8,
+ :coli "IYF",
+ :colj "IYJ",
+ :corr 0.8718249782678218}
+^{}
+{:i 4,
+ :j 9,
+ :coli "IYF",
+ :colj "IYM",
+ :corr 0.7850637127302789}
+^{}
+{:i 4,
+ :j 10,
+ :coli "IYF",
+ :colj "IYE",
+ :corr 0.5355979093050197}
+^{}
+{:i 4,
+ :j 11,
+ :coli "IYF",
+ :colj "IDU",
+ :corr 0.5106504137404423}
+^{}
+{:i 4,
+ :j 12,
+ :coli "IYF",
+ :colj "IYT",
+ :corr 0.32872200450781264}
+^{}
+{:i 5,
+ :j 0,
+ :coli "IYG",
+ :colj "IYW",
+ :corr 0.23115218589621786}
+^{}
+{:i 5,
+ :j 1,
+ :coli "IYG",
+ :colj "IYK",
+ :corr 0.9138289745817233}
+^{}
+{:i 5,
+ :j 2,
+ :coli "IYG",
+ :colj "IYC",
+ :corr 0.3345903642722283}
+^{}
+{:i 5,
+ :j 3,
+ :coli "IYG",
+ :colj "IYH",
+ :corr 0.9245556402156447}
+^{}
+{:i 5,
+ :j 4,
+ :coli "IYG",
+ :colj "IYF",
+ :corr 0.45620282719015665}
+^{}
+{:i 5, :j 5, :coli "IYG", :colj "IYG", :corr 1.0}
+^{}
+{:i 5,
+ :j 6,
+ :coli "IYG",
+ :colj "IYR",
+ :corr 0.30113998163691297}
+^{}
+{:i 5,
+ :j 7,
+ :coli "IYG",
+ :colj "IYZ",
+ :corr 0.3527818923041816}
+^{}
+{:i 5,
+ :j 8,
+ :coli "IYG",
+ :colj "IYJ",
+ :corr 0.3873499486663806}
+^{}
+{:i 5,
+ :j 9,
+ :coli "IYG",
+ :colj "IYM",
+ :corr 0.3291704844320452}
+^{}
+{:i 5,
+ :j 10,
+ :coli "IYG",
+ :colj "IYE",
+ :corr 0.23032071146667907}
+^{}
+{:i 5,
+ :j 11,
+ :coli "IYG",
+ :colj "IDU",
+ :corr 0.18984524649786794}
+^{}
+{:i 5,
+ :j 12,
+ :coli "IYG",
+ :colj "IYT",
+ :corr 0.9573324638409111}
+^{}
+{:i 6,
+ :j 0,
+ :coli "IYR",
+ :colj "IYW",
+ :corr 0.5605611728308366}
+^{}
+{:i 6,
+ :j 1,
+ :coli "IYR",
+ :colj "IYK",
+ :corr 0.2073523511349448}
+^{}
+{:i 6,
+ :j 2,
+ :coli "IYR",
+ :colj "IYC",
+ :corr 0.6769569455243694}
+^{}
+{:i 6,
+ :j 3,
+ :coli "IYR",
+ :colj "IYH",
+ :corr 0.18810439486237768}
+^{}
+{:i 6,
+ :j 4,
+ :coli "IYR",
+ :colj "IYF",
+ :corr 0.6948835458010727}
+^{}
+{:i 6,
+ :j 5,
+ :coli "IYR",
+ :colj "IYG",
+ :corr 0.30113998163691297}
+^{}
+{:i 6, :j 6, :coli "IYR", :colj "IYR", :corr 1.0}
+^{}
+{:i 6,
+ :j 7,
+ :coli "IYR",
+ :colj "IYZ",
+ :corr 0.6939408899208201}
+^{}
+{:i 6,
+ :j 8,
+ :coli "IYR",
+ :colj "IYJ",
+ :corr 0.744576078705879}
+^{}
+{:i 6,
+ :j 9,
+ :coli "IYR",
+ :colj "IYM",
+ :corr 0.6336745832339851}
+^{}
+{:i 6,
+ :j 10,
+ :coli "IYR",
+ :colj "IYE",
+ :corr 0.3539939073521894}
+^{}
+{:i 6,
+ :j 11,
+ :coli "IYR",
+ :colj "IDU",
+ :corr 0.6990216845845041}
+^{}
+{:i 6,
+ :j 12,
+ :coli "IYR",
+ :colj "IYT",
+ :corr 0.2693970685792169}
+^{}
+{:i 7,
+ :j 0,
+ :coli "IYZ",
+ :colj "IYW",
+ :corr 0.6381525876447857}
+^{}
+{:i 7,
+ :j 1,
+ :coli "IYZ",
+ :colj "IYK",
+ :corr 0.23378357234780567}
+^{}
+{:i 7,
+ :j 2,
+ :coli "IYZ",
+ :colj "IYC",
+ :corr 0.7368046606298088}
+^{}
+{:i 7,
+ :j 3,
+ :coli "IYZ",
+ :colj "IYH",
+ :corr 0.21328516609444015}
+^{}
+{:i 7,
+ :j 4,
+ :coli "IYZ",
+ :colj "IYF",
+ :corr 0.7239777636488955}
+^{}
+{:i 7,
+ :j 5,
+ :coli "IYZ",
+ :colj "IYG",
+ :corr 0.3527818923041816}
+^{}
+{:i 7,
+ :j 6,
+ :coli "IYZ",
+ :colj "IYR",
+ :corr 0.6939408899208201}
+^{}
+{:i 7, :j 7, :coli "IYZ", :colj "IYZ", :corr 1.0}
+^{}
+{:i 7,
+ :j 8,
+ :coli "IYZ",
+ :colj "IYJ",
+ :corr 0.7787211413029952}
+^{}
+{:i 7,
+ :j 9,
+ :coli "IYZ",
+ :colj "IYM",
+ :corr 0.6677344655164937}
+^{}
+{:i 7,
+ :j 10,
+ :coli "IYZ",
+ :colj "IYE",
+ :corr 0.39922748572636485}
+^{}
+{:i 7,
+ :j 11,
+ :coli "IYZ",
+ :colj "IDU",
+ :corr 0.5359048041889742}
+^{}
+{:i 7,
+ :j 12,
+ :coli "IYZ",
+ :colj "IYT",
+ :corr 0.31032989706270603}
+^{}
+{:i 8,
+ :j 0,
+ :coli "IYJ",
+ :colj "IYW",
+ :corr 0.72647315130553}
+^{}
+{:i 8,
+ :j 1,
+ :coli "IYJ",
+ :colj "IYK",
+ :corr 0.205413425986494}
+^{}
+{:i 8,
+ :j 2,
+ :coli "IYJ",
+ :colj "IYC",
+ :corr 0.845861532233218}
+^{}
+{:i 8,
+ :j 3,
+ :coli "IYJ",
+ :colj "IYH",
+ :corr 0.1797972551382028}
+^{}
+{:i 8,
+ :j 4,
+ :coli "IYJ",
+ :colj "IYF",
+ :corr 0.8718249782678218}
+^{}
+{:i 8,
+ :j 5,
+ :coli "IYJ",
+ :colj "IYG",
+ :corr 0.3873499486663806}
+^{}
+{:i 8,
+ :j 6,
+ :coli "IYJ",
+ :colj "IYR",
+ :corr 0.744576078705879}
+^{}
+{:i 8,
+ :j 7,
+ :coli "IYJ",
+ :colj "IYZ",
+ :corr 0.7787211413029952}
+^{}
+{:i 8, :j 8, :coli "IYJ", :colj "IYJ", :corr 1.0}
+^{}
+{:i 8,
+ :j 9,
+ :coli "IYJ",
+ :colj "IYM",
+ :corr 0.8407210741706997}
+^{}
+{:i 8,
+ :j 10,
+ :coli "IYJ",
+ :colj "IYE",
+ :corr 0.501503134409761}
+^{}
+{:i 8,
+ :j 11,
+ :coli "IYJ",
+ :colj "IDU",
+ :corr 0.5393335232379632}
+^{}
+{:i 8,
+ :j 12,
+ :coli "IYJ",
+ :colj "IYT",
+ :corr 0.34073314706113483}
+^{}
+{:i 9,
+ :j 0,
+ :coli "IYM",
+ :colj "IYW",
+ :corr 0.5484042854348387}
+^{}
+{:i 9,
+ :j 1,
+ :coli "IYM",
+ :colj "IYK",
+ :corr 0.16895312508355076}
+^{}
+{:i 9,
+ :j 2,
+ :coli "IYM",
+ :colj "IYC",
+ :corr 0.6857088175098396}
+^{}
+{:i 9,
+ :j 3,
+ :coli "IYM",
+ :colj "IYH",
+ :corr 0.13293897424715878}
+^{}
+{:i 9,
+ :j 4,
+ :coli "IYM",
+ :colj "IYF",
+ :corr 0.7850637127302789}
+^{}
+{:i 9,
+ :j 5,
+ :coli "IYM",
+ :colj "IYG",
+ :corr 0.3291704844320452}
+^{}
+{:i 9,
+ :j 6,
+ :coli "IYM",
+ :colj "IYR",
+ :corr 0.6336745832339851}
+^{}
+{:i 9,
+ :j 7,
+ :coli "IYM",
+ :colj "IYZ",
+ :corr 0.6677344655164937}
+^{}
+{:i 9,
+ :j 8,
+ :coli "IYM",
+ :colj "IYJ",
+ :corr 0.8407210741706997}
+^{}
+{:i 9, :j 9, :coli "IYM", :colj "IYM", :corr 1.0}
+^{}
+{:i 9,
+ :j 10,
+ :coli "IYM",
+ :colj "IYE",
+ :corr 0.6128974280790519}
+^{}
+{:i 9,
+ :j 11,
+ :coli "IYM",
+ :colj "IDU",
+ :corr 0.491510951745427}
+^{}
+{:i 9,
+ :j 12,
+ :coli "IYM",
+ :colj "IYT",
+ :corr 0.2813060354110383}
+^{}
+{:i 10,
+ :j 0,
+ :coli "IYE",
+ :colj "IYW",
+ :corr 0.24358704631875094}
+^{}
+{:i 10,
+ :j 1,
+ :coli "IYE",
+ :colj "IYK",
+ :corr 0.0929660794992253}
+^{}
+{:i 10,
+ :j 2,
+ :coli "IYE",
+ :colj "IYC",
+ :corr 0.35729215079452}
+^{}
+{:i 10,
+ :j 3,
+ :coli "IYE",
+ :colj "IYH",
+ :corr 0.07199283288903106}
+^{}
+{:i 10,
+ :j 4,
+ :coli "IYE",
+ :colj "IYF",
+ :corr 0.5355979093050197}
+^{}
+{:i 10,
+ :j 5,
+ :coli "IYE",
+ :colj "IYG",
+ :corr 0.23032071146667907}
+^{}
+{:i 10,
+ :j 6,
+ :coli "IYE",
+ :colj "IYR",
+ :corr 0.3539939073521894}
+^{}
+{:i 10,
+ :j 7,
+ :coli "IYE",
+ :colj "IYZ",
+ :corr 0.39922748572636485}
+^{}
+{:i 10,
+ :j 8,
+ :coli "IYE",
+ :colj "IYJ",
+ :corr 0.501503134409761}
+^{}
+{:i 10,
+ :j 9,
+ :coli "IYE",
+ :colj "IYM",
+ :corr 0.6128974280790519}
+^{}
+{:i 10, :j 10, :coli "IYE", :colj "IYE", :corr 1.0}
+^{}
+{:i 10,
+ :j 11,
+ :coli "IYE",
+ :colj "IDU",
+ :corr 0.3032836303356604}
+^{}
+{:i 10,
+ :j 12,
+ :coli "IYE",
+ :colj "IYT",
+ :corr 0.16633753638049822}
+^{}
+{:i 11,
+ :j 0,
+ :coli "IDU",
+ :colj "IYW",
+ :corr 0.29972222338970983}
+^{}
+{:i 11,
+ :j 1,
+ :coli "IDU",
+ :colj "IYK",
+ :corr 0.20897214597911953}
+^{}
+{:i 11,
+ :j 2,
+ :coli "IDU",
+ :colj "IYC",
+ :corr 0.42081006101092644}
+^{}
+{:i 11,
+ :j 3,
+ :coli "IDU",
+ :colj "IYH",
+ :corr 0.1518753109023894}
+^{}
+{:i 11,
+ :j 4,
+ :coli "IDU",
+ :colj "IYF",
+ :corr 0.5106504137404423}
+^{}
+{:i 11,
+ :j 5,
+ :coli "IDU",
+ :colj "IYG",
+ :corr 0.18984524649786794}
+^{}
+{:i 11,
+ :j 6,
+ :coli "IDU",
+ :colj "IYR",
+ :corr 0.6990216845845041}
+^{}
+{:i 11,
+ :j 7,
+ :coli "IDU",
+ :colj "IYZ",
+ :corr 0.5359048041889742}
+^{}
+{:i 11,
+ :j 8,
+ :coli "IDU",
+ :colj "IYJ",
+ :corr 0.5393335232379632}
+^{}
+{:i 11,
+ :j 9,
+ :coli "IDU",
+ :colj "IYM",
+ :corr 0.491510951745427}
+^{}
+{:i 11,
+ :j 10,
+ :coli "IDU",
+ :colj "IYE",
+ :corr 0.3032836303356604}
+^{}
+{:i 11, :j 11, :coli "IDU", :colj "IDU", :corr 1.0}
+^{}
+{:i 11,
+ :j 12,
+ :coli "IDU",
+ :colj "IYT",
+ :corr 0.16930377581468678}
+^{}
+{:i 12,
+ :j 0,
+ :coli "IYT",
+ :colj "IYW",
+ :corr 0.21523300704175258}
+^{}
+{:i 12,
+ :j 1,
+ :coli "IYT",
+ :colj "IYK",
+ :corr 0.9251171044327041}
+^{}
+{:i 12,
+ :j 2,
+ :coli "IYT",
+ :colj "IYC",
+ :corr 0.3078171457415712}
+^{}
+{:i 12,
+ :j 3,
+ :coli "IYT",
+ :colj "IYH",
+ :corr 0.9361107852477049}
+^{}
+{:i 12,
+ :j 4,
+ :coli "IYT",
+ :colj "IYF",
+ :corr 0.32872200450781264}
+^{}
+{:i 12,
+ :j 5,
+ :coli "IYT",
+ :colj "IYG",
+ :corr 0.9573324638409111}
+^{}
+{:i 12,
+ :j 6,
+ :coli "IYT",
+ :colj "IYR",
+ :corr 0.2693970685792169}
+^{}
+{:i 12,
+ :j 7,
+ :coli "IYT",
+ :colj "IYZ",
+ :corr 0.31032989706270603}
+^{}
+{:i 12,
+ :j 8,
+ :coli "IYT",
+ :colj "IYJ",
+ :corr 0.34073314706113483}
+^{}
+{:i 12,
+ :j 9,
+ :coli "IYT",
+ :colj "IYM",
+ :corr 0.2813060354110383}
+^{}
+{:i 12,
+ :j 10,
+ :coli "IYT",
+ :colj "IYE",
+ :corr 0.16633753638049822}
+^{}
+{:i 12,
+ :j 11,
+ :coli "IYT",
+ :colj "IDU",
+ :corr 0.16930377581468678}
+^{}
+{:i 12, :j 12, :coli "IYT", :colj "IYT", :corr 1.0}]},
+                          :encoding {:x {:field "coli",
+                                         :type "ordinal"},
+                                     :y {:field "colj",
+                                         :type "ordinal"},
+                                     :color {:field "corr",
+                                             :type "quantitative",
+                                             :scale {:scheme "redblue",
+                                                     :domain [-1.0
+                                                              1.0]}}}}}}
+           {:out "[32m2024-05-03T17:52:11.463Z nuc12 INFO [smile.math.MathEx:152] - Set RNG seed 19650218 for thread main[0m\n[32m2024-05-03T17:52:11.468Z nuc12 INFO [smile.clustering.KMeans:140] - Distortion after initialization: 3442.5087[0m\n[32m2024-05-03T17:52:11.473Z nuc12 INFO [smile.clustering.KMeans:152] - Distortion after   1 iterations: 1764.9284[0m\n[32m2024-05-03T17:52:11.476Z nuc12 INFO [smile.clustering.KMeans:152] - Distortion after   2 iterations: 1764.9284[0m\n",
+            :id :ee4aa861-473c-43ab-9774-f78855baa93c,
+            :code "(def clustering\n  (-> bar-ds-list\n      (->> (map #(-> % :return standardize)))\n      (clustering/k-means 5)))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.cluster/clustering"]}
+           {:out "",
+            :id :ca7d788e-fd37-46fe-9ad6-32c27aa3d13e,
+            :code "(:sizes clustering)",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class clojure.lang.ArraySeq$ArraySeq_int"]
+                   [:span "(4 3 2 3 1 0)"]]}
+           {:out "",
+            :id :6db33924-fa15-43ef-ad55-512235e6552b,
+            :code "(-> {:asset assets\n     :name (map asset-db/instrument-name assets)\n     :cluster (:clustering clustering)}\n    tc/dataset\n    (tc/order-by :cluster)\n    (print/print-range :all))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [13 3]:\n\n| :asset |                         :name | :cluster |\n|--------|-------------------------------|---------:|\n|    IYK |     iShares US Consumer Goods |        0 |\n|    IYH |         iShares US Healthcare |        0 |\n|    IYG |     iShares US Financial Svcs |        0 |\n|    IYT |    iShares Transportation Avg |        0 |\n|    IYF |         iShares US Financials |        1 |\n|    IYM |    iShares US Basic Materials |        1 |\n|    IYE |             iShares US Energy |        1 |\n|    IYJ |        iShares US Industrials |        2 |\n|    IYC |      iShares US Consumer Svcs |        2 |\n|    IYZ | iShares US Telecommunications |        3 |\n|    IYR |        iShares US Real Estate |        3 |\n|    IDU |          iShares US Utilities |        3 |\n|    IYW |         iShares US Technology |        4 |\n"]]}
+           {:out "",
+            :id :0ac7a0ed-7738-4f14-8dce-b732892c2d5b,
+            :code "(asset-db/instrument-name \"IYK\")",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "grey"}}
+                   "\"iShares US Consumer Goods\""]}
+           {:out "",
+            :id :d8ebafe5-f6b5-4732-8982-efe2f25e07e7,
+            :code "(asset-db/instrument-name \"IYM\")",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "grey"}}
+                   "\"iShares US Basic Materials\""]}
+           {:out "",
+            :id :06cd9638-6215-487b-ab0c-391f710bd715,
+            :code "(def symbol->cluster\n  (zipmap assets\n          (:clustering clustering)))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.cluster/symbol->cluster"]}
+           {:out "",
+            :id :05242b29-42de-41af-9e64-f650d55732f7,
+            :code "symbol->cluster",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:class "clj-map"}
+                   [:span.font-bold.teal-700.mr-1 "{"]
+                   [:span.items
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYM\""]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "1"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYH\""]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "0"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYT\""]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "0"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYF\""]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "1"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYR\""]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "3"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYZ\""]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "3"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYC\""]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "2"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYJ\""]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "2"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IDU\""]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "3"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYE\""]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "1"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYG\""]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "0"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYK\""]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "0"]
+                    [:span " "]
+                    [:span
+                     {:style {:color "grey"}}
+                     "\"IYW\""]
+                    [:span " "]
+                    [:span {:style {:color "blue"}} "4"]]
+                   [:span.font-bold.teal-700.ml-1 "}"]]}
+           {:out "",
+            :id :d1febb08-f310-4c87-9317-fc9b4930c903,
+            :code "(defn edges [threshold]\n  (let [n (count assets)]\n    (-> (for [j     (range n)\n              i     (range j)\n              :let  [r (corrs i j)]\n              :when (-> r\n                        fun/sq\n                        (>= threshold))]\n          {:i    i\n           :j    j\n           :sign (fun/signum r)}))))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.cluster/edges"]}
+           {:out "",
+            :id :ee319df9-105d-4bfd-9581-a8f9dd7123ab,
+            :code "(-> 0.6\n    edges\n    tc/dataset\n    (print/print-range :all))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [12 3]:\n\n| :i | :j | :sign |\n|---:|---:|------:|\n|  0 |  2 |   1.0 |\n|  1 |  3 |   1.0 |\n|  1 |  5 |   1.0 |\n|  3 |  5 |   1.0 |\n|  2 |  8 |   1.0 |\n|  4 |  8 |   1.0 |\n|  7 |  8 |   1.0 |\n|  4 |  9 |   1.0 |\n|  8 |  9 |   1.0 |\n|  1 | 12 |   1.0 |\n|  3 | 12 |   1.0 |\n|  5 | 12 |   1.0 |\n"]]}
+           {:out "",
+            :id :80874800-6f0a-403c-8e2a-2d25c9751dc6,
+            :code "(let [threshold 0.6\n      nodes (->> assets\n                 (map-indexed (fn [i symbol]\n                                {:data {:id i\n                                        :label (name symbol)}})))\n      edges (->> threshold\n                 edges\n                 (map (fn [{:keys [i j #_sign]}]\n                        {:data {:id (str i \"-\" j)\n                                :source i\n                                :target j}})))\n      elements (concat nodes edges)]\n  (cytoscape\n   {:stylesheet [{:selector \"node\"\n                  :style    {:width  20\n                             :height 10\n                             :shape  \"rectangle\"}}\n                 {:selector \"edge\"\n                  :style    {:width 5\n                             :line-color \"purple\"}}]\n    :elements   elements\n    :layout     {:name \"cose\"}\n    :style      {:border \"9px solid #39b\"\n                 :width  \"600px\"\n                 :height \"600px\"}}))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn ui.cytoscape/cytoscape,
+            :data ^{:render-fn ui.cytoscape/cytoscape}
+                  {:stylesheet [{:selector "node",
+                                 :style {:width 20,
+                                         :height 10,
+                                         :shape "rectangle"}}
+                                {:selector "edge",
+                                 :style {:width 5,
+                                         :line-color "purple"}}],
+                   :elements ({:data {:id 0, :label "IYW"}}
+                              {:data {:id 1, :label "IYK"}}
+                              {:data {:id 2, :label "IYC"}}
+                              {:data {:id 3, :label "IYH"}}
+                              {:data {:id 4, :label "IYF"}}
+                              {:data {:id 5, :label "IYG"}}
+                              {:data {:id 6, :label "IYR"}}
+                              {:data {:id 7, :label "IYZ"}}
+                              {:data {:id 8, :label "IYJ"}}
+                              {:data {:id 9, :label "IYM"}}
+                              {:data {:id 10, :label "IYE"}}
+                              {:data {:id 11, :label "IDU"}}
+                              {:data {:id 12, :label "IYT"}}
+                              {:data {:id "0-2",
+                                      :source 0,
+                                      :target 2}}
+                              {:data {:id "1-3",
+                                      :source 1,
+                                      :target 3}}
+                              {:data {:id "1-5",
+                                      :source 1,
+                                      :target 5}}
+                              {:data {:id "3-5",
+                                      :source 3,
+                                      :target 5}}
+                              {:data {:id "2-8",
+                                      :source 2,
+                                      :target 8}}
+                              {:data {:id "4-8",
+                                      :source 4,
+                                      :target 8}}
+                              {:data {:id "7-8",
+                                      :source 7,
+                                      :target 8}}
+                              {:data {:id "4-9",
+                                      :source 4,
+                                      :target 9}}
+                              {:data {:id "8-9",
+                                      :source 8,
+                                      :target 9}}
+                              {:data {:id "1-12",
+                                      :source 1,
+                                      :target 12}}
+                              {:data {:id "3-12",
+                                      :source 3,
+                                      :target 12}}
+                              {:data {:id "5-12",
+                                      :source 5,
+                                      :target 12}}),
+                   :layout {:name "cose"},
+                   :style {:border "9px solid #39b",
+                           :width "600px",
+                           :height "600px"}}}
+           {:out "",
+            :id :570c21e0-5d8a-4875-9ec3-94cd7e5f52c7,
+            :code "(-> (->> 0.6\n         edges\n         (map (fn [{:keys [i j #_sign]}]\n                [i j]))\n         (apply loom.graph/graph)\n         loom.alg/connected-components\n         (map-indexed\n          (fn [i comp-indexes]\n            (tc/dataset\n             {:component      (str \"comp\" i)\n              :symbol (map (vec assets) comp-indexes)})))\n         (apply tc/concat)\n         )\n    (tc/add-columns\n     {:name    #(->> % :symbol (mapv asset-db/instrument-name))\n      :cluster #(->> % :symbol (mapv symbol->cluster))})\n    (print/print-range :all))",
+            :ns "quanta.notebook.study.cluster",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [10 4]:\n\n| :component | :symbol |                         :name | :cluster |\n|------------|---------|-------------------------------|---------:|\n|      comp0 |     IYW |         iShares US Technology |        4 |\n|      comp0 |     IYC |      iShares US Consumer Svcs |        2 |\n|      comp0 |     IYJ |        iShares US Industrials |        2 |\n|      comp0 |     IYZ | iShares US Telecommunications |        3 |\n|      comp0 |     IYF |         iShares US Financials |        1 |\n|      comp0 |     IYM |    iShares US Basic Materials |        1 |\n|      comp1 |     IYK |     iShares US Consumer Goods |        0 |\n|      comp1 |     IYH |         iShares US Healthcare |        0 |\n|      comp1 |     IYT |    iShares Transportation Avg |        0 |\n|      comp1 |     IYG |     iShares US Financial Svcs |        0 |\n"]]}],
+ :meta {:id :f80468b1-3898-4570-8652-e1f1eeefed3f,
+        :eval-time "2024-05-03 12:52:11",
+        :ns "quanta.notebook.study.cluster",
+        :java "19.0.2",
+        :clojure "1.11.1"}}

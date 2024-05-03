@@ -1,0 +1,139 @@
+; saved on 2024-05-03 12:52:02
+{:content [{:out "",
+            :id :0500ffb8-09e5-4e56-afbb-6b0e44e73e34,
+            :code "(ns quanta.notebook.study.astro-aspect-influence\n  (:require\n   [clojure.edn :as edn]\n   [tablecloth.api :as tc]\n   [tech.v3.datatype.functional :as fun]\n   [ta.helper.print :refer [print-all]]\n   [ta.db.bars.protocol :as b]\n   [modular.system]\n   [ta.calendar.core :as cal]\n   [astro.aspect :as aspect]\n   [astro.windowstats :refer [window-stats]]))",
+            :ns "quanta.notebook.study.astro-aspect-influence",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.p-2.clj-nil [:p "nil"]]}
+           {:out "",
+            :id :53d78a6a-0495-4f01-a922-e59e7f8515e7,
+            :code "(defn load-aspects [filename]\n  (-> (slurp filename) edn/read-string))",
+            :ns "quanta.notebook.study.astro-aspect-influence",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.astro-aspect-influence/load-aspects"]}
+           {:out "",
+            :id :bda63622-07c6-4b04-82cd-0c072e87d6d2,
+            :code "(defn load-aspects-until-now-no-moon []\n  (-> (load-aspects \"target/webly/aspects.edn\")\n      (aspect/select-aspects-until-now)\n      aspect/remove-moon-aspects))",
+            :ns "quanta.notebook.study.astro-aspect-influence",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.astro-aspect-influence/load-aspects-until-now-no-moon"]}
+           {:out "",
+            :id :6ed08ec5-acd4-4121-93db-08646d6911ad,
+            :code "(def aspects (load-aspects-until-now-no-moon))",
+            :ns "quanta.notebook.study.astro-aspect-influence",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.astro-aspect-influence/aspects"]}
+           {:out "",
+            :id :5b6cbeaf-cc13-4a88-91af-fef421e70be7,
+            :code "(-> aspects count)",
+            :ns "quanta.notebook.study.astro-aspect-influence",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span {:style {:color "blue"}} "127"]}
+           {:out "",
+            :id :3a3963c9-f594-47f4-90f3-3e7aee95fda9,
+            :code "(def db (modular.system/system :bardb-dynamic))",
+            :ns "quanta.notebook.study.astro-aspect-influence",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.astro-aspect-influence/db"]}
+           {:out "",
+            :id :2dc713fd-f685-4ef2-a3d4-7f1aa122635b,
+            :code "(def window (cal/trailing-range [:us :d] 1000))",
+            :ns "quanta.notebook.study.astro-aspect-influence",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.astro-aspect-influence/window"]}
+           {:out "[32m2024-05-03T17:52:02.391Z nuc12 INFO [ta.db.bars.dynamic:11] - dynamic get-bars  {:asset \"BTCUSDT\", :calendar [:us :d], :import :bybit} {:end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\", :start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:02.398Z nuc12 INFO [ta.db.bars.dynamic.import:78] - import-on-demand  {:asset \"BTCUSDT\", :calendar [:us :d], :import :bybit} {:end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\", :start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\"}[0m\n[32m2024-05-03T17:52:02.425Z nuc12 INFO [ta.db.bars.dynamic.import:80] - tasks:  ()[0m\n[32m2024-05-03T17:52:02.428Z nuc12 INFO [ta.db.bars.duckdb:275] - get-bars  {:asset \"BTCUSDT\", :calendar [:us :d], :import :bybit} {:end #time/zoned-date-time \"2024-05-02T17:00-04:00[America/New_York]\", :start #time/zoned-date-time \"2020-07-03T17:00-04:00[America/New_York]\"}[0m\n",
+            :id :36354973-f183-437a-82ba-110ce064a04b,
+            :code "(def bars-ds (b/get-bars db {:asset \"BTCUSDT\"\n                             :calendar [:us :d]\n                             :import :bybit}\n                         window))",
+            :ns "quanta.notebook.study.astro-aspect-influence",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.astro-aspect-influence/bars-ds"]}
+           {:out "",
+            :id :02f22c1c-f051-4a71-87c3-49fc2bd983f6,
+            :code "bars-ds",
+            :ns "quanta.notebook.study.astro-aspect-influence",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    ":_unnamed [1034 9]:\n\n|    :open | :epoch |                :date |   :close |      :volume |    :high |     :low | :ticks |  :asset |\n|---------:|-------:|----------------------|---------:|-------------:|---------:|---------:|-------:|---------|\n| 35225.48 |      0 | 2021-07-05T00:00:00Z | 33704.41 |    13.578128 | 35239.23 | 33187.09 |      0 | BTCUSDT |\n| 33704.41 |      0 | 2021-07-06T00:00:00Z | 34224.45 |     3.802583 | 35098.33 | 33578.49 |      0 | BTCUSDT |\n| 34224.45 |      0 | 2021-07-07T00:00:00Z | 33865.30 |     4.924340 | 35008.17 | 33800.68 |      0 | BTCUSDT |\n| 33865.30 |      0 | 2021-07-08T00:00:00Z | 32892.17 |    18.331070 | 33921.53 | 32235.82 |      0 | BTCUSDT |\n| 32892.17 |      0 | 2021-07-09T00:00:00Z | 33815.88 |     9.554352 | 34077.01 | 32307.11 |      0 | BTCUSDT |\n| 33815.88 |      0 | 2021-07-10T00:00:00Z | 33509.32 |     4.168134 | 34233.49 | 33055.38 |      0 | BTCUSDT |\n| 33509.32 |      0 | 2021-07-11T00:00:00Z | 34246.51 |    13.776442 | 34586.63 | 33326.11 |      0 | BTCUSDT |\n| 34246.51 |      0 | 2021-07-12T00:00:00Z | 33109.63 |    13.101666 | 34650.00 | 32665.68 |      0 | BTCUSDT |\n| 33109.63 |      0 | 2021-07-13T00:00:00Z | 32715.61 |    12.811375 | 33324.49 | 32206.81 |      0 | BTCUSDT |\n| 32715.61 |      0 | 2021-07-14T00:00:00Z | 32823.90 |    11.785230 | 33074.30 | 31605.25 |      0 | BTCUSDT |\n|      ... |    ... |                  ... |      ... |          ... |      ... |      ... |    ... |     ... |\n| 66811.56 |      0 | 2024-04-23T00:00:00Z | 66417.53 | 12381.038037 | 67181.60 | 65790.31 |      0 | BTCUSDT |\n| 66811.56 |      0 | 2024-04-23T00:00:00Z | 66417.53 | 12381.038037 | 67181.60 | 65790.31 |      0 | BTCUSDT |\n| 66417.53 |      0 | 2024-04-24T00:00:00Z | 64286.90 | 16171.480986 | 67088.80 | 63602.00 |      0 | BTCUSDT |\n| 64286.90 |      0 | 2024-04-25T00:00:00Z | 64495.92 | 17461.266457 | 65303.00 | 62777.36 |      0 | BTCUSDT |\n| 64495.92 |      0 | 2024-04-26T00:00:00Z | 63777.35 | 17141.815069 | 64822.78 | 63313.70 |      0 | BTCUSDT |\n| 63777.35 |      0 | 2024-04-27T00:00:00Z | 63455.86 | 11511.057753 | 63929.01 | 62395.80 |      0 | BTCUSDT |\n| 63455.86 |      0 | 2024-04-28T00:00:00Z | 63121.38 | 11025.671094 | 64374.92 | 62759.00 |      0 | BTCUSDT |\n| 63121.38 |      0 | 2024-04-29T00:00:00Z | 63867.84 | 16453.028200 | 64218.75 | 61774.09 |      0 | BTCUSDT |\n| 63867.84 |      0 | 2024-04-30T00:00:00Z | 60681.36 | 20140.608003 | 64735.32 | 59180.12 |      0 | BTCUSDT |\n| 60681.36 |      0 | 2024-05-01T00:00:00Z | 58341.10 | 23911.377215 | 60856.77 | 56542.32 |      0 | BTCUSDT |\n| 58341.10 |      0 | 2024-05-02T00:00:00Z | 59023.55 | 12610.829504 | 59465.76 | 56937.51 |      0 | BTCUSDT |\n"]]}
+           {:out "",
+            :id :1874d5f8-7daf-4572-83d3-78e449790af9,
+            :code "(defn- assoc-aspect-return [ds {:keys [start end] :as aspect}]\n  (merge aspect (window-stats ds start end)))",
+            :ns "quanta.notebook.study.astro-aspect-influence",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.astro-aspect-influence/assoc-aspect-return"]}
+           {:out "",
+            :id :15f17c64-5602-4897-9ddf-50b19907eee2,
+            :code "(defn add-aspect-return [aspects ds]\n   (map (partial assoc-aspect-return ds) aspects))",
+            :ns "quanta.notebook.study.astro-aspect-influence",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.astro-aspect-influence/add-aspect-return"]}
+           {:out "",
+            :id :40b05847-8242-4ef5-945a-58fc9ee8e9a1,
+            :code "(->> (add-aspect-return aspects bars-ds)\n    (take 3))",
+            :ns "quanta.notebook.study.astro-aspect-influence",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class clojure.lang.LazySeq"]
+                   [:span
+                    "({:trend 0.0, :chg-l 17, :chg -30, :bars 3, :start #inst \"2024-01-01T00:00:00.000-00:00\", :type :square, :chg-r -46, :b :Venus, :end #inst \"2024-01-03T08:00:00.000-00:00\", :a :Saturn} {:trend 0.0, :chg-l -46, :chg -17, :bars 4, :start #inst \"2024-01-01T06:00:00.000-00:00\", :type :septile, :chg-r 30, :b :Sun, :end #inst \"2024-01-05T12:00:00.000-00:00\", :a :Saturn} {:trend 0.0, :chg-l 30, :chg 26, :bars 4, :start #inst \"2024-01-02T01:00:00.000-00:00\", :type :quintile, :chg-r -4, :b :Sun, :end #inst \"2024-01-06T00:00:00.000-00:00\", :a :Neptune})"]]}
+           {:out "",
+            :id :2d234977-8b02-4523-8b96-59fb15b8fee5,
+            :code "(defn aspect-group-stats [group-by ds-aspect]\n  (-> ds-aspect\n      (tc/group-by group-by)\n      (tc/aggregate\n       {:count (fn [ds]\n                 (->> ds\n                      :chg\n                      count))\n        :bars (fn [ds]\n                (->> ds\n                     :bars\n                     fun/mean\n                     int))\n        :mean (fn [ds]\n                (->> ds\n                     :chg\n                     fun/mean\n                     int))\n        :med (fn [ds]\n               (->> ds\n                    :chg\n                    fun/median\n                    int))\n        :min (fn [ds]\n               (-> (apply min (:chg ds)) int))\n        :max (fn [ds]\n               (-> (apply max (:chg ds)) int))\n        :trend (fn [ds]\n                 (->> ds\n                      :trend\n                      fun/mean\n                      (* 100.0)\n                      int))})))",
+            :ns "quanta.notebook.study.astro-aspect-influence",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.astro-aspect-influence/aspect-group-stats"]}
+           {:out "",
+            :id :dabdef81-25d4-46f3-8fc3-3c241c89dce2,
+            :code "(defn calc-aspect-stats [aspects ds group-by]\n  (let [ds-all (->> (add-aspect-return aspects ds)\n                    tc/dataset)\n        ds-groups (-> (->> ds-all\n                           (aspect-group-stats group-by))\n                      (tc/order-by [:type :a :b]))]\n    ds-groups))",
+            :ns "quanta.notebook.study.astro-aspect-influence",
+            :render-fn reval.viz.render-fn/reagent,
+            :data ^{:hiccup true}
+                  [:span
+                   {:style {:color "deeppink"}}
+                   "#'quanta.notebook.study.astro-aspect-influence/calc-aspect-stats"]}
+           {:out "",
+            :id :214eb88a-62e9-4135-a847-198c0a77b86b,
+            :code "(-> (calc-aspect-stats aspects bars-ds [:type :a :b])\n    (print-all))",
+            :ns "quanta.notebook.study.astro-aspect-influence",
+            :render-fn reval.viz.render-fn/reagent,
+            :data [:div.border-solid.p-2
+                   [:p.text-red-300
+                    "class tech.v3.dataset.impl.dataset.Dataset"]
+                   [:span
+                    "_unnamed [118 10]:\n\n| :trend | :min | :mean | :bars |        :type | :max | :med | :count |       :b |        :a |\n|-------:|-----:|------:|------:|--------------|-----:|-----:|-------:|----------|-----------|\n|      0 |  -94 |   -94 |     6 |    :binovile |  -94 |  -94 |      1 |    :Mars |  :Neptune |\n|    100 |    8 |     8 |     3 |    :binovile |    8 |    8 |      1 | :Mercury |  :Neptune |\n|      0 |   28 |    28 |     3 |    :binovile |   28 |   28 |      1 |   :Venus |  :Neptune |\n|      0 |  -72 |   -72 |     4 |    :binovile |  -72 |  -72 |      1 |   :Venus |   :Saturn |\n|    100 |   67 |    67 |     9 | :conjunction |   67 |   67 |      1 | :Mercury |     :Mars |\n|    100 |   79 |    79 |     8 | :conjunction |   79 |   79 |      1 |   :Pluto |     :Mars |\n|      0 |  197 |   197 |    13 | :conjunction |  197 |  197 |      1 |   :Venus |     :Mars |\n|    100 |   41 |    41 |     4 | :conjunction |   41 |   41 |      1 |   :Pluto |  :Mercury |\n|     50 |  -86 |    56 |     5 | :conjunction |  198 |  198 |      2 |     :Sun |  :Mercury |\n|    100 |   23 |    23 |     4 | :conjunction |   23 |   23 |      1 |   :Venus |  :Mercury |\n|    100 |  -48 |   -48 |     5 | :conjunction |  -48 |  -48 |      1 |    :Mars |  :Neptune |\n|    100 |   12 |    12 |     3 | :conjunction |   12 |   12 |      1 | :Mercury |  :Neptune |\n|    100 |  -23 |   -23 |     6 | :conjunction |  -23 |  -23 |      1 |     :Sun |  :Neptune |\n|    100 |   35 |    35 |     4 | :conjunction |   35 |   35 |      1 |   :Venus |  :Neptune |\n|      0 |  -34 |   -34 |     6 | :conjunction |  -34 |  -34 |      1 |     :Sun |    :Pluto |\n|      0 |   -1 |    -1 |     5 | :conjunction |   -1 |   -1 |      1 |   :Venus |    :Pluto |\n|      0 |  -85 |   -85 |     9 | :conjunction |  -85 |  -85 |      1 |    :Mars |   :Saturn |\n|      0 |   93 |    93 |     4 | :conjunction |   93 |   93 |      1 | :Mercury |   :Saturn |\n|    100 |  158 |   158 |     7 | :conjunction |  158 |  158 |      1 |     :Sun |   :Saturn |\n|      0 |   -9 |    -9 |     5 | :conjunction |   -9 |   -9 |      1 |   :Venus |   :Saturn |\n|      0 |  -31 |   -31 |     4 | :conjunction |  -31 |  -31 |      1 | :Mercury | :TrueNode |\n|    100 |   59 |    59 |     6 | :conjunction |   59 |   59 |      1 |     :Sun | :TrueNode |\n|      0 |   17 |    17 |     5 | :conjunction |   17 |   17 |      1 |   :Venus | :TrueNode |\n|      0 |    9 |     9 |     2 |      :novile |    9 |    9 |      1 | :Mercury |     :Mars |\n|      0 |   19 |    19 |     5 |      :novile |   19 |   19 |      1 |   :Pluto |     :Mars |\n|      0 |   13 |    13 |     3 |      :novile |   13 |   13 |      1 | :Jupiter |  :Mercury |\n|      0 |   20 |    20 |     2 |      :novile |   20 |   20 |      1 |   :Pluto |  :Mercury |\n|      0 |  -60 |   -60 |     2 |      :novile |  -60 |  -60 |      1 |  :Uranus |  :Mercury |\n|      0 |   -2 |    -2 |     5 |      :novile |   -2 |   -2 |      1 |    :Mars |  :Neptune |\n|      0 |    4 |     4 |     2 |      :novile |    4 |    4 |      1 | :Mercury |  :Neptune |\n|    100 |   41 |    41 |     4 |      :novile |   41 |   41 |      1 |     :Sun |  :Neptune |\n|      0 |   14 |    14 |     3 |      :novile |   14 |   14 |      1 |   :Venus |  :Neptune |\n|    100 |   32 |    32 |     4 |      :novile |   32 |   32 |      1 |     :Sun |    :Pluto |\n|    100 |  -59 |   -13 |     3 |      :novile |   33 |   33 |      2 |   :Venus |    :Pluto |\n|    100 |  120 |   120 |     7 |      :novile |  120 |  120 |      1 |    :Mars |   :Saturn |\n|    100 |  -14 |   -14 |     3 |      :novile |  -14 |  -14 |      1 | :Mercury |   :Saturn |\n|      0 |  299 |   299 |    41 |      :novile |  299 |  299 |      1 |   :Pluto |   :Saturn |\n|    100 |   24 |    24 |     4 |      :novile |   24 |   24 |      1 |     :Sun |   :Saturn |\n|    100 |    6 |     6 |     3 |      :novile |    6 |    6 |      1 |   :Venus |   :Saturn |\n|    100 |   53 |    53 |     5 |      :novile |   53 |   53 |      1 | :Jupiter |      :Sun |\n|      0 |  -62 |   -62 |     5 |      :novile |  -62 |  -62 |      1 |  :Uranus |      :Sun |\n|    100 |  -54 |   -54 |     4 |      :novile |  -54 |  -54 |      1 | :Jupiter |    :Venus |\n|      0 |   -2 |    -2 |     4 |      :novile |   -2 |   -2 |      1 |  :Uranus |    :Venus |\n|      0 |  -41 |   -41 |     6 |    :quintile |  -41 |  -41 |      1 |    :Mars |  :Neptune |\n|      0 |   43 |    43 |     3 |    :quintile |   43 |   43 |      1 | :Mercury |  :Neptune |\n|      0 |   26 |    26 |     4 |    :quintile |   26 |   26 |      1 |     :Sun |  :Neptune |\n|    100 |  -11 |   -11 |     4 |    :quintile |  -11 |  -11 |      1 |   :Venus |  :Neptune |\n|    100 |   -5 |    -5 |     7 |    :quintile |   -5 |   -5 |      1 | :Mercury |   :Saturn |\n|    100 |  -34 |   -34 |     4 |    :quintile |  -34 |  -34 |      1 |   :Venus |   :Saturn |\n|    100 |  -49 |   -49 |     5 | :semi-square |  -49 |  -49 |      1 |   :Pluto |     :Mars |\n|      0 |   81 |    81 |     2 | :semi-square |   81 |   81 |      1 |   :Pluto |  :Mercury |\n|      0 |   22 |    22 |     2 | :semi-square |   22 |   22 |      1 |  :Uranus |  :Mercury |\n|      0 |  138 |   138 |     6 | :semi-square |  138 |  138 |      1 |    :Mars |  :Neptune |\n|      0 |   28 |    28 |     3 | :semi-square |   28 |   28 |      1 | :Mercury |  :Neptune |\n|      0 |    5 |     5 |     4 | :semi-square |    5 |    5 |      1 |     :Sun |  :Neptune |\n|    100 |  102 |   102 |     3 | :semi-square |  102 |  102 |      1 |   :Venus |  :Neptune |\n|    100 |   68 |    68 |     4 | :semi-square |   68 |   68 |      1 |     :Sun |    :Pluto |\n|     50 |  -82 |   -24 |     3 | :semi-square |   33 |   33 |      2 |   :Venus |    :Pluto |\n|      0 |    3 |     3 |     6 | :semi-square |    3 |    3 |      1 |    :Mars |   :Saturn |\n|    100 |  -16 |   -16 |     3 | :semi-square |  -16 |  -16 |      1 | :Mercury |   :Saturn |\n|    100 |  -88 |   -88 |     5 | :semi-square |  -88 |  -88 |      1 |     :Sun |   :Saturn |\n|    100 |   59 |    59 |     4 | :semi-square |   59 |   59 |      1 |   :Venus |   :Saturn |\n|      0 |  -25 |   -25 |     2 | :semi-square |  -25 |  -25 |      1 | :Jupiter |      :Sun |\n|      0 |   33 |    33 |     4 | :semi-square |   33 |   33 |      1 |  :Uranus |      :Sun |\n|      0 |   18 |    18 |     4 | :semi-square |   18 |   18 |      1 | :Jupiter |    :Venus |\n|      0 |   12 |    12 |     3 | :semi-square |   12 |   12 |      1 |  :Uranus |    :Venus |\n|      0 |  -10 |   -10 |     6 |     :septile |  -10 |  -10 |      1 |   :Pluto |     :Mars |\n|      0 |   11 |    11 |     2 |     :septile |   11 |   11 |      1 |   :Pluto |  :Mercury |\n|      0 |    0 |     0 |     0 |     :septile |    0 |    0 |      1 |  :Uranus |  :Mercury |\n|      0 |  -16 |   -16 |     5 |     :septile |  -16 |  -16 |      1 |    :Mars |  :Neptune |\n|      0 |   40 |    40 |     2 |     :septile |   40 |   40 |      1 | :Mercury |  :Neptune |\n|      0 |   50 |    50 |     4 |     :septile |   50 |   50 |      1 |     :Sun |  :Neptune |\n|    100 |  -18 |   -18 |     3 |     :septile |  -18 |  -18 |      1 |   :Venus |  :Neptune |\n|    100 |   -9 |    -9 |     4 |     :septile |   -9 |   -9 |      1 |     :Sun |    :Pluto |\n|     50 |   -4 |    -3 |     3 |     :septile |   -2 |   -2 |      2 |   :Venus |    :Pluto |\n|      0 |   12 |    12 |     7 |     :septile |   12 |   12 |      1 |    :Mars |   :Saturn |\n|    100 |   54 |    54 |     3 |     :septile |   54 |   54 |      1 | :Mercury |   :Saturn |\n|      0 |  -17 |   -17 |     4 |     :septile |  -17 |  -17 |      1 |     :Sun |   :Saturn |\n|    100 |   41 |    41 |     4 |     :septile |   41 |   41 |      1 |   :Venus |   :Saturn |\n|      0 |    0 |     0 |     1 |     :septile |    0 |    0 |      1 |  :Uranus |      :Sun |\n|      0 |    0 |     0 |     1 |     :septile |    0 |    0 |      1 |  :Uranus |    :Venus |\n|      0 |    0 |     0 |     1 |     :sextile |    0 |    0 |      1 |   :Pluto |  :Mercury |\n|    100 |  107 |   107 |     5 |     :sextile |  107 |  107 |      1 |    :Mars |  :Neptune |\n|      0 |   -4 |    -4 |     2 |     :sextile |   -4 |   -4 |      1 | :Mercury |  :Neptune |\n|      0 |  -28 |   -28 |     4 |     :sextile |  -28 |  -28 |      1 |     :Sun |  :Neptune |\n|      0 |   39 |    39 |     4 |     :sextile |   39 |   39 |      1 |   :Venus |  :Neptune |\n|      0 |    0 |     0 |     1 |     :sextile |    0 |    0 |      1 |     :Sun |    :Pluto |\n|      0 |    0 |     0 |     0 |     :sextile |    0 |    0 |      1 |   :Venus |    :Pluto |\n|    100 |  -87 |   -87 |     6 |     :sextile |  -87 |  -87 |      1 |    :Mars |   :Saturn |\n|      0 |  -25 |   -25 |     4 |     :sextile |  -25 |  -25 |      1 | :Mercury |   :Saturn |\n|      0 |   19 |    19 |     4 |     :sextile |   19 |   19 |      1 |   :Venus |   :Saturn |\n|      0 |   53 |    53 |     6 |      :square |   53 |   53 |      1 | :Mercury |  :Neptune |\n|      0 |    6 |     6 |     4 |      :square |    6 |    6 |      1 |   :Venus |  :Neptune |\n|      0 |  -30 |   -30 |     3 |      :square |  -30 |  -30 |      1 |   :Venus |   :Saturn |\n|    100 |   32 |    32 |     4 |      :thirty |   32 |   32 |      1 | :Mercury |     :Mars |\n|     50 |  -21 |    32 |     5 |      :thirty |   85 |   85 |      2 |   :Pluto |     :Mars |\n|      0 |    0 |     0 |    18 |      :thirty |    0 |    0 |      1 |     :Sun |     :Mars |\n|    100 |  -94 |   -67 |     4 |      :thirty |  -41 |  -41 |      2 | :Jupiter |  :Mercury |\n|     50 |   -6 |     6 |     3 |      :thirty |   19 |   19 |      2 |   :Pluto |  :Mercury |\n|     50 |  -88 |   -31 |     5 |      :thirty |   26 |   26 |      2 |  :Uranus |  :Mercury |\n|    100 |   72 |    72 |     5 |      :thirty |   72 |   72 |      1 |   :Venus |  :Mercury |\n|      0 |  -56 |   -56 |     5 |      :thirty |  -56 |  -56 |      1 |    :Mars |  :Neptune |\n|      0 |  -10 |   -10 |     2 |      :thirty |  -10 |  -10 |      1 | :Mercury |  :Neptune |\n|      0 |   -2 |    -2 |     4 |      :thirty |   -2 |   -2 |      1 |     :Sun |  :Neptune |\n|    100 |   58 |    58 |     4 |      :thirty |   58 |   58 |      1 |   :Venus |  :Neptune |\n|      0 |   -9 |    -9 |     4 |      :thirty |   -9 |   -9 |      1 |     :Sun |    :Pluto |\n|     50 |    0 |     4 |     3 |      :thirty |    9 |    9 |      2 |   :Venus |    :Pluto |\n|    100 |  230 |   230 |     6 |      :thirty |  230 |  230 |      1 |    :Mars |   :Saturn |\n|    100 |   24 |    24 |     3 |      :thirty |   24 |   24 |      1 | :Mercury |   :Saturn |\n|    100 |   51 |    51 |     4 |      :thirty |   51 |   51 |      1 |     :Sun |   :Saturn |\n|    100 |   19 |    19 |     3 |      :thirty |   19 |   19 |      1 |   :Venus |   :Saturn |\n|      0 |   25 |    25 |     5 |      :thirty |   25 |   25 |      1 | :Jupiter |      :Sun |\n|      0 |  -29 |   -29 |     4 |      :thirty |  -29 |  -29 |      1 |  :Uranus |      :Sun |\n|    100 |  232 |   232 |    18 |      :thirty |  232 |  232 |      1 |   :Venus |      :Sun |\n|    100 |  -58 |   -58 |    19 |      :thirty |  -58 |  -58 |      1 | :Jupiter | :TrueNode |\n|      0 |   66 |    66 |    40 |      :thirty |   66 |   66 |      1 |  :Uranus | :TrueNode |\n|    100 |  -34 |   -34 |     5 |      :thirty |  -34 |  -34 |      1 | :Jupiter |    :Venus |\n|    100 |  -37 |   -37 |     4 |      :thirty |  -37 |  -37 |      1 |  :Uranus |    :Venus |\n"]]}],
+ :meta {:id :9f613cb0-8fc0-4f5f-8584-f2095ccd6921,
+        :eval-time "2024-05-03 12:52:02",
+        :ns "quanta.notebook.study.astro-aspect-influence",
+        :java "19.0.2",
+        :clojure "1.11.1"}}

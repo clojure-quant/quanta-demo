@@ -55,11 +55,24 @@
 
   :static-sci {:exec-fn goldly.build/static-build-copy-sci-code}
 
+  :web-demo {:extra-deps {quanta/web-demo {:local/root "./web-demo" :deps/manifest :deps}}}
+  :web-static {:extra-deps {quanta/static {:local/root "./web-static" :deps/manifest :deps}}}
+
   :nbeval {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.7.27"}}
            :exec-fn modular.system/start!
            :exec-args {:run reval.task/eval-all-collections
                        :config  ["ta-config.edn"]
                        :services "services-task.edn"}}
+
+  :nbeval-static {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.7.27"}}
+                  :exec-fn modular.system/start!
+                  :exec-args {:run reval.task/eval-all-collections
+                              :config  ["ta-config.edn"
+                                        {:reval {:rdocument  {:storage-root "target/static/r/rdocument/"
+                                                              :url-root "/api/rdocument/file/"}
+                                                 :collections {:study [:clj "quanta/notebook/study/"]
+                                                               :quanta-docs [:clj "quanta/notebook/docs/"]}}}]
+                              :services "services-task.edn"}}
 
   :public-algos
   {:extra-deps {io.github.clojure-quant/algo-demo {:local/root "../algo-demo" :deps/manifest :deps}}}
