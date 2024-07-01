@@ -13,13 +13,13 @@
   :asset-db {:start (quanta.notebook.asset-add/add-assets)}
 
   :duckdb {; todo: change /bars to /bars.ddb (duck-db db has .ddb extension)
-           :start (ta.db.bars.duckdb/start-bardb-duck "output/duckdb/bars.ddb")
+           :start (ta.db.bars.duckdb/start-bardb-duck ".data/duckdb/bars.ddb")
            :stop (ta.db.bars.duckdb/stop-bardb-duck this)
            :post-start ta.db.bars.duckdb/init-tables}
 
   :bardb-sources {:start (ta.db.bars.sources/start-bardb-sources
                           {:duckdb (clip/ref :duckdb)
-                           :nippy (ta.db.bars.nippy/start-bardb-nippy "output/kibot-intraday/")})}
+                           :nippy (ta.db.bars.nippy/start-bardb-nippy ".data/kibot-intraday/")})}
 
   :import-manager {:start (ta.import.core/start-import-manager
                            {:kibot (ta.import.provider.kibot.ds/create-import-kibot
@@ -37,7 +37,7 @@
   :bardb-dynamic {:start (ta.db.bars.dynamic/start-bardb-dynamic
                           (clip/ref :duckdb)
                           (clip/ref :import-manager)
-                          "output/overviewdb")
+                          ".data/overviewdb")
                   :stop (ta.db.bars.dynamic/stop-bardb-dynamic this)}
 
 ;

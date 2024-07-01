@@ -1,13 +1,13 @@
 {:paths ["src"
          "resources"]
- :deps {org.clojure/clojure  {:mvn/version "1.11.1"}
+ :deps {org.clojure/clojure  {:mvn/version "1.11.3"}
         aysylu/loom {:mvn/version "1.0.2"}
         techascent/tech.viz {:mvn/version "6.00-beta-16-2"}
-        com.taoensso/timbre {:mvn/version "6.2.2"} ; clj/cljs logging
-        org.pinkgorilla/reval {:mvn/version "0.6.159"}
+        org.pinkgorilla/timbre {:mvn/version "0.0.7"} ; timbre, but alwaays the same version
+        org.pinkgorilla/reval {:mvn/version "0.7.160"}
         ; quanta
-        org.pinkgorilla/ta {:mvn/version "0.3.791"}
-        ;org.pinkgorilla/ta {:local/root "../quanta" :deps/manifest :deps}
+        ;org.pinkgorilla/ta {:mvn/version "0.3.808"}
+        org.pinkgorilla/ta {:local/root "../quanta" :deps/manifest :deps}
         babashka/process {:mvn/version "0.5.21"}
         ;com.clojure-goes-fast/clj-memory-meter {:mvn/version "0.1.0"}
         }
@@ -19,8 +19,7 @@
   ; example: clojure -X:task :task ':bybit-import' :symbol-list "currency-spot"
   ; see README.md for available tasks
 
-  :task {:extra-deps {org.pinkgorilla/modular {:mvn/version "0.2.56"}
-                      com.fzakaria/slf4j-timbre {:mvn/version "0.4.0"}}
+  :task {:extra-deps {org.pinkgorilla/modular {:mvn/version "0.2.56"}}
          :extra-paths ["cli"]
          :exec-fn modular.system/start!
          :exec-args {:config "ta-config.edn"
@@ -29,14 +28,13 @@
          :jvm-opts ["-Xmx4G"] ;; or more
          }
 
-  :webly {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.7.27"}
-                       org.pinkgorilla/modular {:mvn/version "0.2.56"}
-                       com.fzakaria/slf4j-timbre {:mvn/version "0.4.0"}}
+  :webly {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.8.30"}
+                       org.pinkgorilla/modular {:mvn/version "0.2.56"}}
           :extra-paths [;"src" "resources"
                         "target/webly" ; to include the sci-bindings info
                         "node_modules"]
           :exec-fn webly.app.app/webly-build
-          :exec-args {:config ["ta-config.edn"]
+          :exec-args {:config ["quanta-config.edn"]
                       :profile "npm-install"}}
 
   :npm-install {:exec-args {:profile "npm-install"}}
@@ -58,13 +56,13 @@
   :web-demo {:extra-deps {quanta/web-demo {:local/root "./web-demo" :deps/manifest :deps}}}
   :web-static {:extra-deps {quanta/static {:local/root "./web-static" :deps/manifest :deps}}}
 
-  :nbeval {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.7.27"}}
+  :nbeval {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.8.28"}}
            :exec-fn modular.system/start!
            :exec-args {:run reval.task/eval-all-collections
                        :config  ["ta-config.edn"]
                        :services "services-task.edn"}}
 
-  :nbeval-static {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.7.27"}}
+  :nbeval-static {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.8.28"}}
                   :exec-fn modular.system/start!
                   :exec-args {:run reval.task/eval-all-collections
                               :config  ["ta-config.edn"
@@ -85,11 +83,12 @@
                   io.github.clojure-quant/algo-joseph {:git/sha "0cf2e362520756d5c55071846e6c5f3c8a57229c"}}}
 
   :my-algos
-  {:extra-deps {io.github.clojure-quant/algo-juan {:local/root "../algo-juan" :deps/manifest :deps}
+  {:extra-deps {;io.github.clojure-quant/algo-juan {:local/root "../algo-juan" :deps/manifest :deps}
                 io.github.clojure-quant/algo-alex {:local/root "../algo-alex" :deps/manifest :deps}
-                io.github.clojure-quant/algo-gann {:local/root "../algo-gann" :deps/manifest :deps}
-                io.github.clojure-quant/algo-astro {:local/root "../algo-astro" :deps/manifest :deps}
-                io.github.clojure-quant/algo-joseph {:local/root "../algo-joseph" :deps/manifest :deps}}}
+                ;io.github.clojure-quant/algo-gann {:local/root "../algo-gann" :deps/manifest :deps}
+                ;io.github.clojure-quant/algo-astro {:local/root "../algo-astro" :deps/manifest :deps}
+                ;io.github.clojure-quant/algo-joseph {:local/root "../algo-joseph" :deps/manifest :deps}
+                }}
 
   :quote-harvester
   {:exec-fn juan.fix/start-harvesting}

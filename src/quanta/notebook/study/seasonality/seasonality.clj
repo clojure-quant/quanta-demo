@@ -194,13 +194,13 @@ ds-etf-since
 ;;; calculate seasonal stats and save to nippy file.
 ;;; test with just 2 symbols, then 30 symbols, then all
 (-> (calc-stats-all ["AAXJ" "ZSL"])
-    (nippy/save-ds "../../output/seasonal/small.nippy"))
+    (nippy/save-ds "../../.data/seasonal/small.nippy"))
 
 (-> (calc-stats-all (take 30 symbols))
-    (nippy/save-ds "../../output/seasonal/30.nippy"))
+    (nippy/save-ds "../../.data/seasonal/30.nippy"))
 
 (-> (calc-stats-all symbols)
-    (nippy/save-ds "../../output/seasonal/all.nippy"))
+    (nippy/save-ds "../../.data/seasonal/all.nippy"))
 
 (calc-stats-all ["DIA" "TLT"])
 
@@ -208,9 +208,9 @@ ds-etf-since
 
 ;; roundtrips
 
-(def ds-stats (nippy/load-ds "../../output/seasonal/30.nippy"))
+(def ds-stats (nippy/load-ds "../../.data/seasonal/30.nippy"))
 
-(def ds-stats (nippy/load-ds "../../output/seasonal/all.nippy"))
+(def ds-stats (nippy/load-ds "../../.data/seasonal/all.nippy"))
 
 ds-stats
 ; :month :open :close :symbol :year :goodness 
@@ -314,9 +314,9 @@ trades
   (into []
         (tds/mapseq-reader trades)))
 
-(storage/save :edn "../../output/seasonal/trades.edn" trades-edn)
+(storage/save :edn "../../.data/seasonal/trades.edn" trades-edn)
 
-(def trades-edn (storage/loadr :edn "../../output/seasonal/trades.edn"))
+(def trades-edn (storage/loadr :edn "../../.data/seasonal/trades.edn"))
 
 (def nav (portfolio trades-edn {:warehouse :seasonal}))
 

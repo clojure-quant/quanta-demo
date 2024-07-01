@@ -97,7 +97,7 @@
 
   (defn print-to-file [data]
     (let [table (with-out-str (print-table data))]
-      (spit "../../output/downtrend.txt" table)))
+      (spit "../../.data/downtrend.txt" table)))
 
   (print-to-file [{:a 1 :b 2} {:a 3 :b 5}])
 

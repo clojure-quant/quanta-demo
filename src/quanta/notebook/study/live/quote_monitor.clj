@@ -4,7 +4,7 @@
    [modular.system]
    [tablecloth.api :as tc]
    [ta.algo.env.protocol :as algo]
-   [ta.live.quote-manager :as qm]))
+   [ta.quote.quote-manager :as qm]))
 
 (defn get-quote-snapshot [_env _opts dt]
   (try

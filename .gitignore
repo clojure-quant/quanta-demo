@@ -12,8 +12,8 @@ package-lock.json
 package.json
 shadow-cljs.edn
 app/demo/certs
-/output/
-output
+/.data/
+.data
 /classes/
 *~
 \#*\#

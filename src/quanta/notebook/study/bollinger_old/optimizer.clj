@@ -2,7 +2,7 @@
   (:require
    [taoensso.timbre :refer [info]]
    [tablecloth.api :as tc]
-   [ta.backtest.backtester :as backtest]
+   [ta.algobacktest.backtester :as backtest]
    [demo.study.bollinger :as bs]))
 
 (def default-options {:w :crypto

@@ -14,7 +14,7 @@
                           [#{"*"} :info]] ; default -> info
               :appenders {:default {:type :console-color}
                           :rolling {:type :file-rolling
-                                    :path "output/quanta.log"
+                                    :path ".data/quanta.log"
                                     :pattern :monthly}}}
 
  :webly/web-server {:port 8080
