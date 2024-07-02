@@ -136,11 +136,13 @@
   ;:multicalendar-sma-strategy-forex {:start (ta.env.dsl.multi-calendar/add (clip/ref :live)
   ;                                           (var-get notebook.algo-config.multicalendar-sma/multi-calendar-algo-demo))}
 
-  :studio {:start (ta.studio.core/start-studio
+  :studio {:start (ta.studio/start-studio
                    {:exts (clip/ref :exts)
                     :clj (clip/ref :clj-service) 
                     :role nil
-                    :bar-db (clip/ref :bardb-dynamic-compressing)})}
+                    :bar-db (clip/ref :bardb-dynamic-compressing)
+                    :env-live (clip/ref :live)
+                    })}
 
 ;
   }}

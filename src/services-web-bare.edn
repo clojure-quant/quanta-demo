@@ -84,11 +84,22 @@
                                                           ;:bardb-dynamic-compressing
                                                           ))}
 
-  :studio {:start (quanta.studio.core/start-studio
+   :quote-manager {:start (ta.quote.quote-manager/create-quote-manager
+                          {})}
+    
+  :tickerplant {:start (ta.live.tickerplant/start-tickerplant
+                        {:algo-env (clip/ref :live)
+                         :quote-manager (clip/ref :quote-manager)})}
+
+
+  :studio {:start (quanta.studio/start-studio
                    {:exts (clip/ref :exts)
                     :clj (clip/ref :clj-service)
                     :role nil
-                    :bar-db (clip/ref :bardb-dynamic-compressing)})}
+                    :bar-db (clip/ref :bardb-dynamic-compressing)
+                    :env-live (clip/ref :live)
+                    :websocket (:websocket (clip/ref :webly))
+                    })}
 
 ;
   }}

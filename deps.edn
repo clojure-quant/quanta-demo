@@ -28,7 +28,7 @@
          :jvm-opts ["-Xmx4G"] ;; or more
          }
 
-  :webly {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.8.30"}
+  :webly {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.8.31"}
                        org.pinkgorilla/modular {:mvn/version "0.2.56"}}
           :extra-paths [;"src" "resources"
                         "target/webly" ; to include the sci-bindings info
