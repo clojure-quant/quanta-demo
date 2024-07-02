@@ -6,8 +6,8 @@
         org.pinkgorilla/timbre {:mvn/version "0.0.7"} ; timbre, but alwaays the same version
         org.pinkgorilla/reval {:mvn/version "0.7.160"}
         ; quanta
-        ;org.pinkgorilla/ta {:mvn/version "0.3.808"}
-        org.pinkgorilla/ta {:local/root "../quanta" :deps/manifest :deps}
+        io.github.clojure-quant/quanta-studio {:mvn/version "0.3.5"}
+        ;io.github.clojure-quant/quanta-studio {:local/root "../quanta-studio" :deps/manifest :deps}
         babashka/process {:mvn/version "0.5.21"}
         ;com.clojure-goes-fast/clj-memory-meter {:mvn/version "0.1.0"}
         }
@@ -28,7 +28,7 @@
          :jvm-opts ["-Xmx4G"] ;; or more
          }
 
-  :webly {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.8.31"}
+  :webly {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.8.33"}
                        org.pinkgorilla/modular {:mvn/version "0.2.56"}}
           :extra-paths [;"src" "resources"
                         "target/webly" ; to include the sci-bindings info
