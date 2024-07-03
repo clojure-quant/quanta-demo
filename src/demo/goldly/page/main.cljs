@@ -18,7 +18,10 @@
     [:p.text-blue.text-xl "backtest"]
     [link-href "/algo/backtest" "backtester"]
     [link-href "/publish" "published result-views"]
+    
     [link-href "/interact" "live interact"]
+    [link-href "/tasks" "live tasks"]
+
     ; warehouse  
     [:p.text-blue.text-xl "warehouse"]
     [link-href "/warehouse" "warehouse"]
