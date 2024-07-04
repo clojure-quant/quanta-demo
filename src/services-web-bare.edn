@@ -72,11 +72,15 @@
                                        (clip/ref :bardb-dynamic)
                                        {; we just request daily and minute bars, the rest gets
                                         ; calculated.
-                                        :month :d
-                                        :year :d
+                                        :Y :d
+                                        :M :d
+                                        :W :d
+                                        ;:d :d ; use daily from source.
                                         :h :m
                                         :m30 :m
-                                        :m15 :m})}
+                                        :m15 :m
+                                        ;:m :m ; use minute from source.
+                                        })}
 
   :bardb-dynamic-compressing {:start (ta.db.bars.dynamic/start-bardb-dynamic
                                       (clip/ref :duckdb)
@@ -84,8 +88,8 @@
                                       ".data/overviewdb-compressing")
                               :stop (ta.db.bars.dynamic/stop-bardb-dynamic this)}
 
-  :live {:start (ta.algo.env/create-env-javelin (clip/ref :bardb-dynamic
-                                                          ;:bardb-dynamic-compressing
+  :live {:start (ta.algo.env/create-env-javelin (clip/ref ;:bardb-dynamic
+                                                          :bardb-dynamic-compressing
                                                           ))}
 
   :quote-manager {:start (ta.quote.quote-manager/create-quote-manager
@@ -125,11 +129,13 @@
            (clip/ref :studio)
            :alex/bollinger
            :chart
-           [:asset ["BTCUSDT" "ETHUSDT"]
-            :calendar [[:crypto :m]
-                       [:crypto :h]
-                       [:crypto :m15]
-                       [:crypto :m30]]])}
+           [:asset [;"BTCUSDT"
+                    "ETHUSDT"]
+            :calendar [;[:crypto :m]
+                       ;[:crypto :h]
+                       ;[:crypto :m15]
+                       [:crypto :m30]]
+            ])}
 
 ;
   }}

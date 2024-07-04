@@ -1,8 +1,4 @@
 
-
-
-
-
 studio
 - get-environment
   - time
