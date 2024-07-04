@@ -43,7 +43,7 @@
   :duckdb {; todo: change /bars to /bars.ddb (duck-db db has .ddb extension)
            :start (ta.db.bars.duckdb/start-bardb-duck ".data/duckdb/bars.ddb")
            :stop (ta.db.bars.duckdb/stop-bardb-duck this)
-           :post-start ta.db.bars.duckdb/init-tables}
+           :post-start ta.db.bars.duckdb.table/init-tables}
 
   :bardb-sources {:start (ta.db.bars.sources/start-bardb-sources
                           {:duckdb (clip/ref :duckdb)
@@ -70,9 +70,14 @@
 
   :import-manager-compressing {:start (ta.import.provider.compress/start-compressing-provider
                                        (clip/ref :bardb-dynamic)
-                                       {:month :d
+                                       {; we just request daily and minute bars, the rest gets
+                                        ; calculated.
+                                        :month :d
                                         :year :d
-                                        :h :m})}
+                                        :h :m
+                                        :m30 :m
+                                        :m15 :m
+                                        })}
 
   :bardb-dynamic-compressing {:start (ta.db.bars.dynamic/start-bardb-dynamic
                                       (clip/ref :duckdb)
@@ -111,9 +116,10 @@
             :chart
            [:asset ["BTCUSDT" "ETHUSDT"]
             :calendar [[:crypto :m]
-                       ;[:crypto :m15]
-                       ;[:crypto :m30]
-                       [:crypto :h]]])} 
+                       [:crypto :h]
+                       [:crypto :m15]
+                       [:crypto :m30]
+                       ]])} 
 
 ;
   }}
