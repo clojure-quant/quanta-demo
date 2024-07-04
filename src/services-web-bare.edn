@@ -2,7 +2,7 @@
  :components
  {:config {:start (modular.config/load-config! (:config #ref [:modular]))}
   :secrets {:start (clojure.edn/read-string
-                    (slurp #envf ["%s/goldly/trateg.edn" "MYVAULT"]))}
+                    (slurp #envf ["%s/goldly/quanta.edn" "MYVAULT"]))}
 
   :exts {:start (extension/discover)}
 
@@ -20,7 +20,7 @@
   ;                {:config (:reval (deref (clip/ref :config)))
   ;                 :clj  (clip/ref :clj-service)
   ;                 :reval-role nil})}
-  
+
   :webly {:start (webly.app.app/start-webly
                   (clip/ref :exts)
                   (deref (clip/ref :config))
@@ -35,7 +35,7 @@
           :stop (.close this)}
 
   ;; QUANTA:
-  
+
   :asset-db {:start (quanta.notebook.asset-add/add-assets)}
 
   :techml-render-ui {:start (demo.goldly.reval/add-techml-render-ui)}
@@ -76,8 +76,7 @@
                                         :year :d
                                         :h :m
                                         :m30 :m
-                                        :m15 :m
-                                        })}
+                                        :m15 :m})}
 
   :bardb-dynamic-compressing {:start (ta.db.bars.dynamic/start-bardb-dynamic
                                       (clip/ref :duckdb)
@@ -91,11 +90,23 @@
 
   :quote-manager {:start (ta.quote.quote-manager/create-quote-manager
                           {})}
-  
+
   :tickerplant {:start (ta.live.tickerplant/start-tickerplant
                         {:algo-env (clip/ref :live)
                          :quote-manager (clip/ref :quote-manager)})}
 
+  :telegram {:start (telegram.service/telegram-bot-start
+                     (:telegram (clip/ref :secrets))
+                     {:commands [{:command "ping" :description "service ok?"
+                                  :rpc-fn quanta.studio.telegram/ping}
+                                 {:command "subscribe" :description "subscribe topic"
+                                  :rpc-fn telegram.pubsub/subscribe
+                                  :opts [{:title "topic" :options ["error" "trade-signal"]}]}
+                                 {:command "unsubscribe" :description "unsubscribe topic"
+                                  :rpc-fn telegram.pubsub/unsubscribe
+                                  :opts [{:title "topic" :options ["error" "trade-signal"]}]}
+                                 {:command "subscriptions" :description "current subscriptions"
+                                  :rpc-fn telegram.pubsub/my-subscriptions}]})}
 
   :studio {:start (quanta.studio/start-studio
                    {:exts (clip/ref :exts)
@@ -107,19 +118,18 @@
                     ; gets started tickerplant is already up and can start watching the live-env.
                     :env-live (:algo-env (clip/ref :tickerplant))
                     :websocket (:websocket (clip/ref :webly))
-                    })}
-  
-  :start-alex-bollinger-variations 
+                    :telegram (clip/ref :telegram)})}
+
+  :start-alex-bollinger-variations
   {:start (quanta.studio/start-variations
            (clip/ref :studio)
-            :alex/bollinger
-            :chart
+           :alex/bollinger
+           :chart
            [:asset ["BTCUSDT" "ETHUSDT"]
             :calendar [[:crypto :m]
                        [:crypto :h]
                        [:crypto :m15]
-                       [:crypto :m30]
-                       ]])} 
+                       [:crypto :m30]]])}
 
 ;
   }}
