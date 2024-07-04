@@ -9,7 +9,7 @@
 
    ; trateg web ui
    [:div.bg-blue-300.m-5
-    [:h1.text-xl.text-red-600 "trateg "]
+    [:h1.text-xl.text-red-600 "quanta studio "]
     ; tradingview
     [:p.text-blue.text-xl "tradingview"]
     [link-dispatch [:bidi/goto 'ta.tradingview.goldly.page.tradingview-algo/tvalgo-page] "tradingview-algo"]
