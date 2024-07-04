@@ -97,7 +97,10 @@
                     :clj (clip/ref :clj-service)
                     :role nil
                     :bar-db (clip/ref :bardb-dynamic-compressing)
-                    :env-live (clip/ref :live)
+                    ;:env-live (clip/ref :live)
+                    ; we use the live env via the tickerplant, this means that when studio
+                    ; gets started tickerplant is already up and can start watching the live-env.
+                    :env-live (:algo-env (clip/ref :tickerplant))
                     :websocket (:websocket (clip/ref :webly))
                     })}
   
@@ -108,8 +111,8 @@
             :chart
            [:asset ["BTCUSDT" "ETHUSDT"]
             :calendar [[:crypto :m]
-                       [:crypto :m15]
-                       [:crypto :m30]
+                       ;[:crypto :m15]
+                       ;[:crypto :m30]
                        [:crypto :h]]])} 
 
 ;
