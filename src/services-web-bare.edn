@@ -40,7 +40,7 @@
 
   :techml-render-ui {:start (demo.goldly.reval/add-techml-render-ui)}
 
-  :duckdb {; todo: change /bars to /bars.ddb (duck-db db has .ddb extension)
+  :duckdb {; bars.ddb (because duck-db db has .ddb extension)
            :start (ta.db.bars.duckdb/start-bardb-duck ".data/duckdb/bars.ddb")
            :stop (ta.db.bars.duckdb/stop-bardb-duck this)
            :post-start ta.db.bars.duckdb.table/init-tables}
@@ -103,6 +103,8 @@
                      (:telegram (clip/ref :secrets))
                      {:commands [{:command "ping" :description "service ok?"
                                   :rpc-fn quanta.studio.telegram/ping}
+                                 {:command "testalert" :description "test alert"
+                                  :rpc-fn quanta.alert/test-alert}
                                  {:command "subscribe" :description "subscribe topic"
                                   :rpc-fn telegram.pubsub/subscribe
                                   :opts [{:title "topic" :options ["error" "trade-signal"]}]}
@@ -124,18 +126,62 @@
                     :websocket (:websocket (clip/ref :webly))
                     :telegram (clip/ref :telegram)})}
 
-  :start-alex-bollinger-variations
+  :alex-bollinger-variations-chart
   {:start (quanta.studio/start-variations
            (clip/ref :studio)
            :alex/bollinger
            :chart
-           [:asset [;"BTCUSDT"
-                    "ETHUSDT"]
+           [:asset ["BTCUSDT"
+                    "ETHUSDT"
+                    "SOLUSDT" ; solana
+                    "XRPUSDT" ; ripple
+                    "ADAUSDT" ; cardano
+                    "BNBUSDT" ; binance coin
+                    "TRXUSDT" ; tron
+                    "LINKUSDT" ;chainlink
+                    "BCHUSDT" ;bitcoin cash
+                    "DAIUSDT" ; dai
+                    "LTCUSDT" ; litecoin
+                    ; "XMRUSDT" ; monero ; bybit not listed?
+                    "XLMUSDT" ; stella
+                    "EOSUSDT" ; eos
+                    "XTZUSDT" ; tezos
+                    ]
             :calendar [;[:crypto :m]
                        ;[:crypto :h]
-                       ;[:crypto :m15]
-                       [:crypto :m30]]
+                       [:crypto :m15]
+                       ;[:crypto :m30]
+                       ]
             ])}
+  
+  :alex-bollinger-variations-alert
+  {:start (quanta.studio/start-variations
+           (clip/ref :studio)
+           :alex/bollinger
+           :alert
+           [:asset ["BTCUSDT"
+                    "ETHUSDT"
+                    "SOLUSDT" ; solana
+                    "XRPUSDT" ; ripple
+                    "ADAUSDT" ; cardano
+                    "BNBUSDT" ; binance coin
+                    "TRXUSDT" ; tron
+                    "LINKUSDT" ;chainlink
+                    "BCHUSDT" ;bitcoin cash
+                    "DAIUSDT" ; dai
+                    "LTCUSDT" ; litecoin
+                    ;"XMRUSDT" ; monero ; bybit not listed?
+                    "XLMUSDT" ; stella
+                    "EOSUSDT" ; eos
+                    "XTZUSDT" ; tezos
+                    ]
+            :calendar [;[:crypto :m]
+                         ;[:crypto :h]
+                       [:crypto :m15]
+                         ;[:crypto :m30]
+                       ]])}
+
+
 
 ;
   }}
