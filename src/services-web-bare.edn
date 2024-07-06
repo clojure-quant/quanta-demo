@@ -107,10 +107,10 @@
                                   :rpc-fn quanta.alert/test-alert}
                                  {:command "subscribe" :description "subscribe topic"
                                   :rpc-fn telegram.pubsub/subscribe
-                                  :opts [{:title "topic" :options ["error" "trade-signal"]}]}
+                                  :opts [{:title "topic" :options ["error" "trade-signal" "trade-signal-debug"]}]}
                                  {:command "unsubscribe" :description "unsubscribe topic"
                                   :rpc-fn telegram.pubsub/unsubscribe
-                                  :opts [{:title "topic" :options ["error" "trade-signal"]}]}
+                                  :opts [{:title "topic" :options ["error" "trade-signal" "trade-signal-debug"]}]}
                                  {:command "subscriptions" :description "current subscriptions"
                                   :rpc-fn telegram.pubsub/my-subscriptions}]})}
 
