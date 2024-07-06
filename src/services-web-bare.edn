@@ -38,7 +38,7 @@
 
   :asset-db {:start (quanta.notebook.asset-add/add-assets)}
 
-  :techml-render-ui {:start (demo.goldly.reval/add-techml-render-ui)}
+  :techml-render-ui {:start (quanta.studio.reval/add-techml-render-ui)}
 
   :duckdb {; bars.ddb (because duck-db db has .ddb extension)
            :start (ta.db.bars.duckdb/start-bardb-duck ".data/duckdb/bars.ddb")
