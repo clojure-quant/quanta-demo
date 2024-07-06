@@ -10,17 +10,17 @@ This will run quanta-studio; the ui can be accessed on http://localhost:8080/.
 *start with public algos enabled*
 
 ```
-clj -X:webly:run:web-demo:public-algos
+clj -X:webly:run:public-algos
 ```
 
 *start with private algos enabled as well*
 ```
-clj -X:webly:run:web-demo:public-algos:my-algos
+clj -X:webly:run:public-algos:my-algos
 ```
 
 *start without realtime feeds*
 ```
-clj -X:webly:run-bare:web-demo:public-algos:my-algos
+clj -X:webly:run-bare:public-algos:my-algos
 ```
 
 ## Notebook Viewer

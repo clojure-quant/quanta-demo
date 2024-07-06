@@ -53,7 +53,6 @@
 
   :static-sci {:exec-fn goldly.build/static-build-copy-sci-code}
 
-  :web-demo {:extra-deps {quanta/web-demo {:local/root "./web-demo" :deps/manifest :deps}}}
   :web-static {:extra-deps {quanta/static {:local/root "./web-static" :deps/manifest :deps}}}
 
   :nbeval {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.8.28"}}

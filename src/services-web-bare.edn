@@ -175,10 +175,10 @@
                     "EOSUSDT" ; eos
                     "XTZUSDT" ; tezos
                     ]
-            :calendar [;[:crypto :m]
-                         ;[:crypto :h]
+            :calendar [[:crypto :m]
+                       [:crypto :h]
                        [:crypto :m15]
-                         ;[:crypto :m30]
+                       [:crypto :m30]
                        ]])}
 
 

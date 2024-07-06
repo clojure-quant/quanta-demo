@@ -8,7 +8,7 @@
                                       ; [#{"modular.ws.*"} :debug]
                           [#{"modular.persist.*"} :warn]
                           [#{"goldly.service.core"} :warn] ; goldly services - less logging
-                          ; trateg specific:
+                          ; quanta specific:
                           [#{"ta.import.provider.bybit.*"} ;bybit is already stable
                              :warn]
                           [#{"*"} :info]] ; default -> info
